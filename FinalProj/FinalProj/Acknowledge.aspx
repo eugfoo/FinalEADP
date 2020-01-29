@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
 &nbsp;<asp:Label ID="gcnt" runat="server" Text="Label"></asp:Label>
+		<h1>yoyoyo</h1>
     </form>
 </body>
 </html>
