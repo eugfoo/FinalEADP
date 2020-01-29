@@ -37,35 +37,20 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["threadid"] != null)
+            string threadId = Request.QueryString["threadid"];
+
+            if (threadId != null)
             {
-                string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-                string myQuery = "Select * From Threads where Id=" + Request.QueryString["threadid"].ToString();
-                SqlConnection myConn = new SqlConnection(DBConnect);
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = myQuery;
-                cmd.Connection = myConn;
+                Thread thread = new Thread();
+                Thread currentThread = thread.GetThreadByThreadId(threadId);
 
-                cmd.Parameters.AddWithValue("@ThreadId", Request.QueryString["threadid"]);
-
-                SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = cmd;
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-
-                    LblTitle.Text = ds.Tables[0].Rows[0]["threadTitle"].ToString();
-                    LblTitleBig.Text = ds.Tables[0].Rows[0]["threadTitle"].ToString();
-                    LblTitleBreadcrumb.Text = ds.Tables[0].Rows[0]["threadTitle"].ToString();
-                    LblPostDate.Text = ds.Tables[0].Rows[0]["threadDate"].ToString();
-                    LblContent.Text = ds.Tables[0].Rows[0]["threadContent"].ToString();
-                    LblPrefix.Text = ds.Tables[0].Rows[0]["threadPrefix"].ToString();
-                    HFthreadId.Value = ds.Tables[0].Rows[0]["Id"].ToString();
-                }
-                myConn.Close();
-
+                LblTitle.Text = currentThread.Title;
+                LblTitleBig.Text = currentThread.Title;
+                LblTitleBreadcrumb.Text = currentThread.Title;
+                LblPostDate.Text = currentThread.Date;
+                LblContent.Text = currentThread.Content;
+                LblPrefix.Text = currentThread.Prefix;
+                HFthreadId.Value = threadId;
             }
 
             if (Page.IsPostBack) return;
@@ -74,9 +59,12 @@ namespace FinalProj
             if (!IsPostBack)
             {
                 getImages(HFthreadId.Value);
+
             }
 
         }
+
+
 
         private void getImages(string threadId)
         {
@@ -136,7 +124,7 @@ namespace FinalProj
         }
 
         private void HandlePaging()
-         {
+        {
             var dt = new DataTable();
             dt.Columns.Add("PageIndex");
             dt.Columns.Add("PageText");
@@ -242,6 +230,7 @@ namespace FinalProj
             Session["LblPrefix"] = LblPrefix.Text;
             Session["LblTitle"] = LblTitle.Text;
             Session["LblContent"] = LblContent.Text;
+            Session["threadId"] = HFthreadId.Value;
             Response.Redirect("editForumPost.aspx?threadid=" + HFthreadId.Value);
         }
 
@@ -251,88 +240,92 @@ namespace FinalProj
 
         }
 
-        //private void GetComments(string threadId)
-        //{
-        //    DataTable allComments = new DataTable();
-
-        //    string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-        //    SqlConnection myConn = new SqlConnection(DBConnect);
-
-        //    myConn.Open();
-        //    string sqlCmd = "Select * From ThreadReplies WHERE threadId = @paraThreadId";
-        //    SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCmd, myConn);
-        //    sqlDa.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
-        //    sqlDa.Fill(allComments);
-        //    myConn.Close();
-
-        //    PagedDataSource pdsData = new PagedDataSource();
-
-        //    DataView dv = new DataView(allComments);
-        //    pdsData.DataSource = dv;
-        //    pdsData.AllowPaging = true;
-        //    pdsData.PageSize = iPageSize;
-
-        //    if (ViewState["PageNumber"] != null)
-        //        pdsData.CurrentPageIndex = Convert.ToInt32(ViewState["PageNumber"]);
-        //    else
-        //        pdsData.CurrentPageIndex = 0;
-
-        //    if(pdsData.PageCount > 1)
-        //    {
-        //        Repeater1.Visible = true;
-        //        ArrayList allPages = new ArrayList();
-        //        for (int i = 1; i <= pdsData.PageCount; i++)
-        //            allPages.Add((i).ToString());
-        //        //allPages.RemoveAt(allPages.Count - 1);
-        //        Repeater1.DataSource = allPages;
-        //        Repeater1.DataBind();
-        //    }
-        //    else
-        //    {
-        //        Repeater1.Visible = false;
-        //    }
-        //    rptrComments.DataSource = pdsData;
-        //    rptrComments.DataBind();
-        //}
-
-        //protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
-        //{
-        //    ViewState["PageNumber"] = Convert.ToInt32(e.CommandArgument);
-        //    GetComments(HFthreadId.Value);
-        //    //string url = e.CommandArgument.ToString();
-        //    //Response.Redirect("forumPost.aspx?threadid=" + HFthreadId.Value + "/" + url);
-        //}
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //private void RepliesRptr(string threadId)
-        //{
-        //    string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-        //    SqlConnection myConn = new SqlConnection(DBConnect);
-
-        //    string sqlStmt = "Select * From ThreadReplies WHERE threadId = @paraThreadId";
-
-        //    using (SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn))
-        //    {
-        //        da.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
-        //        DataTable allThreads = new DataTable();
-        //        da.Fill(allThreads);
-        //        rptrComments.DataSource = allThreads;
-        //        rptrComments.DataBind();
-        //    }
-
-        //using (SqlConnection myConn = new SqlConnection(DBConnect))
-        //{
-        //    using (SqlCommand cmd = new SqlCommand("Select * From ThreadReplies WHERE threadId= ORDER BY Id", myConn))
-        //    {
-        //        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-        //        {
-        //            DataTable allThreads = new DataTable();
-        //            sda.Fill(allThreads);
-        //            rptrComments.DataSource = allThreads;
-        //            rptrComments.DataBind();
-        //        }
-        //    }
-        //}
     }
+
 }
+
+
+
+//private void GetComments(string threadId)
+//{
+//    DataTable allComments = new DataTable();
+
+//    string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+//    SqlConnection myConn = new SqlConnection(DBConnect);
+
+//    myConn.Open();
+//    string sqlCmd = "Select * From ThreadReplies WHERE threadId = @paraThreadId";
+//    SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCmd, myConn);
+//    sqlDa.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
+//    sqlDa.Fill(allComments);
+//    myConn.Close();
+
+//    PagedDataSource pdsData = new PagedDataSource();
+
+//    DataView dv = new DataView(allComments);
+//    pdsData.DataSource = dv;
+//    pdsData.AllowPaging = true;
+//    pdsData.PageSize = iPageSize;
+
+//    if (ViewState["PageNumber"] != null)
+//        pdsData.CurrentPageIndex = Convert.ToInt32(ViewState["PageNumber"]);
+//    else
+//        pdsData.CurrentPageIndex = 0;
+
+//    if(pdsData.PageCount > 1)
+//    {
+//        Repeater1.Visible = true;
+//        ArrayList allPages = new ArrayList();
+//        for (int i = 1; i <= pdsData.PageCount; i++)
+//            allPages.Add((i).ToString());
+//        //allPages.RemoveAt(allPages.Count - 1);
+//        Repeater1.DataSource = allPages;
+//        Repeater1.DataBind();
+//    }
+//    else
+//    {
+//        Repeater1.Visible = false;
+//    }
+//    rptrComments.DataSource = pdsData;
+//    rptrComments.DataBind();
+//}
+
+//protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+//{
+//    ViewState["PageNumber"] = Convert.ToInt32(e.CommandArgument);
+//    GetComments(HFthreadId.Value);
+//    //string url = e.CommandArgument.ToString();
+//    //Response.Redirect("forumPost.aspx?threadid=" + HFthreadId.Value + "/" + url);
+//}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//private void RepliesRptr(string threadId)
+//{
+//    string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+//    SqlConnection myConn = new SqlConnection(DBConnect);
+
+//    string sqlStmt = "Select * From ThreadReplies WHERE threadId = @paraThreadId";
+
+//    using (SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn))
+//    {
+//        da.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
+//        DataTable allThreads = new DataTable();
+//        da.Fill(allThreads);
+//        rptrComments.DataSource = allThreads;
+//        rptrComments.DataBind();
+//    }
+
+//using (SqlConnection myConn = new SqlConnection(DBConnect))
+//{
+//    using (SqlCommand cmd = new SqlCommand("Select * From ThreadReplies WHERE threadId= ORDER BY Id", myConn))
+//    {
+//        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+//        {
+//            DataTable allThreads = new DataTable();
+//            sda.Fill(allThreads);
+//            rptrComments.DataSource = allThreads;
+//            rptrComments.DataBind();
+//        }
+//    }
+//}

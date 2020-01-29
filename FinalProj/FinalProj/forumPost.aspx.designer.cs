@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalProj {
-    
-    
-    public partial class forumPost {
-        
+namespace FinalProj
+{
+
+
+    public partial class forumPost
+    {
+
         /// <summary>
         /// LblPrefix control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblPrefix;
-        
+
         /// <summary>
         /// LblTitleBreadcrumb control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblTitleBreadcrumb;
-        
+
         /// <summary>
         /// LblTitleBig control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblTitleBig;
-        
+
         /// <summary>
         /// LblTitle control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblTitle;
-        
+
         /// <summary>
         /// LblPostDate control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblPostDate;
-        
+
         /// <summary>
         /// LVImages control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView LVImages;
-        
+
         /// <summary>
         /// LblContent control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblContent;
-        
+
         /// <summary>
         /// btnGoBack control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGoBack;
-        
+
         /// <summary>
         /// btnEdit control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEdit;
-        
+
         /// <summary>
         /// MainScriptManager control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager MainScriptManager;
-        
+
         /// <summary>
         /// pnlHelloWorld control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel pnlHelloWorld;
-        
+
         /// <summary>
         /// rptrComments control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptrComments;
-        
+
         /// <summary>
         /// lbFirst control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbFirst;
-        
+
         /// <summary>
         /// lbPrevious control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbPrevious;
-        
+
         /// <summary>
         /// rptPaging control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList rptPaging;
-        
+
         /// <summary>
         /// lbNext control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbNext;
-        
+
         /// <summary>
         /// lbLast control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbLast;
-        
+
         /// <summary>
         /// lblpage control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblpage;
-        
+
         /// <summary>
         /// tbReplyContent control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbReplyContent;
-        
+
         /// <summary>
         /// LblMsg control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblMsg;
-        
+
         /// <summary>
         /// btnReply control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReply;
-        
+
         /// <summary>
         /// HFthreadId control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HFthreadId;
-        
+
         /// <summary>
         /// HFDate control.
         /// </summary>

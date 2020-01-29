@@ -61,7 +61,6 @@ namespace FinalProj
             DataTable dt = new DataTable();
             dt.Columns.Add("path");
 
-
             foreach (var imgName in imagesNames)
             {
                 DataRow row = dt.NewRow();
@@ -80,9 +79,6 @@ namespace FinalProj
             }
             DataList1.DataSource = dt;
             DataList1.DataBind();
-
-
-
         }
 
         protected void btnUpload_Click(object sender, EventArgs e)
@@ -93,7 +89,8 @@ namespace FinalProj
 
                 if (uploadedImgNames.Contains(filename))
                 {
-                    LblMsg.Text = "fk off";
+                    LblMsg.Text = "Sorry you cannot upload the same file!";
+                    LblMsg.ForeColor = Color.Red;
                 }
                 else
                 {
@@ -107,18 +104,13 @@ namespace FinalProj
                     }
                     else
                     {
-                        LblMsg.Text = "sorry no more pictures for you bitch!";
+                        LblMsg.Text = "Sorry you can only upload a maximum of 4 pictures!";
+                        LblMsg.ForeColor = Color.Red;
                     }
                 }
-
-
-
-
             }
 
         }
-
-
 
         private bool ValidateInput()
         {
@@ -150,24 +142,6 @@ namespace FinalProj
             {
                 return false;
             }
-
-
-
-
-
-        }
-
-        private void queryCreatedThreadId()
-        {
-            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            myConn.Open();
-            SqlCommand cmd = new SqlCommand("Select Max(Id) From Threads", myConn);
-            int i = Convert.ToInt32(cmd.ExecuteScalar());
-            myConn.Close();
-
-            HFthreadId.Value = i.ToString();
         }
 
         private string BadgeColorIdentifier()
@@ -214,16 +188,11 @@ namespace FinalProj
             //    threadImage = filename;
             //}
 
-
             if (ValidateInput())
             {
-
-
                 DateTime now = DateTime.Now;
                 HFDate.Value = now.ToString("g");
                 DateTime mDate = Convert.ToDateTime(HFDate.Value);
-
-
 
                 if (uploadedImgNames.Count == 1)
                 {
@@ -249,20 +218,16 @@ namespace FinalProj
                 }
 
 
-
-
-
-
                 thread = new Thread(DdlPrefix.Text, BadgeColorIdentifier(), tbTitle.Text, HFDate.Value,
                     firstImage, secondImage, thirdImage, fourthImage,
                     tbContent.Text, "1", "Gundy");
 
                 int result = thread.CreateThread();
+                int threadId = thread.getMaxThreadId();
 
                 if (result == 1)
                 {
-                    queryCreatedThreadId();
-                    Response.Redirect("forumPost.aspx?threadid=" + HFthreadId.Value);
+                    Response.Redirect("forumPost.aspx?threadid=" + threadId);
                 }
             }
 
@@ -274,8 +239,14 @@ namespace FinalProj
             File.Delete(MapPath(e.CommandArgument.ToString()));
             imagesNames.Remove(e.CommandArgument.ToString());
             uploadedImgNames.Remove(e.CommandArgument.ToString());
-
             show_data();
+        }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            tbTitle.Text = String.Empty;
+            tbContent.Text = String.Empty;
+            DdlPrefix.SelectedIndex = 0;
         }
     }
 }

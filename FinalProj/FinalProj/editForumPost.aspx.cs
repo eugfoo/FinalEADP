@@ -23,107 +23,103 @@ namespace FinalProj
         {
             if (!Page.IsPostBack)
             {
-                if (Request.QueryString["threadid"] != null)
+                string threadId = Request.QueryString["threadid"];
+
+                if (threadId != null)
                 {
-                    string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-                    string myQuery = "Select * From Threads where Id=" + Request.QueryString["threadid"].ToString();
-                    SqlConnection myConn = new SqlConnection(DBConnect);
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandText = myQuery;
-                    cmd.Connection = myConn;
+                    string ImageOne = "";
+                    string ImageTwo = "";
+                    string ImageThree = "";
+                    string ImageFour = "";
+                    Session["firstImage"] = "";
+                    Session["secondImage"] = "";
+                    Session["thirdImage"] = "";
+                    Session["fourthImage"] = "";
 
-                    cmd.Parameters.AddWithValue("@ThreadId", Request.QueryString["threadid"]);
+                    Thread thread = new Thread();
+                    Thread currentThread = thread.GetThreadByThreadId(threadId);
 
-                    SqlDataAdapter da = new SqlDataAdapter();
-                    da.SelectCommand = cmd;
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
+                    tbTitle.Text = currentThread.Title;
+                    HFDate.Value = currentThread.Date;
+                    tbContent.Text = currentThread.Content;
+                    HFthreadId.Value = threadId;
+                    ImageOne = currentThread.ThreadImage1;
+                    ImageTwo = currentThread.ThreadImage2;
+                    ImageThree = currentThread.ThreadImage3;
+                    ImageFour = currentThread.ThreadImage4;
 
-                    if (ds.Tables[0].Rows.Count > 0)
+
+
+                    if (Session["LblPrefix"].ToString() == "[Discussion]")
                     {
-                        if (Session["LblPrefix"].ToString() == "[Discussion]")
-                        {
-                            DdlPrefix.SelectedIndex = 1;
-                        }
-                        if (Session["LblPrefix"].ToString() == "[Info]")
-                        {
-                            DdlPrefix.SelectedIndex = 2;
-                        }
-                        if (Session["LblPrefix"].ToString() == "[News]")
-                        {
-                            DdlPrefix.SelectedIndex = 3;
-                        }
-                        if (Session["LblPrefix"].ToString() == "[Help]")
-                        {
-                            DdlPrefix.SelectedIndex = 4;
-                        }
-                        if (Session["LblPrefix"].ToString() == "[Request]")
-                        {
-                            DdlPrefix.SelectedIndex = 1;
-                        }
+                        DdlPrefix.SelectedIndex = 1;
+                    }
+                    if (Session["LblPrefix"].ToString() == "[Info]")
+                    {
+                        DdlPrefix.SelectedIndex = 2;
+                    }
+                    if (Session["LblPrefix"].ToString() == "[News]")
+                    {
+                        DdlPrefix.SelectedIndex = 3;
+                    }
+                    if (Session["LblPrefix"].ToString() == "[Help]")
+                    {
+                        DdlPrefix.SelectedIndex = 4;
+                    }
+                    if (Session["LblPrefix"].ToString() == "[Request]")
+                    {
+                        DdlPrefix.SelectedIndex = 1;
+                    }
 
-                        tbTitle.Text = ds.Tables[0].Rows[0]["threadTitle"].ToString();
-                        tbContent.Text = ds.Tables[0].Rows[0]["threadContent"].ToString();
-                        //LblTitleBreadcrumb.Text = ds.Tables[0].Rows[0]["threadTitle"].ToString();
-                        //LblPostDate.Text = ds.Tables[0].Rows[0]["threadDate"].ToString();
-                        //LblPrefix.Text = ds.Tables[0].Rows[0]["threadPrefix"].ToString();
+                    //Populating pictures;
 
-
-
-
-                        HFthreadId.Value = ds.Tables[0].Rows[0]["Id"].ToString();
-
-
-                        if (ds.Tables[0].Rows[0]["threadImage1"].ToString() == "")
-                        {
-                            Image1.Style.Add("display", "none");
-
-                        }
-                        else
-                        {
-                            Image1.ImageUrl = "~/Img/" + ds.Tables[0].Rows[0]["threadImage1"].ToString();
-                            Image1.Style.Add("display", "block");
-                        }
-
-                        if (ds.Tables[0].Rows[0]["threadImage2"].ToString() == "")
-                        {
-                            Image2.Style.Add("display", "none");
-
-                        }
-                        else
-                        {
-                            Image2.ImageUrl = "~/Img/" + ds.Tables[0].Rows[0]["threadImage2"].ToString();
-                            Image2.Style.Add("display", "block");
-                        }
-
-                        if (ds.Tables[0].Rows[0]["threadImage3"].ToString() == "")
-                        {
-                            Image3.Style.Add("display", "none");
-
-                        }
-                        else
-                        {
-                            Image3.ImageUrl = "~/Img/" + ds.Tables[0].Rows[0]["threadImage3"].ToString();
-                            Image3.Style.Add("display", "block");
-                        }
-
-                        if (ds.Tables[0].Rows[0]["threadImage4"].ToString() == "")
-                        {
-                            Image4.Style.Add("display", "none");
-
-                        }
-                        else
-                        {
-                            Image4.ImageUrl = "~/Img/" + ds.Tables[0].Rows[0]["threadImage4"].ToString();
-                            Image4.Style.Add("display", "block");
-                        }
-
+                    if (ImageOne == "")
+                    {
+                        Image1.Style.Add("display", "none");
 
                     }
-                    myConn.Close();
+                    else
+                    {
+                        Session["firstImage"] = ImageOne;
+                        Image1.ImageUrl = "~/Img/" + ImageOne;
+                        Image1.Style.Add("display", "block");
+                    }
 
+                    if (ImageTwo == "")
+                    {
+                        Image2.Style.Add("display", "none");
 
+                    }
+                    else
+                    {
+                        Session["secondImage"] = ImageTwo;
+                        Image2.ImageUrl = "~/Img/" + ImageTwo;
+                        Image2.Style.Add("display", "block");
+                    }
 
+                    if (ImageThree == "")
+                    {
+                        Image3.Style.Add("display", "none");
+
+                    }
+                    else
+                    {
+                        Session["thirdImage"] = ImageThree;
+                        Image3.ImageUrl = "~/Img/" + ImageThree;
+                        Image3.Style.Add("display", "block");
+                    }
+
+                    if (ImageFour == "")
+                    {
+                        Image4.Style.Add("display", "none");
+
+                    }
+                    else
+                    {
+                        Session["fourthImage"] = ImageFour;
+                        Image4.ImageUrl = "~/Img/" + ImageFour;
+                        Image4.Style.Add("display", "block");
+                    }
                 }
 
             }
@@ -159,19 +155,6 @@ namespace FinalProj
             {
                 return false;
             }
-        }
-
-        private void queryCreatedThreadId()
-        {
-            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            myConn.Open();
-            SqlCommand cmd = new SqlCommand("Select Max(Id) From Threads", myConn);
-            int i = Convert.ToInt32(cmd.ExecuteScalar());
-            myConn.Close();
-
-            HFthreadId.Value = i.ToString();
         }
 
         private string BadgeColorIdentifier()
@@ -225,8 +208,7 @@ namespace FinalProj
 
                 if (result == 1)
                 {
-                    //queryCreatedThreadId();
-                    Response.Redirect("forumPost.aspx?threadid=" + HFthreadId.Value);
+                    Response.Redirect("forumPost.aspx?threadid=" + Session["threadId"]);
                 }
             }
         }

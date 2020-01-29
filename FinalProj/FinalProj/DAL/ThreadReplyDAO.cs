@@ -26,7 +26,7 @@ namespace FinalProj.DAL
             sqlCmd.Parameters.AddWithValue("@paraPostDate", threadReply.PostDate);
             sqlCmd.Parameters.AddWithValue("@paraPostContent", threadReply.PostContent);
             sqlCmd.Parameters.AddWithValue("@paraUserId", threadReply.UserId);
-        
+
             myConn.Open();
             result = sqlCmd.ExecuteNonQuery();
 
