@@ -12,7 +12,8 @@ namespace FinalProj
     {
         protected List<EventsStatus> evStListTemp;
         protected List<EventsStatus> evStList = new List<EventsStatus>();
-        int eventCount = 0;
+        public int eventCount = 0;
+        public List<string> complete = new List<string>();
         int forCount = 0;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +33,6 @@ namespace FinalProj
                 {
                     if (evStListTemp[i].Organiser == Session["id"].ToString())
                     {
-                        System.Diagnostics.Debug.WriteLine("This is evStListTemp[i]: " + evStListTemp[i]);
                         evStList.Add(evStListTemp[i]);
                         eventCount += 1;
                     }
@@ -40,7 +40,6 @@ namespace FinalProj
 
                 foreach (EventsStatus element in evStList)
                 {
-                    string[] complete = new string[evStList.Count()];
 
                     int index = element.Date.IndexOf(" ");
                     element.Date = element.Date.Substring(0, index);
@@ -51,11 +50,11 @@ namespace FinalProj
 
                     if (dt1.Date < dt2.Date)
                     {
-                        complete[forCount] = "Completed";
+                        complete.Add("Completed");
                     }
                     else
                     {
-                        complete[forCount] = "Incomplete";
+                        complete.Add("Incomplete");
                     }
 
                     if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)

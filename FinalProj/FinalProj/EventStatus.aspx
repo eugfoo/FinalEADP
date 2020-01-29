@@ -26,6 +26,16 @@
             }
         }
 
+        var completed = <%= complete %>;
+        var eventCount = <%= eventCount %>;
+
+        document.getElementById("status").innerText = completed;
+        document.getElementById("totalComplete").innerText = eventCount;
+
+        if (eventCount < 0) {
+            document.getElementById("msg").style.visibility = "hidden";
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
@@ -39,7 +49,7 @@
                 <td id="totalParticipate"></td>
                 <td></td>
                 <td>Events Completed:</td>
-                <td id="totalComplete"></td>
+                <td><p id="totalComplete"></p></td>
                 <td></td>
                 <td>Events Created:</td>
                 <td id="totalCreate"></td>
