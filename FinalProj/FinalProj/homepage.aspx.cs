@@ -11,7 +11,7 @@ namespace FinalProj
 	public partial class Corporate : System.Web.UI.Page
 	{ 
         protected List<Events> evList;
-		protected Dictionary<int, string> newList = new Dictionary<int, string>();
+		protected Dictionary<int, string> userList = new Dictionary<int, string>();
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -41,7 +41,7 @@ namespace FinalProj
 				{
 					element.StartTime = element.StartTime + " AM";
 				}
-				newList.Add(element.User_id, ev.GetAllUserNameByUserId(element.User_id));
+				userList.Add(element.User_id, ev.GetAllUserNameByUserId(element.User_id));
 			}
 			if (Session["user"] == null) // A user has signed in
 			{
