@@ -43,7 +43,8 @@ namespace FinalProj.DAL
                 string eventEndTime = row["eventEndTime"].ToString();
                 string eventDesc = row["eventDesc"].ToString();
                 string eventPic = row["eventPic"].ToString();
-                EventsStatus obj = new EventsStatus(eventTitle, eventVenue, eventDate ,eventStartTime, eventEndTime, eventDesc, eventPic);
+                string eventOrganiser = row["user_id"].ToString();
+                EventsStatus obj = new EventsStatus(eventTitle, eventVenue, eventDate ,eventStartTime, eventEndTime, eventDesc, eventPic, eventOrganiser);
                 evStList.Add(obj);
             };
 

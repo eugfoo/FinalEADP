@@ -27,6 +27,7 @@ namespace FinalProj
                 if (tryingUser.passHash == passHash)
                 {
                     Session["user"] = tryingUser;
+                    Session["id"] = tryingUser.id;
                     Response.Redirect("homepage.aspx");
                 }
                 else

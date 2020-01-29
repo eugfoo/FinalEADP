@@ -36,13 +36,13 @@
         <table id="totalStats">
             <tr>
                 <td>Events Participated:</td>
-                <td id="totalParticipate">1</td>
+                <td id="totalParticipate"></td>
                 <td></td>
                 <td>Events Completed:</td>
-                <td id="totalComplete">1</td>
+                <td id="totalComplete"></td>
                 <td></td>
                 <td>Events Created:</td>
-                <td id="totalCreate">0</td>
+                <td id="totalCreate"></td>
         </table>
 
         <div class="container">
@@ -106,7 +106,7 @@
                                         <br />
                                     </td>
                                     <td>
-                                        <p id="status">Complete</p>
+                                        <p id="status"></p>
                                     </td>
                                 </tr>
                             </table>

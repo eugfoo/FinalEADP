@@ -16,13 +16,14 @@ namespace FinalProj.BLL
         public string EndTime { get; set; }
         public string Desc { get; set; }
         public string Pic { get; set; }
+        public string Organiser { get; set; }
 
         public EventsStatus()
         {
 
         }
         // Define a constructor to initialize all the properties
-        public EventsStatus(string eventTitle, string eventVenue, string eventDate, string eventStartTime, string eventEndTime, string eventDesc, string eventPic)
+        public EventsStatus(string eventTitle, string eventVenue, string eventDate, string eventStartTime, string eventEndTime, string eventDesc, string eventPic, string eventOrganiser)
         {
             Title = eventTitle;
             Name = eventVenue;
@@ -31,6 +32,7 @@ namespace FinalProj.BLL
             EndTime = eventEndTime;
             Desc = eventDesc;
             Pic = eventPic;
+            Organiser = eventOrganiser;
         }
 
         public List<EventsStatus> GetAllEventsByName()

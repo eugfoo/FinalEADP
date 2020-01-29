@@ -10,40 +10,75 @@ namespace FinalProj
 {
     public partial class EventStatus : System.Web.UI.Page
     {
-        protected List<EventsStatus> evStList;
+        protected List<EventsStatus> evStListTemp;
+        protected List<EventsStatus> evStList = new List<EventsStatus>();
+        int eventCount = 0;
+        int forCount = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             EventsStatus evSt = new EventsStatus();
+            Users usr = new Users();
 
-            evStList = evSt.GetAllEventsByName();
-
-            foreach (EventsStatus element in evStList)
+            if (Session["user"] == null)
             {
-                int index = element.Date.IndexOf(" ");
-                element.Date = element.Date.Substring(0, index);
-                element.StartTime = element.StartTime.Substring(0, 5);
-                element.EndTime = element.EndTime.Substring(0, 5);
+                Response.Redirect("homepage.aspx");
+            }
+            else
+            {
+                evStListTemp = evSt.GetAllEventsByName();
 
-                if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+                for (int i = 0; i < evStListTemp.Count; i++)
                 {
-                    element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
-                }
-                else
-                {
-                    element.StartTime = element.StartTime + " AM";
+                    if (evStListTemp[i].Organiser == Session["id"].ToString())
+                    {
+                        System.Diagnostics.Debug.WriteLine("This is evStListTemp[i]: " + evStListTemp[i]);
+                        evStList.Add(evStListTemp[i]);
+                        eventCount += 1;
+                    }
                 }
 
-                if (int.Parse(element.EndTime.Substring(0, 2)) >= 12)
+                foreach (EventsStatus element in evStList)
                 {
-                    element.EndTime = (int.Parse(element.EndTime.Substring(0, 2)) - 12).ToString() + ":" + element.EndTime.Substring(3, 2) + " PM";
-                }
-                else
-                {
-                    element.EndTime = element.EndTime + " AM";
+                    string[] complete = new string[evStList.Count()];
+
+                    int index = element.Date.IndexOf(" ");
+                    element.Date = element.Date.Substring(0, index);
+                    element.StartTime = element.StartTime.Substring(0, 5);
+                    element.EndTime = element.EndTime.Substring(0, 5);
+                    DateTime dt1 = DateTime.Parse(element.Date + " " + element.EndTime);
+                    DateTime dt2 = DateTime.Now;
+
+                    if (dt1.Date < dt2.Date)
+                    {
+                        complete[forCount] = "Completed";
+                    }
+                    else
+                    {
+                        complete[forCount] = "Incomplete";
+                    }
+
+                    if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+                    {
+                        element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+                    }
+                    else
+                    {
+                        element.StartTime = element.StartTime + " AM";
+                    }
+
+                    if (int.Parse(element.EndTime.Substring(0, 2)) >= 12)
+                    {
+                        element.EndTime = (int.Parse(element.EndTime.Substring(0, 2)) - 12).ToString() + ":" + element.EndTime.Substring(3, 2) + " PM";
+                    }
+                    else
+                    {
+                        element.EndTime = element.EndTime + " AM";
+                    }
+
+                    forCount += 1;
                 }
             }
-            
         }
     }
 }
