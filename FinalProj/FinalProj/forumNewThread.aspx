@@ -70,7 +70,6 @@
 
             <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" />
 
-            <%-- <button type="submit" class="btn btn-primary">Submit</button>--%>
             <button type="reset" class="btn btn-danger">Reset</button>
         </div>
     </div>
