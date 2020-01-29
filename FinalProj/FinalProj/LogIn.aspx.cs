@@ -28,6 +28,8 @@ namespace FinalProj
                 {
                     Session["user"] = tryingUser;
                     Session["id"] = tryingUser.id;
+                    Session["Name"] = tryingUser.name;
+                    Session["Pic"] = tryingUser.DPimage;
                     Response.Redirect("homepage.aspx");
                 }
                 else

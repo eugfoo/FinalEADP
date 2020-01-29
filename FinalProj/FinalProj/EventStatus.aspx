@@ -25,15 +25,35 @@
                 }
             }
         }
-
-        var completed = <%= complete %>;
-        var eventCount = <%= eventCount %>;
-
-        document.getElementById("status").innerText = completed;
-        document.getElementById("totalComplete").innerText = eventCount;
-
-        if (eventCount < 0) {
-            document.getElementById("msg").style.visibility = "hidden";
+        function sortTable() {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("myTable");
+            switching = true;
+            /* Make a loop that will continue until no switching has been done: */
+            while (switching) {
+                // Start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /* Loop through all table rows (except the first, which contains table headers): */
+                for (i = 1; i < (rows.length - 1); i++) {
+                    // Start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* Get the two elements you want to compare, one from current row and one from the next: */
+                    x = rows[i].getElementsByTagName("TD")[0];
+                    y = rows[i + 1].getElementsByTagName("TD")[0];
+                    // Check if the two rows should switch place:
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch and mark that a switch has been done: */
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
         }
 
     </script>
@@ -41,18 +61,18 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <div style="height: 100%">
         <div>
-            <h1 id="title">Events Status</h1>
+            <h1 id="title">Event Overview</h1>
         </div>
         <table id="totalStats">
             <tr>
-                <td>Events Participated:</td>
-                <td id="totalParticipate"></td>
-                <td></td>
-                <td>Events Completed:</td>
-                <td><p id="totalComplete"></p></td>
+                <td>Total Events:</td>
+                <td id="totalComplete"><%= eventCount %></td>
                 <td></td>
                 <td>Events Created:</td>
-                <td id="totalCreate"></td>
+                <td id="totalCreate"><%= eventCount %></td>
+                <td></td>
+                <td>Events Participated:</td>
+                <td id="totalParticipate">0</td>
         </table>
 
         <div class="container">
@@ -68,9 +88,9 @@
                     </asp:RadioButtonList>
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                    <asp:DropDownList ID="ddlAlphabet" runat="server" Width="150px">
-                        <asp:ListItem>A-Z</asp:ListItem>
+                    <asp:DropDownList ID="ddlAlphabet" runat="server" Width="150px" onchange="sortTable();">
                         <asp:ListItem>Earliest-Latest</asp:ListItem>
+                        <asp:ListItem>A-Z</asp:ListItem>
                     </asp:DropDownList><br />
                     Sort Alphabetically or by Date
                 </div>
@@ -97,8 +117,8 @@
                                         <p>Organised by: </p>
                                     </td>
                                     <td>
-                                        <img id="dp" src="picture.jpg" />
-                                        <p id="organiser">Kovi Tan</p>
+                                        <img id="dp" src="<%= element.OrganiserPic %>" />
+                                        <p id="organiser"><%= element.Organiser %></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -116,7 +136,7 @@
                                         <br />
                                     </td>
                                     <td>
-                                        <p id="status"></p>
+                                        <p id="status"><%= element.Completed %></p>
                                     </td>
                                 </tr>
                             </table>
@@ -127,4 +147,16 @@
             </table>
         </div>
     </div>
+    <script>
+        if (document.getElementById("status").innerText == "Incomplete") {
+            document.getElementById("status").style.color = "red";
+        }
+        else {
+            document.getElementById("status").style.color = "green";
+        }
+
+        if (<%= eventCount%> > 0) {
+            document.getElementById("msg").style.visibility = "hidden";
+        }
+    </script>
 </asp:Content>

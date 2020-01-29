@@ -13,7 +13,7 @@
     color: white;
     font-weight: bold;
     border-radius: 3px;
-    width: 300px;
+    width: 320px;
 }
 
 #myTable {
@@ -33,7 +33,7 @@ tr {
 }
 
 #rowRepeat {
-    box-shadow: 0px 0px 2px grey;
+    box-shadow: 0px 1px 5px grey;
     height: 500px;
 }
 
@@ -155,7 +155,6 @@ h3 {
 }
 
 #status {
-    color: green;
     font-weight: bold;
     text-align: left;
 }

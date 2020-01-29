@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -33,29 +34,25 @@ namespace FinalProj
                 {
                     if (evStListTemp[i].Organiser == Session["id"].ToString())
                     {
+                        evStListTemp[i].OrganiserPic = Session["Pic"].ToString();
+                        evStListTemp[i].Organiser = Session["Name"].ToString();
                         evStList.Add(evStListTemp[i]);
                         eventCount += 1;
                     }
                 }
 
+
                 foreach (EventsStatus element in evStList)
                 {
+                    element.NumCompleted = eventCount;
 
                     int index = element.Date.IndexOf(" ");
+                    
+
                     element.Date = element.Date.Substring(0, index);
                     element.StartTime = element.StartTime.Substring(0, 5);
                     element.EndTime = element.EndTime.Substring(0, 5);
-                    DateTime dt1 = DateTime.Parse(element.Date + " " + element.EndTime);
-                    DateTime dt2 = DateTime.Now;
-
-                    if (dt1.Date < dt2.Date)
-                    {
-                        complete.Add("Completed");
-                    }
-                    else
-                    {
-                        complete.Add("Incomplete");
-                    }
+                    
 
                     if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
                     {
@@ -74,6 +71,15 @@ namespace FinalProj
                     {
                         element.EndTime = element.EndTime + " AM";
                     }
+
+                    string date = element.Date + " " + element.EndTime;
+                    DateTime dt1 = DateTime.Parse(date);
+                    DateTime dt2 = DateTime.Now;
+
+                    int result = DateTime.Compare(dt1, dt2);
+
+                    if (result < 0 || result == 0)
+                        element.Completed = "Complete";
 
                     forCount += 1;
                 }
