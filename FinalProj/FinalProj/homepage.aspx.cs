@@ -11,7 +11,7 @@ namespace FinalProj
 	public partial class Corporate : System.Web.UI.Page
 	{ 
         protected List<Events> evList;
-		protected Dictionary<int, string> userList = new Dictionary<int, string>();
+		protected Dictionary<int, string> newList = new Dictionary<int, string>();
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -31,13 +31,17 @@ namespace FinalProj
 
 				if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
 				{
+
+					if(int.Parse(element.StartTime.Substring(0, 2)) == 12)
+						element.StartTime = (int.Parse(element.StartTime.Substring(0, 2))).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+					else
 					element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
 				}
 				else
 				{
 					element.StartTime = element.StartTime + " AM";
 				}
-				userList.Add(element.User_id, ev.GetAllUserNameByUserId(element.User_id));
+				newList.Add(element.User_id, ev.GetAllUserNameByUserId(element.User_id));
 			}
 			if (Session["user"] == null) // A user has signed in
 			{
@@ -60,7 +64,11 @@ namespace FinalProj
 
 				if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
 				{
-					element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+					if (int.Parse(element.StartTime.Substring(0, 2)) == 12)
+						element.StartTime = (int.Parse(element.StartTime.Substring(0, 2))).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+					else
+						element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+				
 				}
 				else
 				{
