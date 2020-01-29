@@ -1,0 +1,71 @@
+﻿body {
+    text-align: center;
+    font-family: Arial;
+}
+
+#title {
+    margin: 0 auto;
+    text-align: center;
+    background-color: darkred;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    max-width: 50%;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-top:20px;
+    margin-bottom: 50px;
+}
+
+#timer {
+    margin: 0 auto;
+    width: 50%;
+}
+
+#timerRow {
+    border: 0.5px solid grey;
+    height: 20px;
+}
+
+#attendTitle {
+    font-weight: bold;
+}
+
+#attendTime {
+    color: darkred;
+    font-weight: bold;
+}
+
+.greenBar {
+    width: 50%;
+    background-color: green;
+}
+
+.emptyBar {
+    width: 50%;
+}
+
+#attendance {
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 80%;
+    border: 1px solid black;
+}
+
+.row {
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    border: 0.5px solid black;
+    border-radius: 3px;
+    padding: 5px 0 0 0;
+    width: 200px;
+}
+
+#totalPart, #currentPart {
+    float: left;
+}
+
+#totalPartNum, #currentPartNum {
+    color: green;
+    text-align: left;
+}
