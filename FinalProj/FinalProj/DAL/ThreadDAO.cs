@@ -140,5 +140,41 @@ namespace FinalProj.DAL
 
             return result;
         }
+
+        public DataTable GetImagesToLV(string threadId)
+        {
+            DataTable allImages = new DataTable();
+
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            myConn.Open();
+            string sqlCmd = "Select * From Threads WHERE Id = @paraThreadId";
+            SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCmd, myConn);
+            sqlDa.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
+            sqlDa.Fill(allImages);
+            myConn.Close();
+
+            return allImages;
+        }
+
+        public DataTable GetRepliesFromDB(string threadId)
+        {
+            DataTable allReplies = new DataTable();
+
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            myConn.Open();
+            string sqlCmd = "Select * From ThreadReplies WHERE Id = @paraThreadId";
+            SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCmd, myConn);
+            sqlDa.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
+            sqlDa.Fill(allReplies);
+            myConn.Close();
+
+            return allReplies;
+        }
+
+
     }
 }

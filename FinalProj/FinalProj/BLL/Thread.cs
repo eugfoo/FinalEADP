@@ -1,6 +1,7 @@
 ﻿using FinalProj.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -69,6 +70,20 @@ namespace FinalProj.BLL
             int result = dao.queryCreatedThreadId();
             return result;
         }
+
+        public DataTable GetImagesToLV(string threadId)
+        {
+            ThreadDAO dao = new ThreadDAO();
+            return dao.GetImagesToLV(threadId);
+        }
+
+        //public DataTable GetRepliesFromDB(string threadId)
+        //{
+        //    ThreadDAO dao = new ThreadDAO();
+        //    return dao.GetRepliesFromDB(threadId);
+        //}
+        
+
 
 
     }

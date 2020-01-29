@@ -38,10 +38,11 @@ namespace FinalProj
         protected void Page_Load(object sender, EventArgs e)
         {
             string threadId = Request.QueryString["threadid"];
+            Thread thread = new Thread();
 
             if (threadId != null)
             {
-                Thread thread = new Thread();
+                
                 Thread currentThread = thread.GetThreadByThreadId(threadId);
 
                 LblTitle.Text = currentThread.Title;
@@ -58,29 +59,11 @@ namespace FinalProj
 
             if (!IsPostBack)
             {
-                getImages(HFthreadId.Value);
+                LVImages.DataSource = thread.GetImagesToLV(threadId);
+                LVImages.DataBind();
+                //getImages(HFthreadId.Value);
 
             }
-
-        }
-
-
-
-        private void getImages(string threadId)
-        {
-            DataTable allImages = new DataTable();
-
-            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            myConn.Open();
-            string sqlCmd = "Select * From Threads WHERE Id = @paraThreadId";
-            SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCmd, myConn);
-            sqlDa.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
-            sqlDa.Fill(allImages);
-            LVImages.DataSource = allImages;
-            LVImages.DataBind();
-            myConn.Close();
 
         }
 
