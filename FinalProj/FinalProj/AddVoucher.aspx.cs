@@ -15,7 +15,10 @@ namespace FinalProj
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] == null)
+            {
+                Response.Redirect("homepage.aspx");
+            }
         }
 
         protected void createBtn_Click(object sender, EventArgs e)

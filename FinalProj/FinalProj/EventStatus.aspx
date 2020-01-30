@@ -68,10 +68,10 @@
                 <td>Total Events:</td>
                 <td id="totalComplete"><%= eventCount %></td>
                 <td></td>
-                <td>Events Created:</td>
+                <td>Events Create:</td>
                 <td id="totalCreate"><%= eventCount %></td>
                 <td></td>
-                <td>Events Participated:</td>
+                <td>Events Participate:</td>
                 <td id="totalParticipate">0</td>
         </table>
 
@@ -105,7 +105,7 @@
                 
                 <tr id="rowRepeat">
                     <td>
-                        <img id="eventdp" src="<%= element.Pic %>" />
+                        <img id="eventdp" src="/Img/<%= element.Pic %>" />
                     </td>
                     <td id="tableTD">
                         <h3 class="title"><%= element.Title %><br />

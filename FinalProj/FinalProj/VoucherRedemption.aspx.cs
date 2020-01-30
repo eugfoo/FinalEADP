@@ -16,8 +16,16 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Voucher vcher = new Voucher();
-            vcherList = vcher.GetAllVouchersByName();
+            if (Session["user"] == null)
+            {
+                Response.Redirect("homepage.aspx");
+            }
+            else
+            {
+                Voucher vcher = new Voucher();
+                vcherList = vcher.GetAllVouchersByName();
+            }
+            
 
         }
 
