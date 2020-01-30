@@ -23,6 +23,7 @@ namespace FinalProj
             Voucher vcher = new Voucher();
             string errmsg = "";
             PanelError.Visible = false;
+            int num = -1;
 
             if (voucherName.Text == "")
             {   
@@ -34,19 +35,21 @@ namespace FinalProj
                 voucherName.BorderColor = System.Drawing.Color.LightGray;
             }
 
-            if (voucherAmt.Text == "")
+            if (voucherAmt.Text == "" || !int.TryParse(voucherAmt.Text, out num))
             {
-                errmsg = errmsg + "Voucher Amount cannot be empty! <br>";
+                errmsg = errmsg + "Voucher Amount must be an integer and cannot be empty! <br>";
                 voucherAmt.BorderColor = System.Drawing.Color.Red;
-            }
-            if (FileUpload1.HasFile == false)
-            {
-                errmsg = errmsg + "Select an image for voucher! <br>";
             }
             else
             {
                 voucherAmt.BorderColor = System.Drawing.Color.LightGray;
             }
+
+            if (FileUpload1.HasFile == false)
+            {
+                errmsg = errmsg + "Select an image for voucher! <br>";
+            }
+            
 
             if (errmsg != "")
             {
@@ -72,9 +75,7 @@ namespace FinalProj
                 vcher = new Voucher(vcherName, vcherAmt, file);
                 int result = vcher.AddVoucher();
                 Response.Redirect("VoucherRedemption.aspx");
-            }
-
-            
+            } 
         }
     }
 }

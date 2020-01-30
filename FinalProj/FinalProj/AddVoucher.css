@@ -1,4 +1,5 @@
 ﻿#title {
+    padding: 5px 10px 5px 10px;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -15,32 +16,41 @@
     margin-right: auto;
 }
 
+#ContentPlaceHolder1_PanelError {
+    font-weight: bold;
+}
+
 .row {
     border-radius: 4px;
     margin-bottom: 20px;
 }
 
-#coupon {
-    width: 90%;
-    padding: 20px 0 20px 0;
-}
-
-#box {
-    margin: 0 auto;
-    box-shadow: 0px 1px 5px grey;
-    margin-top: 10%;
-    width: 90%;
-    height: 60%;
-    padding: 5% 0 15% 0;
-}
-
-#points {
-    color: green;
+label {
     font-weight: bold;
+    font-size: 18px;
 }
 
-#divButton {
-    box-shadow: 0px 1px 5px grey;
+#center {
+    text-align: center;
+}
+
+#ContentPlaceHolder1_createBtn {
+    margin-top: 100px;
+    color: #fff;
+    background-color: dodgerblue;
+    width: 75px;
+    border: none 0px transparent;
+    font-size: 20px;
+    font-weight: ;
+    padding: 4px 8px 4px 8px;
+    webkit-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+}
+
+#ContentPlaceHolder1_createBtn:hover {
+    background-color: lightblue;
+    border: solid 1px #fff;
 }
 
 .stuff {

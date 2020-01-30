@@ -99,9 +99,10 @@
 
         <div style="overflow-x: auto;">
             <h1 id="msg">No available events, join or create one!</h1>
-            <table class="center" id="myTable">
-                <% foreach (var element in evStList)
+            <% foreach (var element in evStList)
                     { %>
+            <table class="center" id="myTable">
+                
                 <tr id="rowRepeat">
                     <td>
                         <img id="eventdp" src="<%= element.Pic %>" />
@@ -143,15 +144,16 @@
                         </div>
                     </td>
                 </tr>
-                <% } %>
+                
             </table>
+            <% } %>
         </div>
     </div>
     <script>
         if (document.getElementById("status").innerText == "Incomplete") {
             document.getElementById("status").style.color = "red";
         }
-        else {
+        else if (document.getElementById("status").innerText == "Complete"){
             document.getElementById("status").style.color = "green";
         }
 

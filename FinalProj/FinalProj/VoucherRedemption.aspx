@@ -6,24 +6,25 @@
     <div style="height: 250vh">
         <h2 id="title">Voucher Redemption</h2>
 
-        <table id="voucherTable">
-            <%foreach (var element in vcherList)
+        <%foreach (var element in vcherList)
                 { %>
+        <table id="voucherTable">
+            
             <tr id="voucherRow">
                 <td>
                     <img id="voucherImg" src="<%=element.VoucherPic %>"/>
                 </td>
-                <td>
+                <td id="tdRepeat">
                     <p id="voucherName"><%=element.VoucherName %></p>
-                    <p id="voucherAmount"><%=element.VoucherAmount %></p>
-                    <button>Redeem</button>
+                    <p id="voucherAmount">$<%=element.VoucherAmount %></p>
+                    <button id="redeemBtn">Redeem</button>
                 </td>
             </tr>
-            <% } %>
+            
         </table>
-        
-        <div id="divButton">
-            <a href="AddVoucher.aspx" id="AddVouchers">Add Vouchers</a>
-        </div>
+        <% } %>
+
+        <a href="AddVoucher.aspx" id="AddVouchers">Add Vouchers</a>
+
     </div>
 </asp:Content>
