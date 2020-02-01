@@ -20,6 +20,8 @@ namespace FinalProj
                 lbLogOut.Visible = true;
                 lblBookmark.Visible = true;
                 lblUserName.Text = user.name;
+                imgDP.ImageUrl = user.DPimage;
+                imgBP.ImageUrl = user.BPimage;
                 lblDesc.Text = user.desc;
                 rating = user.rating;
             }

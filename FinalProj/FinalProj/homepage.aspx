@@ -621,8 +621,6 @@
                     <asp:TextBox ID="hidingDate" CssClass="forHide" runat="server"></asp:TextBox>
                     <asp:Button ID="testbtn" CssClass="forHide" runat="server" OnClick="DateClicked" CausesValidation="False" />
                 </div>
-
-
             </div>
         </div>
 </asp:Content>

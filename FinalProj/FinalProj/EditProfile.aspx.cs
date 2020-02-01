@@ -20,11 +20,11 @@ namespace FinalProj
             if (Session["user"] != null) // A user has signed in
             {
                 Users user = (Users)Session["user"];
-                if (user.DPimage != null)
+                if (user.DPimage != "")
                 {
                     imgDP.ImageUrl = user.DPimage;
                 }
-                if (user.BPimage != null)
+                if (user.BPimage != "")
                 {
                     imgBP.ImageUrl = user.BPimage;
                 }
@@ -34,6 +34,7 @@ namespace FinalProj
                 Response.Redirect("/homepage.aspx");
             }
         }
+
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -46,20 +47,24 @@ namespace FinalProj
             {
                 user.UpdateDescByID(user.id, tbDesc.Text);
             }
-            if (DPfilepath != "")
+            if (Session["tempDP"] != null)
             {
-                user.UpdateDPByID(user.id, DPfilepath);
+                user.UpdateDPByID(user.id, Session["tempDP"].ToString());
             }
-            if (BPfilepath != "")
+            if (Session["tempBP"] != null)
             {
-                user.UpdateDescByID(user.id, BPfilepath);
+                user.UpdateBPByID(user.id, Session["tempBP"].ToString());
             }
-
+            Session["tempDP"] = null;
+            Session["tempBP"] = null;
+            Session["user"] = user.GetUserByEmail(user.email);
             Response.Redirect("/EventStatus.aspx");
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
+            Session["tempDP"] = null;
+            Session["tempBP"] = null;
             Response.Redirect("/EventStatus.aspx");
         }
 
@@ -71,9 +76,13 @@ namespace FinalProj
                 string fileName = Path.Combine(Server.MapPath("~/Img/User"), uniqueFileName);
                 fuDP.SaveAs(fileName);
                 imgDP.ImageUrl = "~/Img/User/" + uniqueFileName;
-                DPfilepath = "~/Img/User/" + uniqueFileName;
+                Session["tempDP"] = imgDP.ImageUrl;
+                //DPfilepath = "~/Img/User/" + uniqueFileName;
+                if (BPfilepath != "")
+                {
+                    imgBP.ImageUrl = BPfilepath;
+                }
             }
-            
         }
 
         protected void btnUploadBP_Click(object sender, EventArgs e)
@@ -84,10 +93,13 @@ namespace FinalProj
                 string fileName = Path.Combine(Server.MapPath("~/Img/User"), uniqueFileName);
                 fuBP.SaveAs(fileName);
                 imgBP.ImageUrl = "~/Img/User/" + uniqueFileName;
-                BPfilepath = "~/Img/User/" + uniqueFileName;
+                Session["tempBP"] = imgBP.ImageUrl;
+                //BPfilepath = "~/Img/User/" + uniqueFileName;
+                if (DPfilepath != "")
+                {
+                    imgDP.ImageUrl = DPfilepath;
+                }
             }
-
         }
-
     }
 }
