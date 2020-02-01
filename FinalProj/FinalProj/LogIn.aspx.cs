@@ -19,27 +19,39 @@ namespace FinalProj
 
         protected void btnSignIn_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            Users tryingUser = user.GetUserByEmail(tbEmail.Text);
-            string passHash = ComputeSha256Hash(tbPass.Text);
-            if (tryingUser != null) // user exists
+            if (Page.IsValid)
             {
-                if (tryingUser.passHash == passHash)
+                if (tbEmail.Text == "admin@admin")
                 {
-                    Session["user"] = tryingUser;
-                    Session["id"] = tryingUser.id;
-                    Session["Name"] = tryingUser.name;
-                    Session["Pic"] = tryingUser.DPimage;
-                    Response.Redirect("homepage.aspx");
+                    string adminPassHash = ComputeSha256Hash(tbPass.Text);
+                    if (adminPassHash == "ca5ce9636699b4bfa0a3801e2c28842638c13f22e04820b586041a425ce665d9") // hashed version of adminPass41111
+                    {
+                        Session["admin"] = true;
+                        Response.Redirect("homepage.aspx");
+                    }
+                }
+                Users user = new Users();
+                Users tryingUser = user.GetUserByEmail(tbEmail.Text);
+                string passHash = ComputeSha256Hash(tbPass.Text);
+                if (tryingUser != null) // user exists
+                {
+                    if (tryingUser.passHash == passHash)
+                    {
+                        Session["user"] = tryingUser;
+                        Session["id"] = tryingUser.id;
+                        Session["Name"] = tryingUser.name;
+                        Session["Pic"] = tryingUser.DPimage;
+                        Response.Redirect("homepage.aspx");
+                    }
+                    else
+                    {
+                        lblError.Visible = true;
+                    }
                 }
                 else
                 {
                     lblError.Visible = true;
                 }
-            }
-            else
-            {
-                lblError.Visible = true;
             }
         }
 

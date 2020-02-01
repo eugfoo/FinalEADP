@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Acknowledge.aspx" />
+    <Content Include="AdminPage.aspx" />
     <Content Include="App_Data\myDB.mdf" />
     <Content Include="App_Data\myDB_log.ldf">
       <DependentUpon>myDB.mdf</DependentUpon>
@@ -124,6 +125,13 @@
     </Compile>
     <Compile Include="Acknowledge.aspx.designer.cs">
       <DependentUpon>Acknowledge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPage.aspx.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPage.aspx.designer.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="AttendanceEdit.aspx.cs">
       <DependentUpon>AttendanceEdit.aspx</DependentUpon>

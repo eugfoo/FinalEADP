@@ -16,7 +16,7 @@
                     <asp:Image ID="imgBP" CssClass="card-img-top" Style="max-height: 100px; max-width: 1100px; min-height: 100px; min-width: 150px;" runat="server" />
                     <div class="form-control">
                         <asp:FileUpload CssClass="col-md-8" ID="fuBP" runat="server" accept=".png,.jpg,.jpeg" />
-                        <asp:Button ID="btnUploadBP" runat="server" Text="Upload" OnClick="btnUploadBP_Click" />
+                        <asp:Button ID="btnUploadBP" runat="server" Text="Upload" OnClick="btnUploadBP_Click" UseSubmitBehavior="False" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -26,7 +26,7 @@
                     <asp:Image ID="imgDP" CssClass="card-img-top" Style="max-width: 100px; max-height: 100px; min-height: 100px; min-width: 100px;" runat="server" />
                     <div class="form-control">
                         <asp:FileUpload CssClass="col-md-8" ID="fuDP" runat="server" accept=".png,.jpg,.jpeg" />
-                        <asp:Button ID="btnUploadDP" runat="server" Text="Upload" OnClick="btnUploadDP_Click" />
+                        <asp:Button ID="btnUploadDP" runat="server" Text="Upload" OnClick="btnUploadDP_Click" UseSubmitBehavior="False"/>
                     </div>
                 </div>
 
@@ -59,8 +59,8 @@
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div class="align-bottom" style="text-align: right;">
-                    <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-danger mr-3" Text="Cancel" OnClick="btnCancel_Click" />
-                    <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" />
+                    <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-danger mr-3" Text="Cancel" UseSubmitBehavior="False" OnClick="btnCancel_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" UseSubmitBehavior="False" OnClick="btnUpdate_Click" />
                 </div>
             </div>
         </div>

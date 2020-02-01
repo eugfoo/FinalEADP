@@ -19,27 +19,31 @@ namespace FinalProj
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            Users checkEmail = new Users();
+            if (Page.IsValid)
+            {
+                Users checkEmail = new Users();
 
-            if (checkEmail.GetUserByEmail(tbEmail.Text) == null) { // If there isn't a matching email...
-                if (tbPass.Text == tbCfmPass.Text) // If the passwords match...
-                {
-                    string passHash = ComputeSha256Hash(tbPass.Text);
-                    DateTime now = DateTime.Now;
-                    Users user = new Users(tbEmail.Text, tbName.Text, cbIsOrg.Checked.ToString(), passHash, now);
-                    user.AddUser();
-                    Response.Redirect("LogIn.aspx");
+                if (checkEmail.GetUserByEmail(tbEmail.Text) == null)
+                { // If there isn't a matching email...
+                    if (tbPass.Text == tbCfmPass.Text) // If the passwords match...
+                    {
+                        string passHash = ComputeSha256Hash(tbPass.Text);
+                        DateTime now = DateTime.Now;
+                        Users user = new Users(tbEmail.Text, tbName.Text, cbIsOrg.Checked.ToString(), passHash, now);
+                        user.AddUser();
+                        Response.Redirect("LogIn.aspx");
+                    }
+                    else
+                    {
+                        lblError.Text = "Passwords do not match.";
+                        lblError.Visible = true;
+                    }
                 }
                 else
                 {
-                    lblError.Text = "Passwords do not match.";
+                    lblError.Text = "Email is already in use.";
                     lblError.Visible = true;
                 }
-            }
-            else
-            {
-                lblError.Text = "Email is already in use.";
-                lblError.Visible = true;
             }
         }
 

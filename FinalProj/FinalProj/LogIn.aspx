@@ -38,17 +38,19 @@
                     <h5 class="card-title text-muted font-italic">Enter your account details</h5>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Email</label>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="vError" runat="server" ControlToValidate="tbEmail" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>
-                        <asp:TextBox type="email" CssClass="form-control" ID="tbEmail" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="vError" runat="server" ControlToValidate="tbEmail" 
+                            EnableClientScript="False" ErrorMessage="*" ValidationGroup="Credentials"></asp:RequiredFieldValidator>
+                        <asp:TextBox type="email" CssClass="form-control" ID="tbEmail" runat="server" ValidationGroup="Credentials"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Password</label>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" CssClass="vError" runat="server" ControlToValidate="tbPass" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>
-                        <asp:TextBox type="password" CssClass="form-control" ID="tbPass" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" CssClass="vError" runat="server" ControlToValidate="tbPass" 
+                            EnableClientScript="False" ErrorMessage="*" ValidationGroup="Credentials"></asp:RequiredFieldValidator>
+                        <asp:TextBox type="password" CssClass="form-control" ID="tbPass" runat="server" ValidationGroup="Credentials"></asp:TextBox>
                         </div>
                     <div class="align-bottom" style="text-align: right;">
                         <asp:Label ID="lblError" CssClass="vError mr-3" runat="server" Visible="False" Font-Italic="False" Font-Size="Small">Incorrect account information. Please try again.</asp:Label>
-                        <asp:Button ID="btnSignIn" runat="server" CssClass="btn btn-primary" Text="Sign In" OnClick="btnSignIn_Click" />
+                        <asp:Button ID="btnSignIn" runat="server" CssClass="btn btn-primary" Text="Sign In" OnClick="btnSignIn_Click" ValidationGroup="Credentials" ValidateRequestMode="Enabled" />
                     &nbsp;</div>
                 </div>
             </div>
