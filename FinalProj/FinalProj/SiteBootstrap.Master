@@ -90,7 +90,7 @@
                         <asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>
                     </li>
                     <li class="nav-item">
-                        <asp:Button ID="lblLogOut" CssClass="btn btn-dark nav-link" runat="server" Text="Log Out" OnClick="lblLogOut_Click" />
+                        <asp:LinkButton ID="lbLogOut" CssClass="btn btn-dark nav-link" OnClick="lblLogOut_Click" runat="server">Log Out</asp:LinkButton>
                     </li>
                 </ul>
             </div>

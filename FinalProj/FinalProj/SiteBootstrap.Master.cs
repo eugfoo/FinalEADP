@@ -16,14 +16,14 @@ namespace FinalProj
             {
                 Users user = (Users)Session["user"];
                 lblProfile.Text = user.name;
-                lblLogOut.Visible = true;
+                lbLogOut.Visible = true;
                 lblBookmark.Visible = true;
             }
             else
             {
                 lblProfile.Text = "Sign In";
                 lblProfile.NavigateUrl = "/LogIn.aspx";
-                lblLogOut.Visible = false;
+                lbLogOut.Visible = false;
                 lblBookmark.Visible = false;
             }
         }

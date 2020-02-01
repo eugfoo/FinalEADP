@@ -17,7 +17,7 @@ namespace FinalProj
             {
                 Users user = (Users)Session["user"];
                 lblProfile.Text = user.name;
-                lblLogOut.Visible = true;
+                lbLogOut.Visible = true;
                 lblBookmark.Visible = true;
                 lblUserName.Text = user.name;
                 lblDesc.Text = user.desc;
@@ -27,7 +27,7 @@ namespace FinalProj
             {
                 lblProfile.Text = "Sign In";
                 lblProfile.NavigateUrl = "/LogIn.aspx";
-                lblLogOut.Visible = false;
+                lbLogOut.Visible = false;
                 lblBookmark.Visible = false;
                 Response.Redirect("/homepage.aspx");
             }
