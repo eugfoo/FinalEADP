@@ -12,6 +12,10 @@ namespace FinalProj
 {
     public partial class EditProfile : System.Web.UI.Page
     {
+        public string linkFB = "https://www.facebook.com/";
+        public string linkInst = "https://www.instagram.com/";
+        public string linkTwit = "https://www.twitter.com/";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["user"] != null) // A user has signed in
@@ -57,6 +61,18 @@ namespace FinalProj
             if (tbDesc.Text != "")
             {
                 user.UpdateDescByID(user.id, tbDesc.Text);
+            }
+            if (tbFacebook.Text != "")
+            {
+                user.UpdateFacebookByID(user.id, linkFB + tbFacebook.Text);
+            }
+            if (tbInstagram.Text != "")
+            {
+                user.UpdateInstagramByID(user.id, linkInst + tbInstagram.Text);
+            }
+            if (tbTwitter.Text != "")
+            {
+                user.UpdateTwitterByID(user.id, linkTwit + tbTwitter.Text);
             }
             if (Session["tempDP"] != null)
             {

@@ -67,6 +67,33 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.Image imgDP;
         
         /// <summary>
+        /// hlFacebook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlFacebook;
+        
+        /// <summary>
+        /// hlInstagram control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlInstagram;
+        
+        /// <summary>
+        /// hlTwitter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlTwitter;
+        
+        /// <summary>
         /// lblUserName control.
         /// </summary>
         /// <remarks>

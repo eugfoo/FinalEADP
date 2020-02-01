@@ -28,16 +28,14 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Name</label>
-                        <asp:RequiredFieldValidator CssClass="vError" ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbName" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>
                         <asp:TextBox type="text" CssClass="form-control" ID="tbName" runat="server" CausesValidation="True"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Description</label>
-                        <asp:RequiredFieldValidator CssClass="vError" ID="RequiredFieldValidator3" runat="server" ControlToValidate="tbDesc" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>
-                        <asp:TextBox type="text" CssClass="form-control" ID="tbDesc" runat="server" CausesValidation="True"></asp:TextBox>
+                        <asp:TextBox TextMode="MultiLine" Columns="50" Rows="5" type="text" 
+                            CssClass="form-control" ID="tbDesc" runat="server" CausesValidation="True"></asp:TextBox>
                     </div>
                 </div>
-
                 <div class="col-1"></div>
                 <div class="col-5">
                     <div class="form-group">
@@ -58,19 +56,19 @@
                             <div style="min-width: 140px;" class="input-group-prepend">
                                 <div style="min-width: inherit;" class="input-group-text">facebook.com/</div>
                             </div>
-                            <asp:TextBox type="text" CssClass="form-control" ID="TextBox4" runat="server" CausesValidation="False"></asp:TextBox>
+                            <asp:TextBox type="text" CssClass="form-control" ID="tbFacebook" runat="server" CausesValidation="False"></asp:TextBox>
                         </div>
                         <div class="input-group mb-2">
                             <div style="min-width: 140px;" class="input-group-prepend">
                                 <div style="min-width: inherit;" class="input-group-text">instagram.com/</div>
                             </div>
-                            <asp:TextBox type="text" CssClass="form-control" ID="TextBox1" runat="server" CausesValidation="False"></asp:TextBox>
+                            <asp:TextBox type="text" CssClass="form-control" ID="tbInstagram" runat="server" CausesValidation="False"></asp:TextBox>
                         </div>
                         <div class="input-group mb-2">
                             <div style="min-width: 140px;" class="input-group-prepend">
                                 <div style="min-width: inherit;" class="input-group-text">twitter.com/</div>
                             </div>
-                            <asp:TextBox type="text" CssClass="form-control" ID="TextBox2" runat="server" CausesValidation="False"></asp:TextBox>
+                            <asp:TextBox type="text" CssClass="form-control" ID="tbTwitter" runat="server" CausesValidation="False"></asp:TextBox>
                         </div>
                     </div>
                 </div>

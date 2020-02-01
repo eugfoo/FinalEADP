@@ -20,9 +20,14 @@ namespace FinalProj
                 lbLogOut.Visible = true;
                 lblBookmark.Visible = true;
                 lblUserName.Text = user.name;
+                if (user.facebook != "") { hlFacebook.NavigateUrl = user.facebook; }
+                if (user.instagram != "") { hlInstagram.NavigateUrl = user.instagram; }
+                if (user.twitter != "") { hlTwitter.NavigateUrl = user.twitter; }
+                hlInstagram.NavigateUrl = user.instagram;
+                hlTwitter.NavigateUrl = user.twitter;
                 imgDP.ImageUrl = user.DPimage;
                 imgBP.ImageUrl = user.BPimage;
-                lblDesc.Text = user.desc;
+                if (user.desc != "") { lblDesc.Text = user.desc; } else { lblDesc.Text = "This user has not added any description."; lblDesc.CssClass += "text-muted font-italic"; }
                 rating = user.rating;
             }
             else

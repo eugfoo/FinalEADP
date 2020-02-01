@@ -67,15 +67,6 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.Button btnUploadDP;
         
         /// <summary>
-        /// RequiredFieldValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
-        /// <summary>
         /// tbName control.
         /// </summary>
         /// <remarks>
@@ -83,15 +74,6 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbName;
-        
-        /// <summary>
-        /// RequiredFieldValidator3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
         /// tbDesc control.
@@ -112,31 +94,31 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.DropDownList ddlDiet;
         
         /// <summary>
-        /// TextBox4 control.
+        /// tbFacebook control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox tbFacebook;
         
         /// <summary>
-        /// TextBox1 control.
+        /// tbInstagram control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox tbInstagram;
         
         /// <summary>
-        /// TextBox2 control.
+        /// tbTwitter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox tbTwitter;
         
         /// <summary>
         /// btnCancel control.

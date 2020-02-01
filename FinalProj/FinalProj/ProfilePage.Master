@@ -56,9 +56,9 @@
             transition: box-shadow 0.2s;
         }
 
-        .pplinks:hover {
-            box-shadow: 0px 5px 5px #aaaaaa;
-        }
+            .pplinks:hover {
+                box-shadow: 0px 5px 5px #aaaaaa;
+            }
 
         .pphyperlinks {
             display: block;
@@ -67,8 +67,13 @@
         .pphyperlinks:hover {
             text-decoration: none;
         }
-            
 
+        .ppSMlinks {
+            border: none !important;
+            background-color:rgba(0,0,0,0) !important;
+        }
+
+        
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -104,28 +109,7 @@
         </nav>
         <div class="container">
             <div class="row">
-                <%--<div class="col-md-2">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <asp:HyperLink ID="hlFacebook" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.facebook.com" runat="server">
-                                <img style="max-height: 20px;" class="img " src="https://image.flaticon.com/icons/svg/124/124010.svg" alt="f icon" />
-                                Facebook
-                            </asp:HyperLink>
-                        </li>
-                        <li class="list-group-item">
-                            <asp:HyperLink ID="hlInstagram" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.instagram.com" runat="server">
-                            <img style="max-height: 20px;" class="img " src="https://image.flaticon.com/icons/svg/2111/2111463.svg" alt="i icon" />
-                                Instagram
-                            </asp:HyperLink>
-                        </li>
-                        <li class="list-group-item">
-                            <asp:HyperLink ID="hlTwitter" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.twitter.com" runat="server">
-                            <img style="max-height: 20px;" class="img " src="https://image.flaticon.com/icons/svg/124/124021.svg" alt="t icon" />
-                                Twitter
-                            </asp:HyperLink>
-                        </li>
-                    </ul>
-                </div>--%>
+
                 <div class="col-md-12">
                     <div style="max-width: 1100px; position: relative;" class="card">
                         <div style="top: 0;">
@@ -136,6 +120,23 @@
                         </div>
                         <br />
                         <div class="text-center card-body">
+                            <ul style="float:left; position:absolute; background-color:none !important;" class="list-group">
+                                <li class="list-group-item ppSMlinks">
+                                    <asp:HyperLink ID="hlFacebook" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.facebook.com" runat="server">
+                                <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/124/124010.svg" alt="f icon" />
+                                    </asp:HyperLink>
+                                </li>
+                                <li class="list-group-item ppSMlinks">
+                                    <asp:HyperLink ID="hlInstagram" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.instagram.com" runat="server">
+                            <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/2111/2111463.svg" alt="i icon" />
+                                    </asp:HyperLink>
+                                </li>
+                                <li class="list-group-item ppSMlinks">
+                                    <asp:HyperLink ID="hlTwitter" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.twitter.com" runat="server">
+                            <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/124/124021.svg" alt="t icon" />
+                                    </asp:HyperLink>
+                                </li>
+                            </ul>
                             <div>
                                 <asp:Label ID="lblUserName" Style="font-size: 30px;" runat="server" Text="PH" CssClass="card-title"></asp:Label>
                                 <a class="ml-1 " style="color: black; text-decoration: none;" href="/EditProfile.aspx">
@@ -155,9 +156,10 @@
                                     </p>
                                 </div>
                             </div>
-                            <p class="card-text">
+                            <p style="margin-left: 50px; margin-right: 50px;" class="card-text">
                                 <asp:Label ID="lblDesc" runat="server" Text="PH"></asp:Label>
                             </p>
+                        <br />
                         </div>
                         <ul class="list-group text-center" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
                             <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" href="/EventStatus.aspx">Events</a></li>
@@ -171,12 +173,6 @@
         </div>
         <div style="border-bottom: 1px solid rgba(0,0,0,.125); box-shadow: gray 2px 2px inset"></div>
 
-        <%--<ul class="list-group" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
-            <li class="list-inline-item mx-0"><a class="btn bg-light text-dark" href="/EventStatus.aspx">Events</a></li>
-            <li class="list-inline-item mx-0"><a class="btn bg-light text-dark" href="/PPGallery.aspx">Gallery</a></li>
-            <li class="list-inline-item mx-0"><a class="btn bg-light text-dark" href="/PPRating.aspx">Rating</a></li>
-            <li class="list-inline-item mx-0"><a class="btn bg-light text-dark" href="/PPPoints.aspx">Points</a></li>
-        </ul>--%>
         <div style="min-height: 70vh">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
             </asp:ContentPlaceHolder>
