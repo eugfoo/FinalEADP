@@ -16,6 +16,16 @@ namespace FinalProj
             if (Session["user"] != null) // A user has signed in
             {
                 Users user = (Users)Session["user"];
+                EventsStatus events = new EventsStatus();
+                var eventList = events.GetAllEventsByName();
+                int eventCount = 0;
+                for (int i = 0; i < eventList.Count; i++) {
+                    if (eventList[i].Organiser == user.id.ToString())
+                    {
+                        eventCount++;
+                    }
+                }
+                lblEventCount.Text = "(" + eventCount.ToString() + ")";
                 lblProfile.Text = user.name;
                 lbLogOut.Visible = true;
                 lblBookmark.Visible = true;

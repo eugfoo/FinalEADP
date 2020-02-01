@@ -149,14 +149,10 @@
                                                 <span><i class="text-warning fa fa-star"></i></span>
                                             <% } %>
                                     </asp:Label>
-                                    <p class="font-small text-muted">
-                                        <span>(
-                                            <asp:Label ID="lblEventCount" runat="server" Text="PH"></asp:Label>
-                                        </span>)
-                                    </p>
+                                    <asp:Label ID="lblEventCount" CssClass="font-small text-muted" runat="server" Text="PH"></asp:Label>
                                 </div>
                             </div>
-                            <p style="margin-left: 50px; margin-right: 50px;" class="card-text">
+                            <p style="margin-left: 80px; margin-right: 80px;" class="card-text">
                                 <asp:Label ID="lblDesc" runat="server" Text="PH"></asp:Label>
                             </p>
                         <br />
