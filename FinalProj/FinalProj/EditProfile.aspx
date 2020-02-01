@@ -3,8 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="mb-5" style="">
-        <div style="width: 500px; margin: auto; margin-top: 5rem;" class="card">
+    <div class="mb-5 row" style="">
+        <div style="max-width: 600px; margin: auto; margin-top: 3rem;" class="p-0 card col-6">
             <div class="card-header text-center">
                 Edit Profile
             </div>
@@ -26,10 +26,10 @@
                     <asp:Image ID="imgDP" CssClass="card-img-top" Style="max-width: 100px; max-height: 100px; min-height: 100px; min-width: 100px;" runat="server" />
                     <div class="form-control">
                         <asp:FileUpload CssClass="col-md-8" ID="fuDP" runat="server" accept=".png,.jpg,.jpeg" />
-                        <asp:Button ID="btnUploadDP" runat="server" Text="Upload" OnClick="btnUploadDP_Click" UseSubmitBehavior="False"/>
+                        <asp:Button ID="btnUploadDP" runat="server" Text="Upload" OnClick="btnUploadDP_Click" UseSubmitBehavior="False" />
                     </div>
                 </div>
-
+                <div class="dropdown-divider"></div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Name</label>
                     <asp:RequiredFieldValidator CssClass="vError" ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbName" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>
@@ -39,11 +39,6 @@
                     <label for="formGroupExampleInput2">Description</label>
                     <asp:RequiredFieldValidator CssClass="vError" ID="RequiredFieldValidator3" runat="server" ControlToValidate="tbDesc" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>
                     <asp:TextBox type="text" CssClass="form-control" ID="tbDesc" runat="server" CausesValidation="True"></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Connect your Social Media</label>
-                    <asp:RequiredFieldValidator CssClass="vError" ID="RequiredFieldValidator5" runat="server" ControlToValidate="TextBox1" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>
-                    <asp:TextBox type="text" CssClass="form-control" ID="TextBox1" runat="server" CausesValidation="True"></asp:TextBox>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="form-group">
@@ -64,5 +59,39 @@
                 </div>
             </div>
         </div>
+        <div style="max-width: 600px; margin: auto; margin-top: 3rem;" class="p-0 card col-6">
+            <div class="card-header text-center">
+                Social Media
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Connect your Social Media</label>
+                    <%--<asp:RequiredFieldValidator CssClass="vError" ID="RequiredFieldValidator6" runat="server" ControlToValidate="TextBox4" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>--%>
+                    <div class="input-group mb-2">
+                        <div style="min-width:140px;"class="input-group-prepend">
+                            <div style="min-width:inherit;" class="input-group-text">facebook.com/</div>
+                        </div>
+                        <asp:TextBox type="text" CssClass="form-control" ID="TextBox4" runat="server" CausesValidation="False"></asp:TextBox>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div style="min-width:140px;"class="input-group-prepend">
+                            <div style="min-width:inherit;" class="input-group-text">instagram.com/</div>
+                        </div>
+                        <asp:TextBox type="text" CssClass="form-control" ID="TextBox1" runat="server" CausesValidation="False"></asp:TextBox>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div style="min-width:140px;"class="input-group-prepend">
+                            <div style="min-width:inherit;" class="input-group-text">twitter.com/</div>
+                        </div>
+                        <asp:TextBox type="text" CssClass="form-control" ID="TextBox2" runat="server" CausesValidation="False"></asp:TextBox>
+                    </div>
+                </div>
+                <%--<div class="align-bottom" style="text-align: right;">
+                    <asp:Button ID="Button3" runat="server" CssClass="btn btn-danger mr-3" Text="Cancel" UseSubmitBehavior="False" OnClick="btnCancel_Click" />
+                    <asp:Button ID="Button4" runat="server" CssClass="btn btn-primary" Text="Update" UseSubmitBehavior="False" OnClick="btnUpdate_Click" />
+                </div>--%>
+            </div>
+        </div>
+
     </div>
 </asp:Content>

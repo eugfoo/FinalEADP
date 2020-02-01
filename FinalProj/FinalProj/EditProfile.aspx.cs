@@ -12,9 +12,6 @@ namespace FinalProj
 {
     public partial class EditProfile : System.Web.UI.Page
     {
-        public string DPfilepath = "";
-        public string BPfilepath = "";
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["user"] != null) // A user has signed in
@@ -22,11 +19,25 @@ namespace FinalProj
                 Users user = (Users)Session["user"];
                 if (user.DPimage != "")
                 {
-                    imgDP.ImageUrl = user.DPimage;
+                    if (Session["tempDP"] != null)
+                    {
+                        imgDP.ImageUrl = Session["tempDP"].ToString();
+                    }
+                    else
+                    {
+                        imgDP.ImageUrl = user.DPimage;
+                    }
                 }
                 if (user.BPimage != "")
                 {
-                    imgBP.ImageUrl = user.BPimage;
+                    if (Session["tempBP"] != null)
+                    {
+                        imgBP.ImageUrl = Session["tempBP"].ToString();
+                    }
+                    else
+                    {
+                        imgBP.ImageUrl = user.BPimage;
+                    }
                 }
             }
             else
@@ -77,11 +88,6 @@ namespace FinalProj
                 fuDP.SaveAs(fileName);
                 imgDP.ImageUrl = "~/Img/User/" + uniqueFileName;
                 Session["tempDP"] = imgDP.ImageUrl;
-                //DPfilepath = "~/Img/User/" + uniqueFileName;
-                if (BPfilepath != "")
-                {
-                    imgBP.ImageUrl = BPfilepath;
-                }
             }
         }
 
@@ -94,11 +100,6 @@ namespace FinalProj
                 fuBP.SaveAs(fileName);
                 imgBP.ImageUrl = "~/Img/User/" + uniqueFileName;
                 Session["tempBP"] = imgBP.ImageUrl;
-                //BPfilepath = "~/Img/User/" + uniqueFileName;
-                if (DPfilepath != "")
-                {
-                    imgDP.ImageUrl = DPfilepath;
-                }
             }
         }
     }

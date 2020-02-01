@@ -9,7 +9,11 @@
     <div class="container">
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row ">
             <div style="width: 100%;" class="row mx-0">
-                <p style="margin-bottom: 0px">Points: <span style="color: darkcyan">25</span>P</p>
+                
+                <p style="margin-bottom: 0px">Points:
+                    <asp:Label ID="lblPoints" ForeColor="DarkCyan" runat="server"></asp:Label>P
+                    <%--<span style="color: darkcyan">25</span>P--%>
+                </p>
             </div>
         </div>
         <br>
