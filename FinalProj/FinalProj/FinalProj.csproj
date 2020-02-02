@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="BLL\EventStatus.cs" />
     <Compile Include="BLL\Events.cs" />
+    <Compile Include="BLL\GPictures.cs" />
     <Compile Include="BLL\Thread.cs" />
     <Compile Include="BLL\ThreadReply.cs" />
     <Compile Include="BLL\Users.cs" />
@@ -164,6 +165,7 @@
     </Compile>
     <Compile Include="DAL\eventStatusDAO.cs" />
     <Compile Include="DAL\eventDao.cs" />
+    <Compile Include="DAL\gpictureDAO.cs" />
     <Compile Include="DAL\ThreadReplyDAO.cs" />
     <Compile Include="DAL\ThreadDAO.cs" />
     <Compile Include="DAL\userDAO.cs" />

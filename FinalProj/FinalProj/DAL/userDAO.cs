@@ -88,7 +88,47 @@ namespace FinalProj.DAL
             return user;
         }
 
+        public Users SelectById(int Id)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStmt = "Select * from Users where Id = @id";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@id", Id);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
 
+            Users user = null;
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            if (rec_cnt == 1)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+                int Uid = Convert.ToInt32(row["Id"]);
+                string Uemail = row["userEmail"].ToString();
+                string UpassHash = row["userPasswordHash"].ToString();
+                string Uname = row["userName"].ToString();
+                string UDPimage = row["userDPImage"].ToString();
+                string UBPimage = row["userBPImage"].ToString();
+                string Udesc = row["userDesc"].ToString();
+                int Urating = Convert.ToInt32(row["userRating"]);
+                string UisOrg = row["userIsOrg"].ToString();
+                int Upoints = Convert.ToInt32(row["userPoints"]);
+                string Uparticipate = row["userParticipated"].ToString();
+                int Uverified = Convert.ToInt32(row["userIsVerified"]);
+                DateTime UregDate = Convert.ToDateTime(row["userRegDate"]);
+                string Ufacebook = row["userFacebook"].ToString();
+                string Uinstagram = row["userInstagram"].ToString();
+                string Utwitter = row["userTwitter"].ToString();
+                user = new Users(Uid, Uemail, UpassHash, Uname, UDPimage, UBPimage, Udesc, Urating, UisOrg, Upoints, 
+                    Uparticipate, Uverified, UregDate, Ufacebook, Uinstagram, Utwitter);
+            }
+            else
+            {
+                user = null;
+            }
+
+            return user;
+        }
 
         public int UpdateName(int id, string name)
         {
@@ -153,44 +193,6 @@ namespace FinalProj.DAL
             myConn.Close();
             return result;
         }
-
-		public Users SelectById(int Id)
-		{
-			string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-			SqlConnection myConn = new SqlConnection(DBConnect);
-			string sqlStmt = "Select * from Users where Id = @id";
-			SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
-			da.SelectCommand.Parameters.AddWithValue("@id", Id);
-			DataSet ds = new DataSet();
-			da.Fill(ds);
-
-			Users user = null;
-			int rec_cnt = ds.Tables[0].Rows.Count;
-			if (rec_cnt == 1)
-			{
-				DataRow row = ds.Tables[0].Rows[0];
-				int Uid = Convert.ToInt32(row["Id"]);
-				string Uemail = row["userEmail"].ToString();
-				string UpassHash = row["userPasswordHash"].ToString();
-				string Uname = row["userName"].ToString();
-				string UDPimage = row["userDPImage"].ToString();
-				string UBPimage = row["userBPImage"].ToString();
-				string Udesc = row["userDesc"].ToString();
-				int Urating = Convert.ToInt32(row["userRating"]);
-				string UisOrg = row["userIsOrg"].ToString();
-				int Upoints = Convert.ToInt32(row["userPoints"]);
-				string Uparticipate = row["userParticipated"].ToString();
-				int Uverified = Convert.ToInt32(row["userIsVerified"]);
-				DateTime UregDate = Convert.ToDateTime(row["userRegDate"]);
-				user = new Users(Uid, Uemail, UpassHash, Uname, UDPimage, UBPimage, Udesc, Urating, UisOrg, Upoints, Uparticipate, Uverified, UregDate, "", "" , "");
-			}
-			else
-			{
-				user = null;
-			}
-
-			return user;
-		}
 
 		public int UpdateFacebook(int id, string fb)
 		{

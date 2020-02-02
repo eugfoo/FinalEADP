@@ -25,7 +25,7 @@ namespace FinalProj
                     {
                         norgItems.Visible = false;
                     }
-                    lblProfile.Text = user.name + lblProfile.Text;
+                    lblProfile.Text = user.name;
                     liLogOut.Visible = true;
                     lblBookmark.Visible = true;
                 }
@@ -33,7 +33,7 @@ namespace FinalProj
                 {
                     ddCaret.Visible = false;
                     ddMenu.Visible = false;
-                    lblProfile.Text = "Sign In" + lblProfile.Text;
+                    lblProfile.Text = "Sign In";
                     lblProfile.NavigateUrl = "/LogIn.aspx";
                     liLogOut.Visible = false;
                     lblBookmark.Visible = false;

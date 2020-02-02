@@ -22,6 +22,24 @@ namespace FinalProj {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl noPic;
         
         /// <summary>
+        /// openModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton openModal;
+        
+        /// <summary>
+        /// btnOpenModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnOpenModal;
+        
+        /// <summary>
         /// imgPic control.
         /// </summary>
         /// <remarks>
@@ -40,13 +58,22 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.FileUpload fuPic;
         
         /// <summary>
-        /// tbName control.
+        /// btnDisplayPic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbName;
+        protected global::System.Web.UI.WebControls.Button btnDisplayPic;
+        
+        /// <summary>
+        /// tbCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbCaption;
         
         /// <summary>
         /// ddlEvents control.
@@ -56,5 +83,14 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEvents;
+        
+        /// <summary>
+        /// btnUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpload;
     }
 }

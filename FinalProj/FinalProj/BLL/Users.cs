@@ -72,7 +72,13 @@ namespace FinalProj.BLL
 			return user.SelectByEmail(email);
 		}
 
-		public int UpdateNameByID(int id, string name)
+        public Users GetUserById(int Id)
+        {
+            userDAO user = new userDAO();
+            return user.SelectById(Id);
+        }
+
+        public int UpdateNameByID(int id, string name)
 		{
 			userDAO user = new userDAO();
 			return user.UpdateName(id, name);
@@ -113,11 +119,6 @@ namespace FinalProj.BLL
 			userDAO user = new userDAO();
 			return user.UpdateTwitter(id, twit);
 		}
-
-		public Users GetUserById(int Id)
-		{
-			userDAO user = new userDAO();
-			return user.SelectById(Id);
-		}
+		
 	}
 }
