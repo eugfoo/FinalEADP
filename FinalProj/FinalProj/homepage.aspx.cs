@@ -11,7 +11,10 @@ namespace FinalProj
 	public partial class Corporate : System.Web.UI.Page
 	{ 
         protected List<Events> evList;
+		protected List<int> attending;
 		protected Dictionary<int, string> userList = new Dictionary<int, string>();
+		protected Dictionary<int, int> attendingUsers = new Dictionary<int, int>();
+		protected List<Users> participantList = new List<Users>();
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -41,12 +44,23 @@ namespace FinalProj
 				{
 					element.StartTime = element.StartTime + " AM";
 				}
-				userList.Add(element.User_id, ev.GetAllUserNameByUserId(element.User_id));
+				userList.Add(element.EventId, ev.GetAllUserNameByUserId(element.User_id));
+
+				attending = element.getAllParticipants(element.EventId);
+				attendingUsers.Add(element.EventId, attending.Count);
+
+
+
+
 			}
-			if (Session["user"] == null) // A user has signed in
+			if (Session["user"] == null)
 			{
 				createEvent.Enabled = false;
 			}
+
+			
+
+
 		}
 		
 		protected void DateClicked(object sender, EventArgs e)
@@ -74,6 +88,8 @@ namespace FinalProj
 				{
 					element.StartTime = element.StartTime + " AM";
 				}
+
+				
 			}
 
 		}

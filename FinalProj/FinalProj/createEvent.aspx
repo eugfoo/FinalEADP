@@ -119,11 +119,11 @@
 							<asp:TextBox ID="eventDate" CssClass="form-control" runat="server" type="date" format="DD-MM-YYYY"></asp:TextBox>
 						</div>
 						<div class="form-group col-md-3">
-							<label for="startTime">Start Time:</label>
+							<label for="startTime">Start Time: (7:00AM - 10:00PM)</label>
 							<asp:TextBox ID="startTime" CssClass="form-control" runat="server" min="07:00" max="22:00" format="hh:mm" type="time"></asp:TextBox>
 						</div>
 						<div class="form-group col-md-3">
-							<label for="endTime">End Time:</label>
+							<label for="endTime">End Time: (7:00AM - 10:00PM)</label>
 							<asp:TextBox ID="endTime" CssClass="form-control" runat="server" min="07:00" max="22:00" format="hh:mm" type="time"></asp:TextBox>
 						</div>
 					</div>
@@ -138,8 +138,7 @@
 
 						<asp:TextBox ID="desc" CssClass="form-control" runat="server" Height="250" TextMode="MultiLine" onkeyup="countChars(this);"></asp:TextBox>
 						<p id="charNum">3000 characters remaining</p>
-						<%--autopostback="true" ontextchanged="desc_textchanged" // This is to be placed in the tag above--%>
-						<%--<asp:Label ID="charCounter" runat="server" Text="."></asp:Label>--%>
+						
 					</div>
 					<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Add a Photo</div>
 

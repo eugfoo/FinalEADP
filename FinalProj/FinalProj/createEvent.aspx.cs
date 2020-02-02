@@ -168,16 +168,16 @@ namespace FinalProj
                 else if (FileUploadControl.HasFile == false)
                 {
 
-                    string filename = "defaultPic.jpg";
+                    string filename = "defaultPic.PNG";
                     picture = filename;
 
                 }
 
             
 
-                ev = new Events(title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, advertisement, user_id);
+                ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, advertisement, user_id);
                 int result = ev.AddEvent();
-                Response.Redirect("createdEvent.aspx");
+                Response.Redirect("eventDetails.aspx");
             }
         }
 

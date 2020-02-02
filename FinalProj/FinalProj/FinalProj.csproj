@@ -79,9 +79,7 @@
     <Content Include="AttendanceSubmitted.css" />
     <Content Include="beach.jpg" />
     <Content Include="bookmark.aspx" />
-    <Content Include="createdEvent.aspx" />
     <Content Include="EditProfile.aspx" />
-    <Content Include="eventDetailsTabTwo.aspx" />
     <Content Include="EventStatus.aspx" />
     <Content Include="EventStatus.css" />
     <Content Include="forumCatOverview.aspx" />
@@ -91,19 +89,23 @@
     <Content Include="forumProjectClean.aspx" />
     <Content Include="grabVoucher.JPG" />
     <Content Include="homepage.aspx" />
-    <Content Include="eventDetailsTabOne.aspx" />
+    <Content Include="eventDetails.aspx" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Img\clipboard.jpeg" />
+    <Content Include="Img\defaultPic.png" />
     <Content Include="Img\eventphoto.jpeg" />
     <Content Include="Img\organiser.jpeg" />
     <Content Include="Img\table.jpeg" />
     <Content Include="Img\volunteer.jpeg" />
+    <Content Include="JoinEventFromBookmark.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="picture.JPG" />
     <Content Include="PPGallery.aspx" />
     <Content Include="PPPoints.aspx" />
     <Content Include="PPRating.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="RemoveBookmark.aspx" />
+    <Content Include="RemoveEventFromBookmark.aspx" />
     <Content Include="StyleSheet\footer.css" />
     <Content Include="Global.asax" />
     <Content Include="Img\together.jpeg" />
@@ -160,13 +162,6 @@
     <Compile Include="bookmark.aspx.designer.cs">
       <DependentUpon>bookmark.aspx</DependentUpon>
     </Compile>
-    <Compile Include="createdEvent.aspx.cs">
-      <DependentUpon>createdEvent.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="createdEvent.aspx.designer.cs">
-      <DependentUpon>createdEvent.aspx</DependentUpon>
-    </Compile>
     <Compile Include="DAL\eventStatusDAO.cs" />
     <Compile Include="DAL\eventDao.cs" />
     <Compile Include="DAL\ThreadReplyDAO.cs" />
@@ -179,13 +174,6 @@
     </Compile>
     <Compile Include="EditProfile.aspx.designer.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="eventDetailsTabTwo.aspx.cs">
-      <DependentUpon>eventDetailsTabTwo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="eventDetailsTabTwo.aspx.designer.cs">
-      <DependentUpon>eventDetailsTabTwo.aspx</DependentUpon>
     </Compile>
     <Compile Include="EventStatus.aspx.cs">
       <DependentUpon>EventStatus.aspx</DependentUpon>
@@ -236,12 +224,12 @@
     <Compile Include="homepage.aspx.designer.cs">
       <DependentUpon>homepage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="eventDetailsTabOne.aspx.cs">
-      <DependentUpon>eventDetailsTabOne.aspx</DependentUpon>
+    <Compile Include="eventDetails.aspx.cs">
+      <DependentUpon>eventDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="eventDetailsTabOne.aspx.designer.cs">
-      <DependentUpon>eventDetailsTabOne.aspx</DependentUpon>
+    <Compile Include="eventDetails.aspx.designer.cs">
+      <DependentUpon>eventDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -252,6 +240,13 @@
     </Compile>
     <Compile Include="createEvent.aspx.designer.cs">
       <DependentUpon>createEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JoinEventFromBookmark.aspx.cs">
+      <DependentUpon>JoinEventFromBookmark.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JoinEventFromBookmark.aspx.designer.cs">
+      <DependentUpon>JoinEventFromBookmark.aspx</DependentUpon>
     </Compile>
     <Compile Include="LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
@@ -295,6 +290,20 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RemoveBookmark.aspx.cs">
+      <DependentUpon>RemoveBookmark.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RemoveBookmark.aspx.designer.cs">
+      <DependentUpon>RemoveBookmark.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RemoveEventFromBookmark.aspx.cs">
+      <DependentUpon>RemoveEventFromBookmark.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RemoveEventFromBookmark.aspx.designer.cs">
+      <DependentUpon>RemoveEventFromBookmark.aspx</DependentUpon>
     </Compile>
     <Compile Include="SiteBootstrap.Master.cs">
       <DependentUpon>SiteBootstrap.Master</DependentUpon>
