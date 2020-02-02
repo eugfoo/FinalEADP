@@ -64,21 +64,26 @@
             display: block;
         }
 
-        .pphyperlinks:hover {
-            text-decoration: none;
-        }
+            .pphyperlinks:hover {
+                text-decoration: none;
+            }
 
         .ppSMlinks {
             border: none !important;
-            background-color:rgba(0,0,0,0) !important;
+            background-color: rgba(0,0,0,0) !important;
         }
 
-        
+        #ddCaret i:hover {
+            color: white;
+            cursor: pointer;
+        }
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -92,16 +97,30 @@
             <div class="hexagon"><span></span></div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarnav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item mr-3">
                         <asp:HyperLink ID="lblBookmark" CssClass="nav-link" runat="server" NavigateUrl="/bookmark.aspx">Bookmarks</asp:HyperLink>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mr-3">
                         <a class="nav-link" href="/forumPage1.aspx">Forum</a>
                     </li>
-                    <li class="nav-item">
-                        <asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>
+                    <li class="nav-item mr-3">
+                        <div class="btn-group">
+
+                            <asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>
+                            <span id="ddCaret" runat="server" class="text-secondary pt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-caret-down"></i></span>
+
+                            <div id="ddMenu" runat="server" class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="/EditProfile.aspx">Edit Profile</a>
+                                <%--<a class="dropdown-item" href="#">Request Verification</a>--%>
+                                <div id="norgItems" runat="server">
+                                    <a class="dropdown-item" href="/VoucherRedemption.aspx">Redeem Vouchers</a>
+                                    <a class="dropdown-item" href="#">Request Recommendation</a>
+                                </div>
+                            </div>
+                        </div>
+                        <%--<asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>--%>
                     </li>
-                    <li class="nav-item">
+                    <li id="liLogOut" runat="server" class="nav-item mr-3">
                         <asp:LinkButton ID="lbLogOut" CssClass="nav-link" OnClick="lblLogOut_Click" runat="server">Log Out</asp:LinkButton>
                     </li>
                 </ul>
@@ -120,7 +139,7 @@
                         </div>
                         <br />
                         <div class="text-center card-body">
-                            <ul style="float:left; position:absolute; background-color:none !important;" class="list-group">
+                            <ul style="float: left; position: absolute; background-color: none !important;" class="list-group">
                                 <li class="list-group-item ppSMlinks">
                                     <asp:HyperLink ID="hlFacebook" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.facebook.com" runat="server">
                                 <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/124/124010.svg" alt="f icon" />
@@ -139,9 +158,9 @@
                             </ul>
                             <div>
                                 <asp:Label ID="lblUserName" Style="font-size: 30px;" runat="server" Text="PH" CssClass="card-title"></asp:Label>
-                                <a class="ml-1 " id="btnEditProfile" runat="server" style="color: black; text-decoration: none;" href="/EditProfile.aspx">
+                                <%--<a class="ml-1 " id="btnEditProfile" runat="server" style="color: black; text-decoration: none;" href="/EditProfile.aspx">
                                     <span class="fas fa-edit"></span>
-                                </a>
+                                </a>--%>
                                 <div>
                                     <asp:Label ID="lblRating" runat="server" Text="">
                                         <% for (int i = 0; i < rating; i++)
@@ -155,32 +174,34 @@
                             <p style="margin-left: 80px; margin-right: 80px;" class="card-text">
                                 <asp:Label ID="lblDesc" runat="server" Text="PH"></asp:Label>
                             </p>
-                        <br />
+                            <br />
                         </div>
                         <% if (viewingUserId != null)
                             { %>
                         <ul class="list-group text-center" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/EventStatus.aspx">Events</a></li>
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPGallery.aspx?userId=<%=viewingUserId.ToString()%>">Gallery</a></li>
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPRating.aspx?userId=<%=viewingUserId.ToString()%>">Rating</a></li>
-                            <li id="linkPPPoints" runat="server" class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark" 
+                            <li id="linkPPPoints" runat="server" class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark"
                                 href="/PPPoints.aspx?userId=<%=viewingUserId.ToString()%>">Points</a></li>
                         </ul>
-                        <% } else { %>
+                        <% }
+                        else
+                        { %>
                         <ul class="list-group text-center" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/EventStatus.aspx">Events</a></li>
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPGallery.aspx">Gallery</a></li>
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPRating.aspx">Rating</a></li>
-                            <li id="li1" runat="server" class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark" 
+                            <li id="li1" runat="server" class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark"
                                 href="/PPPoints.aspx">Points</a></li>
                         </ul>
-                          <% } %>
+                        <% } %>
                     </div>
                 </div>
             </div>

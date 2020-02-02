@@ -19,22 +19,27 @@ namespace FinalProj
 
             if (viewingUserId != null) // A user is viewing another's PP
             {
-                if (Session["user"] == null)
+                if (Session["user"] == null) // User is not signed in
                 {
+                    ddCaret.Visible = false;
+                    ddMenu.Visible = false;
                     lblProfile.Text = "Sign In";
                     lblProfile.NavigateUrl = "/LogIn.aspx";
-                    lbLogOut.Visible = false;
+                    liLogOut.Visible = false;
                     lblBookmark.Visible = false;
                 }
                 else
                 {
                     Users user1 = (Users)Session["user"];
+                    if (user1.isOrg.Trim() == "True")
+                    {
+                        norgItems.Visible = false;
+                    }
                     lblProfile.Text = user1.name;
-                    lbLogOut.Visible = true;
+                    liLogOut.Visible = true;
                     lblBookmark.Visible = true;
                 }
                 linkPPPoints.Visible = false;
-                btnEditProfile.Visible = false;
                 Users user = new Users();
                 var viewingUser = user.GetUserById(Convert.ToInt32(viewingUserId));
                 initializePPFields(viewingUser);
@@ -42,11 +47,14 @@ namespace FinalProj
             else if (Session["user"] != null) // A user is viewing their own PP
             {
                 Users user = (Users)Session["user"];
+                if (user.isOrg.Trim() == "True")
+                {
+                    norgItems.Visible = false;
+                }
                 initializePPFields(user);
                 linkPPPoints.Visible = true;
-                btnEditProfile.Visible = true;
                 lblProfile.Text = user.name;
-                lbLogOut.Visible = true;
+                liLogOut.Visible = true;
                 lblBookmark.Visible = true;
             }
         }

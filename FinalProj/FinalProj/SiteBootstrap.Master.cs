@@ -14,22 +14,28 @@ namespace FinalProj
         {
             if (Convert.ToBoolean(Session["admin"])) // An admin has signed in
             {
-                lblAdmin.Visible = true;
+                liAdmin.Visible = true;
             }
             else
             {
                 if (Session["user"] != null) // A user has signed in
                 {
                     Users user = (Users)Session["user"];
-                    lblProfile.Text = user.name;
-                    lbLogOut.Visible = true;
+                    if (user.isOrg.Trim() == "True")
+                    {
+                        norgItems.Visible = false;
+                    }
+                    lblProfile.Text = user.name + lblProfile.Text;
+                    liLogOut.Visible = true;
                     lblBookmark.Visible = true;
                 }
                 else
                 {
-                    lblProfile.Text = "Sign In";
+                    ddCaret.Visible = false;
+                    ddMenu.Visible = false;
+                    lblProfile.Text = "Sign In" + lblProfile.Text;
                     lblProfile.NavigateUrl = "/LogIn.aspx";
-                    lbLogOut.Visible = false;
+                    liLogOut.Visible = false;
                     lblBookmark.Visible = false;
                 }
             }
