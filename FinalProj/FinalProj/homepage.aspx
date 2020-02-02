@@ -548,7 +548,7 @@
 						</div>
 						<div class="card-footer text-muted">
 							Posted by
-							<a href="#"><%= userList[element.EventId] %></a>
+							<a href="/PPGallery.aspx?userId=<%=userIdList[element.EventId]%>"><%= userList[element.EventId] %></a>
 						</div>
 					</div>
 					<% } %>

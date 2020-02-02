@@ -11,42 +11,43 @@ namespace FinalProj
     public partial class ProfilePage : System.Web.UI.MasterPage
     {
         public int rating;
+        public string viewingUserId;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] != null) // A user has signed in
+            viewingUserId = Request.QueryString["userId"];
+
+            if (viewingUserId != null) // A user is viewing another's PP
+            {
+                if (Session["user"] == null)
+                {
+                    lblProfile.Text = "Sign In";
+                    lblProfile.NavigateUrl = "/LogIn.aspx";
+                    lbLogOut.Visible = false;
+                    lblBookmark.Visible = false;
+                }
+                else
+                {
+                    Users user1 = (Users)Session["user"];
+                    lblProfile.Text = user1.name;
+                    lbLogOut.Visible = true;
+                    lblBookmark.Visible = true;
+                }
+                linkPPPoints.Visible = false;
+                btnEditProfile.Visible = false;
+                Users user = new Users();
+                var viewingUser = user.GetUserById(Convert.ToInt32(viewingUserId));
+                initializePPFields(viewingUser);
+            }
+            else if (Session["user"] != null) // A user is viewing their own PP
             {
                 Users user = (Users)Session["user"];
-                EventsStatus events = new EventsStatus();
-                var eventList = events.GetAllEventsByName();
-                int eventCount = 0;
-                for (int i = 0; i < eventList.Count; i++) {
-                    if (eventList[i].Organiser == user.id.ToString())
-                    {
-                        eventCount++;
-                    }
-                }
-                lblEventCount.Text = "(" + eventCount.ToString() + ")";
+                initializePPFields(user);
+                linkPPPoints.Visible = true;
+                btnEditProfile.Visible = true;
                 lblProfile.Text = user.name;
                 lbLogOut.Visible = true;
                 lblBookmark.Visible = true;
-                lblUserName.Text = user.name;
-                if (user.facebook != "") { hlFacebook.NavigateUrl = user.facebook; }
-                if (user.instagram != "") { hlInstagram.NavigateUrl = user.instagram; }
-                if (user.twitter != "") { hlTwitter.NavigateUrl = user.twitter; }
-                hlInstagram.NavigateUrl = user.instagram;
-                hlTwitter.NavigateUrl = user.twitter;
-                imgDP.ImageUrl = user.DPimage;
-                imgBP.ImageUrl = user.BPimage;
-                if (user.desc != "") { lblDesc.Text = user.desc; } else { lblDesc.Text = "This user has not added any description."; lblDesc.CssClass += "text-muted font-italic"; }
-                rating = user.rating;
-            }
-            else
-            {
-                lblProfile.Text = "Sign In";
-                lblProfile.NavigateUrl = "/LogIn.aspx";
-                lbLogOut.Visible = false;
-                lblBookmark.Visible = false;
-                Response.Redirect("/homepage.aspx");
             }
         }
 
@@ -54,6 +55,31 @@ namespace FinalProj
         {
             Session.Clear();
             Response.Redirect("/homepage.aspx");
+        }
+
+        public void initializePPFields(Users user)
+        {
+            EventsStatus events = new EventsStatus();
+            var eventList = events.GetAllEventsByName(); // Cher don't ask me why the function named "GetAllEventsByName" doesn't get events BY NAME. why name even? get by id la. smh
+            int eventCount = 0;
+            for (int i = 0; i < eventList.Count; i++)
+            {
+                if (eventList[i].Organiser == user.id.ToString())
+                {
+                    eventCount++;
+                }
+            }
+            lblEventCount.Text = "(" + eventCount.ToString() + ")";
+            lblUserName.Text = user.name;
+            if (user.facebook != "") { hlFacebook.NavigateUrl = user.facebook; }
+            if (user.instagram != "") { hlInstagram.NavigateUrl = user.instagram; }
+            if (user.twitter != "") { hlTwitter.NavigateUrl = user.twitter; }
+            hlInstagram.NavigateUrl = user.instagram;
+            hlTwitter.NavigateUrl = user.twitter;
+            imgDP.ImageUrl = user.DPimage;
+            imgBP.ImageUrl = user.BPimage;
+            if (user.desc != "") { lblDesc.Text = user.desc; } else { lblDesc.Text = "This user has not added any description."; lblDesc.CssClass += "text-muted font-italic"; }
+            rating = user.rating;
         }
     }
 }

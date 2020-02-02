@@ -13,7 +13,8 @@ namespace FinalProj
         protected List<Events> evList;
 		protected List<int> attending;
 		protected Dictionary<int, string> userList = new Dictionary<int, string>();
-		protected Dictionary<int, int> attendingUsers = new Dictionary<int, int>();
+        protected Dictionary<int, int> userIdList = new Dictionary<int, int>();
+        protected Dictionary<int, int> attendingUsers = new Dictionary<int, int>();
 		protected List<Users> participantList = new List<Users>();
 
 		protected void Page_Load(object sender, EventArgs e)
@@ -45,8 +46,8 @@ namespace FinalProj
 					element.StartTime = element.StartTime + " AM";
 				}
 				userList.Add(element.EventId, ev.GetAllUserNameByUserId(element.User_id));
-
-				attending = element.getAllParticipants(element.EventId);
+                userIdList.Add(element.EventId, element.User_id);
+                attending = element.getAllParticipants(element.EventId);
 				attendingUsers.Add(element.EventId, attending.Count);
 
 

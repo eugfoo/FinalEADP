@@ -139,7 +139,7 @@
                             </ul>
                             <div>
                                 <asp:Label ID="lblUserName" Style="font-size: 30px;" runat="server" Text="PH" CssClass="card-title"></asp:Label>
-                                <a class="ml-1 " style="color: black; text-decoration: none;" href="/EditProfile.aspx">
+                                <a class="ml-1 " id="btnEditProfile" runat="server" style="color: black; text-decoration: none;" href="/EditProfile.aspx">
                                     <span class="fas fa-edit"></span>
                                 </a>
                                 <div>
@@ -157,12 +157,30 @@
                             </p>
                         <br />
                         </div>
+                        <% if (viewingUserId != null)
+                            { %>
                         <ul class="list-group text-center" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" href="/EventStatus.aspx">Events</a></li>
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" href="/PPGallery.aspx">Gallery</a></li>
-                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" href="/PPRating.aspx">Rating</a></li>
-                            <li class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark" href="/PPPoints.aspx">Points</a></li>
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                                href="/EventStatus.aspx">Events</a></li>
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                                href="/PPGallery.aspx?userId=<%=viewingUserId.ToString()%>">Gallery</a></li>
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                                href="/PPRating.aspx?userId=<%=viewingUserId.ToString()%>">Rating</a></li>
+                            <li id="linkPPPoints" runat="server" class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark" 
+                                href="/PPPoints.aspx?userId=<%=viewingUserId.ToString()%>">Points</a></li>
                         </ul>
+                        <% } else { %>
+                        <ul class="list-group text-center" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                                href="/EventStatus.aspx">Events</a></li>
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                                href="/PPGallery.aspx">Gallery</a></li>
+                            <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark" 
+                                href="/PPRating.aspx">Rating</a></li>
+                            <li id="li1" runat="server" class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark" 
+                                href="/PPPoints.aspx">Points</a></li>
+                        </ul>
+                          <% } %>
                     </div>
                 </div>
             </div>
