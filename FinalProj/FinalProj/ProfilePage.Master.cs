@@ -57,6 +57,16 @@ namespace FinalProj
                 liLogOut.Visible = true;
                 lblBookmark.Visible = true;
             }
+            else
+            {
+                ddCaret.Visible = false;
+                ddMenu.Visible = false;
+                lblProfile.Text = "Sign In";
+                lblProfile.NavigateUrl = "/LogIn.aspx";
+                liLogOut.Visible = false;
+                lblBookmark.Visible = false;
+                Response.Redirect("homepage.aspx");
+            }
         }
 
         protected void lblLogOut_Click(object sender, EventArgs e)
