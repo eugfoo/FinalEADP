@@ -165,7 +165,7 @@
                             </ul>
                             <div>
                                 <asp:Label ID="lblUserName" Style="font-size: 30px;" runat="server" Text="PH" CssClass="card-title"></asp:Label>
-                                <span><i style="font-size: 30px;" class="text-primary fas fa-check"></i></span>
+                                <span Visible="false" runat="server" id="bluetick"><i style="font-size: 30px;" class="text-primary fas fa-check"></i></span>
                                 <div>
                                     <asp:Label ID="lblRating" runat="server" Text="">
                                         <% for (int i = 0; i < rating; i++)

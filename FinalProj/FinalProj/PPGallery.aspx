@@ -11,9 +11,12 @@
     <script>
         function openModal() {
             $('#uploadPicture').modal('show');
+            console.log("openModal works")
         };
+
         $(document).ready(function () {
             $("#fuPic").change(function (e) {
+                console.log("This whole thing works")
                 $("#btnDisplayPic").click();
             });
         });
@@ -59,7 +62,7 @@
                         <asp:Image Style="width: 466px; height: 466px;" CssClass="bg-secondary img text-center" ID="imgPic" runat="server" />
                         <div class="form-control">
                             <asp:FileUpload ID="fuPic" runat="server" accept=".png,.jpg,.jpeg" CssClass="fileUpload" />
-                            <asp:Button Style="display: none;" ID="btnDisplayPic" runat="server" Text="Display" OnClick="btnDisplayPic_Click" UseSubmitBehavior="False" />
+                            <asp:Button Style="display: none;" ID="btnDisplayPic" runat="server" Text="Display" OnClick="btnDisplayPic_Click" CausesValidation="False" UseSubmitBehavior="False" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -67,14 +70,10 @@
                     </div>
                     <div class="form-group">
                         <asp:DropDownList CssClass="form-control" ID="ddlEvents" runat="server"></asp:DropDownList>
-                        <%--<select id="inputState" class="form-control">
-                            <option selected>Link Event</option>
-                            <option>...</option>
-                        </select>--%>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnUpload" CssClass="btn btn-success" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+                    <asp:Button ID="btnUpload" CssClass="btn btn-success" runat="server" Text="Upload" OnClick="btnUpload_Click" CausesValidation="False" />
                 </div>
             </div>
         </div>

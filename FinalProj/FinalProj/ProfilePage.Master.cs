@@ -93,6 +93,10 @@ namespace FinalProj
                     eventCount++;
                 }
             }
+            if (user.verified == 1)
+            {
+                bluetick.Visible = true;
+            }
             lblEventCount.Text = "(" + eventCount.ToString() + ")";
             lblUserName.Text = user.name;
             if (user.facebook != "") { hlFacebook.NavigateUrl = user.facebook; }

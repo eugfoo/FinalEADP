@@ -268,40 +268,40 @@ namespace FinalProj.DAL
 
 
 
-		//public List<Events> SelectAllEventsByUserId(int UserId)
-		//{
-		//	//Step 1 -  Define a connection to the database by getting
-		//	//          the connection string from web.config
-		//	string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-		//	SqlConnection myConn = new SqlConnection(DBConnect);
+        public List<Events> SelectAllEventsByUserId(int UserId)     // EUGENE I AM USING THIS FOR MY PPGALLERY. NEED TO GET ALL THE EVENTS THAT A USER ATTENDS.
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from web.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
 
-		//	//Step 2 -  Create a DataAdapter to retrieve data from the database table
-		//	string sqlStmt = "Select * from Attendance Where User_Id = @paraUserId";
-		//	SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            //Step 2 -  Create a DataAdapter to retrieve data from the database table
+            string sqlStmt = "Select * from Attendance Where Users_Id = @paraUserId";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
 
-		//	da.SelectCommand.Parameters.AddWithValue("@paraUserId", UserId);
+            da.SelectCommand.Parameters.AddWithValue("@paraUserId", UserId);
 
-		//	//Step 3 -  Create a DataSet to store the data to be retrieved
-		//	DataSet ds = new DataSet();
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
 
-		//	//Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
-		//	da.Fill(ds);
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
 
-		//	//Step 5 -  Read data from DataSet to List
-		//	List<Events> evList = new List<Events>();
-		//	Events ev = new Events();
-		//	int rec_cnt = ds.Tables[0].Rows.Count;
-		//	for (int i = 0; i < rec_cnt; i++)
-		//	{
-		//		DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
-		//		int eventId = int.Parse(row["Event_Id"].ToString());
-		//		ev = ev.getEventDetails(eventId);
-		//		evList.Add(ev);
-		//	}
-		//	return evList;
-		//}
+            //Step 5 -  Read data from DataSet to List
+            List<Events> evList = new List<Events>();
+            Events ev = new Events();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                int eventId = int.Parse(row["Event_Id"].ToString());
+                ev = ev.getEventDetails(eventId);
+                evList.Add(ev);
+            }
+            return evList;
+        }
 
-		public List<Events> SelectAllBookmarkedEvents(int UserId)
+        public List<Events> SelectAllBookmarkedEvents(int UserId)
 		{
 			//Step 1 -  Define a connection to the database by getting
 			//          the connection string from web.config

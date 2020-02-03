@@ -92,14 +92,14 @@ namespace FinalProj.BLL
 		}
 
 
-		//public List<Events> GetAllEventsByUserId(int UserId)
-		//{
-		//	eventDao ev = new eventDao();
-		//	return ev.SelectAllEventsByUserId(UserId);
-			
-		//}
+        public List<Events> GetAllEventsByUserId(int UserId) // i am using for ppgallery -azim
+        {
+            eventDao ev = new eventDao();
+            return ev.SelectAllEventsByUserId(UserId);
 
-		public List<Events> GetAllBookedmarkedEventsById(int UserId)
+        }
+
+        public List<Events> GetAllBookedmarkedEventsById(int UserId)
 		{
 			eventDao ev = new eventDao();
 			return ev.SelectAllBookmarkedEvents(UserId);
