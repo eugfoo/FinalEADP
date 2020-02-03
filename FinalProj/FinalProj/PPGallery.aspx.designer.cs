@@ -31,6 +31,24 @@ namespace FinalProj {
         protected global::System.Web.UI.HtmlControls.HtmlButton openModal;
         
         /// <summary>
+        /// noPicViewing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noPicViewing;
+        
+        /// <summary>
+        /// btnOpen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnOpen;
+        
+        /// <summary>
         /// btnOpenModal control.
         /// </summary>
         /// <remarks>
