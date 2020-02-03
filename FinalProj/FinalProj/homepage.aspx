@@ -542,7 +542,8 @@
 									{
 										if (element.EventId == attendance.Key)
 										{%><%= attendance.Value %><%}
-								}%> Participants Attending
+								}%> Participants Attending <% if (attending.Count == element.MaxAttendees)
+															   { %> <b style="color:red;">(FULL)</b><%} %>
 							</p>
 							<a href="/eventDetails.aspx?eventId=<%=element.EventId %>" class="btn btn-primary">View More &rarr;</a>
 						</div>

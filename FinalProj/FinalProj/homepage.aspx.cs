@@ -49,10 +49,7 @@ namespace FinalProj
                 userIdList.Add(element.EventId, element.User_id);
                 attending = element.getAllParticipants(element.EventId);
 				attendingUsers.Add(element.EventId, attending.Count);
-
-
-
-
+				
 			}
 			if (Session["user"] == null)
 			{
@@ -94,10 +91,10 @@ namespace FinalProj
 			}
 
 		}
-	
+
 		protected void createEvent_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("createEvent.aspx");
-        }
-    }
+		{
+			Response.Redirect("createEvent.aspx");
+		}
+	}
 }

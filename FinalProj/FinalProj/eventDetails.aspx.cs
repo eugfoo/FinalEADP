@@ -99,6 +99,7 @@ namespace FinalProj
 				{
 					Session["SessionSSM"] = "You have successfully joined the event!";
 					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
+					
 				}
 				else
 				{
