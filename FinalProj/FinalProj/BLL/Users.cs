@@ -78,6 +78,12 @@ namespace FinalProj.BLL
             return user.SelectById(Id);
         }
 
+        public int VerifyOrgById(int id)
+        {
+            userDAO user = new userDAO();
+            return user.VerifyOrgById(id);
+        }
+
         public int UpdateNameByID(int id, string name)
 		{
 			userDAO user = new userDAO();

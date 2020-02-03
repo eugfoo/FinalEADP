@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ProfilePage.master.cs" Inherits="FinalProj.ProfilePage" %>
 
+<%@ Import Namespace="FinalProj.BLL" %>
 <!DOCTYPE html>
 
 <html>
@@ -111,8 +112,14 @@
 
                             <div id="ddMenu" runat="server" class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="/EditProfile.aspx">Edit Profile</a>
-                                <%--<a class="dropdown-item" href="#">Request Verification</a>--%>
+                                <% Users user = (Users)Session["user"];
+                                    if (user != null && user.isOrg.Trim() == "True" && Convert.ToInt32(user.verified) == 0)
+                                    { %>
+                                <div class="dropdown-divider"></div>
+                                <button id="openModal" runat="server" type="button" class="btn dropdown-item" data-toggle="modal" data-target="#reqVer">Request Verification</button>
+                                <%  }%>
                                 <div id="norgItems" runat="server">
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/VoucherRedemption.aspx">Redeem Vouchers</a>
                                     <a class="dropdown-item" href="#">Request Recommendation</a>
                                 </div>
@@ -121,7 +128,7 @@
                         <%--<asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>--%>
                     </li>
                     <li id="liLogOut" runat="server" class="nav-item mr-3">
-                        <asp:LinkButton ID="lbLogOut" CssClass="nav-link" OnClick="lblLogOut_Click" runat="server">Log Out</asp:LinkButton>
+                        <asp:LinkButton ID="lbLogOut" CssClass="nav-link" OnClick="lblLogOut_Click" runat="server" CausesValidation="False">Log Out</asp:LinkButton>
                     </li>
                 </ul>
             </div>
@@ -158,9 +165,7 @@
                             </ul>
                             <div>
                                 <asp:Label ID="lblUserName" Style="font-size: 30px;" runat="server" Text="PH" CssClass="card-title"></asp:Label>
-                                <%--<a class="ml-1 " id="btnEditProfile" runat="server" style="color: black; text-decoration: none;" href="/EditProfile.aspx">
-                                    <span class="fas fa-edit"></span>
-                                </a>--%>
+                                <span><i style="font-size: 30px;" class="text-primary fas fa-check"></i></span>
                                 <div>
                                     <asp:Label ID="lblRating" runat="server" Text="">
                                         <% for (int i = 0; i < rating; i++)
@@ -212,6 +217,45 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+        <div class="modal fade" id="reqVer" tabindex="-1" role="dialog" aria-labelledby="reqVerLabel" aria-hidden="true">
+            <div class="modal-dialog modal-img" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reqVerLabel">Request Verification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Name of Organisation</label>
+                            <asp:RequiredFieldValidator ControlToValidate="tbNameOrg" ID="RequiredFieldValidator1" runat="server" ForeColor="Red" ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <br />
+                            <asp:TextBox type="text" PlaceHolder="" CssClass="form-control" ID="tbNameOrg" runat="server" CausesValidation="True"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Description of Organisation</label>
+                            <asp:RequiredFieldValidator ControlToValidate="tbDescOrg" ID="RequiredFieldValidator2" runat="server" ForeColor="Red" ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <br />
+                            <asp:TextBox type="text" PlaceHolder="" CssClass="form-control" ID="tbDescOrg" runat="server" CausesValidation="True" TextMode="MultiLine" Rows="5" Columns="20"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Proof</label>
+                            <asp:RequiredFieldValidator ControlToValidate="fuProof" ID="RequiredFieldValidator3" runat="server" ForeColor="Red" ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <br />
+                            <div class="form-control">
+                                <asp:FileUpload ID="fuProof" runat="server" accept=".png,.jpg,.jpeg" CssClass="fileUpload text-right" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="btnSend" CssClass="btn btn-success" runat="server" OnClick="btnSend_Click" Text="Send" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer class="small bg-dark text-white">
             <div class="container py-4">
                 <ul class="list-inline mb-0 text-center">

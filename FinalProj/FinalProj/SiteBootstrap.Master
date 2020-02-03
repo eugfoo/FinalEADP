@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteBootstrap.master.cs" Inherits="FinalProj.SiteBootstrap" %>
 
+<%@ Import Namespace="FinalProj.BLL" %>
+
 <!DOCTYPE html>
 
 <html>
@@ -24,45 +26,44 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.35);
         }
 
-        .hexagon:before, .hexagon:after {
-            content: "";
-            position: absolute;
-            z-index: 1;
-            width: 21.21px;
-            height: 21.21px;
-            -webkit-transform: scaleY(0.5774) rotate(-45deg);
-            -ms-transform: scaleY(0.5774) rotate(-45deg);
-            transform: scaleY(0.5774) rotate(-45deg);
-            background-color: inherit;
-            left: 4.3934px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.35);
-        }
+            .hexagon:before, .hexagon:after {
+                content: "";
+                position: absolute;
+                z-index: 1;
+                width: 21.21px;
+                height: 21.21px;
+                -webkit-transform: scaleY(0.5774) rotate(-45deg);
+                -ms-transform: scaleY(0.5774) rotate(-45deg);
+                transform: scaleY(0.5774) rotate(-45deg);
+                background-color: inherit;
+                left: 4.3934px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.35);
+            }
 
-        .hexagon:before {
-            top: -10.6066px;
-        }
+            .hexagon:before {
+                top: -10.6066px;
+            }
 
-        .hexagon:after {
-            bottom: -10.6066px;
-        }
+            .hexagon:after {
+                bottom: -10.6066px;
+            }
 
-        
-        .hexagon span {
-            display: block;
-            position: absolute;
-            top: 0px;
-            left: 0;
-            width: 30px;
-            height: 17.3205px;
-            z-index: 2;
-            background: inherit;
-        }
+
+            .hexagon span {
+                display: block;
+                position: absolute;
+                top: 0px;
+                left: 0;
+                width: 30px;
+                height: 17.3205px;
+                z-index: 2;
+                background: inherit;
+            }
 
         #ddCaret i:hover {
             color: white;
             cursor: pointer;
         }
-
     </style>
     <script>
         function deleteAllCookies() {
@@ -105,8 +106,14 @@
 
                             <div id="ddMenu" runat="server" class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="/EditProfile.aspx">Edit Profile</a>
-                                <%--<a class="dropdown-item" href="#">Request Verification</a>--%>
+                                <% Users user = (Users)Session["user"];
+                                    if (user != null && user.isOrg.Trim() == "True" && Convert.ToInt32(user.verified) == 0)
+                                    { %>
+                                <div class="dropdown-divider"></div>
+                                <button id="openModal" runat="server" type="button" class="btn dropdown-item" data-toggle="modal" data-target="#reqVer">Request Verification</button>
+                                <%  }%>
                                 <div id="norgItems" runat="server">
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/VoucherRedemption.aspx">Redeem Vouchers</a>
                                     <a class="dropdown-item" href="#">Request Recommendation</a>
                                 </div>
@@ -115,13 +122,51 @@
                         <%--<asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>--%>
                     </li>
                     <li id="liLogOut" runat="server" class="nav-item mr-3">
-                        <asp:LinkButton ID="lbLogOut" CssClass="nav-link" OnClick="lblLogOut_Click" runat="server">Log Out</asp:LinkButton>
+                        <asp:LinkButton ID="lbLogOut" CssClass="nav-link" OnClick="lblLogOut_Click" runat="server" CausesValidation="False">Log Out</asp:LinkButton>
                     </li>
                 </ul>
             </div>
         </nav>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
+
+        <div class="modal fade" id="reqVer" tabindex="-1" role="dialog" aria-labelledby="reqVerLabel" aria-hidden="true">
+            <div class="modal-dialog modal-img" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reqVerLabel">Request Verification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Name of Organisation</label>
+                            <asp:RequiredFieldValidator ControlToValidate="tbNameOrg" ID="RequiredFieldValidator1" runat="server" ForeColor="Red" ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <br />
+                            <asp:TextBox type="text" PlaceHolder="" CssClass="form-control" ID="tbNameOrg" runat="server" CausesValidation="True"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Description of Organisation</label>
+                            <asp:RequiredFieldValidator ControlToValidate="tbDescOrg" ID="RequiredFieldValidator2" runat="server" ForeColor="Red" ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <br />
+                            <asp:TextBox type="text" PlaceHolder="" CssClass="form-control" ID="tbDescOrg" runat="server" CausesValidation="True" TextMode="MultiLine" Rows="5" Columns="20"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Proof</label>
+                            <asp:RequiredFieldValidator ControlToValidate="fuProof" ID="RequiredFieldValidator3" runat="server" ForeColor="Red" ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <br />
+                            <div class="form-control">
+                                <asp:FileUpload ID="fuProof" runat="server" accept=".png,.jpg,.jpeg" CssClass="fileUpload text-right" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="btnSend" CssClass="btn btn-success" runat="server" OnClick="btnSend_Click" Text="Send" />
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <footer class="small bg-dark text-white footer">
             <div class="container py-4">

@@ -75,6 +75,12 @@ namespace FinalProj
             Response.Redirect("/homepage.aspx");
         }
 
+        protected void btnSend_Click(object sender, EventArgs e)
+        {
+            Users user = (Users)Session["user"];
+            user.VerifyOrgById(user.id);
+        }
+
         public void initializePPFields(Users user)
         {
             EventsStatus events = new EventsStatus();
