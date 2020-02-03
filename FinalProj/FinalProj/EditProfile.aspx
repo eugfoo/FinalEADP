@@ -25,7 +25,7 @@
                         <asp:Image ID="imgBP" CssClass="card-img-top" Style="max-height: 100px; max-width: 1100px; min-height: 100px; min-width: 150px;" runat="server" />
                         <div class="form-control">
                             <asp:FileUpload CssClass="col-md-8" ID="fuBP" runat="server" accept=".png,.jpg,.jpeg" />
-                            <asp:Button style="display:none;" ID="btnUploadBP" runat="server" Text="Display" OnClick="btnUploadBP_Click" UseSubmitBehavior="False" />
+                            <asp:Button style="display:none;" ID="btnUploadBP" runat="server" Text="Display" OnClick="btnUploadBP_Click" CausesValidation="false" UseSubmitBehavior="False" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -34,7 +34,7 @@
                         <asp:Image ID="imgDP" CssClass="card-img-top" Style="max-width: 100px; max-height: 100px; min-height: 100px; min-width: 100px;" runat="server" />
                         <div class="form-control">
                             <asp:FileUpload CssClass="col-md-8" ID="fuDP" runat="server" accept=".png,.jpg,.jpeg" />
-                            <asp:Button style="display:none;" ID="btnUploadDP" runat="server" Text="Display" OnClick="btnUploadDP_Click" UseSubmitBehavior="False" />
+                            <asp:Button style="display:none;" ID="btnUploadDP" runat="server" Text="Display" OnClick="btnUploadDP_Click" CausesValidation="false" UseSubmitBehavior="False" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -86,8 +86,8 @@
             </div>
             <div style="border-bottom: 1px solid rgba(0,0,0,.250);"></div>
             <div class="mt-2 align-bottom" style="text-align: right;">
-                    <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-danger mr-3" Text="Cancel" UseSubmitBehavior="False" OnClick="btnCancel_Click" />
-                    <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" UseSubmitBehavior="False" OnClick="btnUpdate_Click" />
+                    <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-danger mr-3" Text="Cancel" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnCancel_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnUpdate_Click" />
                 </div>
         </div>
     </div>
