@@ -12,25 +12,29 @@ namespace FinalProj
 {
     public partial class PPRating : System.Web.UI.Page
     {
+        public string viewingUserId;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            viewingUserId = Request.QueryString["userId"];
             Users user = (Users)Session["user"];
+
             if (user != null)
             {
-                if (!Page.IsPostBack)
+                if (viewingUserId != null)
                 {
-                    ddlEvents.DataSource = CreateDataSource(user.id);
-                    ddlEvents.DataTextField = "EventTextField";
-                    ddlEvents.DataValueField = "EventValueField";
-                    ddlEvents.DataBind();
-                    ddlEvents.SelectedIndex = 0;
+                    loadDdlEvents(Convert.ToInt32(viewingUserId));
                 }
+                else
+                {
+                    loadDdlEvents(user.id);
+                }
+                
             }
             else
             {
-                Response.Redirect("homepage.aspx");
+                loadDdlEvents(Convert.ToInt32(viewingUserId));
             }
-            
         }
 
         protected void ddlEvents_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -65,6 +69,18 @@ namespace FinalProj
 
             return dr;
 
+        }
+
+        public void loadDdlEvents(int userId)
+        {
+            if (!Page.IsPostBack)
+            {
+                ddlEvents.DataSource = CreateDataSource(userId);
+                ddlEvents.DataTextField = "EventTextField";
+                ddlEvents.DataValueField = "EventValueField";
+                ddlEvents.DataBind();
+                ddlEvents.SelectedIndex = 0;
+            }
         }
     }
 }

@@ -32,13 +32,6 @@
                 
                 <div class="text-right col-md-6">
                     <asp:DropDownList AutoPostBack="True" ID="ddlEvents" OnSelectedIndexChanged="ddlEvents_OnSelectedIndexChanged" runat="server"></asp:DropDownList>
-                    <%--Event:
-                    <select>
-                        <option value="volvo">PUB Water Day</option>
-                        <option value="saab">Event 2</option>
-                        <option value="opel">Event 3</option>
-                        <option value="audi">Event 4</option>
-                    </select>--%>
                 </div>
             </div>
             <div class="dropdown-divider"></div>

@@ -18,7 +18,7 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            viewingUserId = Request.QueryString["userId"];
+            viewingUserId = Request.QueryString["userId"];                  // Not displaying DDLevents when the user has not created any events yet.
             Users user = (Users)Session["user"];
 
             if (user != null)

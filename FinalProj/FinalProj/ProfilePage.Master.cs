@@ -83,42 +83,49 @@ namespace FinalProj
 
         public void initializePPFields(Users user)
         {
-            EventsStatus events = new EventsStatus();
-            var eventList = events.GetAllEventsByName(); // Cher don't ask me why the function named "GetAllEventsByName" doesn't get events BY NAME. why name even? get by id la. smh
-            int eventCount = 0;
-
-            for (int i = 0; i < eventList.Count; i++)
+            if (user == null)
             {
-                if (eventList[i].Organiser == user.id.ToString())
-                {
-                    eventCount++;
-                }
+                Response.Redirect("homepage.aspx");
             }
-
-            if (user.verified == 1)
-            {
-                bluetick.Visible = true;
-            }
-
-            if (eventCount == 0)
-            {
-                lblEventCount.Visible = false;
-            } 
             else
             {
-                lblEventCount.Text = "(" + eventCount.ToString() + ")";
-            }
+                EventsStatus events = new EventsStatus();
+                var eventList = events.GetAllEventsByName(); // Cher don't ask me why the function named "GetAllEventsByName" doesn't get events BY NAME. why name even? get by id la. smh
+                int eventCount = 0;
 
-            lblUserName.Text = user.name;
-            if (user.facebook != "") { hlFacebook.NavigateUrl = user.facebook; }
-            if (user.instagram != "") { hlInstagram.NavigateUrl = user.instagram; }
-            if (user.twitter != "") { hlTwitter.NavigateUrl = user.twitter; }
-            hlInstagram.NavigateUrl = user.instagram;
-            hlTwitter.NavigateUrl = user.twitter;
-            imgDP.ImageUrl = user.DPimage;
-            imgBP.ImageUrl = user.BPimage;
-            if (user.desc != "") { lblDesc.Text = user.desc; } else { lblDesc.Text = "This user has not added any description."; lblDesc.CssClass += "text-muted font-italic"; }
-            rating = user.rating;
+                for (int i = 0; i < eventList.Count; i++)
+                {
+                    if (eventList[i].Organiser == user.id.ToString())
+                    {
+                        eventCount++;
+                    }
+                }
+
+                if (user.verified == 1)
+                {
+                    bluetick.Visible = true;
+                }
+
+                if (eventCount == 0)
+                {
+                    lblEventCount.Visible = false;
+                }
+                else
+                {
+                    lblEventCount.Text = "(" + eventCount.ToString() + ")";
+                }
+
+                lblUserName.Text = user.name;
+                if (user.facebook != "") { hlFacebook.NavigateUrl = user.facebook; }
+                if (user.instagram != "") { hlInstagram.NavigateUrl = user.instagram; }
+                if (user.twitter != "") { hlTwitter.NavigateUrl = user.twitter; }
+                hlInstagram.NavigateUrl = user.instagram;
+                hlTwitter.NavigateUrl = user.twitter;
+                imgDP.ImageUrl = user.DPimage;
+                imgBP.ImageUrl = user.BPimage;
+                if (user.desc != "") { lblDesc.Text = user.desc; } else { lblDesc.Text = "This user has not added any description."; lblDesc.CssClass += "text-muted font-italic"; }
+                rating = user.rating;
+            }
         }
     }
 }
