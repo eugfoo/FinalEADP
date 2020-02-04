@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=19.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -80,6 +84,7 @@
     <Content Include="beach.jpg" />
     <Content Include="bookmark.aspx" />
     <Content Include="EditProfile.aspx" />
+    <Content Include="eventFeedback.aspx" />
     <Content Include="EventStatus.aspx" />
     <Content Include="EventStatus.css" />
     <Content Include="forumCatOverview.aspx" />
@@ -93,10 +98,15 @@
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Img\clipboard.jpeg" />
     <Content Include="Img\defaultPic.png" />
+    <Content Include="Img\emptystar.png" />
     <Content Include="Img\eventphoto.jpeg" />
+    <Content Include="Img\feedbackPG.jpg" />
+    <Content Include="Img\filledStar.png" />
+    <Content Include="Img\filledStarss.png" />
     <Content Include="Img\organiser.jpeg" />
     <Content Include="Img\table.jpeg" />
     <Content Include="Img\volunteer.jpeg" />
+    <Content Include="Img\waitingStar.png" />
     <Content Include="JoinEventFromBookmark.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="picture.JPG" />
@@ -106,6 +116,7 @@
     <Content Include="Register.aspx" />
     <Content Include="RemoveBookmark.aspx" />
     <Content Include="RemoveEventFromBookmark.aspx" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="StyleSheet\footer.css" />
     <Content Include="Global.asax" />
     <Content Include="Img\together.jpeg" />
@@ -115,6 +126,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="AddVoucher.css" />
+    <Content Include="StyleSheet\sweetalert.css" />
     <Content Include="Voucher.css" />
     <Content Include="AddVoucher.aspx" />
     <Content Include="VoucherRedemption.aspx" />
@@ -151,6 +163,7 @@
     </Compile>
     <Compile Include="BLL\EventStatus.cs" />
     <Compile Include="BLL\Events.cs" />
+    <Compile Include="BLL\Feedback.cs" />
     <Compile Include="BLL\GPictures.cs" />
     <Compile Include="BLL\Thread.cs" />
     <Compile Include="BLL\ThreadReply.cs" />
@@ -165,6 +178,7 @@
     </Compile>
     <Compile Include="DAL\eventStatusDAO.cs" />
     <Compile Include="DAL\eventDao.cs" />
+    <Compile Include="DAL\FeedbackDAO.cs" />
     <Compile Include="DAL\gpictureDAO.cs" />
     <Compile Include="DAL\ThreadReplyDAO.cs" />
     <Compile Include="DAL\ThreadDAO.cs" />
@@ -176,6 +190,13 @@
     </Compile>
     <Compile Include="EditProfile.aspx.designer.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="eventFeedback.aspx.cs">
+      <DependentUpon>eventFeedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="eventFeedback.aspx.designer.cs">
+      <DependentUpon>eventFeedback.aspx</DependentUpon>
     </Compile>
     <Compile Include="EventStatus.aspx.cs">
       <DependentUpon>EventStatus.aspx</DependentUpon>

@@ -35,6 +35,9 @@ namespace FinalProj
             }
         }
 
+        Thread thread = new Thread();
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string threadId = Request.QueryString["threadid"];
@@ -42,7 +45,7 @@ namespace FinalProj
 
             if (threadId != null)
             {
-                
+
                 Thread currentThread = thread.GetThreadByThreadId(threadId);
 
                 LblTitle.Text = currentThread.Title;

@@ -41,14 +41,15 @@
             </div>
 
             <div class="form-group">
-                <label>Upload Image :</label>
+                    <label>Upload Image :</label>
 
-                <asp:FileUpload ID="FileImgSave" runat="server" />
-                <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+                    <asp:FileUpload ID="FileImgSave" runat="server" />
+                    <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+
                 <br />
                 <asp:DataList ID="DataList1" runat="server" RepeatColumns="4">
                     <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" Height="250px" ImageUrl='<%# Eval("path") %>' Width="283px" BorderWidth="2px"/>
+                        <asp:Image ID="Image1" runat="server" Height="250px" ImageUrl='<%# Eval("path") %>' Width="283px" BorderWidth="2px" />
                         <br />
                         <asp:LinkButton ID="LKDelete" runat="server" Style="padding: 8px; margin: 110px; background: red; border: solid 1px #d5e3ed; color: white; font-weight: bold;"
                             CommandArgument='<%# Eval("path") %>' OnCommand="LKDelete_Command">Delete</asp:LinkButton>
@@ -71,7 +72,7 @@
             <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" />
 
             <%-- <button type="submit" class="btn btn-primary">Submit</button>--%>
-            <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-danger" OnClick="btnClear_Click"/>
+            <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-danger" OnClick="btnClear_Click" />
         </div>
     </div>
 

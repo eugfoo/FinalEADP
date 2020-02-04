@@ -87,27 +87,27 @@ namespace FinalProj
             {
                 string filename = Path.GetFileName(FileImgSave.PostedFile.FileName);
 
-                if (uploadedImgNames.Contains(filename))
+                //if (uploadedImgNames.Contains(filename))
+                //{
+                //    LblMsg.Text = "Sorry you cannot upload the same file!";
+                //    LblMsg.ForeColor = Color.Red;
+                //}
+                //else
+                //{
+                if (DataList1.Items.Count < 4)
                 {
-                    LblMsg.Text = "Sorry you cannot upload the same file!";
-                    LblMsg.ForeColor = Color.Red;
+                    FileImgSave.SaveAs(Server.MapPath("~/Img/" + filename));
+                    threadImage = filename;
+                    imagesNames.Add(filename);
+
+                    show_data();
                 }
                 else
                 {
-                    if (DataList1.Items.Count < 4)
-                    {
-                        FileImgSave.SaveAs(Server.MapPath("~/Img/" + filename));
-                        threadImage = filename;
-                        imagesNames.Add(filename);
-
-                        show_data();
-                    }
-                    else
-                    {
-                        LblMsg.Text = "Sorry you can only upload a maximum of 4 pictures!";
-                        LblMsg.ForeColor = Color.Red;
-                    }
+                    LblMsg.Text = "Sorry you can only upload a maximum of 4 pictures!";
+                    LblMsg.ForeColor = Color.Red;
                 }
+                //}
             }
 
         }

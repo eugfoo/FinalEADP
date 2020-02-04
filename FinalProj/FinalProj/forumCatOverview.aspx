@@ -79,7 +79,7 @@
 
 
         <div class="mb-3 clearfix">
-            <nav aria-label="Navigate post pages" class="float-lg-right">
+            <%--<nav aria-label="Navigate post pages" class="float-lg-right">
                 <ul class="pagination pagination-sm mb-lg-0">
                     <li class="page-item active"><a href="#0" class="page-link">1 <span class="sr-only">(current)</span></a></li>
                     <li class="page-item"><a href="#0" class="page-link">2</a></li>
@@ -89,7 +89,58 @@
                     <li class="page-item"><a href="#0" class="page-link">&hellip; 31</a></li>
                     <li class="page-item"><a href="#0" class="page-link">Next</a></li>
                 </ul>
-            </nav>
+            </nav>--%>
+
+            <div style="margin-top: 20px;">
+
+                <table style="width: 485px; float: right;">
+                    <tr>
+                        <td>
+                            <asp:LinkButton ID="lbFirst"
+                                Style="padding: 8px; margin: 2px; background: #6b91ab; border: solid 1px #d5e3ed; color: white; font-weight: bold"
+                                runat="server" OnClick="lbFirst_Click">First</asp:LinkButton>
+                        </td>
+                        <td>
+                            <asp:LinkButton ID="lbPrevious" runat="server"
+                                Style="padding: 8px; margin: 2px; background: #6b91ab; border: solid 1px #d5e3ed; color: white; font-weight: bold"
+                                OnClick="lbPrevious_Click">Previous</asp:LinkButton>
+                        </td>
+                        <td>
+                            <asp:DataList ID="rptPaging" runat="server"
+                                OnItemCommand="rptPaging_ItemCommand"
+                                OnItemDataBound="rptPaging_ItemDataBound" RepeatDirection="Horizontal">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lbPaging" runat="server"
+                                        CommandArgument='<%# Eval("PageIndex") %>'
+                                        CommandName="newPage"
+                                        Text='<%# Eval("PageText") %> ' Width="20px">
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:DataList>
+                        </td>
+                        <td>
+                            <asp:LinkButton ID="lbNext" runat="server"
+                                Style="padding: 8px; margin: 2px; background: #6b91ab; border: solid 1px #d5e3ed; color: white; font-weight: bold"
+                                OnClick="lbNext_Click">Next</asp:LinkButton>
+                        </td>
+                        <td>
+                            <asp:LinkButton ID="lbLast" runat="server"
+                                Style="padding: 8px; margin: 2px; background: #6b91ab; border: solid 1px #d5e3ed; color: white; font-weight: bold"
+                                OnClick="lbLast_Click">Last</asp:LinkButton>
+                        </td>
+                        <td>
+                            <asp:Label ID="lblpage" runat="server" Text="" Style="background: #6b91ab; padding: 10px; color: white"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </div>
+
+            <%--SEPARATION--%>
+
+
             <form class="form-inline float-lg-left d-block d-sm-flex">
                 <div class="mb-2 mb-sm-0 mr-2">Display post from previous:</div>
                 <div class="form-group mr-2">
