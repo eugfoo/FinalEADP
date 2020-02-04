@@ -92,10 +92,17 @@ namespace FinalProj.BLL
 		}
 
 
-        public List<Events> GetAllEventsByUserId(int UserId) // i am using for ppgallery -azim
+        public List<Events> GetAllAttendingEventsByUserId(int UserId) // i am using for ppgallery -azim
         {
             eventDao ev = new eventDao();
-            return ev.SelectAllEventsByUserId(UserId);
+            return ev.SelectAllAttendingEventsByUserId(UserId);
+
+        }
+
+        public List<Events> GetAllEventsCreatedByUser(int UserId) // i am using for pprating -azim
+        {
+            eventDao ev = new eventDao();
+            return ev.SelectAllEventsCreatedByUser(UserId);
 
         }
 
@@ -140,5 +147,6 @@ namespace FinalProj.BLL
 			int result = dao.DeleteEvent(eventId);
 			return result;
 		}
-	}
+       
+    }
 }

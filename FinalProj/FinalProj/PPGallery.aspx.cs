@@ -82,7 +82,7 @@ namespace FinalProj
         ICollection CreateDataSource(int userId)
         {
             //Users user = new Users().GetUserById(userId);
-            List<Events> ev = new Events().GetAllEventsByUserId(userId);
+            List<Events> ev = new Events().GetAllAttendingEventsByUserId(userId);
 
             // Create a table to store data for the DropDownList control.
             DataTable dt = new DataTable();
@@ -106,7 +106,6 @@ namespace FinalProj
 
         DataRow CreateRow(String Text, int Value, DataTable dt)
         {
-            // Create a DataRow using the DataTable defined in the 
             // CreateDataSource method.
             DataRow dr = dt.NewRow();
 

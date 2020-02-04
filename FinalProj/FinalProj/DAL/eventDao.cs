@@ -268,7 +268,7 @@ namespace FinalProj.DAL
 
 
 
-        public List<Events> SelectAllEventsByUserId(int UserId)     // EUGENE I AM USING THIS FOR MY PPGALLERY. NEED TO GET ALL THE EVENTS THAT A USER ATTENDS.
+        public List<Events> SelectAllAttendingEventsByUserId(int UserId)     // EUGENE I AM USING THIS FOR MY PPGALLERY. NEED TO GET ALL THE EVENTS THAT A USER ATTENDS.
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from web.config
@@ -295,6 +295,33 @@ namespace FinalProj.DAL
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                 int eventId = int.Parse(row["Event_Id"].ToString());
+                ev = ev.getEventDetails(eventId);
+                evList.Add(ev);
+            }
+            return evList;
+        }
+
+        public List<Events> SelectAllEventsCreatedByUser(int UserId)     // using for pprating - azim
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "Select * from tdEvent Where user_id = @paraUserId";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+
+            da.SelectCommand.Parameters.AddWithValue("@paraUserId", UserId);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            List<Events> evList = new List<Events>();
+            Events ev = new Events();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                int eventId = int.Parse(row["eventId"].ToString());
                 ev = ev.getEventDetails(eventId);
                 evList.Add(ev);
             }
