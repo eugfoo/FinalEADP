@@ -25,7 +25,7 @@ namespace FinalProj
             {
                 if (viewingUserId != null) // A user is viewing another's PP
                 {
-                    btnOpenModal.Visible = false;
+                    btnOpen.Visible = false;
                     loadGP(Convert.ToInt32(viewingUserId));
                 }
                 else
@@ -35,7 +35,7 @@ namespace FinalProj
             }
             else
             {
-                btnOpenModal.Visible = false;
+                btnOpen.Visible = false;
                 loadGP(Convert.ToInt32(viewingUserId));
             }
         }

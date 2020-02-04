@@ -34,7 +34,7 @@
         }
     </style>
 
-
+    <div class="container">
     <div class="card" style="margin-top: 45px;">
         <div class="card-header" style="background-color: red;">
             <h2 style="color: white;">Feedback</h2>
@@ -141,6 +141,7 @@ Are you satisfied with the event?</small>
             <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-danger" />
         </div>
     </div>
+        </div>
 
 
 

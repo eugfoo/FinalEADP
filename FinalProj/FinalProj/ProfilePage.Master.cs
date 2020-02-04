@@ -86,6 +86,7 @@ namespace FinalProj
             EventsStatus events = new EventsStatus();
             var eventList = events.GetAllEventsByName(); // Cher don't ask me why the function named "GetAllEventsByName" doesn't get events BY NAME. why name even? get by id la. smh
             int eventCount = 0;
+
             for (int i = 0; i < eventList.Count; i++)
             {
                 if (eventList[i].Organiser == user.id.ToString())
@@ -93,11 +94,21 @@ namespace FinalProj
                     eventCount++;
                 }
             }
+
             if (user.verified == 1)
             {
                 bluetick.Visible = true;
             }
-            lblEventCount.Text = "(" + eventCount.ToString() + ")";
+
+            if (eventCount == 0)
+            {
+                lblEventCount.Visible = false;
+            } 
+            else
+            {
+                lblEventCount.Text = "(" + eventCount.ToString() + ")";
+            }
+
             lblUserName.Text = user.name;
             if (user.facebook != "") { hlFacebook.NavigateUrl = user.facebook; }
             if (user.instagram != "") { hlInstagram.NavigateUrl = user.instagram; }

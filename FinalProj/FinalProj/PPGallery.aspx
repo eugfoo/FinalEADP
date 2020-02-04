@@ -71,15 +71,12 @@
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row ">
             <%if (viewingUserId == null)
                 { %>
-            <div style="width: 100%; border-bottom: 1px solid lightgray;" class="row mx-0 mb-2 pb-2">
+            <div style="width: 100%; " class="row mx-0 mb-2 ">
                 <div class="col-md-12">
                     <span class="ml-1">
                         <a id="btnOpen" runat="server" style="float: right; width: 25px; height: 25px;" class="" data-toggle="modal" data-target="#uploadPicture">
                             <i style="font-size: 25px;" class="text-success fas fa-plus-square"></i>
                         </a>
-                        <button id="btnOpenModal" runat="server" style="display: none; width: 25px; height: 25px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#uploadPicture">
-                            <i class="fas fa-plus-square"></i>
-                        </button>
                     </span>
                 </div>
             </div>
