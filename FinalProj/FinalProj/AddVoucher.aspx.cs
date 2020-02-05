@@ -65,6 +65,7 @@ namespace FinalProj
                 string vcherName = voucherName.Text.ToString();
                 string vcherAmt = voucherAmt.Text.ToString();
                 string file = "";
+                string vcherPoint = (double.Parse(vcherAmt) * 0.5).ToString();
 
                 if (FileUpload1.HasFile)
                 {
@@ -73,9 +74,8 @@ namespace FinalProj
                     file = filename;
                     
                 }
-               
 
-                vcher = new Voucher(vcherName, vcherAmt, file);
+                vcher = new Voucher(1, vcherName, vcherAmt, file, vcherPoint);
                 int result = vcher.AddVoucher();
                 Response.Redirect("VoucherRedemption.aspx");
             } 
