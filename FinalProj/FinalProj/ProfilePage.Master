@@ -1,6 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ProfilePage.master.cs" Inherits="FinalProj.ProfilePage" %>
 
 <%@ Import Namespace="FinalProj.BLL" %>
+
 <!DOCTYPE html>
 
 <html>
@@ -128,7 +129,6 @@
                                 </div>
                             </div>
                         </div>
-                        <%--<asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>--%>
                     </li>
                     <li id="liLogOut" runat="server" class="nav-item mr-3">
                         <asp:LinkButton ID="lbLogOut" CssClass="nav-link" OnClick="lblLogOut_Click" runat="server" CausesValidation="False">Log Out</asp:LinkButton>
@@ -148,20 +148,20 @@
                             <asp:Image CssClass="img img-thumbnail text-center" Style="max-width: 100px; max-height: 100px; min-height: 100px; min-width: 100px;" ID="imgDP" runat="server" />
                         </div>
                         <br />
-                        <div class="text-center card-body">
+                        <div style="min-height: 200px;" class="text-center card-body">
                             <ul style="float: left; position: absolute; background-color: none !important;" class="list-group">
                                 <li class="list-group-item ppSMlinks">
-                                    <asp:HyperLink ID="hlFacebook" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.facebook.com" runat="server">
+                                    <asp:HyperLink ID="hlFacebook" Style="text-decoration: none;" class="text-dark" NavigateUrl="" runat="server">
                                 <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/124/124010.svg" alt="f icon" />
                                     </asp:HyperLink>
                                 </li>
                                 <li class="list-group-item ppSMlinks">
-                                    <asp:HyperLink ID="hlInstagram" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.instagram.com" runat="server">
+                                    <asp:HyperLink ID="hlInstagram" Style="text-decoration: none;" class="text-dark" NavigateUrl="" runat="server">
                             <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/2111/2111463.svg" alt="i icon" />
                                     </asp:HyperLink>
                                 </li>
                                 <li class="list-group-item ppSMlinks">
-                                    <asp:HyperLink ID="hlTwitter" Style="text-decoration: none;" class="text-dark" NavigateUrl="https://www.twitter.com" runat="server">
+                                    <asp:HyperLink ID="hlTwitter" Style="text-decoration: none;" class="text-dark" NavigateUrl="" runat="server">
                             <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/124/124021.svg" alt="t icon" />
                                     </asp:HyperLink>
                                 </li>
@@ -183,15 +183,20 @@
                                 <asp:Label ID="lblDesc" runat="server" Text="PH"></asp:Label>
                             </div>
                         </div>
-                        <% if (viewingUserId != null)
+                        <% Users user = (Users)Session["user"];
+                            if (viewingUserId != null)
                             { %>
-                        <ul class="mt-5 list-group text-center" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
+                        <ul class="list-group text-center" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
                             <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/EventStatus.aspx">Events</a></li>
                             <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPGallery.aspx?userId=<%=viewingUserId.ToString()%>">Gallery</a></li>
+                            <% if (user != null && user.GetUserById(Convert.ToInt32(viewingUserId)).rating != 0)
+                                {
+                                    %>
                             <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPRating.aspx?userId=<%=viewingUserId.ToString()%>">Rating</a></li>
+                            <%} %>
                             <li id="linkPPPoints" runat="server" class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark"
                                 href="/PPPoints.aspx?userId=<%=viewingUserId.ToString()%>">Points</a></li>
                         </ul>
@@ -203,8 +208,12 @@
                                 href="/EventStatus.aspx">Events</a></li>
                             <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPGallery.aspx">Gallery</a></li>
+                            <% if (user != null && user.rating != 0)
+                                {
+                                    %>
                             <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPRating.aspx">Rating</a></li>
+                            <%} %>
                             <li id="li1" runat="server" class="pplinks list-inline-item mx-0 col-3"><a class="pphyperlinks text-dark"
                                 href="/PPPoints.aspx">Points</a></li>
                         </ul>

@@ -146,6 +146,52 @@ namespace FinalProj.DAL
             return result;
         }
 
+        public int UpdateRating(int id)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStmt = "UPDATE Users SET userRating = @paraRating where id = @paraId";
+            int result = 0;
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+            sqlCmd = new SqlCommand(sqlStmt.ToString(), myConn);
+
+            try
+            {
+                // Get Events created by User. Get feedback of those events, then get avgRating. Bruh.
+
+                Feedback fdback = new Feedback();
+                Events ev = new Events();
+                List<Events> evList = ev.GetAllEventsCreatedByUser(id);
+                int totalRating = 0;
+                int count = 0;
+
+                for (int i = 0; i < evList.Count; i++)
+                {
+                    var fdbackList = fdback.getAllByEventId(evList[i].EventId);
+                    for (int j = 0; j < fdbackList.Count; j++)
+                    {
+                        totalRating += fdbackList[j].AvgRating;
+                        count++;
+                    }
+                }
+                
+                int avgRating = totalRating / count;
+
+                sqlCmd.Parameters.AddWithValue("@paraRating", avgRating);
+                sqlCmd.Parameters.AddWithValue("@paraId", id);
+            }
+            catch // No feedback. No Rating. No Full-stop. No Period.
+            {
+                sqlCmd.Parameters.AddWithValue("@paraRating", 0);
+                sqlCmd.Parameters.AddWithValue("@paraId", id);
+            }
+            
+            myConn.Open();
+            result = sqlCmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+        }
+
         public int UpdateName(int id, string name)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;

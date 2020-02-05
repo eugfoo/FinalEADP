@@ -95,5 +95,32 @@ namespace FinalProj.DAL
             }
             return fdbackList;
         }
+
+        public List<Feedback> SelectAllByUserId(int userId)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "Select * from Feedback Where userId = @paraUserId";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+
+            da.SelectCommand.Parameters.AddWithValue("@paraUserId", userId);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            List<Feedback> fdbackList = new List<Feedback>();
+            Feedback fdback = new Feedback();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];
+                int fdbackId = int.Parse(row["Id"].ToString());
+                fdback = fdback.getFeedbackById(fdbackId);
+                fdbackList.Add(fdback);
+            }
+            return fdbackList;
+        }
     }
 }

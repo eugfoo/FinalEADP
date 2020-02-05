@@ -31,6 +31,7 @@ namespace FinalProj
                 else
                 {
                     Users user1 = (Users)Session["user"];
+                    user1.UpdateRatingByID(user1.id);
                     if (user1.isOrg.Trim() == "True")
                     {
                         norgItems.Visible = false;
@@ -41,6 +42,7 @@ namespace FinalProj
                 }
                 linkPPPoints.Visible = false;
                 Users user = new Users();
+                user.UpdateRatingByID(Convert.ToInt32(viewingUserId));
                 var viewingUser = user.GetUserById(Convert.ToInt32(viewingUserId));
                 initializePPFields(viewingUser);
             }
@@ -52,6 +54,7 @@ namespace FinalProj
                     norgItems.Visible = false;
                 }
                 initializePPFields(user);
+                user.UpdateRatingByID(user.id);
                 linkPPPoints.Visible = true;
                 lblProfile.Text = user.name;
                 liLogOut.Visible = true;

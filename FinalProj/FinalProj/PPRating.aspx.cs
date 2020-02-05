@@ -30,14 +30,17 @@ namespace FinalProj
                 {
                     loadDdlEvents(user.id);
                 }
-                
+
             }
             else
             {
                 loadDdlEvents(Convert.ToInt32(viewingUserId));
             }
-
-            loadFeedback(Convert.ToInt32(ddlEvents.SelectedItem.Value));
+            try
+            {
+                loadFeedback(Convert.ToInt32(ddlEvents.SelectedItem.Value));
+            }
+            catch { }
 
         }
 
@@ -94,6 +97,6 @@ namespace FinalProj
 
         }
 
-        
+
     }
 }

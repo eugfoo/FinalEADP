@@ -50,6 +50,12 @@ namespace FinalProj.BLL
             return dao.SelectByFeedbackId(fdbackId);
         }
 
+        public List<Feedback> getAllByUserId(int userId)
+        {
+            FeedbackDAO dao = new FeedbackDAO();
+            return dao.SelectAllByUserId(userId);
+        }
+
         public List<Feedback> getAllByEventId(int eventId)
         {
             FeedbackDAO dao = new FeedbackDAO();

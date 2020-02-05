@@ -72,16 +72,22 @@ namespace FinalProj.BLL
 			return user.SelectByEmail(email);
 		}
 
-        public Users GetUserById(int Id)
+        public Users GetUserById(int id)
         {
             userDAO user = new userDAO();
-            return user.SelectById(Id);
+            return user.SelectById(id);
         }
 
         public int VerifyOrgById(int id)
         {
             userDAO user = new userDAO();
             return user.VerifyOrgById(id);
+        }
+        
+        public int UpdateRatingByID(int id)
+        {
+            userDAO user = new userDAO();
+            return user.UpdateRating(id);
         }
 
         public int UpdateNameByID(int id, string name)
