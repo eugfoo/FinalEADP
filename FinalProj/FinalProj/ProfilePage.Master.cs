@@ -93,7 +93,7 @@ namespace FinalProj
             else
             {
                 EventsStatus events = new EventsStatus();
-                var eventList = events.GetAllEventsByName(); // Cher don't ask me why the function named "GetAllEventsByName" doesn't get events BY NAME. why name even? get by id la. smh
+                var eventList = events.GetAllEventsByName();
                 int eventCount = 0;
 
                 for (int i = 0; i < eventList.Count; i++)
