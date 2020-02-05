@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteBootstrap.Master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" ClientIDMode="Static" Inherits="FinalProj.EditProfile" %>
-
+<%@ Import Namespace="FinalProj.BLL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
         $(document).ready(function () {
@@ -14,6 +14,8 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<% Users user = (Users)Session["user"];%>
+
     <div style="min-height: 90vh">
         <div class="ml-5 mt-3 mr-5">
             <p class="" style="border-bottom: 1px solid rgba(0,0,0,.250); font-size: 30px;">Edit Profile</p>
@@ -51,15 +53,17 @@
                 <div class="col-5">
                     <div class="form-group">
                         <label>Dietary Requirements:</label>
-                        <asp:DropDownList ID="ddlDiet" runat="server">
-                            <asp:ListItem Selected="True" Value="none">None</asp:ListItem>
-                            <asp:ListItem Value="halal">Halal</asp:ListItem>
-                            <asp:ListItem Value="vegetarian">Vegatarian</asp:ListItem>
+                        <asp:DropDownList ID="ddlDiet" OnSelectedIndexChanged="ddlDiet_OnSelectedIndexChanged" runat="server" AutoPostBack="True">
+                            <asp:ListItem Selected="True" Value="None">None</asp:ListItem>
+                            <asp:ListItem Value="Halal">Halal</asp:ListItem>
+                            <asp:ListItem Value="Vegetarian">Vegatarian</asp:ListItem>
+                            <asp:ListItem Value="Others">Others</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">If your option is not in the list, please specify:</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label for="exampleFormControlTextarea1">If you chose others, please specify:</label>
+                        <asp:TextBox TextMode="MultiLine" Columns="50" Rows="3" type="text" 
+                            CssClass="form-control" ID="tbOtherDiet" runat="server" CausesValidation="True"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Connect your Social Media</label>

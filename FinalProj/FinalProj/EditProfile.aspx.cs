@@ -20,29 +20,7 @@ namespace FinalProj
         {
             if (Session["user"] != null) // A user has signed in
             {
-                Users user = (Users)Session["user"];
-                if (user.DPimage != "")
-                {
-                    if (Session["tempDP"] != null)
-                    {
-                        imgDP.ImageUrl = Session["tempDP"].ToString();
-                    }
-                    else
-                    {
-                        imgDP.ImageUrl = user.DPimage;
-                    }
-                }
-                if (user.BPimage != "")
-                {
-                    if (Session["tempBP"] != null)
-                    {
-                        imgBP.ImageUrl = Session["tempBP"].ToString();
-                    }
-                    else
-                    {
-                        imgBP.ImageUrl = user.BPimage;
-                    }
-                }
+                loadFunctions();
             }
             else
             {
@@ -82,10 +60,35 @@ namespace FinalProj
             {
                 user.UpdateBPByID(user.id, Session["tempBP"].ToString());
             }
+            if (ddlDiet.SelectedItem.Value != user.diet)
+            {
+                if (ddlDiet.SelectedItem.Value == "Others")
+                {
+                    user.UpdateDietByID(user.id, tbOtherDiet.Text);
+                }
+                else
+                {
+                    user.UpdateDietByID(user.id, ddlDiet.SelectedItem.Value);
+                }
+            }
+
             Session["tempDP"] = null;
             Session["tempBP"] = null;
             Session["user"] = user.GetUserByEmail(user.email);
             Response.Redirect("/EventStatus.aspx");
+        }
+
+        protected void ddlDiet_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedItemId = ddlDiet.SelectedItem.Value;
+            if (selectedItemId == "Others")
+            {
+                tbOtherDiet.Attributes.Remove("readonly");
+            }
+            else
+            {
+                tbOtherDiet.Attributes.Add("readonly", "readonly");
+            }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -118,5 +121,55 @@ namespace FinalProj
                 Session["tempBP"] = imgBP.ImageUrl;
             }
         }
+
+        public void loadFunctions() // Give the illusion of cleaner code.
+        {
+            Users user = (Users)Session["user"];
+            tbOtherDiet.Attributes.Add("readonly", "readonly");
+            if (user.DPimage != "")
+            {
+                if (Session["tempDP"] != null)
+                {
+                    imgDP.ImageUrl = Session["tempDP"].ToString();
+                }
+                else
+                {
+                    imgDP.ImageUrl = user.DPimage;
+                }
+            }
+            if (user.BPimage != "")
+            {
+                if (Session["tempBP"] != null)
+                {
+                    imgBP.ImageUrl = Session["tempBP"].ToString();
+                }
+                else
+                {
+                    imgBP.ImageUrl = user.BPimage;
+                }
+            }
+            if (!Page.IsPostBack)
+            {
+                if (user.diet == "" || user.diet == "None")
+                {
+                    ddlDiet.SelectedIndex = 0;
+                }
+                else if (user.diet == "Halal")
+                {
+                    ddlDiet.SelectedIndex = 1;
+                }
+                else if (user.diet == "Vegetarian")
+                {
+                    ddlDiet.SelectedIndex = 2;
+                }
+                else
+                {
+                    ddlDiet.SelectedIndex = 3;
+                    tbOtherDiet.Attributes.Remove("readonly");
+                    tbOtherDiet.Text = user.diet;
+                }
+            }
+        }
+
     }
 }

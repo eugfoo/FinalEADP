@@ -75,10 +75,11 @@ namespace FinalProj.DAL
                 string Ufacebook = row["userFacebook"].ToString();
                 string Uinstagram = row["userInstagram"].ToString();
                 string Utwitter = row["userTwitter"].ToString();
+                string Udiet = row["userDiet"].ToString();
 
                 user = new Users(Uid, Uemail, UpassHash, Uname, UDPimage, UBPimage, Udesc, 
                     Urating, UisOrg, Upoints, Uparticipate, Uverified, UregDate, Ufacebook, 
-                    Uinstagram, Utwitter);
+                    Uinstagram, Utwitter, Udiet);
             }
             else
             {
@@ -119,8 +120,9 @@ namespace FinalProj.DAL
                 string Ufacebook = row["userFacebook"].ToString();
                 string Uinstagram = row["userInstagram"].ToString();
                 string Utwitter = row["userTwitter"].ToString();
+                string Udiet = row["userDiet"].ToString();
                 user = new Users(Uid, Uemail, UpassHash, Uname, UDPimage, UBPimage, Udesc, Urating, UisOrg, Upoints, 
-                    Uparticipate, Uverified, UregDate, Ufacebook, Uinstagram, Utwitter);
+                    Uparticipate, Uverified, UregDate, Ufacebook, Uinstagram, Utwitter, Udiet);
             }
             else
             {
@@ -139,6 +141,22 @@ namespace FinalProj.DAL
             SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
             sqlCmd = new SqlCommand(sqlStmt.ToString(), myConn);
             sqlCmd.Parameters.AddWithValue("@paraVer", 1);
+            sqlCmd.Parameters.AddWithValue("@paraId", id);
+            myConn.Open();
+            result = sqlCmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+        }
+
+        public int UpdateDiet(int id, string diet)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStmt = "UPDATE Users SET userDiet = @paraDiet where id = @paraId";
+            int result = 0;
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+            sqlCmd = new SqlCommand(sqlStmt.ToString(), myConn);
+            sqlCmd.Parameters.AddWithValue("@paraDiet", diet);
             sqlCmd.Parameters.AddWithValue("@paraId", id);
             myConn.Open();
             result = sqlCmd.ExecuteNonQuery();

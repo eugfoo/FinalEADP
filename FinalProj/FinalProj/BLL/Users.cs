@@ -24,6 +24,7 @@ namespace FinalProj.BLL
 		public string facebook { get; set; }
 		public string instagram { get; set; }
 		public string twitter { get; set; }
+        public string diet { get; set; }
 
 
 		public Users() { }
@@ -39,7 +40,7 @@ namespace FinalProj.BLL
 
 		public Users(int uId, string uEmail, string uPassHash, string uName, string uDPImage, string uBPImage,
 			string uDesc, int uRating, string uIsOrg, int uPoints, string uParticipate, int uVerified, DateTime uRegDate,
-			string uFacebook, string uInstagram, string uTwitter)
+			string uFacebook, string uInstagram, string uTwitter, string uDiet)
 		{
 			id = uId;
 			email = uEmail;
@@ -57,6 +58,7 @@ namespace FinalProj.BLL
 			facebook = uFacebook;
 			instagram = uInstagram;
 			twitter = uTwitter;
+            diet = uDiet;
 		}
 
 		public int AddUser()
@@ -83,7 +85,13 @@ namespace FinalProj.BLL
             userDAO user = new userDAO();
             return user.VerifyOrgById(id);
         }
-        
+
+        public int UpdateDietByID(int id, string diet)
+        {
+            userDAO user = new userDAO();
+            return user.UpdateDiet(id, diet);
+        }
+
         public int UpdateRatingByID(int id)
         {
             userDAO user = new userDAO();
