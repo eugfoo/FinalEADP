@@ -35,48 +35,10 @@ namespace FinalProj.DAL
             for (int i = 0; i < rec_cnt; i++)
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
-                int voucherId = int.Parse(row["Id"].ToString());
                 string voucherName = row["VoucherName"].ToString();
                 string voucherAmt = row["VoucherAmount"].ToString();
                 string voucherPic = row["VoucherPic"].ToString();
-                string voucherPoint = row["VoucherPoint"].ToString();
-                Voucher obj = new Voucher(voucherId, voucherName, voucherAmt, voucherPic, voucherPoint);
-                voucherList.Add(obj);
-            };
-
-            return voucherList;
-        }
-
-        public List<Voucher> SelectById(string queryId)
-        {
-            //Step 1 -  Define a connection to the database
-            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            //Step 2 -  Create a DataAdapter to retrieve data from db table
-            string sqlStmt = "Select * from Vouchers where Id = '" + queryId + "'";
-            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
-
-            //Step 3 -  Create a DataSet to store the data to be retrieved
-            DataSet ds = new DataSet();
-
-            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
-            da.Fill(ds);
-
-            //Step 5 -  Read data from DataSet to List
-            List<Voucher> voucherList = new List<Voucher>();
-            List<Voucher> tempList = new List<Voucher>();
-
-            int rec_cnt = ds.Tables[0].Rows.Count;
-            for (int i = 0; i < rec_cnt; i++)
-            {
-                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
-                int voucherId = int.Parse(row["Id"].ToString());
-                string voucherName = row["VoucherName"].ToString();
-                string voucherAmt = row["VoucherAmount"].ToString();
-                string voucherPic = row["VoucherPic"].ToString();
-                string voucherPoint = row["VoucherPoint"].ToString();
-                Voucher obj = new Voucher(voucherId, voucherName, voucherAmt, voucherPic, voucherPoint);
+                Voucher obj = new Voucher(voucherName, voucherAmt, voucherPic);
                 voucherList.Add(obj);
             };
 
@@ -96,15 +58,14 @@ namespace FinalProj.DAL
 
             // Step 2 - Instantiate SqlCommand instance to add record 
             //          with INSERT statement
-            string sqlStmt = "INSERT INTO Vouchers(VoucherName, VoucherAmount, VoucherPic, VoucherPoint) " +
-                             "VALUES (@voucherName, @voucherAmt, @voucherPic, @voucherPoint)";
+            string sqlStmt = "INSERT INTO Vouchers(VoucherName, VoucherAmount, VoucherPic) " +
+                "VALUES (@voucherName, @voucherAmt, @voucherPic)";
             sqlCmd = new SqlCommand(sqlStmt, myConn);
 
             // Step 3 : Add each parameterised variable with value
             sqlCmd.Parameters.AddWithValue("@voucherName", vcher.VoucherName);
             sqlCmd.Parameters.AddWithValue("@voucherAmt", vcher.VoucherAmount);
             sqlCmd.Parameters.AddWithValue("@voucherPic", vcher.VoucherPic);
-            sqlCmd.Parameters.AddWithValue("@voucherPoint", vcher.VoucherPoints);
 
 
             // Step 4 Open connection the execute NonQuery of sql command   

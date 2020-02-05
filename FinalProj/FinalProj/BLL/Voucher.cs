@@ -9,11 +9,9 @@ namespace FinalProj.BLL
     public class Voucher
     {
         // Define class properties
-        public int VoucherId { get; set; }
         public string VoucherName { get; set; }
         public string VoucherPic { get; set; }
         public string VoucherAmount { get; set; }
-        public string VoucherPoints { get; set; }
 
         public Voucher()
         {
@@ -21,13 +19,11 @@ namespace FinalProj.BLL
         }
 
         // Define a constructor to initialize all properties
-        public Voucher(int voucherId, string voucherName, string voucherAmount, string voucherPic, string voucherPoints)
+        public Voucher(string voucherName, string voucherAmount, string voucherPic)
         {
-            VoucherId = voucherId;
             VoucherName = voucherName;
             VoucherPic = voucherPic;
             VoucherAmount = voucherAmount;
-            VoucherPoints = voucherPoints;
         }
 
         public int AddVoucher()
@@ -41,12 +37,6 @@ namespace FinalProj.BLL
         {
             voucherDAO voucher = new voucherDAO();
             return voucher.SelectAllByName();
-        }
-
-        public List<Voucher> GetVoucherById(string queryId)
-        {
-            voucherDAO voucher = new voucherDAO();
-            return voucher.SelectById(queryId);
         }
     }
 }
