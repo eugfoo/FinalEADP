@@ -242,6 +242,22 @@ namespace FinalProj.DAL
             return result;
         }
 
+        public int UpdatePoints(int id, int points)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStmt = "UPDATE Users SET userPoints = @paraPoints where id = @paraId";
+            int result = 0;
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+            sqlCmd = new SqlCommand(sqlStmt.ToString(), myConn);
+            sqlCmd.Parameters.AddWithValue("@paraPoints", points);
+            sqlCmd.Parameters.AddWithValue("@paraId", id);
+            myConn.Open();
+            result = sqlCmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+        }
+
         public int UpdateDP(int id, string filepath)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;

@@ -56,6 +56,7 @@ namespace FinalProj
                                 int result = voucher.AddVoucher();
 
                                 user.points = user.points - int.Parse(element.VoucherPoints);
+                                user.UpdatePointsByID(user.id, user.points);
                             }
                             else
                             {

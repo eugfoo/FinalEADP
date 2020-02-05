@@ -110,7 +110,13 @@ namespace FinalProj.BLL
 			return user.UpdateDesc(id, desc);
 		}
 
-		public int UpdateDPByID(int id, string DP)
+        public int UpdatePointsByID(int id, int points)
+        {
+            userDAO user = new userDAO();
+            return user.UpdatePoints(id, points);
+        }
+
+        public int UpdateDPByID(int id, string DP)
 		{
 			userDAO user = new userDAO();
 			return user.UpdateDP(id, DP);
