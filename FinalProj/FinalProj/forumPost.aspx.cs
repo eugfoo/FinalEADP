@@ -43,9 +43,14 @@ namespace FinalProj
             string threadId = Request.QueryString["threadid"];
             Thread thread = new Thread();
 
+            if (Session["user"] == null) // A user has signed in
+            {
+                Response.Redirect("/homepage.aspx");
+            }
+
             if (threadId != null)
             {
-
+                Users user = (Users)Session["user"];
                 Thread currentThread = thread.GetThreadByThreadId(threadId);
 
                 LblTitle.Text = currentThread.Title;
@@ -55,6 +60,17 @@ namespace FinalProj
                 LblContent.Text = currentThread.Content;
                 LblPrefix.Text = currentThread.Prefix;
                 HFthreadId.Value = threadId;
+
+                if(user.id != currentThread.UserId)
+                {
+                    panelEdit.Visible = false;
+                }
+                else
+                {
+                    panelEdit.Visible = true;
+                }
+              
+
             }
 
             if (Page.IsPostBack) return;
@@ -188,6 +204,8 @@ namespace FinalProj
         protected void btnReply_Click(object sender, EventArgs e)
         {
             ThreadReply threadReply = new ThreadReply();
+            Users user = (Users)Session["user"];
+            int user_id = user.id;
 
             if (String.IsNullOrEmpty(tbReplyContent.Text))
             {
@@ -200,7 +218,7 @@ namespace FinalProj
                 HFDate.Value = now.ToString("g");
                 DateTime mDate = Convert.ToDateTime(HFDate.Value);
 
-                threadReply = new ThreadReply(HFthreadId.Value, HFDate.Value, tbReplyContent.Text, "1");
+                threadReply = new ThreadReply(Convert.ToInt32(HFthreadId.Value), HFDate.Value, tbReplyContent.Text, user_id);
                 int result = threadReply.ReplyThread();
                 if (result == 1)
                 {
@@ -220,6 +238,10 @@ namespace FinalProj
             Response.Redirect("editForumPost.aspx?threadid=" + HFthreadId.Value);
         }
 
+        protected void btnFeedback_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("eventFeedback.aspx?eventId=" + 15);
+        }
 
         protected void btnGoBack_Click(object sender, EventArgs e)
         {

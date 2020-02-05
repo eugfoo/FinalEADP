@@ -76,6 +76,15 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.Label LblContent;
         
         /// <summary>
+        /// panelEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelEdit;
+        
+        /// <summary>
         /// btnGoBack control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,15 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager MainScriptManager;
+        
+        /// <summary>
+        /// btnFeedback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFeedback;
         
         /// <summary>
         /// pnlHelloWorld control.

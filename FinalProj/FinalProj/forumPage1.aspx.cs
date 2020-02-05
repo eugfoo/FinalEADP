@@ -45,7 +45,7 @@ namespace FinalProj
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                using (SqlCommand cmd = new SqlCommand("Select TOP 5 * From tdEvent ORDER BY Id DESC", myConn))
+                using (SqlCommand cmd = new SqlCommand("Select TOP 5 * From tdEvent ORDER BY eventId DESC", myConn))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     {

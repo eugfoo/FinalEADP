@@ -40,7 +40,7 @@
             </div>
 
             <div class="form-group">
-                <label>Upload Image :</label>
+                <label>Uploaded Image :</label>
 
                 <%--<asp:FileUpload ID="FileImgSave" runat="server" />
                 <%--<asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />--%>

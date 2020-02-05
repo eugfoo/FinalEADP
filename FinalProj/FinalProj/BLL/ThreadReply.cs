@@ -8,17 +8,17 @@ namespace FinalProj.BLL
 {
     public class ThreadReply
     {
-        public string ThreadId { get; set; }
+        public int ThreadId { get; set; }
         public string PostDate { get; set; }
         public string PostContent { get; set; }
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public ThreadReply()
         {
 
         }
 
-        public ThreadReply(string threadId, string postDate, string postContent, string userId)
+        public ThreadReply(int threadId, string postDate, string postContent, int userId)
         {
             ThreadId = threadId;
             PostDate = postDate;

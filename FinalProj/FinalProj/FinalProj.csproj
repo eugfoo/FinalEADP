@@ -83,6 +83,7 @@
     <Content Include="AttendanceSubmitted.css" />
     <Content Include="beach.jpg" />
     <Content Include="bookmark.aspx" />
+    <Content Include="editForumPost.aspx" />
     <Content Include="EditProfile.aspx" />
     <Content Include="eventFeedback.aspx" />
     <Content Include="EventStatus.aspx" />
@@ -184,6 +185,13 @@
     <Compile Include="DAL\ThreadDAO.cs" />
     <Compile Include="DAL\userDAO.cs" />
     <Compile Include="DAL\voucherDAO.cs" />
+    <Compile Include="editForumPost.aspx.cs">
+      <DependentUpon>editForumPost.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="editForumPost.aspx.designer.cs">
+      <DependentUpon>editForumPost.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -53,14 +53,14 @@
                     <ItemTemplate>
                         <tr>
                             <td>
-                                <h3 class="h6"><span class="badge badge-success">EVENT</span> <a href="forumPost.aspx?threadid=<%# Eval("Id") %>"><%# Eval("eventTitle") %></a></h3>
+                                <h3 class="h6"><span class="badge badge-success">EVENT</span> <a href="forumPost.aspx?threadid=<%# Eval("eventId") %>"><%# Eval("eventTitle") %></a></h3>
                                 <div class="small">
-                                    Started by: <%# Eval("user_name") %>
+                                    Started by: <%--<%# Eval("user_name") %>--%>
                                 </div>
                             </td>
 
                             <td>
-                                <div>by <a href="#0"><%# Eval("user_name") %></a></div>
+                                <div>by <a href="#0"><%--<%# Eval("user_name") %></a>--%></div>
                                 <div>02 Apr 2019, 13:33</div>
                             </td>
                             <td>

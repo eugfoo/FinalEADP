@@ -130,12 +130,19 @@
                         </tr>
                     </tbody>
                 </table>
-                <asp:Button ID="btnGoBack" runat="server" CssClass="btn btn-danger float-right" Text="Back" OnClick="btnGoBack_Click" />
-                <asp:Button ID="btnEdit" runat="server" CssClass="btn btn-primary float-right mr-1" Text="Edit" OnClick="btnEdit_Click" />
+                <asp:Panel ID="panelEdit" Visible="false" runat="server">
+                    <asp:Button ID="btnGoBack" runat="server" CssClass="btn btn-danger float-right" Text="Back" OnClick="btnGoBack_Click" />
+                    <asp:Button ID="btnEdit" runat="server" CssClass="btn btn-primary float-right mr-1" Text="Edit" OnClick="btnEdit_Click" />
+                </asp:Panel>
+
 
 
 
                 <asp:ScriptManager ID="MainScriptManager" runat="server" />
+
+
+
+                <asp:Button ID="btnFeedback" runat="server" OnClick="btnFeedback_Click" Text="Bring me to feedback" />
 
 
 

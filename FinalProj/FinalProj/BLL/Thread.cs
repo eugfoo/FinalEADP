@@ -18,7 +18,7 @@ namespace FinalProj.BLL
         public string ThreadImage3 { get; set; }
         public string ThreadImage4 { get; set; }
         public string Content { get; set; }
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public string UserName { get; set; }
 
         public Thread()
@@ -29,7 +29,7 @@ namespace FinalProj.BLL
         public Thread(string threadPrefix, string threadBadgeColor, string threadTitle, string threadDate
             , string Image1, string Image2, string Image3, string Image4
             , string threadContent
-            , string userId, string userName)
+            , int userId, string userName)
         {
             Prefix = threadPrefix;
             BadgeColor = threadBadgeColor;

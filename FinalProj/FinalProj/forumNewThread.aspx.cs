@@ -31,6 +31,11 @@ namespace FinalProj
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Session["user"] == null) // A user has signed in
+            {
+                Response.Redirect("/homepage.aspx");
+            }
+
             if (imagesNames == null)
             {
                 imagesNames = new List<string>();
@@ -173,11 +178,14 @@ namespace FinalProj
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            Users user = (Users)Session["user"];
             Thread thread = new Thread();
             string firstImage = "";
             string secondImage = "";
             string thirdImage = "";
             string fourthImage = "";
+            int user_id = user.id;
+            string user_name = user.name;
 
             //string threadImage = "";
 
@@ -220,7 +228,7 @@ namespace FinalProj
 
                 thread = new Thread(DdlPrefix.Text, BadgeColorIdentifier(), tbTitle.Text, HFDate.Value,
                     firstImage, secondImage, thirdImage, fourthImage,
-                    tbContent.Text, "1", "Gundy");
+                    tbContent.Text, user_id, user_name);
 
                 int result = thread.CreateThread();
                 int threadId = thread.getMaxThreadId();

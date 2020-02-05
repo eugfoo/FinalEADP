@@ -94,6 +94,15 @@ namespace FinalProj {
         protected global::AjaxControlToolkit.Rating Q4Rating;
         
         /// <summary>
+        /// LblEventTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblEventTitle;
+        
+        /// <summary>
         /// tbFeedbackContent control.
         /// </summary>
         /// <remarks>

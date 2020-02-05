@@ -110,7 +110,7 @@ namespace FinalProj.DAL
                 string threadImage3 = row["threadImage3"].ToString();
                 string threadImage4 = row["threadImage4"].ToString();
                 string threadContent = row["threadContent"].ToString();
-                string threadUserId = row["user_id"].ToString();
+                int threadUserId = Convert.ToInt32(row["user_id"]);
                 string threadUserName = row["user_name"].ToString();
                 thread = new Thread(threadPrefix, threadBadgeColor, threadTitle, threadDate,
                     threadImage1, threadImage2, threadImage3, threadImage4, threadContent,

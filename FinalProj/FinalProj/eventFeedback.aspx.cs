@@ -10,9 +10,19 @@ namespace FinalProj
 {
     public partial class eventFeedback : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user"] == null) // A user has signed in
+            {
+                Response.Redirect("/homepage.aspx");
+            }
 
+            int queriedEventId = Convert.ToInt32(Request.QueryString["eventId"]);
+            Events events = new Events();
+
+            Events selectedEvent = events.getEventDetails(queriedEventId);
+            LblEventTitle.Text = selectedEvent.Title;
         }
 
 
@@ -21,9 +31,11 @@ namespace FinalProj
             try
             {
                 Feedback feedback = new Feedback();
+                Events events = new Events();
+
                 string errorMsg = string.Empty;
-                int eventId = 2;
-                int userId = 69;
+                int eventId = Convert.ToInt32(Request.QueryString["eventId"]);
+                int userId = events.getEventDetails(eventId).User_id;
                 string Q1Ratings = Q1Rating.CurrentRating.ToString();
                 string Q2Ratings = Q2Rating.CurrentRating.ToString();
                 string Q3Ratings = Q3Rating.CurrentRating.ToString();
