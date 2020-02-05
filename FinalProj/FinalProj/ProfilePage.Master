@@ -125,7 +125,7 @@
                                 <div id="norgItems" runat="server">
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/VoucherRedemption.aspx">Redeem Vouchers</a>
-                                    <a class="dropdown-item" href="#">Request Recommendation</a>
+                                    <%--<a class="dropdown-item" href="#">Request Recommendation</a>--%>
                                 </div>
                             </div>
                         </div>

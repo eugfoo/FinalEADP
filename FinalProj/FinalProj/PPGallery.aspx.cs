@@ -62,6 +62,11 @@ namespace FinalProj
             DateTime now = DateTime.Now;
             GPictures gpic = new GPictures(filepath, user.id, caption, gpevent, now);
             gpic.addGP();
+
+            tbCaption.Text = "";
+            imgPic.ImageUrl = "";
+            ddlEvents.SelectedIndex = 0;
+
             loadGP(user.id);
         }
 
