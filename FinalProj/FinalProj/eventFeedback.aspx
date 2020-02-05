@@ -33,7 +33,6 @@
             background-image: url("Img/emptystar.png");
         }
     </style>
-
     <div class="container">
     <div class="card" style="margin-top: 45px;">
         <div class="card-header" style="background-color: red;">
@@ -135,13 +134,13 @@ Are you satisfied with the event?</small>
 
         </div>
         <div class="container mb-4">
-            <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click"/>
+            <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" />
 
             <%-- <button type="submit" class="btn btn-primary">Submit</button>--%>
             <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-danger" />
         </div>
-    </div>
         </div>
+    </div>
 
 
 

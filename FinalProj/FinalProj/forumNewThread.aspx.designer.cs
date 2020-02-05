@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalProj
-{
-
-
-    public partial class forumNewThread
-    {
-
+namespace FinalProj {
+    
+    
+    public partial class forumNewThread {
+        
         /// <summary>
         /// DdlPrefix control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlPrefix;
-
+        
         /// <summary>
         /// tbTitle control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbTitle;
-
+        
         /// <summary>
         /// FileImgSave control.
         /// </summary>
@@ -40,7 +38,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FileImgSave;
-
+        
         /// <summary>
         /// btnUpload control.
         /// </summary>
@@ -49,7 +47,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpload;
-
+        
         /// <summary>
         /// DataList1 control.
         /// </summary>
@@ -58,7 +56,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList DataList1;
-
+        
         /// <summary>
         /// tbContent control.
         /// </summary>
@@ -67,7 +65,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbContent;
-
+        
         /// <summary>
         /// HFDate control.
         /// </summary>
@@ -76,7 +74,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HFDate;
-
+        
         /// <summary>
         /// HFthreadId control.
         /// </summary>
@@ -85,7 +83,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HFthreadId;
-
+        
         /// <summary>
         /// LblMsg control.
         /// </summary>
@@ -94,7 +92,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblMsg;
-
+        
         /// <summary>
         /// btnSubmit control.
         /// </summary>
@@ -103,7 +101,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
-
+        
         /// <summary>
         /// btnClear control.
         /// </summary>

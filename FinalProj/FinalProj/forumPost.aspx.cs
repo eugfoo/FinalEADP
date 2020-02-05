@@ -220,6 +220,7 @@ namespace FinalProj
             Response.Redirect("editForumPost.aspx?threadid=" + HFthreadId.Value);
         }
 
+
         protected void btnGoBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("forumCatOverview.aspx");
