@@ -28,6 +28,7 @@
 		#eventSearch {
 			margin: 3em auto 1em auto;
 		}
+
 		#ContentPlaceHolder1_panelError {
 			text-align: center;
 		}
@@ -35,6 +36,7 @@
 		#ContentPlaceHolder1_panelSuccess {
 			text-align: center;
 		}
+
 		.createEvent {
 			width: 100%;
 			margin: 3em auto 1em auto;
@@ -506,12 +508,12 @@
 	<img src="Img/together.PNG" style="width: 100%; height: auto;" />
 	<div class="container">
 		<br />
-			<asp:Panel ID="panelSuccess" Visible="false" runat="server" CssClass="alert alert-dismissable alert-success">
-				<asp:Label ID="lb_success" runat="server"></asp:Label>
-			</asp:Panel>
-			<asp:Panel ID="panelError" Visible="false" runat="server" CssClass="alert alert-dismissable alert-danger">
-				<asp:Label ID="lb_error" runat="server"></asp:Label>
-			</asp:Panel>
+		<asp:Panel ID="panelSuccess" Visible="false" runat="server" CssClass="alert alert-dismissable alert-success">
+			<asp:Label ID="lb_success" runat="server"></asp:Label>
+		</asp:Panel>
+		<asp:Panel ID="panelError" Visible="false" runat="server" CssClass="alert alert-dismissable alert-danger">
+			<asp:Label ID="lb_error" runat="server"></asp:Label>
+		</asp:Panel>
 
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-8 col-sm-pull-4" id="eventSearch">
@@ -542,8 +544,15 @@
 									{
 										if (element.EventId == attendance.Key)
 										{%><%= attendance.Value %><%}
-								}%> Participants Attending <% if (attending.Count == element.MaxAttendees)
-															   { %> <b style="color:red;">(FULL)</b><%} %>
+																	  }%> Participants Attending <% if (attending.Count == element.MaxAttendees)
+																									 { %> <b style="color: darkred;">(FULL)</b><%}
+																																				   else if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.StartTime.ToString()))
+																																				   {
+																																					   if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.EndTime.ToString()))
+																																					   {%><b style="color: darkred;">(Event Ended)</b><%}
+																																																		  else
+																																																		  { %> <b style="color: darkred;">(Event Ongoing)</b><%}
+																																																																 }%>
 							</p>
 							<a href="/eventDetails.aspx?eventId=<%=element.EventId %>" class="btn btn-primary">View More &rarr;</a>
 						</div>
@@ -566,83 +575,83 @@
 							<div class="head-month"></div>
 						</div>
 
-                            <div class="next-button">></div>
-                        </div>
-                        <table id="calendar">
-                            <thead>
-                                <tr>
-                                    <th>Sun</th>
-                                    <th>Mon</th>
-                                    <th>Tue</th>
-                                    <th>Wed</th>
-                                    <th>Thu</th>
-                                    <th>Fri</th>
-                                    <th>Sat</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <asp:TextBox ID="hidingDate" CssClass="forHide" runat="server"></asp:TextBox>
-                    <asp:Button ID="testbtn" CssClass="forHide" runat="server" OnClick="DateClicked" CausesValidation="False" />
-                </div>
-            </div>
-        </div>
+						<div class="next-button">></div>
+					</div>
+					<table id="calendar">
+						<thead>
+							<tr>
+								<th>Sun</th>
+								<th>Mon</th>
+								<th>Tue</th>
+								<th>Wed</th>
+								<th>Thu</th>
+								<th>Fri</th>
+								<th>Sat</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<asp:TextBox ID="hidingDate" CssClass="forHide" runat="server"></asp:TextBox>
+				<asp:Button ID="testbtn" CssClass="forHide" runat="server" OnClick="DateClicked" CausesValidation="False" />
+			</div>
+		</div>
+	</div>
 </asp:Content>
 
 

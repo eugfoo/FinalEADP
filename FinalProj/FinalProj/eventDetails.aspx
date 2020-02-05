@@ -7,6 +7,17 @@
 			padding: 2%;
 			width: 20%;
 		}
+
+		#ContentPlaceHolder1_ongoing {
+			padding: 2%;
+			width: 20%;
+		}
+
+		#ContentPlaceHolder1_finished {
+			padding: 2%;
+			width: 25%;
+		}
+
 		#ContentPlaceHolder1_fullAttendance {
 			padding: 2%;
 			width: 35%;
@@ -100,6 +111,17 @@
 				width: 100%;
 				height: auto
 			}
+
+			#ContentPlaceHolder1_finished {
+				width: 100%;
+				height: auto
+			}
+
+			#ContentPlaceHolder1_ongoing {
+				width: 100%;
+				height: auto
+			}
+
 			#ContentPlaceHolder1_fullAttendance {
 				width: 100%;
 				height: auto
@@ -209,11 +231,24 @@
 										if (participant.id == user.id)
 										{
 											btnCreated = true;%>
-							<asp:Button ID="leaveEvent" CssClass="btn btn-danger" runat="server" Text="LEAVE"   OnClick="leaveEvent_Click" />
+							<asp:Button ID="leaveEvent" CssClass="btn btn-danger" runat="server" Text="LEAVE" OnClick="leaveEvent_Click" />
 							<%}
 									}
 								}
 								if (btnCreated == false)
+								{
+									if (DateTime.Now >= DateTime.Parse(eventDetail.Date.ToString() + " " + eventDetail.StartTime.ToString()))
+									{
+										if (DateTime.Now >= DateTime.Parse(eventDetail.Date.ToString() + " " + eventDetail.EndTime.ToString()))
+										{%>
+							<asp:Button ID="finished" CssClass="btn btn-secondary" runat="server" Text="EVENT ENDED" Enabled="false" />
+							<%}
+							else
+							{ %>
+							<asp:Button ID="ongoing" CssClass="btn btn-secondary" runat="server" Text="ONGOING" Enabled="false" />
+							<%}
+								}
+								else
 								{
 									if (participantList.Count != eventDetail.MaxAttendees)
 									{%>
@@ -223,6 +258,7 @@
 								{ %>
 							<asp:Button ID="fullAttendance" CssClass="btn btn-secondary" runat="server" Text="MAX CAPACITY" Enabled="False" />
 							<%}
+									}
 								}
 								if (bookmark == false)
 								{%>
