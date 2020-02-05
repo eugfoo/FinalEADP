@@ -13,6 +13,7 @@ namespace FinalProj
     public partial class PPRating : System.Web.UI.Page
     {
         public string viewingUserId;
+        public List<Feedback> feedbackList = new List<Feedback>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,11 +36,33 @@ namespace FinalProj
             {
                 loadDdlEvents(Convert.ToInt32(viewingUserId));
             }
+
+            loadFeedback(Convert.ToInt32(ddlEvents.SelectedItem.Value));
+
         }
 
         protected void ddlEvents_OnSelectedIndexChanged(object sender, EventArgs e)
         {
+            int selectedEventId = Convert.ToInt32(ddlEvents.SelectedItem.Value);
+            loadFeedback(Convert.ToInt32(ddlEvents.SelectedItem.Value));
+        }
 
+        public void loadDdlEvents(int userId)
+        {
+            if (!Page.IsPostBack)
+            {
+                ddlEvents.DataSource = CreateDataSource(userId);
+                ddlEvents.DataTextField = "EventTextField";
+                ddlEvents.DataValueField = "EventValueField";
+                ddlEvents.DataBind();
+                ddlEvents.SelectedIndex = 0;
+            }
+        }
+
+        public void loadFeedback(int eventId)
+        {
+            Feedback fdback = new Feedback();
+            feedbackList = fdback.getAllByEventId(eventId);
         }
 
         ICollection CreateDataSource(int userId)
@@ -71,16 +94,6 @@ namespace FinalProj
 
         }
 
-        public void loadDdlEvents(int userId)
-        {
-            if (!Page.IsPostBack)
-            {
-                ddlEvents.DataSource = CreateDataSource(userId);
-                ddlEvents.DataTextField = "EventTextField";
-                ddlEvents.DataValueField = "EventValueField";
-                ddlEvents.DataBind();
-                ddlEvents.SelectedIndex = 0;
-            }
-        }
+        
     }
 }

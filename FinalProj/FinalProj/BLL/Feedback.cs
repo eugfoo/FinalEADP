@@ -8,6 +8,7 @@ namespace FinalProj.BLL
 {
     public class Feedback
     {
+        public int FdbackId { get; set; }
         public int EventId { get; set; }
         public int UserId { get; set; }
         public int AvgRating { get; set; }
@@ -26,11 +27,33 @@ namespace FinalProj.BLL
             FeedbackDone = feedbackDone;
         }
 
+        public Feedback(int fdbackId, int eventId, int userId, int avgRating, string userReview, int feedbackDone) // Using this to return details from DAO
+        {
+            FdbackId = fdbackId;
+            EventId = eventId;
+            UserId = userId;
+            AvgRating = avgRating;
+            UserReview = userReview;
+            FeedbackDone = feedbackDone;
+        }
+
         public int createFeedback()
         {
             FeedbackDAO dao = new FeedbackDAO();
             int result = dao.Insert(this);
             return result;
+        }
+
+        public Feedback getFeedbackById(int fdbackId)  
+        {
+            FeedbackDAO dao = new FeedbackDAO();
+            return dao.SelectByFeedbackId(fdbackId);
+        }
+
+        public List<Feedback> getAllByEventId(int eventId)
+        {
+            FeedbackDAO dao = new FeedbackDAO();
+            return dao.SelectAllByEventId(eventId);
         }
 
     }

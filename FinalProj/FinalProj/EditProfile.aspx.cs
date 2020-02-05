@@ -100,9 +100,9 @@ namespace FinalProj
             if (fuDP.HasFile)
             {
                 var uniqueFileName = string.Format(@"{0}.png", Guid.NewGuid());
-                string fileName = Path.Combine(Server.MapPath("~/Img/User"), uniqueFileName);
+                string fileName = Path.Combine(Server.MapPath("/Img/User"), uniqueFileName);
                 fuDP.SaveAs(fileName);
-                imgDP.ImageUrl = "~/Img/User/" + uniqueFileName;
+                imgDP.ImageUrl = "/Img/User/" + uniqueFileName;
                 Session["tempDP"] = imgDP.ImageUrl;
             }
         }
@@ -112,9 +112,9 @@ namespace FinalProj
             if (fuBP.HasFile)
             {
                 var uniqueFileName = string.Format(@"{0}.png", Guid.NewGuid());
-                string fileName = Path.Combine(Server.MapPath("~/Img/User"), uniqueFileName);
+                string fileName = Path.Combine(Server.MapPath("/Img/User"), uniqueFileName);
                 fuBP.SaveAs(fileName);
-                imgBP.ImageUrl = "~/Img/User/" + uniqueFileName;
+                imgBP.ImageUrl = "/Img/User/" + uniqueFileName;
                 Session["tempBP"] = imgBP.ImageUrl;
             }
         }

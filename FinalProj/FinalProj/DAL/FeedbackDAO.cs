@@ -5,6 +5,8 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Data;
+
 
 namespace FinalProj.DAL
 {
@@ -34,6 +36,64 @@ namespace FinalProj.DAL
             myConn.Close();
 
             return result;
+        }
+
+        public Feedback SelectByFeedbackId(int fdbackId)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStmt = "Select * from Feedback where Id = @paraId";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraId", fdbackId);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            Feedback fdback = null;
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            if (rec_cnt == 1)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+                int Uid = Convert.ToInt32(row["Id"]);
+                int UeventId = Convert.ToInt32(row["eventId"]);
+                int UuserId = Convert.ToInt32(row["userId"]);
+                int UavgRating = Convert.ToInt32(row["avgRating"]);
+                string UuserReview = row["userReview"].ToString();
+                int UfeedbackDone = Convert.ToInt32(row["feedbackDone"]);
+                fdback = new Feedback(Uid, UeventId, UuserId, UavgRating, UuserReview, UfeedbackDone);
+            }
+            else
+            {
+                fdback = null;
+            }
+
+            return fdback;
+        }
+
+        public List<Feedback> SelectAllByEventId(int eventId)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "Select * from Feedback Where eventId = @paraEventId";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+
+            da.SelectCommand.Parameters.AddWithValue("@paraEventId", eventId);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            List<Feedback> fdbackList = new List<Feedback>();
+            Feedback fdback = new Feedback();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i]; 
+                int fdbackId = int.Parse(row["Id"].ToString());
+                fdback = fdback.getFeedbackById(fdbackId);
+                fdbackList.Add(fdback);
+            }
+            return fdbackList;
         }
     }
 }
