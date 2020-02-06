@@ -15,6 +15,7 @@ namespace FinalProj
         protected List<Users> attendUser = new List<Users>();
         public List<string> diet = new List<string>();
         public List<string> attending = new List<string>();
+        public string title;
         public int participant = 0;
         public int participantHere = 0;
 
@@ -22,6 +23,8 @@ namespace FinalProj
         {
             Attendance attend = new Attendance();
             Users user = new Users();
+            title = Session["eventTitle"].ToString();
+
 
             if (Session["user"] == null)
             {

@@ -190,6 +190,10 @@ namespace FinalProj
 
         protected void attendance_Click(object sender, EventArgs e)
         {
+            Events ev = new Events();
+            eventDetail = ev.getEventDetails(int.Parse(Request.QueryString["eventId"]));
+            string title = eventDetail.Title;
+            Session["eventTitle"] = title;
             Session["eventId"] = int.Parse(Request.QueryString["eventId"]);
             Response.Redirect("/AttendanceSubmitted.aspx");
         }

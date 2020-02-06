@@ -1,11 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteBootstrap.Master" AutoEventWireup="true" CodeBehind="AttendanceSubmitted.aspx.cs" Inherits="FinalProj.AttendanceSubmitted" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="AttendanceSubmitted.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="height:86vh">    
+    <div style="height: 86vh">
         <div>
-            <div><h2 id="title">Project Clean The Beach Attendance</h2></div>
+            <div>
+                <h2 id="title"><%= title %></h2>
+            </div>
             <table id="timer">
                 <tr>
                     <td id="attendTitle">Time left to edit attendance:</td>
@@ -24,19 +27,19 @@
                     <th>Are they at your event?</th>
                 </tr>
                 <% for (int i = 0; i < attendList.Count; i++)
-                   { %> 
-                    <tr>
-                        <td>
-                            <%= attendUser[i].name %>
-                        </td>
-                        <td>
-                            <%= diet[i] %>
-                        </td>
-                        <td>
-                            <%= attending[i] %>
-                        </td>
-                    </tr>
-                    
+                    { %>
+                <tr>
+                    <td>
+                        <%= attendUser[i].name %>
+                    </td>
+                    <td>
+                        <%= diet[i] %>
+                    </td>
+                    <td>
+                        <%= attending[i] %>
+                    </td>
+                </tr>
+
                 <% } %>
             </table>
 
