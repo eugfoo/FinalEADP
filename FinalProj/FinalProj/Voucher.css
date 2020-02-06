@@ -17,10 +17,14 @@
 
 #ContentPlaceHolder1_panelError {
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #ContentPlaceHolder1_panelSuccess {
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #btnOk {
