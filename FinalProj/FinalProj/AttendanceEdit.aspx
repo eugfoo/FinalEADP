@@ -6,7 +6,56 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="height: 86vh">
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript">
+
+            var userIdChecked = [];
+            var userIdUncheck = [];
+            var str;
+
+            $(function () {
+                $('#btnSubmit').click(function () {
+                    userIdChecked = [];
+
+                    $('#attendance input[type=checkbox]:checked').each(function () {
+                        var row = $(this).closest("tr")[0];
+                        str = row.cells[0].innerHTML;
+                        str = str.replace(/\s+/g, '');
+                        userIdChecked.push(str);
+                    });
+
+                    userIdChecked = JSON.parse("[" + userIdChecked + "]")
+
+                    document.getElementById('<%= HiddenField.ClientID%>').value = userIdChecked.join(',');
+
+                    alert(userIdChecked);
+
+                    return false;
+                });
+            });
+
+            $(function () {
+                $('#btnSubmit').click(function () {
+                    userIdUncheck = [];
+
+                    $('#attendance input[type=checkbox]:not(:checked)').each(function () {
+                        var row = $(this).closest("tr")[0];
+                        str = row.cells[0].innerHTML;
+                        str = str.replace(/\s+/g, '');
+                        userIdUncheck.push(str);
+                    });
+
+                    userIdUncheck = JSON.parse("[" + userIdUncheck + "]")
+
+                    document.getElementById('<%= HiddenField1.ClientID%>').value = userIdUncheck.join(',');
+
+                    alert(userIdUncheck);
+
+                    return false;
+                });
+            });
+
+
             function progress(timeleft, timetotal, $element) {  // Create function to start timer
                 var progressBarWidth = timeleft * $element.width() / timetotal;  // 
                 $element.find('div').animate({ width: progressBarWidth }, 500).html(Math.floor(timeleft / 60) + ":" + timeleft % 60);
@@ -36,6 +85,7 @@
 
             <table id="attendance">
                 <tr>
+                    <th style="visibility:hidden">ID</th>
                     <th>Names</th>
                     <th>Dietary Requirements (If any)</th>
                     <th>Are they at your event?</th>
@@ -43,6 +93,9 @@
                 <% for (int i = 0; i < attendList.Count; i++)
                     { %>
                 <tr>
+                    <td style="visibility:hidden">
+                        <%= attendUser[i].id %>
+                    </td>
                     <td>
                         <%= attendUser[i].name %>
                     </td>
@@ -50,7 +103,7 @@
                         <%= diet[i] %>
                     </td>
                     <td>
-                        <asp:CheckBox ID="CheckBox1" runat="server" Text="Present" />
+                        <input type="checkbox" value = "nth"/>
                     </td>
                 </tr>
 
@@ -67,8 +120,12 @@
                     </div>
                 </div>
             </div>
+            <input id="btnSubmit" type="button" value="Get Selected" />
 
-            <a href="/AttendanceSubmitted.aspx" id="btnSubmit" class="btn btn-warning">Submit</a>
+            <%--<a href="/AttendanceSubmitted.aspx" id="btnSubmit" class="btn btn-warning">Submit</a>--%>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <asp:HiddenField ID="HiddenField" runat="server" Value="5" Visible="true" />
+            <asp:HiddenField ID="HiddenField1" runat="server" Value="5" Visible="true" />
         </div>
     </div>
 </asp:Content>

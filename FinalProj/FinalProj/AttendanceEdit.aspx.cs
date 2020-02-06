@@ -68,5 +68,25 @@ namespace FinalProj
                 }
             }
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string hidden = HiddenField.Value;
+            string hidden1 = HiddenField1.Value;
+
+            string[] jsArrayChecked = hidden.Split(",".ToCharArray());
+            string[] jsArrayUnchecked = hidden1.Split(",".ToCharArray());
+
+            foreach (var element in jsArrayChecked)
+            {
+                System.Diagnostics.Debug.WriteLine("This is checked: " + element);
+            }
+
+            foreach (var element in jsArrayUnchecked)
+            {
+                System.Diagnostics.Debug.WriteLine("This is unchecked: " + element);
+            }
+
+        }
     }
 }
