@@ -55,10 +55,6 @@ namespace FinalProj
 			{
 				createEvent.Enabled = false;
 			}
-
-			
-
-
 		}
 		
 		protected void DateClicked(object sender, EventArgs e)
@@ -86,8 +82,6 @@ namespace FinalProj
 				{
 					element.StartTime = element.StartTime + " AM";
 				}
-
-				
 			}
 
 		}

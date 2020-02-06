@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteBootstrap.Master" AutoEventWireup="true" CodeBehind="createEvent.aspx.cs" Inherits="FinalProj.Personal" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+	
 	<style>
 		body {
 			background-image: url('Img/table.jpeg');
@@ -68,7 +69,7 @@
 		}
 	</style>
 	<script>
-		
+
 		function countChars(obj) {
 			var maxLength = 3000;
 			var strLength = obj.value.length;
@@ -93,94 +94,94 @@
 
 
 
-		<asp:Panel ID="PanelError" runat="server" Visible="false" CssClass="stuff alert alert-danger ">
-			<asp:Label ID="errmsgTb" runat="server"></asp:Label>
-		</asp:Panel>
-		<div class="container" id="formContainer">
+	<asp:Panel ID="PanelError" runat="server" Visible="false" CssClass="stuff alert alert-danger ">
+		<asp:Label ID="errmsgTb" runat="server"></asp:Label>
+	</asp:Panel>
+	<div class="container" id="formContainer">
 
-			<div class="card">
-				<div class="card-body">
+		<div class="card">
+			<div class="card-body">
 
-					<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Fill in the Details of the Event*</div>
-					<div class="form-row">
-						<div class="form-group col-md-12">
-							<label for="eventTitle">Title:</label>
-							<asp:TextBox ID="eventTitle" CssClass="form-control" placeholder="Project Free Cycle" runat="server"></asp:TextBox>
-						</div>
-
+				<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Fill in the Details of the Event*<br> <b style="color: red;">Note: Event must be between 7:00AM - 10:00PM and of minimum 1 hour duration </b></div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="eventTitle">Title:</label>
+						<asp:TextBox ID="eventTitle" CssClass="form-control" placeholder="Project Free Cycle" runat="server"></asp:TextBox>
 					</div>
-					<div class="form-group">
-						<label for="eventAddress">Venue:</label>
-						<asp:TextBox ID="eventAddress" CssClass="form-control" placeholder="1234 Main St" runat="server"></asp:TextBox>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="eventDate">Date:</label>
-							<asp:TextBox ID="eventDate" CssClass="form-control" runat="server" type="date" format="DD-MM-YYYY"></asp:TextBox>
-						</div>
-						<div class="form-group col-md-3">
-							<label for="startTime">Start Time: (7:00AM - 10:00PM)</label>
-							<asp:TextBox ID="startTime" CssClass="form-control" runat="server" min="07:00" max="22:00" format="hh:mm" type="time"></asp:TextBox>
-						</div>
-						<div class="form-group col-md-3">
-							<label for="endTime">End Time: (7:00AM - 10:00PM)</label>
-							<asp:TextBox ID="endTime" CssClass="form-control" runat="server" min="07:00" max="22:00" format="hh:mm" type="time"></asp:TextBox>
-						</div>
-					</div>
-					<div class="form-group">
 
-						<label for="maxAttend">Max Number of Attendees:</label>
-						<asp:TextBox ID="maxAttend" CssClass="form-control" runat="server" Rows="5" placeholder="20" type="number"></asp:TextBox>
-					</div>
-					<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Write a summary of your Event*</div>
-					<div class="form-group">
-						<label for="desc">Description:</label>
-
-						<asp:TextBox ID="desc" CssClass="form-control" runat="server" Height="250" TextMode="MultiLine" onkeyup="countChars(this);"></asp:TextBox>
-						<p id="charNum">3000 characters remaining</p>
-						
-					</div>
-					<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Add a Photo</div>
-
-					<div class="input-group" style="margin: 2em auto;">
-
-
-						<div class="custom-file">
-							<asp:FileUpload ID="FileUploadControl" CssClass=" custom-file-input" runat="server" />
-							<asp:Label ID="picChosen" runat="server" Text="Choose File" CssClass="custom-file-label"></asp:Label>
-						</div>
-
-						<script>
-							var input = document.querySelector('.custom-file-input');	// selects element with .custom-file-input class
-							var label = document.querySelector('.custom-file-label'),	// selects element with .custom-file-label class
-								labelVal = "Choose File";								// default value
-
-							input.addEventListener('change', function (e) {				// creates an on change function on the input var
-								var fileName = '';
-								if (this.files["length"] > 0)								// checks if file is selected. eg. {0: File, length: 1} when file is selected, FileList {length: 0} when file isn't selected
-									fileName = this.files[0]["name"];						// selects the object with the key "0" and then selects the object that has the key "name"
-
-								if (fileName !== "")									// if a file was selected, the inner text will be the file's name
-									label.innerText = fileName;
-								else													// if a file wasn't selected, the inner text will be the default value of "Chosen Value"
-									label.innerText = labelVal;
-							});
-						</script>
-
-					</div>
-					<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Include a Short Note</div>
-					<label for="noteText">Note:</label>
-					<asp:TextBox ID="noteText" CssClass="form-control" runat="server"></asp:TextBox>
-					<div class="form-group" style="margin-top: 2em;">
-						<div class="form-check">
-							<asp:CheckBox ID="advCheck" CssClass="form-check-input" runat="server" />
-							<asp:Label AssociatedControlID="advCheck" runat="server">Post this on our Instagram</asp:Label>
-
-						</div>
-					</div>
-					<asp:Button ID="createBtn" runat="server"  CssClass="btn btn-primary" Text="Submit" CausesValidation="false" OnClick="createBtn_Click" />
 				</div>
+				<div class="form-group">
+					<label for="eventAddress">Venue:</label>
+					<asp:TextBox ID="eventAddress" CssClass="form-control" placeholder="1234 Main St" runat="server"></asp:TextBox>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="eventDate">Date:</label>
+						<asp:TextBox ID="eventDate" CssClass="form-control" runat="server" type="date" format="DD-MM-YYYY"></asp:TextBox>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="startTime">Start Time: </label>
+						<asp:TextBox ID="startTime" CssClass="form-control" runat="server" min="07:00" max="22:00" format="hh:mm" type="time"></asp:TextBox>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="endTime">End Time: </label>
+						<asp:TextBox ID="endTime" CssClass="form-control" runat="server" min="07:00" max="22:00" format="hh:mm" type="time"></asp:TextBox>
+					</div>
+				</div>
+				<div class="form-group">
+
+					<label for="maxAttend">Max Number of Attendees:</label>
+					<asp:TextBox ID="maxAttend" CssClass="form-control" runat="server" Rows="5" placeholder="20" type="number"></asp:TextBox>
+				</div>
+				<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Write a summary of your Event*</div>
+				<div class="form-group">
+					<label for="desc">Description:</label>
+
+					<asp:TextBox ID="desc" CssClass="form-control" runat="server" Height="250" TextMode="MultiLine" onkeyup="countChars(this);"></asp:TextBox>
+					<p id="charNum">3000 characters remaining</p>
+
+				</div>
+				<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Add a Photo</div>
+
+				<div class="input-group" style="margin: 2em auto;">
+
+
+					<div class="custom-file">
+						<asp:FileUpload ID="FileUploadControl" CssClass=" custom-file-input" runat="server" />
+						<asp:Label ID="picChosen" runat="server" Text="Choose File" CssClass="custom-file-label"></asp:Label>
+					</div>
+
+					<script>
+						var input = document.querySelector('.custom-file-input');	// selects element with .custom-file-input class
+						var label = document.querySelector('.custom-file-label'),	// selects element with .custom-file-label class
+							labelVal = "Choose File";								// default value
+
+						input.addEventListener('change', function (e) {				// creates an on change function on the input var
+							var fileName = '';
+							if (this.files["length"] > 0)								// checks if file is selected. eg. {0: File, length: 1} when file is selected, FileList {length: 0} when file isn't selected
+								fileName = this.files[0]["name"];						// selects the object with the key "0" and then selects the object that has the key "name"
+
+							if (fileName !== "")									// if a file was selected, the inner text will be the file's name
+								label.innerText = fileName;
+							else													// if a file wasn't selected, the inner text will be the default value of "Chosen Value"
+								label.innerText = labelVal;
+						});
+					</script>
+
+				</div>
+				<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Include a Short Note</div>
+				<label for="noteText">Note:</label>
+				<asp:TextBox ID="noteText" CssClass="form-control" runat="server"></asp:TextBox>
+				<div class="form-group" style="margin-top: 2em;">
+					<div class="form-check">
+						<asp:CheckBox ID="advCheck" CssClass="form-check-input" runat="server" />
+						<asp:Label AssociatedControlID="advCheck" runat="server">Post this on our Instagram</asp:Label>
+
+					</div>
+				</div>
+				<asp:Button ID="createBtn" runat="server" CssClass="btn btn-primary" Text="Submit" CausesValidation="false" OnClick="createBtn_Click" />
 			</div>
 		</div>
+	</div>
 
 </asp:Content>

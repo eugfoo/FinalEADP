@@ -207,7 +207,7 @@
 				<div class="col-sm-12 col-md-12 col-lg-6" id="eventDetails">
 					<p class="h1" id="eventName"><%=eventDetail.Title %></p>
 					<div id="organiserDiv">
-						<img src="Img/organiser.jpeg" style="border-radius: 100%; width: 60px; height: 60px;" /><span style="padding-left: 10px">organised by <a href="#" style="text-decoration: none;"><%=userName %></a></span>
+						<img src="Img/organiser.jpeg" style="border-radius: 100%; width: 60px; height: 60px;" /><span style="padding-left: 10px">organised by <a href="/PPGallery.aspx?userId=<%=eventDetail.User_id%>" style="text-decoration: none;"><%=userName %></a></span>
 
 						<p style="padding-left: 70px;">
 							<i class="fa fa-clock"></i>&nbsp;<span><%= eventDetail.Date%><br />
@@ -311,7 +311,7 @@
 							kovitanwk@gmail.com</span>
 					</div>
 
-					<p style="margin-top: 1em;" id="remainingSpots" class="h5">Remaining Spot(s) Available:<b style="color: #EC5D5D">&nbsp; <%= eventDetail.MaxAttendees - participantList.Count %> spots left</b></p>
+					<p style="margin-top: 1em;" id="remainingSpots" class="h5">Remaining Spot(s) Available:<b style="color: #EC5D5D">&nbsp; <%= eventDetail.MaxAttendees - participantList.Count %></b></p>
 					<div class="row attendeeGroup" style="margin-top: 3em;">
 						<div class="col-sm-12 col-md-12 col-lg-12">
 							<p class="h4" style="color: #EC5D5D;">Attendees (<%=participantList.Count %>)</p>

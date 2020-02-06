@@ -98,8 +98,21 @@ namespace FinalProj
                     startTime.BorderColor = System.Drawing.Color.Red;
                     endTime.BorderColor = System.Drawing.Color.Red;
                 }
-            }
-            if (maxAttend.Text.ToString() == "")
+
+				if ((int.Parse(endTimeNumber) - int.Parse(startTimeNumber)) < 100)
+				{
+					errmsg += "Duration must be 1 hour bare minimum";
+					startTime.BorderColor = System.Drawing.Color.Red;
+					endTime.BorderColor = System.Drawing.Color.Red;
+				}
+			}
+			
+			if (DateTime.Parse(eventDate.Text.ToString() + " " + startTime.Text.ToString()) <= DateTime.Now)
+			{
+				errmsg += "Please ensure that you entered a valid Start Time";
+				startTime.BorderColor = System.Drawing.Color.Red;
+			}
+			if (maxAttend.Text.ToString() == "")
             {
                 errmsg += "Maximum number of attendees cannot be empty! <br>";
                 maxAttend.BorderColor = System.Drawing.Color.Red;

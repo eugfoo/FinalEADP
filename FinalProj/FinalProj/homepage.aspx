@@ -544,21 +544,25 @@
 									{
 										if (element.EventId == attendance.Key)
 										{%><%= attendance.Value %><%}
-																	  }%> Participants Attending <% if (attending.Count == element.MaxAttendees)
-																									 { %> <b style="color: darkred;">(FULL)</b><%}
-																																				   else if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.StartTime.ToString()))
-																																				   {
-																																					   if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.EndTime.ToString()))
-																																					   {%><b style="color: darkred;">(Event Ended)</b><%}
-																																																		  else
-																																																		  { %> <b style="color: darkred;">(Event Ongoing)</b><%}
-																																																																 }%>
+									}%> 
+								Participants Attending 
+								<% if (attending.Count == element.MaxAttendees){ %> 
+									<b style="color: darkred;">(FULL)</b>
+								<%} else if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.StartTime.ToString())){
+									if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.EndTime.ToString()))
+									{%>
+										<b style="color: darkred;">(EVENT ENDED)</b>
+									<%}else{ %>
+										<b style="color: darkred;">(Event Ongoing)</b><%}
+								}else{ %>
+									<b style="color: forestgreen;">(EVENT AVAILABLE TO JOIN)</b>
+								<%} %>
 							</p>
 							<a href="/eventDetails.aspx?eventId=<%=element.EventId %>" class="btn btn-primary">View More &rarr;</a>
 						</div>
 						<div class="card-footer text-muted">
 							Posted by
-							<a href="#"><%= userList[element.EventId] %></a>
+							<a href="/PPGallery.aspx?userId=<%=element.User_id%>"><%= userList[element.EventId] %></a>
 						</div>
 					</div>
 					<% } %>
