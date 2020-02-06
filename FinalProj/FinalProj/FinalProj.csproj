@@ -162,6 +162,7 @@
     <Compile Include="AttendanceSubmitted.aspx.designer.cs">
       <DependentUpon>AttendanceSubmitted.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BLL\Attendance.cs" />
     <Compile Include="BLL\EventStatus.cs" />
     <Compile Include="BLL\Events.cs" />
     <Compile Include="BLL\Feedback.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="BLL\ThreadReply.cs" />
     <Compile Include="BLL\Users.cs" />
     <Compile Include="BLL\Voucher.cs" />
+    <Compile Include="BLL\VoucherRedeemed.cs" />
     <Compile Include="bookmark.aspx.cs">
       <DependentUpon>bookmark.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -177,6 +179,7 @@
     <Compile Include="bookmark.aspx.designer.cs">
       <DependentUpon>bookmark.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\AttendanceDAO.cs" />
     <Compile Include="DAL\eventStatusDAO.cs" />
     <Compile Include="DAL\eventDao.cs" />
     <Compile Include="DAL\FeedbackDAO.cs" />
