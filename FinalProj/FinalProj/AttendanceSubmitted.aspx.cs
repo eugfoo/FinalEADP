@@ -14,6 +14,7 @@ namespace FinalProj
         protected List<Attendance> attendList;
         protected List<Users> attendUser = new List<Users>();
         public List<string> diet = new List<string>();
+        public List<string> attending = new List<string>();
         public int participant = 0;
         public int participantHere = 0;
 
@@ -37,13 +38,23 @@ namespace FinalProj
 
                     int userId = int.Parse(attendList[i].UserId.ToString());
                     attendUser.Add(user.GetUserById(userId)); // Get user's name and diet
-                    if (user.GetUserById(userId).diet == null)
+
+                    if (attendUser[i].diet == "")
                     {
                         diet.Add("Unspecified");
                     }
                     else
                     {
                         diet.Add(user.GetUserById(userId).diet);
+                    }
+
+                    if (attendList[i].Attend == 0)
+                    {
+                        attending.Add("No");
+                    }
+                    else if (attendList[i].Attend == 1)
+                    {
+                        attending.Add("Yes");
                     }
 
                     // Count number of participants here already

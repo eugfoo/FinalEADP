@@ -33,7 +33,7 @@
                             <%= diet[i] %>
                         </td>
                         <td>
-
+                            <%= attending[i] %>
                         </td>
                     </tr>
                     
