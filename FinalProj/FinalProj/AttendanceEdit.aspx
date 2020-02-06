@@ -50,7 +50,7 @@
                         <%= diet[i] %>
                     </td>
                     <td>
-                        <%= attending[i] %>
+                        <asp:CheckBox ID="CheckBox1" runat="server" Text="Present" />
                     </td>
                 </tr>
 
