@@ -8,6 +8,21 @@
     font-weight: bold;
     border-radius: 4px;
     width: 370px;
+    padding: 5px 0 5px 0;
+}
+
+#pointDiv {
+    text-align: center;
+}
+
+h3 {
+    display: inline-block;
+    margin-bottom: 50px;
+}
+
+#numPoints {
+    color: green;
+    font-weight: bold;
 }
 
 #voucherRow {
@@ -28,8 +43,10 @@
 }
 
 #voucherImg {
-    max-height: 300px;
+    max-height: 45%;
     padding: 10px 20px 10px 20px;
+    max-width: 90%;
+    min-width: 200px;
 }
 
 #tdRepeat {
@@ -47,24 +64,26 @@
     font-size: 25px;
 }
 
-#redeemBtn {
+#btnRedeem {
     margin-top: 30px;
     color: #fff;
     background-color: dodgerblue;
-    width: 90px;
+    width: 120px;
     border: none 0px transparent;
     font-size: 20px;
-    font-weight:;
     padding: 4px 8px 4px 8px;
     webkit-border-radius: 2px 2px 2px 2px;
     -moz-border-radius: 2px 2px 2px 2px;
     border-radius: 2px 2px 2px 2px;
 }
 
-#redeemBtn:hover {
-    background-color: lightblue;
-    border: solid 1px #fff;
-}
+    #btnRedeem:hover {
+        background-color: lightblue;
+        border: solid 1px #fff;
+        webkit-border-radius: 2px 2px 2px 2px;
+        -moz-border-radius: 2px 2px 2px 2px;
+        border-radius: 2px 2px 2px 2px;
+    }
 
 #divButton {
     box-shadow: 0px 1px 5px grey;

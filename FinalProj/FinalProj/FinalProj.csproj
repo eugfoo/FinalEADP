@@ -185,6 +185,7 @@
     <Compile Include="DAL\ThreadDAO.cs" />
     <Compile Include="DAL\userDAO.cs" />
     <Compile Include="DAL\voucherDAO.cs" />
+    <Compile Include="DAL\voucherRedeemDAO.cs" />
     <Compile Include="editForumPost.aspx.cs">
       <DependentUpon>editForumPost.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

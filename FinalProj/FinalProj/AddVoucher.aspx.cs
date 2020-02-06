@@ -29,7 +29,7 @@ namespace FinalProj
             int num = -1;
 
             if (voucherName.Text == "")
-            {   
+            {
                 errmsg = errmsg + "Voucher Name cannot be empty! <br>";
                 voucherName.BorderColor = System.Drawing.Color.Red;
             }
@@ -52,33 +52,33 @@ namespace FinalProj
             {
                 errmsg = errmsg + "Select an image for voucher! <br>";
             }
-            
+
 
             if (errmsg != "")
             {
                 errmsgTb.Text = errmsg;
                 PanelError.Visible = true;
             }
-            
+
             else
             {
                 string vcherName = voucherName.Text.ToString();
                 string vcherAmt = voucherAmt.Text.ToString();
                 string file = "";
+                string vcherPoint = (double.Parse(vcherAmt) * 0.5).ToString();
 
                 if (FileUpload1.HasFile)
                 {
                     string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
                     FileUpload1.SaveAs(Server.MapPath("~/Img/" + filename));
                     file = filename;
-                    
-                }
-               
 
-                vcher = new Voucher(vcherName, vcherAmt, file);
+                }
+
+                vcher = new Voucher(1, vcherName, vcherAmt, file, vcherPoint);
                 int result = vcher.AddVoucher();
                 Response.Redirect("VoucherRedemption.aspx");
-            } 
+            }
         }
     }
 }

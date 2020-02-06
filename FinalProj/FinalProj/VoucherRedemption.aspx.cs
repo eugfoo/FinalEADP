@@ -13,6 +13,10 @@ namespace FinalProj
     public partial class VoucherRedemption : System.Web.UI.Page
     {
         protected List<Voucher> vcherList;
+        protected List<Voucher> vchers;
+        public int points = 0;
+        public List<decimal> pointCost = new List<decimal>();
+        protected VoucherRedeemed vouchers;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +26,8 @@ namespace FinalProj
             }
             else
             {
-                if (Request.QueryString["voucherId"] == null) {
+                if (Request.QueryString["voucherId"] == null)
+                {
                     Voucher vcher = new Voucher();
                     vcherList = vcher.GetAllVouchersByName();
                     Users user = (Users)Session["user"];
@@ -52,22 +57,18 @@ namespace FinalProj
                                 int result = voucher.AddVoucher();
 
                                 user.points = user.points - int.Parse(element.VoucherPoints);
-                                user.UpdatePointsByID(user.id, user.points);
                             }
                             else
                             {
                                 Page.ClientScript.RegisterStartupScript(this.GetType(), "myScript", "AlertBad();", true);
                             }
-                            
+
                         }
                     }
 
-                    
+
                 }
             }
-            
-
         }
-
     }
 }
