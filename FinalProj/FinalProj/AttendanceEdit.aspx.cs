@@ -14,6 +14,7 @@ namespace FinalProj
         protected List<Users> attendUser = new List<Users>();
         public List<string> diet = new List<string>();
         public List<string> attending = new List<string>();
+        public List<bool> check = new List<bool>();
         public string title;
         public int participant = 0;
         public int participantHere = 0;
@@ -52,11 +53,11 @@ namespace FinalProj
 
                     if (attendList[i].Attend == 0)
                     {
-                        attending.Add("No");
+                        check.Add(false);
                     }
-                    else if (attendList[i].Attend == 1)
+                    if (attendList[i].Attend == 1)
                     {
-                        attending.Add("Yes");
+                        check.Add(true);
                     }
 
                     // Count number of participants here already
@@ -85,27 +86,30 @@ namespace FinalProj
                 string[] jsArrayChecked = hidden.Split(",".ToCharArray());
                 string[] jsArrayUnchecked = hidden1.Split(",".ToCharArray());
 
-                if (jsArrayChecked.Count() != 0)
+                foreach (var element in jsArrayChecked)
                 {
-                    foreach (var element in jsArrayChecked)
+                    System.Diagnostics.Debug.WriteLine("This is checked: " + element);
+                    if (element != "")
                     {
                         int id = int.Parse(element);
                         attend.UpdateAttendanceById(id, 1);
-                        System.Diagnostics.Debug.WriteLine("This is checked: " + element);
                     }
+
                 }
-                if (jsArrayUnchecked.Count() != 0)
+
+                foreach (var element in jsArrayUnchecked)
                 {
-                    foreach (var element in jsArrayUnchecked)
+                    System.Diagnostics.Debug.WriteLine("This is unchecked: " + element);
+                    if (element != "")
                     {
                         int id = int.Parse(element);
                         attend.UpdateAttendanceById(id, 0);
-                        System.Diagnostics.Debug.WriteLine("This is unchecked: " + element);
                     }
+
                 }
                 Response.Redirect("AttendanceSubmitted.aspx");
             }
-            
+
         }
     }
 }

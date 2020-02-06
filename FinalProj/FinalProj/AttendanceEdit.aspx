@@ -100,7 +100,7 @@
                         <%= diet[i] %>
                     </td>
                     <td>
-                        <input type="checkbox" value="nth" />
+                        <asp:CheckBox ID="CheckBox1" runat="server"/>
                     </td>
                 </tr>
 
