@@ -23,15 +23,23 @@ namespace FinalProj
             {
                 Users checkEmail = new Users();
 
-                if (checkEmail.GetUserByEmail(tbEmail.Text) == null)
-                { // If there isn't a matching email...
-                    if (tbPass.Text == tbCfmPass.Text) // If the passwords match...
+                if (checkEmail.GetUserByEmail(tbEmail.Text) == null) // If the email is unused...
+                { 
+                    if (tbPass.Text == tbCfmPass.Text)               // If the passwords match...
                     {
-                        string passHash = ComputeSha256Hash(tbPass.Text);
-                        DateTime now = DateTime.Now;
-                        Users user = new Users(tbEmail.Text, tbName.Text, cbIsOrg.Checked.ToString(), passHash, now);
-                        user.AddUser();
-                        Response.Redirect("LogIn.aspx");
+                        if (tbPass.Text.Length > 8)                 // If the password is longer than the amount of seconds I wish to live...
+                        {
+                            string passHash = ComputeSha256Hash(tbPass.Text);
+                            DateTime now = DateTime.Now;
+                            Users user = new Users(tbEmail.Text, tbName.Text, cbIsOrg.Checked.ToString(), passHash, now);
+                            user.AddUser();
+                            Response.Redirect("LogIn.aspx");
+                        }
+                        else
+                        {
+                            lblError.Text = "Password should be longer than 12 characters.";
+                            lblError.Visible = true;
+                        }
                     }
                     else
                     {
