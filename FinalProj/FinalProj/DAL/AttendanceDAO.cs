@@ -46,6 +46,41 @@ namespace FinalProj.DAL
             return attendanceList;
         }
 
+        public List<Attendance> SelectAllByEventId(int id)
+        {
+            //Step 1 -  Define a connection to the database
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter to retrieve data from db table
+            string sqlStmt = "Select * from Attendance Order By Attend DESC where Event_Id = " + id;
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet to List
+            List<Attendance> attendanceListofEvent = new List<Attendance>();
+            List<Attendance> tempList = new List<Attendance>();
+
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                string userId = row["Users_Id"].ToString();
+                string eventId = row["Event_Id"].ToString();
+                int attend = int.Parse(row["Attend"].ToString());
+                int feedback = int.Parse(row["Feedback"].ToString());
+                Attendance obj = new Attendance(userId, eventId, attend, feedback);
+                attendanceListofEvent.Add(obj);
+            };
+
+            return attendanceListofEvent;
+        }
+
         public int Insert(Attendance attend)
         {
             // Execute NonQuery return an integer value

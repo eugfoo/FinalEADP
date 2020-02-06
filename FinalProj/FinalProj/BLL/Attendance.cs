@@ -46,5 +46,11 @@ namespace FinalProj.BLL
             AttendanceDAO attendance = new AttendanceDAO();
             return attendance.UpdateAttendance(id, attend);
         }
+
+        public List<Attendance> GetAttendanceEvent(int id)
+        {
+            AttendanceDAO voucher = new AttendanceDAO();
+            return voucher.SelectAllByEventId(id);
+        }
     }
 }
