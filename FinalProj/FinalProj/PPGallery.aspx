@@ -106,7 +106,7 @@
     <%  } %>
 
     <div class="modal fade" id="uploadPicture" tabindex="-1" role="dialog" aria-labelledby="uploadPictureLabel" aria-hidden="true">
-        <div class="modal-dialog modal-img" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-img" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="uploadPictureLabel">Upload a picture</h5>

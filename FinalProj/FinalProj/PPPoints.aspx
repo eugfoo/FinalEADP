@@ -21,6 +21,9 @@
                     <asp:LinkButton href="/VoucherRedemption.aspx" CssClass="btn btn-success" ID="lbRedeem" runat="server">Redeem <i class="fas fa-arrow-right"></i></asp:LinkButton>
                 </div>
             </div>
+            <% if (vRedList.Count > 0)
+                {
+                    %>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -29,7 +32,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (int i = 0; i < vRedList.Count; i++) {
+                    <% for (int i = 0; i < vRedList.Count; i++)
+                                          {
                             %>
                     <tr>
                         <th scope="row"><%=vRedList[i].VoucherName%></th>
@@ -38,6 +42,15 @@
                     <%} %>
                 </tbody>
             </table>
+            <% }
+            else
+            { %>
+            <div style="font-size:16px;" class="m-3 font-italic text-muted text-center row">
+                <div class="col-12">
+                    No vouchers have been redeemed.
+                </div>
+            </div>
+            <%} %>
         </div>
     </div>
 </asp:Content>
