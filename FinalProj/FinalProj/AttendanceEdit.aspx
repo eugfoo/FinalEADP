@@ -13,47 +13,44 @@
             var userIdUncheck = [];
             var str;
 
-            $(function () {
-                $('#btnSubmit').click(function () {
-                    userIdChecked = [];
 
-                    $('#attendance input[type=checkbox]:checked').each(function () {
-                        var row = $(this).closest("tr")[0];
-                        str = row.cells[0].innerHTML;
-                        str = str.replace(/\s+/g, '');
-                        userIdChecked.push(str);
-                    });
+            function onClick() {
+                userIdChecked = [];
 
-                    userIdChecked = JSON.parse("[" + userIdChecked + "]")
-
-                    document.getElementById('<%= HiddenField.ClientID%>').value = userIdChecked.join(',');
-
-                    alert(userIdChecked);
-
-                    return false;
+                $('#attendance input[type=checkbox]:checked').each(function () {
+                    var row = $(this).closest("tr")[0];
+                    str = row.cells[0].innerHTML;
+                    str = str.replace(/\s+/g, '');
+                    userIdChecked.push(str);
                 });
-            });
 
-            $(function () {
-                $('#btnSubmit').click(function () {
-                    userIdUncheck = [];
+                userIdChecked = JSON.parse("[" + userIdChecked + "]")
 
-                    $('#attendance input[type=checkbox]:not(:checked)').each(function () {
-                        var row = $(this).closest("tr")[0];
-                        str = row.cells[0].innerHTML;
-                        str = str.replace(/\s+/g, '');
-                        userIdUncheck.push(str);
-                    });
+                document.getElementById('<%= HiddenField.ClientID%>').value = userIdChecked.join(',');
 
-                    userIdUncheck = JSON.parse("[" + userIdUncheck + "]")
+                //alert(userIdChecked);
 
-                    document.getElementById('<%= HiddenField1.ClientID%>').value = userIdUncheck.join(',');
+                return false;
+            };
 
-                    alert(userIdUncheck);
+            function onClick1() {
+                userIdUncheck = [];
 
-                    return false;
+                $('#attendance input[type=checkbox]:not(:checked)').each(function () {
+                    var row = $(this).closest("tr")[0];
+                    str = row.cells[0].innerHTML;
+                    str = str.replace(/\s+/g, '');
+                    userIdUncheck.push(str);
                 });
-            });
+
+                userIdUncheck = JSON.parse("[" + userIdUncheck + "]")
+
+                document.getElementById('<%= HiddenField1.ClientID%>').value = userIdUncheck.join(',');
+
+                //alert(userIdUncheck);
+
+                return false;
+            };
 
 
             function progress(timeleft, timetotal, $element) {  // Create function to start timer
@@ -85,7 +82,7 @@
 
             <table id="attendance">
                 <tr>
-                    <th style="visibility:hidden">ID</th>
+                    <th style="visibility: hidden">ID</th>
                     <th>Names</th>
                     <th>Dietary Requirements (If any)</th>
                     <th>Are they at your event?</th>
@@ -93,7 +90,7 @@
                 <% for (int i = 0; i < attendList.Count; i++)
                     { %>
                 <tr>
-                    <td style="visibility:hidden">
+                    <td style="visibility: hidden">
                         <%= attendUser[i].id %>
                     </td>
                     <td>
@@ -103,7 +100,7 @@
                         <%= diet[i] %>
                     </td>
                     <td>
-                        <input type="checkbox" value = "nth"/>
+                        <input type="checkbox" value="nth" />
                     </td>
                 </tr>
 
@@ -120,10 +117,9 @@
                     </div>
                 </div>
             </div>
-            <input id="btnSubmit" type="button" value="Get Selected" />
 
-            <%--<a href="/AttendanceSubmitted.aspx" id="btnSubmit" class="btn btn-warning">Submit</a>--%>
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <asp:Button ID="Button1" UseSubmitBehavior="true" OnClientClick="onClick();onClick1();" runat="server" OnClick="Button1_Click" Text="Submit" />
+
             <asp:HiddenField ID="HiddenField" runat="server" Value="5" Visible="true" />
             <asp:HiddenField ID="HiddenField1" runat="server" Value="5" Visible="true" />
         </div>

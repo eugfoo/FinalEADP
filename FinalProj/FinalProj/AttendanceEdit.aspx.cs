@@ -20,7 +20,7 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+
             if (Session["user"] == null || Session["eventTitle"] == null)
             {
                 Response.Redirect("homepage.aspx");
@@ -87,6 +87,7 @@ namespace FinalProj
                 System.Diagnostics.Debug.WriteLine("This is unchecked: " + element);
             }
 
+            Response.Redirect("AttendanceSubmitted.aspx");
         }
     }
 }
