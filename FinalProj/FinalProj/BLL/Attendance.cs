@@ -11,6 +11,7 @@ namespace FinalProj.BLL
         // Define class properties
         public string UserId { get; set; }
         public string EventId { get; set; }
+        public string UserName { get; set; }
         public int Attend { get; set; }
         public int Feedback { get; set; }
 
@@ -20,10 +21,11 @@ namespace FinalProj.BLL
         }
 
         // Define a constructor to initialize all properties
-        public Attendance(string userId, string eventId, int attend, int feedback)
+        public Attendance(string userId, string eventId, string userName, int attend, int feedback)
         {
             UserId = userId;
             EventId = eventId;
+            UserName = userName;
             Attend = attend;
             Feedback = feedback;
         }

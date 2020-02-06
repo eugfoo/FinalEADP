@@ -37,9 +37,10 @@ namespace FinalProj.DAL
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                 string userId = row["Users_Id"].ToString();
                 string eventId = row["Event_Id"].ToString();
+                string userName = row["User_Name"].ToString();
                 int attend = int.Parse(row["Attend"].ToString());
                 int feedback = int.Parse(row["Feedback"].ToString());
-                Attendance obj = new Attendance(userId, eventId, attend, feedback);
+                Attendance obj = new Attendance(userId, eventId, userName, attend, feedback);
                 attendanceList.Add(obj);
             };
 
@@ -53,7 +54,7 @@ namespace FinalProj.DAL
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter to retrieve data from db table
-            string sqlStmt = "Select * from Attendance WHERE Event_Id = '" + id.ToString() + "' ORDER BY Attend DESC";
+            string sqlStmt = "Select * from Attendance WHERE Event_Id = '" + id.ToString() + "' ORDER BY User_Name ASC";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
 
             //Step 3 -  Create a DataSet to store the data to be retrieved
@@ -72,9 +73,10 @@ namespace FinalProj.DAL
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                 string userId = row["Users_Id"].ToString();
                 string eventId = row["Event_Id"].ToString();
+                string userName = row["User_Name"].ToString();
                 int attend = int.Parse(row["Attend"].ToString());
                 int feedback = int.Parse(row["Feedback"].ToString());
-                Attendance obj = new Attendance(userId, eventId, attend, feedback);
+                Attendance obj = new Attendance(userId, eventId, userName, attend, feedback);
                 attendanceListofEvent.Add(obj);
             };
 

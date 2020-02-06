@@ -95,10 +95,6 @@ namespace FinalProj
 			imgDP.ImageUrl = profilePic.DPimage;
 			imgDPOrg.ImageUrl = profilePic.DPimage;
 
-
-
-
-
 		}
 
 		protected void joinEvent_Click(object sender, EventArgs e)
@@ -107,8 +103,9 @@ namespace FinalProj
 			{
 				Users user = (Users)Session["user"];
 				userId = user.id;
+                string userName = user.name;
 				Events parti = new Events();
-				var result = parti.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]));
+				var result = parti.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]), userName);
 				if (result == 1)
 				{
 					Session["SessionSSM"] = "You have successfully joined the event!";

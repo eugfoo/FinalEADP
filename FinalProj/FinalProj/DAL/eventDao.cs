@@ -204,7 +204,7 @@ namespace FinalProj.DAL
 			return pList;
 		}
 
-		public int InsertParticipant(int userId, int eventId)
+		public int InsertParticipant(int userId, int eventId, string userName)
 		{
 			// Execute NonQuery return an integer value
 			int result = 0;
@@ -217,16 +217,17 @@ namespace FinalProj.DAL
 
 			// Step 2 - Instantiate SqlCommand instance to add record 
 			//          with INSERT statement
-			string sqlStmt = "INSERT INTO Attendance(Users_Id, Event_Id) " +
-				"VALUES (@userId, @eventId)";
+			string sqlStmt = "INSERT INTO Attendance(Users_Id, Event_Id, User_Name) " +
+				"VALUES (@userId, @eventId, @userName)";
 			sqlCmd = new SqlCommand(sqlStmt, myConn);
 
 			// Step 3 : Add each parameterised variable with value
 			sqlCmd.Parameters.AddWithValue("@userId", userId);
 			sqlCmd.Parameters.AddWithValue("@eventId", eventId);
+            sqlCmd.Parameters.AddWithValue("@userName", userName);
 
-			// Step 4 Open connection the execute NonQuery of sql command   
-			myConn.Open();
+            // Step 4 Open connection the execute NonQuery of sql command   
+            myConn.Open();
 			result = sqlCmd.ExecuteNonQuery();
 
 			// Step 5 :Close connection

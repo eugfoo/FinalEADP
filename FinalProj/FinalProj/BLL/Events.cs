@@ -77,10 +77,10 @@ namespace FinalProj.BLL
 			return ev.SelectAllParticipants(eventId);
 		}
 
-		public int AddParticipant(int userId, int eventId)
+		public int AddParticipant(int userId, int eventId, string userName)
 		{
 			eventDao dao = new eventDao();
-			int result = dao.InsertParticipant(userId, eventId);
+			int result = dao.InsertParticipant(userId, eventId, userName);
 			return result;
 		}
 

@@ -21,53 +21,61 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Attendance attend = new Attendance();
-            Users user = new Users();
-            title = Session["eventTitle"].ToString();
-
-
-            if (Session["user"] == null)
+            if (Session["eventTitle"] == null)
             {
                 Response.Redirect("homepage.aspx");
             }
             else
             {
-                int id = int.Parse(Session["eventId"].ToString());
-                attendList = attend.GetAttendanceEvent(id);
-                for (int i = 0; i < attendList.Count; i++)
+                Attendance attend = new Attendance();
+                Users user = new Users();
+                title = Session["eventTitle"].ToString();
+
+
+                if (Session["user"] == null)
                 {
-                    // Total number of participants
-                    participant += 1;
-
-                    int userId = int.Parse(attendList[i].UserId.ToString());
-                    attendUser.Add(user.GetUserById(userId)); // Get user's name and diet
-
-                    if (attendUser[i].diet == "")
+                    Response.Redirect("homepage.aspx");
+                }
+                else
+                {
+                    int id = int.Parse(Session["eventId"].ToString());
+                    attendList = attend.GetAttendanceEvent(id);
+                    for (int i = 0; i < attendList.Count; i++)
                     {
-                        diet.Add("Unspecified");
-                    }
-                    else
-                    {
-                        diet.Add(user.GetUserById(userId).diet);
-                    }
+                        // Total number of participants
+                        participant += 1;
 
-                    if (attendList[i].Attend == 0)
-                    {
-                        attending.Add("No");
-                    }
-                    else if (attendList[i].Attend == 1)
-                    {
-                        attending.Add("Yes");
-                    }
+                        int userId = int.Parse(attendList[i].UserId.ToString());
+                        attendUser.Add(user.GetUserById(userId)); // Get user's name and diet
 
-                    // Count number of participants here already
-                    if (int.Parse(attendList[i].Attend.ToString()) == 1)
-                    {
-                        participantHere += 1;
-                    }
+                        if (attendUser[i].diet == "")
+                        {
+                            diet.Add("Unspecified");
+                        }
+                        else
+                        {
+                            diet.Add(user.GetUserById(userId).diet);
+                        }
 
+                        if (attendList[i].Attend == 0)
+                        {
+                            attending.Add("No");
+                        }
+                        if (attendList[i].Attend == 1)
+                        {
+                            attending.Add("Yes");
+                        }
+
+                        // Count number of participants here already
+                        if (int.Parse(attendList[i].Attend.ToString()) == 1)
+                        {
+                            participantHere += 1;
+                        }
+
+                    }
                 }
             }
+
         }
     }
 }

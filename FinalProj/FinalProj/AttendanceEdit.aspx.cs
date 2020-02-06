@@ -71,23 +71,41 @@ namespace FinalProj
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            Attendance attend = new Attendance();
+
             string hidden = HiddenField.Value;
             string hidden1 = HiddenField1.Value;
 
-            string[] jsArrayChecked = hidden.Split(",".ToCharArray());
-            string[] jsArrayUnchecked = hidden1.Split(",".ToCharArray());
-
-            foreach (var element in jsArrayChecked)
+            if (hidden == "" && hidden1 == "")
             {
-                System.Diagnostics.Debug.WriteLine("This is checked: " + element);
+                Response.Redirect("AttendanceSubmitted.aspx");
             }
-
-            foreach (var element in jsArrayUnchecked)
+            else
             {
-                System.Diagnostics.Debug.WriteLine("This is unchecked: " + element);
-            }
+                string[] jsArrayChecked = hidden.Split(",".ToCharArray());
+                string[] jsArrayUnchecked = hidden1.Split(",".ToCharArray());
 
-            Response.Redirect("AttendanceSubmitted.aspx");
+                if (jsArrayChecked.Count() != 0)
+                {
+                    foreach (var element in jsArrayChecked)
+                    {
+                        int id = int.Parse(element);
+                        attend.UpdateAttendanceById(id, 1);
+                        System.Diagnostics.Debug.WriteLine("This is checked: " + element);
+                    }
+                }
+                if (jsArrayUnchecked.Count() != 0)
+                {
+                    foreach (var element in jsArrayUnchecked)
+                    {
+                        int id = int.Parse(element);
+                        attend.UpdateAttendanceById(id, 0);
+                        System.Diagnostics.Debug.WriteLine("This is unchecked: " + element);
+                    }
+                }
+                Response.Redirect("AttendanceSubmitted.aspx");
+            }
+            
         }
     }
 }
