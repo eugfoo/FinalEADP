@@ -13,7 +13,7 @@
         </div>
         <br>
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row ">
-            <div style="width: 100%; border-bottom: 1px solid lightgray;" class="row mx-0 pb-2">
+            <div style="font-size: 20px; width: 100%; border-bottom: 1px solid lightgray;" class="row mx-0 pb-2">
                 Redeemed Vouchers 
             </div>
             <table class="table table-striped table-hover">
@@ -24,22 +24,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <% for (int i = 0; i < vRedList.Count; i++) {
+                            %>
                     <tr>
-                        <th scope="row">Food Panda S$17 Coupon</th>
-                        <td>6</td>
+                        <th scope="row"><%=vRedList[i].VoucherName%></th>
+                        <td><%=vRedList[i].VoucherAmount %></td>
                     </tr>
-                    <tr>
-                        <th scope="row">Best Buys S$10 Coupon</th>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Grav S$6 Coupon</th>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Food S$1 Coupon</th>
-                        <td>1</td>
-                    </tr>
+                    <%} %>
                 </tbody>
             </table>
         </div>

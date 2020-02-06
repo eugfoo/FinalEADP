@@ -34,6 +34,12 @@ namespace FinalProj.BLL
             return voucher.SelectAllByName();
         }
 
+        public List<VoucherRedeemed> GetAllByUserId(string userId)
+        {
+            voucherRedeemDAO voucher = new voucherRedeemDAO();
+            return voucher.SelectAllByUserId(userId);
+        }
+
         public int AddVoucher()
         {
             voucherRedeemDAO dao = new voucherRedeemDAO();
