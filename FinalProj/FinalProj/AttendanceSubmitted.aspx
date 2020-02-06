@@ -4,7 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="height:86vh">    
-    <form id="form1" runat="server">
         <div>
             <div><h2 id="title">Project Clean The Beach Attendance</h2></div>
             <table id="timer">
@@ -24,37 +23,35 @@
                     <th>Dietary Requirements (If any)</th>
                     <th>Are they at your event?</th>
                 </tr>
-                <tr>
-                    <td>Kovi Tan</td>
-                    <td>Halal</td>
-                    <td>
-                        No
-                    </td>
-                </tr>
-                <tr>
-                    <td>Eugene Lee</td>
-                    <td>Nil</td>
-                    <td>
-                        Yes
-                    </td>
-                </tr>
+                <% for (int i = 0; i < attendList.Count; i++)
+                   { %> 
+                    <tr>
+                        <td>
+                            <%= attendUser[i].name %>
+                        </td>
+                        <td>
+                            <%= diet[i] %>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    
+                <% } %>
             </table>
 
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <p id="totalPart">Total Participants: </p>
-                        <p id="totalPartNum">2</p>
+                        <p id="totalPartNum"><%= participant %></p>
                         <p id="currentPart">Current Participants: </p>
-                        <p id="currentPartNum">1</p>
+                        <p id="currentPartNum"><%= participantHere %></p>
                     </div>
                 </div>
             </div>
 
             <a href="/AttendanceEdit.aspx" id="btnEdit" class="btn btn-danger">Edit</a>
         </div>
-
-    </form>
-
     </div>
 </asp:Content>

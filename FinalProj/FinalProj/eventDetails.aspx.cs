@@ -187,5 +187,11 @@ namespace FinalProj
 				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
 			}
 		}
-	}
+
+        protected void attendance_Click(object sender, EventArgs e)
+        {
+            Session["eventId"] = int.Parse(Request.QueryString["eventId"]);
+            Response.Redirect("/AttendanceSubmitted.aspx");
+        }
+    }
 }

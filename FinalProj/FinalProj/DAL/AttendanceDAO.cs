@@ -53,7 +53,7 @@ namespace FinalProj.DAL
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter to retrieve data from db table
-            string sqlStmt = "Select * from Attendance Order By Attend DESC where Event_Id = " + id;
+            string sqlStmt = "Select * from Attendance WHERE Event_Id = '" + id.ToString() + "' ORDER BY Attend DESC";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
 
             //Step 3 -  Create a DataSet to store the data to be retrieved

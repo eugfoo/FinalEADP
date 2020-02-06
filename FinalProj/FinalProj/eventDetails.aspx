@@ -277,7 +277,7 @@
 							<asp:Button ID="editEvent" CssClass="btn btn-warning" runat="server" Text="EDIT" />
 
 							<asp:Button ID="deleteEvent" CssClass="btn btn-danger" runat="server" Text="DELETE" OnClick="deleteEvent_Click" />
-							<asp:Button ID="attendance" class="btn btn-primary" runat="server" Text="ATTENDANCE" />
+							<asp:Button ID="attendance" class="btn btn-primary" runat="server" Text="ATTENDANCE" OnClick="attendance_Click" />
 
 							<asp:Button ID="discussion2" class="btn btn-primary" runat="server" Text="DISCUSSION" />
 						</span>
