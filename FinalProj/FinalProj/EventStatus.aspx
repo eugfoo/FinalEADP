@@ -25,6 +25,7 @@
                 }
             }
         }
+
         function sortTable() {
             var table, rows, switching, i, x, y, shouldSwitch;
             table = document.getElementById("myTable");
@@ -99,17 +100,17 @@
 
         <div style="overflow-x: auto;">
             <h1 id="msg">No available events, join or create one!</h1>
-            <% foreach (var element in evStList)
-                    { %>
+            
             <table class="center" id="myTable">
-                
+                <% foreach (var element in evStList)
+                    { %>
                 <tr id="rowRepeat">
                     <td>
                         <img id="eventdp" src="/Img/<%= element.Pic %>" />
                     </td>
                     <td id="tableTD">
-                        <h3 class="title"><%= element.Title %><br />
-                        </h3>
+                        <h3 class="title"><%= element.Title %></h3>
+                        <br />
                         <div id="containerItems">
 
                             <table id="innerTable">
@@ -144,9 +145,9 @@
                         </div>
                     </td>
                 </tr>
-                
+                <% } %>
             </table>
-            <% } %>
+            
         </div>
     </div>
     <script>
