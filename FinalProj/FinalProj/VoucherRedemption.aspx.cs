@@ -26,15 +26,6 @@ namespace FinalProj
             }
             else
             {
-                if (Request.QueryString["voucherId"] == null)
-                {
-                    Voucher vcher = new Voucher();
-                    vcherList = vcher.GetAllVouchersByName();
-                    Users user = (Users)Session["user"];
-                    points = user.points;
-                }
-                else
-                {
                     Users user = (Users)Session["user"];
                     points = user.points;
                     Voucher vcher = new Voucher();
@@ -48,6 +39,7 @@ namespace FinalProj
                         {
                             if (points >= int.Parse(element.VoucherPoints))
                             {
+                                panelError.Visible = false;
                                 voucher.VoucherAmount = element.VoucherAmount;
                                 voucher.VoucherName = element.VoucherName;
                                 voucher.VoucherPic = element.VoucherPic;
@@ -57,17 +49,22 @@ namespace FinalProj
                                 int result = voucher.AddVoucher();
 
                                 user.points = user.points - int.Parse(element.VoucherPoints);
+                                user.UpdatePointsByID(user.id, user.points);
+
+                                panelSuccess.Visible = true;
+
                             }
                             else
                             {
-                                Page.ClientScript.RegisterStartupScript(this.GetType(), "myScript", "AlertBad();", true);
+                                panelSuccess.Visible = false;
+                                panelError.Visible = true;
                             }
 
                         }
                     }
 
 
-                }
+                
             }
         }
     }

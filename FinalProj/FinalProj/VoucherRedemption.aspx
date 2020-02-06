@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteBootstrap.Master" AutoEventWireup="true" CodeBehind="VoucherRedemption.aspx.cs" Inherits="FinalProj.VoucherRedemption" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="Voucher.css" />
 
@@ -9,16 +10,6 @@
                 var clean_uri = uri.substring(0, uri.indexOf("?"));
                 window.history.replaceState({}, document.title, clean_uri);
             }
-            
-        }
-
-        function AlertBad() {
-            document.getElementById("redirected").innerText = "Too little points!";
-            document.getElementById("redirect").style.visibility = "visible";
-        }
-
-        function AlertOkay() {
-            document.getElementById("redirect").style.visibility = "visible";
         }
     </script>
 
@@ -30,19 +21,21 @@
             <h3>Your points: </h3>
             <h3 id="numPoints"><%=points %></h3>
         </div>
+        <asp:Panel ID="panelSuccess" Visible="false" runat="server" CssClass="alert alert-dismissable alert-success">
+            <asp:Label ID="lb_success" runat="server">Redeemed Voucher Successfully!</asp:Label>
+        </asp:Panel>
 
-        <div id="redirect" style="visibility:hidden;">
-            <h1 id="redirected">Successfully redeemed your voucher!</h1>
-            <button id="btnOk" onclick="btnClick(), window.location.reload()">Okay</button>
-        </div>
+        <asp:Panel ID="panelError" Visible="false" runat="server" CssClass="alert alert-dismissable alert-danger">
+            <asp:Label ID="lb_error" runat="server">You have too little points..</asp:Label>
+        </asp:Panel>
 
         <%foreach (var element in vcherList)
-                { %>
+            { %>
         <table id="voucherTable">
-            
+
             <tr id="voucherRow">
                 <td>
-                    <img id="voucherImg" src="/Img/<%=element.VoucherPic %>"/>
+                    <img id="voucherImg" src="/Img/<%=element.VoucherPic %>" />
                 </td>
                 <td id="tdRepeat">
                     <p id="voucherName"><%=element.VoucherName %></p>

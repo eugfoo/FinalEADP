@@ -15,9 +15,21 @@
     text-align: center;
 }
 
+#ContentPlaceHolder1_panelError {
+    text-align: center;
+}
+
+#ContentPlaceHolder1_panelSuccess {
+    text-align: center;
+}
+
+#btnOk {
+
+}
+
 h3 {
     display: inline-block;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
 }
 
 #numPoints {
@@ -77,13 +89,13 @@ h3 {
     border-radius: 2px 2px 2px 2px;
 }
 
-    #btnRedeem:hover {
-        background-color: lightblue;
-        border: solid 1px #fff;
-        webkit-border-radius: 2px 2px 2px 2px;
-        -moz-border-radius: 2px 2px 2px 2px;
-        border-radius: 2px 2px 2px 2px;
-    }
+#btnRedeem:hover {
+    background-color: lightblue;
+    border: solid 1px #fff;
+    webkit-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+}
 
 #divButton {
     box-shadow: 0px 1px 5px grey;
