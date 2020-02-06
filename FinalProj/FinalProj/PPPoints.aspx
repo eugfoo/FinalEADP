@@ -8,13 +8,18 @@
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row text-center">
             <p class="" style="width: 100%; font-size: 20px; margin-bottom: 0px">
                 Points:
-                    <asp:Label ID="lblPoints" ForeColor="DarkCyan" runat="server"></asp:Label>P
+                    <asp:Label ID="lblPoints" ForeColor="DarkCyan" runat="server"></asp:Label>
             </p>
         </div>
         <br>
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row ">
-            <div style="font-size: 20px; width: 100%; border-bottom: 1px solid lightgray;" class="row mx-0 pb-2">
-                Redeemed Vouchers 
+            <div style=" width: 100%; border-bottom: 1px solid lightgray;" class="row mx-0 pb-2">
+                <div style="font-size: 20px;" class="col-md-4 col-sm-7">
+                    Redeemed Vouchers 
+                </div>
+                <div class="text-right col-md-8 col-sm-5">
+                    <asp:LinkButton href="/VoucherRedemption.aspx" CssClass="btn btn-success" ID="lbRedeem" runat="server">Redeem <i class="fas fa-arrow-right"></i></asp:LinkButton>
+                </div>
             </div>
             <table class="table table-striped table-hover">
                 <thead>

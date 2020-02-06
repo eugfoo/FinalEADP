@@ -63,7 +63,7 @@
                         <asp:RequiredFieldValidator CssClass="vError" ID="RequiredFieldValidator3" runat="server" ControlToValidate="tbCfmPass" EnableClientScript="False" ErrorMessage="*"></asp:RequiredFieldValidator>
                         <asp:TextBox type="password" CssClass="form-control" ID="tbCfmPass" runat="server" CausesValidation="True"></asp:TextBox>
                     </div>
-                    <div class="form-group auto-style1" style="left: 0px; top: 0px;">
+                    <div class="form-group auto-style1" style="display:none; left: 0px; top: 0px;">
                         <asp:CheckBox CssClass="form-check-input" ID="cbIsOrg" runat="server" SkinID="gridCheck" />
                         <label class="form-check-label" for="gridCheck">
                             Organization

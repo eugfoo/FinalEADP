@@ -184,6 +184,7 @@
                             </div>
                         </div>
                         <% Users user = (Users)Session["user"];
+                            Users userF = new Users(); 
                             if (viewingUserId != null)
                             { %>
                         <ul class="list-group text-center" style="border-bottom: 1px solid rgba(0,0,0,.125); display: flex; flex-direction: row;">
@@ -191,7 +192,7 @@
                                 href="/EventStatus.aspx">Events</a></li>
                             <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"
                                 href="/PPGallery.aspx?userId=<%=viewingUserId.ToString()%>">Gallery</a></li>
-                            <% if (user != null && user.GetUserById(Convert.ToInt32(viewingUserId)).rating != 0)
+                            <% if (userF.GetUserById(Convert.ToInt32(viewingUserId)).rating != 0)
                                 {
                                     %>
                             <li class="pplinks list-inline-item mx-0 col-3 border-right"><a class="pphyperlinks text-dark"

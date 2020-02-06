@@ -127,6 +127,7 @@ namespace FinalProj
                 imgDP.ImageUrl = user.DPimage;
                 imgBP.ImageUrl = user.BPimage;
                 if (user.desc != "") { lblDesc.Text = user.desc; } else { lblDesc.Text = "This user has not added any description."; lblDesc.CssClass += "text-muted font-italic"; }
+                user.UpdateRatingByID(user.id);
                 rating = user.rating;
             }
         }
