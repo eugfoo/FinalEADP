@@ -13,6 +13,32 @@
             var userIdUncheck = [];
             var str;
 
+            function myFunction() {
+                // Declare variables
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("attendance");
+                tr = table.getElementsByTagName("tr");
+
+                // Loop through all table rows, and hide those who don't match the search query
+                for (i = 1; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+            function checkChkBox(checkI) {
+                console.log("Checkbox is checked!");
+                document.getElementById("ContentPlaceHolder1_CheckBox1").checked = checkI;
+            };
 
             function onClick() {
                 userIdChecked = [];
@@ -80,6 +106,8 @@
                 <div class="bar"></div>
             </div>
 
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for participant" />
+
             <table id="attendance">
                 <tr>
                     <th style="visibility: hidden">ID</th>
@@ -89,7 +117,7 @@
                 </tr>
                 <% for (int i = 0; i < attendList.Count; i++)
                     { %>
-                <tr>
+                <tr id="trRepeat">
                     <td style="visibility: hidden">
                         <%= attendUser[i].id %>
                     </td>
@@ -100,7 +128,11 @@
                         <%= diet[i] %>
                     </td>
                     <td>
-                        <asp:CheckBox ID="CheckBox1" runat="server"/>
+                        <script type="text/javascript">
+                            checkChkBox(<%= check[i].ToString().ToLower() %>);
+                        </script>
+                        <asp:CheckBox ID="CheckBox1" runat="server" />
+                        <%= attending[i] %>
                     </td>
                 </tr>
 

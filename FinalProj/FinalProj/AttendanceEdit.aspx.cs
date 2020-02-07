@@ -14,7 +14,7 @@ namespace FinalProj
         protected List<Users> attendUser = new List<Users>();
         public List<string> diet = new List<string>();
         public List<string> attending = new List<string>();
-        public List<bool> check = new List<bool>();
+        public List<string> check = new List<string>();
         public string title;
         public int participant = 0;
         public int participantHere = 0;
@@ -51,20 +51,29 @@ namespace FinalProj
                         diet.Add(user.GetUserById(userId).diet);
                     }
 
-                    if (attendList[i].Attend == 0)
-                    {
-                        check.Add(false);
-                    }
                     if (attendList[i].Attend == 1)
                     {
-                        check.Add(true);
-                    }
+                        //System.Diagnostics.Debug.WriteLine("This is check true");
+                        check.Add("true");
+                        attending.Add("Previous: Yes");
 
-                    // Count number of participants here already
-                    if (int.Parse(attendList[i].Attend.ToString()) == 1)
-                    {
+                        // Count number of participants here already
                         participantHere += 1;
                     }
+
+                    if (attendList[i].Attend == 0)
+                    {
+                        //System.Diagnostics.Debug.WriteLine("This is check false");
+                        check.Add("false");
+                        attending.Add("Previous: No");
+                    }
+
+                    foreach (var element1 in check)
+                    {
+                        System.Diagnostics.Debug.WriteLine("This is element 1: " + element1);
+
+                    }
+
 
                 }
             }
