@@ -14,7 +14,7 @@ namespace FinalProj
     {
         protected List<Voucher> vcherList;
         protected List<Voucher> vchers;
-        public int points = 0;
+        public double points = 0;
         public List<decimal> pointCost = new List<decimal>();
         protected VoucherRedeemed vouchers;
 
@@ -37,7 +37,7 @@ namespace FinalProj
                     {
                         foreach (var element in vchers)
                         {
-                            if (points >= int.Parse(element.VoucherPoints))
+                            if (points >= double.Parse(element.VoucherPoints))
                             {
                                 panelError.Visible = false;
                                 voucher.VoucherAmount = element.VoucherAmount;

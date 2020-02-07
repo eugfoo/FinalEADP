@@ -10,6 +10,7 @@ namespace FinalProj
 {
     public partial class AttendanceEdit : System.Web.UI.Page
     {
+        protected Events eventDetail;
         protected List<Attendance> attendList;
         protected List<Users> attendUser = new List<Users>();
         public List<string> diet = new List<string>();
@@ -18,6 +19,7 @@ namespace FinalProj
         public string title;
         public int participant = 0;
         public int participantHere = 0;
+        public string endTime;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +30,17 @@ namespace FinalProj
             }
             else
             {
+                Events ev = new Events();
+                eventDetail = ev.getEventDetails(int.Parse(Session["eventId"].ToString()));
+
+                int index = eventDetail.Date.IndexOf(" ");
+                eventDetail.Date = eventDetail.Date.Substring(0, index);
+                eventDetail.StartTime = eventDetail.StartTime.Substring(0, 5);
+
+                
+                endTime = eventDetail.Date + " " + eventDetail.EndTime;
+
+
                 Attendance attend = new Attendance();
                 Users user = new Users();
                 title = Session["eventTitle"].ToString();
@@ -73,8 +86,6 @@ namespace FinalProj
                         System.Diagnostics.Debug.WriteLine("This is element 1: " + element1);
 
                     }
-
-
                 }
             }
         }

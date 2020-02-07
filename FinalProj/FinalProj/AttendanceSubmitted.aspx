@@ -3,6 +3,77 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="AttendanceSubmitted.css" />
     <script type="text/javascript">
+
+                    var endTime = '<%= endTime %>';
+            var nowDate;
+
+            Number.prototype.padLeft = function (base, chr) {
+                var len = (String(base || 10).length - String(this).length) + 1;
+                return len > 0 ? new Array(len).join(chr || '0') + this : this;
+            }
+
+            var d = new Date,
+                dformat = [d.getDate().padLeft(),
+                (d.getMonth() + 1).padLeft(),
+                d.getFullYear()].join('/') +
+                    ' ' +
+                    [d.getHours().padLeft(),
+                    d.getMinutes().padLeft(),
+                    d.getSeconds().padLeft()].join(':');
+
+            nowDate = dformat.toString();
+
+            function getDateObject(datestr) {
+                console.log("This is first", datestr);
+                var parts = datestr.split(' ');
+                console.log("This is second", parts);
+                var dateparts = parts[0].split('/');
+                var day = dateparts[0];
+                var month = parseInt(dateparts[1]) - 1;
+                var year = dateparts[2];
+                var timeparts = parts[1].split(':')
+                var hh = timeparts[0];
+                var mm = timeparts[1];
+                var ss = timeparts[2];
+                console.log("This is first ymdhhmmss: ", year, month, day, hh, mm, ss);
+                var date = new Date(year, month, day, hh, mm, ss);
+                console.log("This is date: ", date);
+                return date;
+            }
+
+            function gettimediff(t1, t2) {
+                var secs = (t2 - t1) / 1000;
+
+                function z(n) { return (n < 10 ? '0' : '') + n; }
+                var sign = secs < 0 ? '-' : '';
+                secs = Math.abs(secs);
+                return sign + z(secs / 3600 | 0) + ' Hours   ' + z((secs % 3600) / 60 | 0) + ' Minutes   ' + z(secs % 60) + ' Seconds   ';
+            }
+
+            endTime = getDateObject(endTime);
+            nowDate = getDateObject(nowDate);
+
+            $("#time").text(gettimediff(nowDate, endTime));
+
+            setInterval(function () {
+
+                var d = new Date,
+                    dformat = [d.getDate().padLeft(),
+                    (d.getMonth() + 1).padLeft(),
+                    d.getFullYear()].join('/') +
+                        ' ' +
+                        [d.getHours().padLeft(),
+                        d.getMinutes().padLeft(),
+                        d.getSeconds().padLeft()].join(':');
+
+                nowDate = dformat.toString();
+
+                nowDate = getDateObject(nowDate);
+
+                $("#time").text(gettimediff(nowDate, endTime));
+
+            }, 1000);
+
         function myFunction() {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
@@ -23,7 +94,8 @@
                         }
                     }
                 }
-            }
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -32,16 +104,13 @@
             <div>
                 <h2 id="title"><%= title %></h2>
             </div>
+
             <table id="timer">
                 <tr>
                     <td id="attendTitle">Time left to edit attendance:</td>
-                    <td id="attendTime">0 hours 32 minutes 3 seconds</td>
+                    <td id="time"></td>
                 </tr>
-                <tr id="timerRow">
-                    <td class="greenBar"></td>
-                    <td class="emptyBar"></td>
-                </tr>
-            </table><br /><br /><br />
+            </table>
 
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for participant" />
 

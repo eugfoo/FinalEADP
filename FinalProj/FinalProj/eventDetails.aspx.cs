@@ -64,7 +64,7 @@ namespace FinalProj
 			{
 				eventDetail.StartTime = eventDetail.StartTime + " AM";
 			}
-
+            
 			if (int.Parse(eventDetail.EndTime.Substring(0, 2)) >= 12)
 			{
 

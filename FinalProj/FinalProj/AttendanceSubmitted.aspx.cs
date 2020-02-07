@@ -11,6 +11,7 @@ namespace FinalProj
 {
     public partial class AttendanceSubmitted : System.Web.UI.Page
     {
+        protected Events eventDetail;
         protected List<Attendance> attendList;
         protected List<Users> attendUser = new List<Users>();
         public List<string> diet = new List<string>();
@@ -18,6 +19,7 @@ namespace FinalProj
         public string title;
         public int participant = 0;
         public int participantHere = 0;
+        public string endTime;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,6 +40,16 @@ namespace FinalProj
                 }
                 else
                 {
+                    Events ev = new Events();
+                    eventDetail = ev.getEventDetails(int.Parse(Session["eventId"].ToString()));
+
+                    int index = eventDetail.Date.IndexOf(" ");
+                    eventDetail.Date = eventDetail.Date.Substring(0, index);
+                    eventDetail.StartTime = eventDetail.StartTime.Substring(0, 5);
+
+
+                    endTime = eventDetail.Date + " " + eventDetail.EndTime;
+
                     int id = int.Parse(Session["eventId"].ToString());
                     attendList = attend.GetAttendanceEvent(id);
                     for (int i = 0; i < attendList.Count; i++)
