@@ -12,7 +12,9 @@
 			max-width: 100%;
 			height: auto;
 		}
-
+		#ContentPlaceHolder1_noteText {
+		margin-bottom:5%;
+		}
 		#createEventTitle {
 			text-align: center;
 			padding: 0.5%;
@@ -84,6 +86,12 @@
 		window.addEventListener('load', (event) => {
 			countChars(document.getElementById("ContentPlaceHolder1_desc"));
 		});
+
+		
+
+
+
+	
 	</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -117,7 +125,7 @@
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="eventDate">Date:</label>
-						<asp:TextBox ID="eventDate" CssClass="form-control" runat="server" type="date" format="DD-MM-YYYY"></asp:TextBox>
+						<asp:TextBox ID="eventDate" CssClass="form-control" runat="server" type="date" format="DD-MM-YYYY" min="<%=DateTime.Now.Date %>" Font-Overline="False" ></asp:TextBox>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="startTime">Start Time: </label>
@@ -172,16 +180,17 @@
 				<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Include a Short Note</div>
 				<label for="noteText">Note:</label>
 				<asp:TextBox ID="noteText" CssClass="form-control" runat="server"></asp:TextBox>
-				<div class="form-group" style="margin-top: 2em;">
-					<div class="form-check">
-						<asp:CheckBox ID="advCheck" CssClass="form-check-input" runat="server" />
-						<asp:Label AssociatedControlID="advCheck" runat="server">Post this on our Instagram</asp:Label>
-
-					</div>
-				</div>
 				<asp:Button ID="createBtn" runat="server" CssClass="btn btn-primary" Text="Submit" CausesValidation="false" OnClick="createBtn_Click" />
 			</div>
 		</div>
 	</div>
-
+	<script>
+		window.addEventListener("load", function () {
+			let tdyDate = new Date();
+			let tdyMonth = (parseInt(tdyDate.getMonth()) + 1).toString().length == 1 ? "0" + (parseInt(tdyDate.getMonth()) + 1).toString() : (parseInt(tdyDate.getMonth()) + 1).toString();
+			let tdyDay = tdyDate.getDate().toString().length == 1 ? "0" + tdyDate.getDate() : tdyDate.getDate();
+			let stringDate = tdyDate.getFullYear() + "-" + tdyMonth + "-" + tdyDay;
+			document.getElementById("ContentPlaceHolder1_eventDate").setAttribute("min", stringDate);
+		});
+	</script>
 </asp:Content>

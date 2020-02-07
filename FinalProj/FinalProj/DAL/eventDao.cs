@@ -47,11 +47,10 @@ namespace FinalProj.DAL
                 string eventDesc = row["eventDesc"].ToString();
                 string eventPic = row["eventPic"].ToString();
                 string eventNote = row["eventNote"].ToString();
-                int eventAdv = int.Parse(row["eventAdv"].ToString());
 				int user_id = int.Parse(row["user_id"].ToString());
 				
 
-				Events obj = new Events(eventId, eventTitle, eventVenue, eventDate ,eventStartTime, eventEndTime, eventMaxAttendees, eventDesc, eventPic, eventNote, eventAdv, user_id);
+				Events obj = new Events(eventId, eventTitle, eventVenue, eventDate ,eventStartTime, eventEndTime, eventMaxAttendees, eventDesc, eventPic, eventNote, user_id);
                 evList.Add(obj);
             }
 
@@ -92,9 +91,8 @@ namespace FinalProj.DAL
 				string eventDesc = row["eventDesc"].ToString();
 				string eventPic = row["eventPic"].ToString();
 				string eventNote = row["eventNote"].ToString();
-				int eventAdv = int.Parse(row["eventAdv"].ToString());
 				int user_id = int.Parse(row["user_id"].ToString());
-				eventDetails = new Events(eventId, eventTitle, eventVenue, eventDate, eventStartTime, eventEndTime, eventMaxAttendees, eventDesc, eventPic, eventNote, eventAdv, user_id);
+				eventDetails = new Events(eventId, eventTitle, eventVenue, eventDate, eventStartTime, eventEndTime, eventMaxAttendees, eventDesc, eventPic, eventNote, user_id);
 			}
 			else
 			{
@@ -116,8 +114,8 @@ namespace FinalProj.DAL
 
             // Step 2 - Instantiate SqlCommand instance to add record 
             //          with INSERT statement
-            string sqlStmt = "INSERT INTO tdEvent(eventTitle, eventVenue, eventDate, eventStartTime, eventEndTime, eventMaxAttendees, eventDesc, eventPic, eventNote, eventAdv, user_id) " +
-                "VALUES (@eventTitle, @eventVenue, @eventDate, @eventStartTime, @eventEndTime, @eventMaxAttendees, @eventDesc, @eventPic, @eventNote, @eventAdv, @user_id)";
+            string sqlStmt = "INSERT INTO tdEvent(eventTitle, eventVenue, eventDate, eventStartTime, eventEndTime, eventMaxAttendees, eventDesc, eventPic, eventNote, user_id) " +
+				"VALUES (@eventTitle, @eventVenue, @eventDate, @eventStartTime, @eventEndTime,@eventMaxAttendees,  @eventDesc, @eventPic, @eventNote, @user_id)";
             sqlCmd = new SqlCommand(sqlStmt, myConn);
 
             // Step 3 : Add each parameterised variable with value
@@ -130,7 +128,6 @@ namespace FinalProj.DAL
             sqlCmd.Parameters.AddWithValue("@eventDesc", ev.Desc);
             sqlCmd.Parameters.AddWithValue("@eventPic", ev.Pic);
             sqlCmd.Parameters.AddWithValue("@eventNote", ev.Note);
-            sqlCmd.Parameters.AddWithValue("@eventAdv", ev.Advertisement);
 			sqlCmd.Parameters.AddWithValue("@user_id", ev.User_id);
 			
 

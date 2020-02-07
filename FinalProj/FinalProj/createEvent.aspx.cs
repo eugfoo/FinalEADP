@@ -19,8 +19,12 @@ namespace FinalProj
 			{
 				Response.Redirect("/homepage.aspx");
 			}
+
 		}
-        protected void changetoDefaultBorder()
+
+
+
+		protected void changetoDefaultBorder()
         {
             eventTitle.BorderColor = System.Drawing.Color.LightGray;
             eventAddress.BorderColor = System.Drawing.Color.LightGray;
@@ -159,15 +163,10 @@ namespace FinalProj
                 string description = desc.Text.ToString();
                 string picture = "";
                 string note = noteText.Text.ToString();
-                int advertisement = 0;
 				int user_id = user.id;
 
 
-                if (advCheck.Checked == true)
-                {
-                    advertisement = 1;
-
-                }
+        
 
                 if (FileUploadControl.HasFile)
                 {
@@ -181,18 +180,19 @@ namespace FinalProj
                 else if (FileUploadControl.HasFile == false)
                 {
 
-                    string filename = "defaultPic.PNG";
+                    string filename = "defaultPic.jpg";
                     picture = filename;
 
                 }
 
             
 
-                ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, advertisement, user_id);
+                ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, user_id);
                 int result = ev.AddEvent();
                 Response.Redirect("/eventDetails.aspx");
             }
         }
 
-    }
+		
+	}
 }

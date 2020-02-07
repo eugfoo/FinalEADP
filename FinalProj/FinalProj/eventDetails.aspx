@@ -118,6 +118,12 @@
 				height: auto
 			}
 
+			#ContentPlaceHolder1_bookmarked {
+				margin-top: 1em;
+				width: 100%;
+				height: auto
+			}
+
 			#ContentPlaceHolder1_eventEnd {
 				width: 100%;
 				height: auto
