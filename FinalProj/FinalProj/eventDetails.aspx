@@ -398,12 +398,25 @@
 								<button id="button-addon1" type="submit" class="btn btn-link border-1 text-primary"><i class="fa fa-search"></i></button>
 							</div>
 						</div>
+						
 					</div>
+					
 
-					<div style="margin-top: 2em; margin-bottom: 2em;">
+					<div style="margin-top: 2em; text-align:center; margin-bottom: 2em;">
+
+						<% if (participantList.Count == 0)
+								{%>
+						<div style="margin-top: 10em; margin-bottom: 10em;">
+							<i style="font-size:large; color:grey;">No Attendees</i>
+							</div>
+							<%} %>
+						
 						<ul class="participants" id="myUL" >
-							<% foreach (var participant in participantList)
-								{ %>
+							
+								<%foreach (var participant in participantList)
+								{
+									%>
+
 
 							<li class="participantsListed" style="margin-bottom:5%;">
 								<img src="<%=participant.DPimage %>" style="border-radius: 100%; width: 60px; height: 60px;" /><span style="padding-left: 10px"><a href="#" style="text-decoration: none;"><%=participant.name %></a></span></li>
