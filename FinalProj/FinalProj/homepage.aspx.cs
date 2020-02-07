@@ -67,7 +67,10 @@ namespace FinalProj
 
 			userList.Clear();
 			userIdList.Clear();
-			attending.Clear();
+			if (attending != null)
+			{
+				attending.Clear();
+			}
 			attendingUsers.Clear();
 			foreach (Events element in evList)                  // loops through each event list and changes formatting of both time and date
 			{

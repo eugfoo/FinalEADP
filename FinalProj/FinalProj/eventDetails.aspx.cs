@@ -23,9 +23,6 @@ namespace FinalProj
 				Users user = (Users)Session["user"];
 				userId = user.id;
 				
-				
-				
-
 			}
 			if (Request.QueryString["eventId"] == null)
 			{
@@ -217,5 +214,6 @@ namespace FinalProj
             Session["eventId"] = int.Parse(Request.QueryString["eventId"]);
             Response.Redirect("/AttendanceSubmitted.aspx");
         }
-    }
+		
+	}
 }

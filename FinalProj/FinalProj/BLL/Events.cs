@@ -51,6 +51,12 @@ namespace FinalProj.BLL
 			int result = dao.Insert(this);
 			return result;
 		}
+		public int updateEvent()
+		{
+			eventDao dao = new eventDao();
+			int result = dao.updateEvent(this);
+			return result;
+		}
 
 		public List<Events> GetAllEventsByEDate(DateTime date)
 		{

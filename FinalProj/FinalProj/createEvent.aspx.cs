@@ -167,9 +167,10 @@ namespace FinalProj
 
 
         
-
+				
                 if (FileUploadControl.HasFile)
                 {
+					
 
                     string filename = Path.GetFileName(FileUploadControl.PostedFile.FileName);
                     FileUploadControl.SaveAs(Server.MapPath("~/Img/" + filename));

@@ -18,7 +18,7 @@
 			width: 25%;
 		}
 
-		#ContentPlaceHolder1_eventEd {
+		#ContentPlaceHolder1_eventEnd {
 			padding: 2%;
 			width: 25%;
 		}
@@ -51,7 +51,7 @@
 			width: 30%;
 		}
 
-		#ContentPlaceHolder1_editEvent {
+		#editEvent {
 			padding: 2%;
 			width: 20%;
 		}
@@ -113,7 +113,7 @@
 		}
 
 		@media only screen and (max-width: 990px) {
-			#ContentPlaceHolder1_editEvent {
+			#editEvent {
 				width: 100%;
 				height: auto
 			}
@@ -150,7 +150,7 @@
 				height: auto
 			}
 
-			#ContentPlaceHolder1_attendace {
+			#ContentPlaceHolder1_attendance {
 				margin-top: 1em;
 				width: 100%;
 				height: auto
@@ -231,10 +231,11 @@
 							<i class="fa fa-clock"></i>&nbsp;<span><%= eventDetail.Date%><br />
 								<%= eventDetail.StartTime %> - <%= eventDetail.EndTime %></span>
 							<br />
-							<i class="fa fa-calendar"></i>&nbsp;<a href="#" style="text-decoration: none;">Add to Calendar</a>
 						</p>
 
 						<p style="padding-left: 70px;"><i class="fa fa-map-marker-alt"></i>&nbsp;<span><%= eventDetail.Venue %></span></p>
+						<p style="padding-left: 70px;"><i>Note:</i>&nbsp;<span><%= eventDetail.Note %></span></p>
+
 
 						<span>
 							<% if (userId != eventDetail.User_id)
@@ -307,8 +308,7 @@
 								else
 								{%>
 
-							<asp:Button ID="editEvent" CssClass="btn btn-warning" runat="server" Text="EDIT" />
-
+							<a href="/editEventDetails.aspx?eventId=<%=eventDetail.EventId %>" id="editEvent" class="btn btn-warning">EDIT</a>
 							<asp:Button ID="deleteEvent" CssClass="btn btn-danger" runat="server" Text="DELETE" OnClick="deleteEvent_Click" />
 							<asp:Button ID="attendance" class="btn btn-primary" runat="server" Text="ATTENDANCE" OnClick="attendance_Click" />
 
@@ -335,12 +335,17 @@
 			</div>
 			<div id="tab1" class="row">
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">
-					<%= eventDetail.Desc %>
+					<asp:TextBox ID="descriptionTB" CssClass="form-control" runat="server" Visible="False" Width="100%" Height="250" TextMode="MultiLine"></asp:TextBox>
+					<%if (descriptionTB.Visible == false)
+						{ %>
+					<%=eventDetail.Desc %>
+					<%} %>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">
 					<div id="contactOrganiser">
 						<p class="h5">Contact Organiser</p>
-						<asp:Image Style="border-radius: 100%; width: 60px; height: 60px;" ID="imgDPOrg" runat="server" /><span style="padding-left: 10px"><a href="/PPGallery.aspx?userId=<%=eventDetail.User_id%>" style="text-decoration: none;"><%=userName %></a><br /><br />
+						<asp:Image Style="border-radius: 100%; width: 60px; height: 60px;" ID="imgDPOrg" runat="server" /><span style="padding-left: 10px"><a href="/PPGallery.aspx?userId=<%=eventDetail.User_id%>" style="text-decoration: none;"><%=userName %></a><br />
+							<br />
 							Email: <%=profilePic.email %></span>
 					</div>
 
@@ -398,27 +403,27 @@
 								<button id="button-addon1" type="submit" class="btn btn-link border-1 text-primary"><i class="fa fa-search"></i></button>
 							</div>
 						</div>
-						
-					</div>
-					
 
-					<div style="margin-top: 2em; text-align:center; margin-bottom: 2em;">
+					</div>
+
+
+					<div style="margin-top: 2em; text-align: center; margin-bottom: 2em;">
 
 						<% if (participantList.Count == 0)
-								{%>
+							{%>
 						<div style="margin-top: 10em; margin-bottom: 10em;">
-							<i style="font-size:large; color:grey;">No Attendees</i>
-							</div>
-							<%} %>
-						
-						<ul class="participants" id="myUL" >
-							
-								<%foreach (var participant in participantList)
+							<i style="font-size: large; color: grey;">No Attendees</i>
+						</div>
+						<%} %>
+
+						<ul class="participants" id="myUL">
+
+							<%foreach (var participant in participantList)
 								{
-									%>
+							%>
 
 
-							<li class="participantsListed" style="margin-bottom:5%;">
+							<li class="participantsListed" style="margin-bottom: 5%;">
 								<img src="<%=participant.DPimage %>" style="border-radius: 100%; width: 60px; height: 60px;" /><span style="padding-left: 10px"><a href="#" style="text-decoration: none;"><%=participant.name %></a></span></li>
 
 							<%} %>

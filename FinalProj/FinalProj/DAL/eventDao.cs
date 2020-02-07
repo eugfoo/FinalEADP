@@ -147,6 +147,46 @@ namespace FinalProj.DAL
             return result;
         }
 
+		public int updateEvent(Events ev)
+		{
+			// Execute NonQuery return an integer value
+			int result = 0;
+			SqlCommand sqlCmd = new SqlCommand();
+
+			//Step 1 -  Define a connection to the database by getting
+			//          the connection string from web.config
+			string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+			SqlConnection myConn = new SqlConnection(DBConnect);
+
+			// Step 2 - Instantiate SqlCommand instance to add record 
+			//          with UPDATE statement
+			string sqlStmt = "Update tdEvent Set eventTitle = @eventTitle, eventVenue = @eventVenue, eventDate = @eventDate, eventStartTime = @eventStartTime, eventEndTime = @eventEndTime, eventMaxAttendees= @eventMaxAttendees, eventDesc = @eventDesc, eventPic = @eventPic, eventNote = @eventNote WHERE eventId = @eventId "; 
+			sqlCmd = new SqlCommand(sqlStmt, myConn);
+
+			// Step 3 : Add each parameterised variable with value
+			sqlCmd.Parameters.AddWithValue("@eventTitle", ev.Title);
+			sqlCmd.Parameters.AddWithValue("@eventVenue", ev.Venue);
+			sqlCmd.Parameters.AddWithValue("@eventDate", ev.Date);
+			sqlCmd.Parameters.AddWithValue("@eventStartTime", ev.StartTime);
+			sqlCmd.Parameters.AddWithValue("@eventEndTime", ev.EndTime);
+			sqlCmd.Parameters.AddWithValue("@eventMaxAttendees", ev.MaxAttendees);
+			sqlCmd.Parameters.AddWithValue("@eventDesc", ev.Desc);
+			sqlCmd.Parameters.AddWithValue("@eventPic", ev.Pic);
+			sqlCmd.Parameters.AddWithValue("@eventNote", ev.Note);
+			sqlCmd.Parameters.AddWithValue("@eventId", ev.EventId);
+
+
+
+			// Step 4 Open connection the execute NonQuery of sql command   
+			myConn.Open();
+			result = sqlCmd.ExecuteNonQuery();
+
+			// Step 5 :Close connection
+			myConn.Close();
+
+			return result;
+		}
+
 		public string SelectUserNameByUserId(int id)
 		{
 			string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
