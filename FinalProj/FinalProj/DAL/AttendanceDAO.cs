@@ -132,5 +132,23 @@ namespace FinalProj.DAL
             myConn.Close();
             return result;
         }
+
+        public int UpdateFeedback(int id, int feedback)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStmt = "UPDATE Attendance SET Feedback = @feedback where Users_Id = @userId";
+            int result = 0;
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+            sqlCmd = new SqlCommand(sqlStmt.ToString(), myConn);
+            sqlCmd.Parameters.AddWithValue("@feedback", feedback);
+            sqlCmd.Parameters.AddWithValue("@userId", id);
+            myConn.Open();
+            result = sqlCmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+        }
+
+
     }
 }

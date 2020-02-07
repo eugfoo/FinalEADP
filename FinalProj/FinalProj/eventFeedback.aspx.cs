@@ -10,7 +10,9 @@ namespace FinalProj
 {
     public partial class eventFeedback : System.Web.UI.Page
     {
-        
+        protected List<Feedback> allAvgRatingList;
+        Feedback feedback = new Feedback();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["user"] == null) // A user has signed in
@@ -23,6 +25,10 @@ namespace FinalProj
 
             Events selectedEvent = events.getEventDetails(queriedEventId);
             LblEventTitle.Text = selectedEvent.Title;
+
+
+
+
         }
 
 
@@ -84,12 +90,34 @@ namespace FinalProj
                 else
                 {
                     feedback = new Feedback(eventId, userId, avgRating, FeedbackContent, 1);
+                    Attendance attendance = new Attendance();
+                    Users user = (Users)Session["user"];
+                    Events ev = new Events();
+
+                    // I am using User session as the user id; diff from upstairs where i use from event detail;
+
 
                     int result = feedback.createFeedback();
 
                     if (result == 1)
                     {
-                        string script = "setTimeout(function() { swal ({ title: 'wow!', text: 'message!', type: 'success', confirmButtonText: 'OK'}, function(isConfirm) { if (isConfirm) { window.location.href = 'forumCatOverview.aspx'; } }); }, 1000);";
+                        attendance.UpdateFeedbackById(user.id, 1);
+
+                        allAvgRatingList = feedback.getAllFeedbacksByEventId(eventId);
+
+                        int totalAvgRatings = 0;
+                        int totalAvgRatingByEvent = 0;
+
+                        for (int i = 0; i < allAvgRatingList.Count; i++)
+                        {
+                            totalAvgRatings += allAvgRatingList[i].AvgRating;
+                        }
+
+                        totalAvgRatingByEvent = totalAvgRatings / allAvgRatingList.Count();
+
+                        ev.updateAvgRatingByEventId(eventId, totalAvgRatingByEvent);
+
+                        string script = "setTimeout(function() { swal ({ title: 'Successful!', text: 'Thank you for doing this feedback!', type: 'success', confirmButtonText: 'OK'}, function(isConfirm) { if (isConfirm) { window.location.href = 'forumCatOverview.aspx'; } }); }, 1000);";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", script, true);
                     }
 

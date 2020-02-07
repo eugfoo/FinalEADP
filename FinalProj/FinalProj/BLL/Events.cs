@@ -147,6 +147,14 @@ namespace FinalProj.BLL
 			int result = dao.DeleteEvent(eventId);
 			return result;
 		}
-       
+
+        public int updateAvgRatingByEventId(int eventId, int avgRating)
+        {
+            eventDao dao = new eventDao();
+            return dao.updateAvgRatingByEventId(eventId, avgRating);
+        }
+
+
+
     }
 }

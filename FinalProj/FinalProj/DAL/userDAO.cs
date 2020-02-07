@@ -185,7 +185,7 @@ namespace FinalProj.DAL
 
                 for (int i = 0; i < evList.Count; i++)
                 {
-                    var fdbackList = fdback.getAllByEventId(evList[i].EventId);
+                    var fdbackList = fdback.getAllFeedbacksByEventId(evList[i].EventId);
                     for (int j = 0; j < fdbackList.Count; j++)
                     {
                         totalRating += fdbackList[j].AvgRating;

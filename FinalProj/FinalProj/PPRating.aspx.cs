@@ -65,7 +65,7 @@ namespace FinalProj
         public void loadFeedback(int eventId)
         {
             Feedback fdback = new Feedback();
-            feedbackList = fdback.getAllByEventId(eventId);
+            feedbackList = fdback.getAllFeedbacksByEventId(eventId);
         }
 
         ICollection CreateDataSource(int userId)
