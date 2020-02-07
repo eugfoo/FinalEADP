@@ -185,9 +185,9 @@ namespace FinalProj
 
                 }
 
-            
+				int rating = 0;
 
-                ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, user_id);
+                ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, rating , user_id);
                 int result = ev.AddEvent();
                 Response.Redirect("/eventDetails.aspx");
             }

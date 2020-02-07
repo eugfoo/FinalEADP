@@ -19,6 +19,7 @@ namespace FinalProj.BLL
 		public string Desc { get; set; }
 		public string Pic { get; set; }
 		public string Note { get; set; }
+		public int AverageRating { get; set; }
 		public int User_id { get; set; }
 
 
@@ -27,7 +28,7 @@ namespace FinalProj.BLL
 
 		}
 		// Define a constructor to initialize all the properties
-		public Events(int eventId, string eventTitle, string eventVenue, string eventDate, string eventStartTime, string eventEndTime, int eventMaxAttendees, string eventDesc, string eventPic, string eventNote, int user_id)
+		public Events(int eventId, string eventTitle, string eventVenue, string eventDate, string eventStartTime, string eventEndTime, int eventMaxAttendees, string eventDesc, string eventPic, string eventNote, int avgRating, int user_id)
 		{
 			EventId = eventId;
 			Title = eventTitle;
@@ -40,6 +41,7 @@ namespace FinalProj.BLL
 			Pic = eventPic;
 			Note = eventNote;
 			User_id = user_id;
+			AverageRating = avgRating;
 
 		}
 
