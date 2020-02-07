@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProj.BLL;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,6 +14,34 @@ namespace FinalProj
 {
     public partial class forumCatOverview : System.Web.UI.Page
     {
+        //repeater control replacement
+        protected List<Thread> allthreadsList;
+        protected List<ThreadReply> allthreadReplies;
+        protected Dictionary<int, int> threadIdReplies = new Dictionary<int, int>();
+        protected Dictionary<int, string> threadIdUserIdReplies = new Dictionary<int, string>();
+        protected Dictionary<int, string> threadIdLastReplyDateT = new Dictionary<int, string>();
+
+        Thread thread = new Thread();
+        ThreadReply threadReply = new ThreadReply();
+
+        public class Threads
+        {
+            public int Id { get; set; }
+            public string threadPrefix { get; set; }
+            public string threadBadgeColor { get; set; }
+            public string threadTitle { get; set; }
+            public string threadDate { get; set; }
+            public string threadImage1 { get; set; }
+            public string threadImage2 { get; set; }
+            public string threadImage3 { get; set; }
+            public string threadImage4 { get; set; }
+            public string threadContent { get; set; }
+            public int user_id { get; set; }
+            public string user_name { get; set; }
+            public string lastReplyUserName { get; set; }
+
+        }
+
         readonly PagedDataSource _pgsource = new PagedDataSource();
         int _firstIndex, _lastIndex;
         private int _pageSize = 8;
@@ -36,16 +65,66 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                ThreadsRptr();
+                allthreadsList = thread.SelectAllThreads();
+
+
+                List<Threads> threadsList = new List<Threads>();
+
+                foreach (Thread thread in allthreadsList)
+                {
+                    threadsList.Add(
+                        new Threads
+                        {
+                            Id = thread.Id,
+                            threadPrefix = thread.Prefix,
+                            threadBadgeColor = thread.BadgeColor,
+                            threadTitle = thread.Title,
+                            threadDate = thread.Date,
+                            threadImage1 = thread.ThreadImage1,
+                            threadImage2 = thread.ThreadImage2,
+                            threadImage3 = thread.ThreadImage3,
+                            threadImage4 = thread.ThreadImage4,
+                            threadContent = thread.Content,
+                            user_id = thread.UserId,
+                            user_name = thread.UserName
+                        }
+                    );
+
+                    threadIdReplies.Add(thread.Id, threadReply.getAllThreadRepliesByThreadId(thread.Id).Count());
+
+
+                    string lastReplierName = "";
+                    string lastReplierDate = "";
+                    if (threadReply.getMaxUserReplyIdByThreadId(thread.Id) != null)
+                    {
+                        lastReplierName = threadReply.getLastPersonReplyByMaxId(threadReply.getMaxUserReplyIdByThreadId(thread.Id).trId).UserName;
+                        lastReplierDate = threadReply.getLastPersonReplyByMaxId(threadReply.getMaxUserReplyIdByThreadId(thread.Id).trId).PostDate;
+                    }
+                    else
+                    {
+                        lastReplierName = "NO Replies";
+                        lastReplierDate = "-";
+                    }
+
+                    threadIdUserIdReplies.Add(thread.Id, lastReplierName);
+                    threadIdLastReplyDateT.Add(thread.Id, lastReplierDate);
+
+
+                }
+
+
+
+                this.rptrThreads.DataSource = threadsList;
+                this.rptrThreads.DataBind();
+
             }
 
             if (Page.IsPostBack) return;
             BindDataIntoRepeater();
-
         }
-
 
         static DataTable GetDataFromDb()
         {
@@ -64,8 +143,61 @@ namespace FinalProj
             }
         }
 
+
         private void BindDataIntoRepeater()
         {
+            threadIdReplies.Clear();
+            threadIdUserIdReplies.Clear();
+            threadIdLastReplyDateT.Clear();
+
+            allthreadsList = thread.SelectAllThreads();
+
+
+            List<Threads> threadsList = new List<Threads>();
+
+            foreach (Thread thread in allthreadsList)
+            {
+                threadsList.Add(
+                    new Threads
+                    {
+                        Id = thread.Id,
+                        threadPrefix = thread.Prefix,
+                        threadBadgeColor = thread.BadgeColor,
+                        threadTitle = thread.Title,
+                        threadDate = thread.Date,
+                        threadImage1 = thread.ThreadImage1,
+                        threadImage2 = thread.ThreadImage2,
+                        threadImage3 = thread.ThreadImage3,
+                        threadImage4 = thread.ThreadImage4,
+                        threadContent = thread.Content,
+                        user_id = thread.UserId,
+                        user_name = thread.UserName
+                    }
+                );
+
+                string lastReplierName = "";
+                string lastReplierDate = "";
+
+                threadIdReplies.Add(thread.Id, threadReply.getAllThreadRepliesByThreadId(thread.Id).Count());
+
+                if (threadReply.getMaxUserReplyIdByThreadId(thread.Id) != null)
+                {
+                    lastReplierName = threadReply.getLastPersonReplyByMaxId(threadReply.getMaxUserReplyIdByThreadId(thread.Id).trId).UserName;
+                    lastReplierDate = threadReply.getLastPersonReplyByMaxId(threadReply.getMaxUserReplyIdByThreadId(thread.Id).trId).PostDate;
+
+                }
+                else
+                {
+                    lastReplierName = "NO Replies";
+                    lastReplierDate = "-";
+                }
+
+                threadIdUserIdReplies.Add(thread.Id, lastReplierName);
+                threadIdLastReplyDateT.Add(thread.Id, lastReplierDate);
+
+            }
+
+
             var dt = GetDataFromDb();
             _pgsource.DataSource = dt.DefaultView;
             _pgsource.AllowPaging = true;
@@ -162,23 +294,7 @@ namespace FinalProj
             lnkPage.BackColor = Color.FromName("#8db0c7");
         }
 
-        private void ThreadsRptr()
-        {
-            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            using (SqlConnection myConn = new SqlConnection(DBConnect))
-            {
-                using (SqlCommand cmd = new SqlCommand("Select * From Threads ORDER BY Id DESC", myConn))
-                {
-                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                    {
-                        DataTable allThreads = new DataTable();
-                        sda.Fill(allThreads);
-                        rptrThreads.DataSource = allThreads;
-                        rptrThreads.DataBind();
-                    }
-                }
-            }
-        }
+
 
         private DataSet GetData()
         {

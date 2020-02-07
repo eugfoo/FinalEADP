@@ -58,8 +58,8 @@
 
                     <tbody>
                         <tr>
-                            <td class="auto-style4 table-secondary">
-                                <div><a href="#0"><strong>GandyHaley</strong></a></div>
+                            <td class="auto-style4 table-secondary" style="text-align:center; font-size:20px;">
+                                <div><a href="PPGallery.aspx?userId=<%= currentThreadUser.id%>"><strong><%= currentThreadUser.name%></strong></a></div>
                             </td>
                             <td class="post-col d-lg-flex justify-content-lg-between table-secondary" style="height: 60px;">
                                 <div class="container">
@@ -83,10 +83,10 @@
                         </tr>
                         <tr>
                             <td style="max-width: 100px;" class="auto-style3">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/1200px-Donald_Trump_official_portrait.jpg" class="auto-style1" />
+                                <img src="<%=currentThreadUser.DPimage%>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left:30px;">
 
-                                <div><span class="font-weight-bold">Joined: </span>02 Apr 2019, 23:59</div>
-                                <div><span class="font-weight-bold">Posts:</span>123</div>
+                                <div><span class="font-weight-bold">Joined: </span><%= currentThreadUser.regDate%></div>
+                                <div><a href="threadCreaterOverview.aspx?userId=<%= currentThreadUser.id%>"<strong>Posts </strong></a>: 123</div>
                             </td>
                             <td>
                                 <asp:ListView ID="LVImages" runat="server">
@@ -139,6 +139,10 @@
 
 
                 <asp:ScriptManager ID="MainScriptManager" runat="server" />
+
+
+
+                <asp:HiddenField ID="HFuser_id" runat="server" />
 
 
 
@@ -264,6 +268,11 @@
                 <style>
                     .threadBox {
                         background-color: #A9A9A9;
+                    }
+                    .auto-style5 {
+                        max-width: 100%;
+                        height: 131px;
+                        width: 107px;
                     }
                 </style>
             </div>

@@ -15,6 +15,8 @@ namespace FinalProj
 {
     public partial class forumPost : System.Web.UI.Page
     {
+        protected Users currentThreadUser;
+
         readonly PagedDataSource _pgsource = new PagedDataSource();
         int _firstIndex, _lastIndex;
         private int _pageSize = 3;
@@ -42,6 +44,10 @@ namespace FinalProj
         {
             string threadId = Request.QueryString["threadid"];
             Thread thread = new Thread();
+            Users usr = new Users();
+            
+
+
 
             if (Session["user"] == null) // A user has signed in
             {
@@ -59,9 +65,13 @@ namespace FinalProj
                 LblPostDate.Text = currentThread.Date;
                 LblContent.Text = currentThread.Content;
                 LblPrefix.Text = currentThread.Prefix;
+                HFuser_id.Value = currentThread.UserId.ToString();
                 HFthreadId.Value = threadId;
 
-                if(user.id != currentThread.UserId)
+                currentThreadUser = usr.GetUserById(currentThread.UserId);
+
+
+                if (user.id != currentThread.UserId)
                 {
                     panelEdit.Visible = false;
                 }
@@ -69,8 +79,8 @@ namespace FinalProj
                 {
                     panelEdit.Visible = true;
                 }
-              
 
+                
             }
 
             if (Page.IsPostBack) return;
@@ -206,6 +216,7 @@ namespace FinalProj
             ThreadReply threadReply = new ThreadReply();
             Users user = (Users)Session["user"];
             int user_id = user.id;
+            string user_name = user.name;
 
             if (String.IsNullOrEmpty(tbReplyContent.Text))
             {
@@ -218,7 +229,7 @@ namespace FinalProj
                 HFDate.Value = now.ToString("g");
                 DateTime mDate = Convert.ToDateTime(HFDate.Value);
 
-                threadReply = new ThreadReply(Convert.ToInt32(HFthreadId.Value), HFDate.Value, tbReplyContent.Text, user_id);
+                threadReply = new ThreadReply(Convert.ToInt32(HFthreadId.Value), HFDate.Value, tbReplyContent.Text, user_id, user_name);
                 int result = threadReply.ReplyThread();
                 if (result == 1)
                 {

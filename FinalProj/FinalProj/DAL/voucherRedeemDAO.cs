@@ -80,41 +80,41 @@ namespace FinalProj.DAL
                 voucherList.Add(obj);
             };
 
-            return voucherList;
-        }
-
-        public int Insert(VoucherRedeemed vcher)
-            {
-                // Execute NonQuery return an integer value
-                int result = 0;
-                SqlCommand sqlCmd = new SqlCommand();
-
-                //Step 1 -  Define a connection to the database by getting
-                //          the connection string from web.config
-                string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-                SqlConnection myConn = new SqlConnection(DBConnect);
-
-                // Step 2 - Instantiate SqlCommand instance to add record 
-                //          with INSERT statement
-                string sqlStmt = "INSERT INTO VoucherRedeemed(VoucherName, VoucherAmount, VoucherPic, UserId) " +
-                                 "VALUES (@voucherName, @voucherAmt, @voucherPic, @userId)";
-                sqlCmd = new SqlCommand(sqlStmt, myConn);
-
-                // Step 3 : Add each parameterised variable with value
-                sqlCmd.Parameters.AddWithValue("@voucherName", vcher.VoucherName);
-                sqlCmd.Parameters.AddWithValue("@voucherAmt", vcher.VoucherAmount);
-                sqlCmd.Parameters.AddWithValue("@voucherPic", vcher.VoucherPic);
-                sqlCmd.Parameters.AddWithValue("@userId", vcher.UserId);
-
-
-                // Step 4 Open connection the execute NonQuery of sql command   
-                myConn.Open();
-                result = sqlCmd.ExecuteNonQuery();
-
-                // Step 5 :Close connection
-                myConn.Close();
-
-                return result;
-            }
-        }
+            return voucherList;
+        }
+
+        public int Insert(VoucherRedeemed vcher)
+            {
+                // Execute NonQuery return an integer value
+                int result = 0;
+                SqlCommand sqlCmd = new SqlCommand();
+
+                //Step 1 -  Define a connection to the database by getting
+                //          the connection string from web.config
+                string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+                SqlConnection myConn = new SqlConnection(DBConnect);
+
+                // Step 2 - Instantiate SqlCommand instance to add record 
+                //          with INSERT statement
+                string sqlStmt = "INSERT INTO VoucherRedeemed(VoucherName, VoucherAmount, VoucherPic, UserId) " +
+                                 "VALUES (@voucherName, @voucherAmt, @voucherPic, @userId)";
+                sqlCmd = new SqlCommand(sqlStmt, myConn);
+
+                // Step 3 : Add each parameterised variable with value
+                sqlCmd.Parameters.AddWithValue("@voucherName", vcher.VoucherName);
+                sqlCmd.Parameters.AddWithValue("@voucherAmt", vcher.VoucherAmount);
+                sqlCmd.Parameters.AddWithValue("@voucherPic", vcher.VoucherPic);
+                sqlCmd.Parameters.AddWithValue("@userId", vcher.UserId);
+
+
+                // Step 4 Open connection the execute NonQuery of sql command   
+                myConn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+
+                // Step 5 :Close connection
+                myConn.Close();
+
+                return result;
+            }
+        }
     }

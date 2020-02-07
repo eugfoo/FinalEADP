@@ -114,7 +114,7 @@
 
                             <td>
                                 <div>by <a href="#0"><%# Eval("user_name") %></a></div>
-                                <div>02 Apr 2019, 13:33</div>
+                                <div><%# Eval("threadDate") %></div>
                             </td>
                             <td>
                                 <div>5 replies</div>

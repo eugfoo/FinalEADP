@@ -9,6 +9,7 @@ namespace FinalProj.BLL
 {
     public class Thread
     {
+        public int Id { get; set; }
         public string Prefix { get; set; }
         public string BadgeColor { get; set; }
         public string Title { get; set; }
@@ -31,6 +32,25 @@ namespace FinalProj.BLL
             , string threadContent
             , int userId, string userName)
         {
+            Prefix = threadPrefix;
+            BadgeColor = threadBadgeColor;
+            Title = threadTitle;
+            Date = threadDate;
+            ThreadImage1 = Image1;
+            ThreadImage2 = Image2;
+            ThreadImage3 = Image3;
+            ThreadImage4 = Image4;
+            Content = threadContent;
+            UserId = userId;
+            UserName = userName;
+        }
+
+        public Thread(int threadId, string threadPrefix, string threadBadgeColor, string threadTitle, string threadDate
+            , string Image1, string Image2, string Image3, string Image4
+            , string threadContent
+            , int userId, string userName)
+        {
+            Id = threadId;
             Prefix = threadPrefix;
             BadgeColor = threadBadgeColor;
             Title = threadTitle;
@@ -82,7 +102,19 @@ namespace FinalProj.BLL
         //    ThreadDAO dao = new ThreadDAO();
         //    return dao.GetRepliesFromDB(threadId);
         //}
-        
+
+        public DataTable getThreadByUserId(int userId)
+        {
+            ThreadDAO dao = new ThreadDAO();
+            return dao.getThreadsByUserId(userId);
+        }
+
+        public List<Thread> SelectAllThreads()
+        {
+            ThreadDAO dao = new ThreadDAO();
+            return dao.getAllThreads();
+        }
+
 
 
 
