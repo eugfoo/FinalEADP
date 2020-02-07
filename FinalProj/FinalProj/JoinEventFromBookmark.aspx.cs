@@ -11,6 +11,7 @@ namespace FinalProj
 	public partial class JoinEventFromBookmark : System.Web.UI.Page
 	{
 		protected int userId;
+        protected string userName;
 		protected void Page_Load(object sender, EventArgs e)
 		{
 
@@ -18,6 +19,7 @@ namespace FinalProj
 			{
 				Users user = (Users)Session["user"];
 				userId = user.id;
+                userName = user.name;
 				Events ev = new Events();
 
 			}
@@ -31,7 +33,7 @@ namespace FinalProj
 			else
 			{
 				Events ev = new Events();
-				int result = ev.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]));
+				int result = ev.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]), userName);
 				if (result == 1)
 					Session["SessionSSM"] = "Successfully Joined the event!";
 				else
