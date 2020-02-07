@@ -18,7 +18,7 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            viewingUserId = Request.QueryString["userId"];                  // Not displaying DDLevents when the user has not created any events yet.
+            viewingUserId = Request.QueryString["userId"];
             Users user = (Users)Session["user"];
 
             if (user != null)
@@ -44,6 +44,7 @@ namespace FinalProj
         {
             if (fuPic.HasFile)
             {
+                lblError.Visible = false;
                 var uniqueFileName = string.Format(@"{0}.png", Guid.NewGuid());
                 string fileName = Path.Combine(Server.MapPath("~/Img/User"), uniqueFileName);
                 fuPic.SaveAs(fileName);
@@ -55,32 +56,50 @@ namespace FinalProj
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            Users user = (Users)Session["user"];
-            var filepath = Session["tempPic"].ToString();
-            var caption = tbCaption.Text;
-            int gpevent = Convert.ToInt32(ddlEvents.SelectedItem.Value);
-            DateTime now = DateTime.Now;
-            GPictures gpic = new GPictures(filepath, user.id, caption, gpevent, now);
-            gpic.addGP();
+            if (imgPic.ImageUrl != "" && Session["tempPic"] != null)
+            {
+                Users user = (Users)Session["user"];
+                var filepath = Session["tempPic"].ToString();
+                var caption = tbCaption.Text;
+                int gpevent = Convert.ToInt32(ddlEvents.SelectedItem.Value);
+                DateTime now = DateTime.Now;
+                GPictures gpic = new GPictures(filepath, user.id, caption, gpevent, now);
+                gpic.addGP();
 
-            tbCaption.Text = "";
-            imgPic.ImageUrl = "";
-            ddlEvents.SelectedIndex = 0;
+                tbCaption.Text = "";
+                imgPic.ImageUrl = "";
+                ddlEvents.SelectedIndex = 0;
+                Session["tempPic"] = null;
 
-            loadGP(user.id);
+                loadGP(user.id);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                lblError.Visible = true;
+            }
         }
 
         public void loadGP(int userId)
         {
             GPictures gp = new GPictures();
             gpList = gp.getAllByUserId(userId);
+            List<Events> ev = new Events().GetAllAttendingEventsByUserId(userId);
 
-            if (!Page.IsPostBack) { 
-            ddlEvents.DataSource = CreateDataSource(userId);
-            ddlEvents.DataTextField = "EventTextField";
-            ddlEvents.DataValueField = "EventValueField";
-            ddlEvents.DataBind();
-            ddlEvents.SelectedIndex = 0;
+            if (!Page.IsPostBack)
+            {
+                if (ev.Count > 0)
+                {
+                    ddlEvents.DataSource = CreateDataSource(userId);
+                    ddlEvents.DataTextField = "EventTextField";
+                    ddlEvents.DataValueField = "EventValueField";
+                    ddlEvents.DataBind();
+                    ddlEvents.SelectedIndex = 0;
+                }
+                else
+                {
+                    ddlEvents.Visible = false;
+                }
             }
         }
 
