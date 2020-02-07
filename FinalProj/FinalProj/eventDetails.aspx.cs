@@ -13,6 +13,7 @@ namespace FinalProj
 		protected bool bookmark;
 		protected int userId;
 		protected string userName;
+		protected Users profilePic;
 		protected Events eventDetail;
 		protected List<Users> participantList = new List<Users>();
 		protected void Page_Load(object sender, EventArgs e)
@@ -21,6 +22,10 @@ namespace FinalProj
 			{
 				Users user = (Users)Session["user"];
 				userId = user.id;
+				
+				
+				
+
 			}
 			if (Request.QueryString["eventId"] == null)
 			{
@@ -85,6 +90,15 @@ namespace FinalProj
 			userName = eventDetail.GetAllUserNameByUserId(eventDetail.User_id);
 			bookmark = ev.VerifyIfEventIsBookmarked(userId, int.Parse(Request.QueryString["eventId"]));
 
+			Users organiser = new Users();
+			profilePic = organiser.GetUserById(eventDetail.User_id);
+			imgDP.ImageUrl = profilePic.DPimage;
+			imgDPOrg.ImageUrl = profilePic.DPimage;
+
+
+
+
+
 		}
 
 		protected void joinEvent_Click(object sender, EventArgs e)
@@ -139,18 +153,27 @@ namespace FinalProj
 		protected void bookmarkEvent_Click(object sender, EventArgs e)
 		{
 			Users user = (Users)Session["user"];
-			userId = user.id;
-			Events parti = new Events();
-			int result = parti.findBookmark(userId, int.Parse(Request.QueryString["eventId"]));
-			if (result == 1)
+			if (user != null)
 			{
-				Session["SessionSSM"] = "You have successfully bookmarked this event!";
-				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
+				userId = user.id;
+				Events parti = new Events();
+				int result = parti.findBookmark(userId, int.Parse(Request.QueryString["eventId"]));
+				if (result == 1)
+				{
+					Session["SessionSSM"] = "You have successfully bookmarked this event!";
+					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
+				}
+				else
+				{
+					Session["SessionERM"] = "Oops! Something Went Wrong";
+					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
+				}
 			}
 			else
 			{
-				Session["SessionERM"] = "Oops! Something Went Wrong";
+				Session["SessionERM"] = "Please Log In!";
 				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
+
 			}
 		}
 

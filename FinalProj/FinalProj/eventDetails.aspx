@@ -18,6 +18,11 @@
 			width: 25%;
 		}
 
+		#ContentPlaceHolder1_eventEd {
+			padding: 2%;
+			width: 25%;
+		}
+
 		#ContentPlaceHolder1_fullAttendance {
 			padding: 2%;
 			width: 35%;
@@ -99,7 +104,8 @@
 
 		.participantsListed {
 			margin-bottom: 1px;
-			border-bottom: 1px solid black;
+			border-bottom: 1px solid gray;
+			padding-bottom: 5%;
 		}
 
 		#eventDetails {
@@ -108,6 +114,11 @@
 
 		@media only screen and (max-width: 990px) {
 			#ContentPlaceHolder1_editEvent {
+				width: 100%;
+				height: auto
+			}
+
+			#ContentPlaceHolder1_eventEnd {
 				width: 100%;
 				height: auto
 			}
@@ -207,7 +218,8 @@
 				<div class="col-sm-12 col-md-12 col-lg-6" id="eventDetails">
 					<p class="h1" id="eventName"><%=eventDetail.Title %></p>
 					<div id="organiserDiv">
-						<img src="Img/organiser.jpeg" style="border-radius: 100%; width: 60px; height: 60px;" /><span style="padding-left: 10px">organised by <a href="/PPGallery.aspx?userId=<%=eventDetail.User_id%>" style="text-decoration: none;"><%=userName %></a></span>
+						<asp:Image Style="border-radius: 100%; width: 60px; height: 60px;" ID="imgDP" runat="server" /><span style="padding-left: 10px">organised by <a href="/PPGallery.aspx?userId=<%=eventDetail.User_id%>" style="text-decoration: none;"><%=userName %></a></span>
+
 
 						<p style="padding-left: 70px;">
 							<i class="fa fa-clock"></i>&nbsp;<span><%= eventDetail.Date%><br />
@@ -219,7 +231,7 @@
 						<p style="padding-left: 70px;"><i class="fa fa-map-marker-alt"></i>&nbsp;<span><%= eventDetail.Venue %></span></p>
 
 						<span>
-							<% if (userId == null || userId != eventDetail.User_id)
+							<% if (userId != eventDetail.User_id)
 								{
 							%>
 							<%FinalProj.BLL.Users user = (FinalProj.BLL.Users)Session["user"];
@@ -231,8 +243,23 @@
 										if (participant.id == user.id)
 										{
 											btnCreated = true;%>
-							<asp:Button ID="leaveEvent" CssClass="btn btn-danger" runat="server" Text="LEAVE" OnClick="leaveEvent_Click" />
+
+							<%if (DateTime.Now >= DateTime.Parse(eventDetail.Date.ToString() + " " + eventDetail.EndTime.ToString()))
+								{%>
+							<asp:Button ID="eventEnd" CssClass="btn btn-secondary" runat="server" Text="EVENT ENDED" Enabled="false" />
+
 							<%}
+								else if (DateTime.Now >= DateTime.Parse(eventDetail.Date.ToString() + " " + eventDetail.StartTime.ToString()))
+								{%>
+							<asp:Button ID="Button1" CssClass="btn btn-secondary" runat="server" Text="ONGOING" Enabled="false" />
+							<%}
+								else
+								{
+							%>
+							<asp:Button ID="leaveEvent" CssClass="btn btn-danger" runat="server" Text="LEAVE" OnClick="leaveEvent_Click" />
+							<%
+											}
+										}
 									}
 								}
 								if (btnCreated == false)
@@ -243,8 +270,8 @@
 										{%>
 							<asp:Button ID="finished" CssClass="btn btn-secondary" runat="server" Text="EVENT ENDED" Enabled="false" />
 							<%}
-							else
-							{ %>
+								else
+								{ %>
 							<asp:Button ID="ongoing" CssClass="btn btn-secondary" runat="server" Text="ONGOING" Enabled="false" />
 							<%}
 								}
@@ -307,8 +334,8 @@
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">
 					<div id="contactOrganiser">
 						<p class="h5">Contact Organiser</p>
-						<img src="Img/organiser.jpeg" style="border-radius: 100%; width: 60px; height: 60px;" /><span style="padding-left: 10px"><a href="#" style="text-decoration: none;"><%=userName %></a><br />
-							kovitanwk@gmail.com</span>
+						<asp:Image Style="border-radius: 100%; width: 60px; height: 60px;" ID="imgDPOrg" runat="server" /><span style="padding-left: 10px"><a href="/PPGallery.aspx?userId=<%=eventDetail.User_id%>" style="text-decoration: none;"><%=userName %></a><br /><br />
+							Email: <%=profilePic.email %></span>
 					</div>
 
 					<p style="margin-top: 1em;" id="remainingSpots" class="h5">Remaining Spot(s) Available:<b style="color: #EC5D5D">&nbsp; <%= eventDetail.MaxAttendees - participantList.Count %></b></p>
@@ -324,8 +351,9 @@
 									break;
 								{ %>
 
-						<div class="col-3">
-							<img src="Img/organiser.jpeg" style="border-radius: 100%; width: 60px; height: 60px;" />
+						<div class="col-3" style="text-align: center;">
+							<img style="border-radius: 100%; width: 60px; height: 60px;" src="<%=participantList[i].DPimage %>">
+
 							<p><%= participantList[i].name %></p>
 						</div>
 
@@ -341,8 +369,8 @@
 									break;
 								{ %>
 
-						<div class="col-3">
-							<img src="Img/organiser.jpeg" style="border-radius: 100%; width: 60px; height: 60px;" />
+						<div class="col-3" style="text-align: center;">
+							<img style="border-radius: 100%; width: 60px; height: 60px;" src="<%=participantList[i].DPimage %>">
 							<p><%= participantList[i].name %></p>
 						</div>
 
@@ -367,14 +395,13 @@
 					</div>
 
 					<div style="margin-top: 2em; margin-bottom: 2em;">
-						<ul class="participants" id="myUL">
+						<ul class="participants" id="myUL" >
 							<% foreach (var participant in participantList)
 								{ %>
 
-							<li class="participantsListed">
-								<img src="Img/organiser.jpeg" style="border-radius: 100%; width: 60px; height: 60px;" /><span style="padding-left: 10px"><a href="#" style="text-decoration: none;"><%=participant.name %></a></span></li>
+							<li class="participantsListed" style="margin-bottom:5%;">
+								<img src="<%=participant.DPimage %>" style="border-radius: 100%; width: 60px; height: 60px;" /><span style="padding-left: 10px"><a href="#" style="text-decoration: none;"><%=participant.name %></a></span></li>
 
-							<hr />
 							<%} %>
 						</ul>
 					</div>

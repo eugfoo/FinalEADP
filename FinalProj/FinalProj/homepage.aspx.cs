@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -19,42 +20,42 @@ namespace FinalProj
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			
-			Events ev = new Events();
-			DateTime currentDate;
+				Events ev = new Events();
+				DateTime currentDate;
 
-			currentDate = DateTime.Now.Date;
-			
-			evList = ev.GetAllEventsByEDate(currentDate);
+				currentDate = DateTime.Now.Date;
 
-			foreach (Events element in evList)                  // loops through each event list and changes formatting of both time and date
-			{
-				int index = element.Date.IndexOf(" ");
-				element.Date = element.Date.Substring(0, index);
-				element.StartTime = element.StartTime.Substring(0, 5);
+				evList = ev.GetAllEventsByEDate(currentDate);
 
-				if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+				foreach (Events element in evList)                  // loops through each event list and changes formatting of both time and date
 				{
+					int index = element.Date.IndexOf(" ");
+					element.Date = element.Date.Substring(0, index);
+					element.StartTime = element.StartTime.Substring(0, 5);
 
-					if(int.Parse(element.StartTime.Substring(0, 2)) == 12)
-						element.StartTime = (int.Parse(element.StartTime.Substring(0, 2))).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+					if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+					{
+
+						if (int.Parse(element.StartTime.Substring(0, 2)) == 12)
+							element.StartTime = (int.Parse(element.StartTime.Substring(0, 2))).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+						else
+							element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+					}
 					else
-					element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+					{
+						element.StartTime = element.StartTime + " AM";
+					}
+					userList.Add(element.EventId, ev.GetAllUserNameByUserId(element.User_id));
+					userIdList.Add(element.EventId, element.User_id);
+					attending = element.getAllParticipants(element.EventId);
+					attendingUsers.Add(element.EventId, attending.Count);
+
 				}
-				else
+				if (Session["user"] == null)
 				{
-					element.StartTime = element.StartTime + " AM";
+					createEvent.Enabled = false;
 				}
-				userList.Add(element.EventId, ev.GetAllUserNameByUserId(element.User_id));
-                userIdList.Add(element.EventId, element.User_id);
-                attending = element.getAllParticipants(element.EventId);
-				attendingUsers.Add(element.EventId, attending.Count);
-				
-			}
-			if (Session["user"] == null)
-			{
-				createEvent.Enabled = false;
-			}
+			
 		}
 		
 		protected void DateClicked(object sender, EventArgs e)
@@ -64,6 +65,10 @@ namespace FinalProj
 			currentDate = Convert.ToDateTime(hidingDate.Text);
 			evList = ev.GetAllEventsByEDate(currentDate);
 
+			userList.Clear();
+			userIdList.Clear();
+			attending.Clear();
+			attendingUsers.Clear();
 			foreach (Events element in evList)                  // loops through each event list and changes formatting of both time and date
 			{
 				int index = element.Date.IndexOf(" ");
@@ -82,8 +87,11 @@ namespace FinalProj
 				{
 					element.StartTime = element.StartTime + " AM";
 				}
+				userList.Add(element.EventId, ev.GetAllUserNameByUserId(element.User_id));
+				userIdList.Add(element.EventId, element.User_id);
+				attending = element.getAllParticipants(element.EventId);
+				attendingUsers.Add(element.EventId, attending.Count);
 			}
-
 		}
 
 		protected void createEvent_Click(object sender, EventArgs e)

@@ -190,7 +190,7 @@ namespace FinalProj
 
                 ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, advertisement, user_id);
                 int result = ev.AddEvent();
-                Response.Redirect("eventDetails.aspx");
+                Response.Redirect("/eventDetails.aspx");
             }
         }
 

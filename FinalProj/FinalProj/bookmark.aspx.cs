@@ -12,8 +12,11 @@ namespace FinalProj
     {
 		protected int userId;
 		protected bool attendingResult;
+		protected Dictionary<int,Users> organiserDict = new Dictionary<int, Users>();
 		protected Dictionary<int, bool> checkJoinStatus= new Dictionary<int, bool>();
 		protected List<Events> eventsUserBookmarked;
+		protected string userName;
+
 		protected void Page_Load(object sender, EventArgs e)
         {
 			if (Session["user"] != null)
@@ -74,9 +77,16 @@ namespace FinalProj
 				{
 					element.EndTime = element.EndTime + " AM";
 				}
-
 				Events ev = new Events();
+				Users usr = new Users();
+				
+				Users userObj = usr.GetUserById(element.User_id);
+
+				organiserDict.Add(element.EventId, userObj);
+
+				
 				attendingResult = ev.VerifyIfUserIsAttendingEvent(userId, element.EventId);
+				userName = element.GetAllUserNameByUserId(element.User_id);
 				checkJoinStatus.Add(element.EventId, attendingResult);
 			}
 

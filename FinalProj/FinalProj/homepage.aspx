@@ -282,7 +282,7 @@
 		}
 	</style>
 	<script>
-
+		
 		document.addEventListener('DOMContentLoaded', function () {      //script happens whenever document is load
 			var today = new Date(),
 				year = today.getFullYear(),
@@ -298,6 +298,7 @@
 				this.options = options;
 				this.draw();
 			}
+
 
 			Calendar.prototype.draw = function () {
 
@@ -484,6 +485,7 @@
 
 
 		}, false);
+		
 
 
 
@@ -562,7 +564,7 @@
 						</div>
 						<div class="card-footer text-muted">
 							Posted by
-							<a href="/PPGallery.aspx?userId=<%=element.User_id%>"><%= userList[element.EventId] %></a>
+							<a href="/PPGallery.aspx?eventId=<%=element.User_id%>"><%= userList[element.EventId] %></a>
 						</div>
 					</div>
 					<% } %>
