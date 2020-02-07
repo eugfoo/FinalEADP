@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteBootstrap.Master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" ClientIDMode="Static" Inherits="FinalProj.EditProfile" %>
+
 <%@ Import Namespace="FinalProj.BLL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
@@ -10,11 +11,20 @@
             $("#fuDP").change(function (e) {
                 $("#btnUploadDP").click();
             });
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
         });
     </script>
+    <style>
+        .ttInfo:hover {
+            cursor: pointer;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<% Users user = (Users)Session["user"];%>
+    <% Users user = (Users)Session["user"];%>
 
     <div style="min-height: 90vh">
         <div class="ml-5 mt-3 mr-5">
@@ -27,7 +37,7 @@
                         <asp:Image ID="imgBP" CssClass="card-img-top" Style="max-height: 100px; max-width: 1100px; min-height: 100px; min-width: 150px;" runat="server" />
                         <div class="form-control">
                             <asp:FileUpload CssClass="col-md-8" ID="fuBP" runat="server" accept=".png,.jpg,.jpeg" />
-                            <asp:Button style="display:none;" ID="btnUploadBP" runat="server" Text="Display" OnClick="btnUploadBP_Click" CausesValidation="false" UseSubmitBehavior="False" />
+                            <asp:Button Style="display: none;" ID="btnUploadBP" runat="server" Text="Display" OnClick="btnUploadBP_Click" CausesValidation="false" UseSubmitBehavior="False" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -36,7 +46,7 @@
                         <asp:Image ID="imgDP" CssClass="card-img-top" Style="max-width: 100px; max-height: 100px; min-height: 100px; min-width: 100px;" runat="server" />
                         <div class="form-control">
                             <asp:FileUpload CssClass="col-md-8" ID="fuDP" runat="server" accept=".png,.jpg,.jpeg" />
-                            <asp:Button style="display:none;" ID="btnUploadDP" runat="server" Text="Display" OnClick="btnUploadDP_Click" CausesValidation="false" UseSubmitBehavior="False" />
+                            <asp:Button Style="display: none;" ID="btnUploadDP" runat="server" Text="Display" OnClick="btnUploadDP_Click" CausesValidation="false" UseSubmitBehavior="False" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -45,26 +55,12 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Description</label>
-                        <asp:TextBox TextMode="MultiLine" Columns="50" Rows="5" type="text" 
+                        <asp:TextBox TextMode="MultiLine" Columns="50" Rows="5" type="text"
                             CssClass="form-control" ID="tbDesc" runat="server" CausesValidation="True"></asp:TextBox>
                     </div>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-5">
-                    <div class="form-group">
-                        <label>Dietary Requirements:</label>
-                        <asp:DropDownList ID="ddlDiet" OnSelectedIndexChanged="ddlDiet_OnSelectedIndexChanged" runat="server" AutoPostBack="True">
-                            <asp:ListItem Selected="True" Value="None">None</asp:ListItem>
-                            <asp:ListItem Value="Halal">Halal</asp:ListItem>
-                            <asp:ListItem Value="Vegetarian">Vegatarian</asp:ListItem>
-                            <asp:ListItem Value="Others">Others</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">If you chose others, please specify:</label>
-                        <asp:TextBox TextMode="MultiLine" Columns="50" Rows="3" type="text" 
-                            CssClass="form-control" ID="tbOtherDiet" runat="server" CausesValidation="True"></asp:TextBox>
-                    </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Connect your Social Media</label>
                         <div class="input-group mb-2">
@@ -86,13 +82,29 @@
                             <asp:TextBox type="text" CssClass="form-control" ID="tbTwitter" runat="server" CausesValidation="False"></asp:TextBox>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label>Dietary Requirements:</label>
+                        <asp:DropDownList ID="ddlDiet" OnSelectedIndexChanged="ddlDiet_OnSelectedIndexChanged" runat="server" AutoPostBack="True">
+                            <asp:ListItem Selected="True" Value="None">None</asp:ListItem>
+                            <asp:ListItem Value="Halal">Halal</asp:ListItem>
+                            <asp:ListItem Value="Vegetarian">Vegatarian</asp:ListItem>
+                            <asp:ListItem Value="Others">Others</asp:ListItem>
+                        </asp:DropDownList>
+                        <i class="ttInfo fas fa-info-circle" data-html='true' data-toggle="tooltip" data-placement="bottom"
+                            title="This won't show on your profile but only to organisers of events you've joined"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">If you chose others, please specify:</label>
+                        <asp:TextBox TextMode="MultiLine" Columns="50" Rows="3" type="text"
+                            CssClass="form-control" ID="tbOtherDiet" runat="server" CausesValidation="True"></asp:TextBox>
+                    </div>
                 </div>
             </div>
             <div style="border-bottom: 1px solid rgba(0,0,0,.250);"></div>
             <div class="mt-2 align-bottom" style="text-align: right;">
-                    <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-danger mr-3" Text="Cancel" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnCancel_Click" />
-                    <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnUpdate_Click" />
-                </div>
+                <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-danger mr-3" Text="Cancel" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnCancel_Click" />
+                <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnUpdate_Click" />
+            </div>
         </div>
     </div>
 </asp:Content>

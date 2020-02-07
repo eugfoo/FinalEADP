@@ -1,19 +1,42 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ProfilePage.Master" AutoEventWireup="true" CodeBehind="PPPoints.aspx.cs" Inherits="FinalProj.PPPoints" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <script> // super fancy code to flip the chevron
+        $(document).ready(function () {
+            $('#collapseOne').on('show.bs.collapse', function () {
+                $("#chevronHow").removeClass("fas fa-chevron-down")
+                $("#chevronHow").addClass("fas fa-chevron-up")
+            })
+
+            $('#collapseOne').on('hide.bs.collapse', function () {
+                $("#chevronHow").removeClass("fas fa-chevron-up")
+                $("#chevronHow").addClass("fas fa-chevron-down")
+            })
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <br>
     <div class="container">
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row text-center">
-            <p class="" style="width: 100%; font-size: 20px; margin-bottom: 0px">
-                Points:
+            <div class="" style="width: 100%; font-size: 20px; margin-bottom: 0px">
+                <div>
+                    Points:
                     <asp:Label ID="lblPoints" ForeColor="DarkCyan" runat="server"></asp:Label>
-            </p>
+                </div>
+                <div>
+                    <a style="font-size: 14px;" runat="server" autopostback="false" class="p-0 text-center text-muted btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">How to Earn?
+                    <i id="chevronHow" style="font-size: 10px;" class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+                <div style="font-size: 18px;" id="collapseOne" class="text-center collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    Participating in events and giving feedback, organising an event with a rating exceeding 3 stars.
+                </div>
+            </div>
         </div>
         <br>
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row ">
-            <div style=" width: 100%; border-bottom: 1px solid lightgray;" class="row mx-0 pb-2">
+            <div style="width: 100%; border-bottom: 1px solid lightgray;" class="row mx-0 pb-2">
                 <div style="font-size: 20px;" class="col-md-4 col-sm-7">
                     Redeemed Vouchers 
                 </div>
@@ -23,7 +46,7 @@
             </div>
             <% if (vRedList.Count > 0)
                 {
-                    %>
+            %>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -33,8 +56,8 @@
                 </thead>
                 <tbody>
                     <% for (int i = 0; i < vRedList.Count; i++)
-                                          {
-                            %>
+                        {
+                    %>
                     <tr>
                         <th scope="row"><%=vRedList[i].VoucherName%></th>
                         <td><%=vRedList[i].VoucherAmount %></td>
@@ -43,9 +66,9 @@
                 </tbody>
             </table>
             <% }
-            else
-            { %>
-            <div style="font-size:16px;" class="m-3 font-italic text-muted text-center row">
+                else
+                { %>
+            <div style="font-size: 16px;" class="m-3 font-italic text-muted text-center row">
                 <div class="col-12">
                     No vouchers have been redeemed.
                 </div>
