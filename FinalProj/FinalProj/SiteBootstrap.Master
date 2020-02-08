@@ -195,7 +195,6 @@
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="/VoucherRedemption.aspx">Redeem Vouchers</a>
                                         <%--<a class="hexagon-item" href="#">Request Recommendation</a>--%>
->>>>>>> master
                                     </div>
                                 </div>
                             </div>
