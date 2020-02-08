@@ -8,6 +8,14 @@
 				cursor:pointer;
 			}
 
+		#ContentPlaceHolder1_panelError {
+			text-align: center;
+		}
+
+		#ContentPlaceHolder1_panelSuccess {
+			text-align: center;
+		}
+
 		@media only screen and (max-width:767px) {
 			
 			.btn {

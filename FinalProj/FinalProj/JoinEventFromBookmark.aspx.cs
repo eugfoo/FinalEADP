@@ -40,6 +40,8 @@ namespace FinalProj
 					int result = ev.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]), userName);
 					if (result == 1)
 						Session["SessionSSM"] = "Successfully Joined the event!";
+					else if(result == -1)
+						Session["SessionERM"] = "You already joined an event within this timeframe!";
 					else
 						Session["SessionERM"] = "Oops! Something Went Wrong!";
 					Response.Redirect("/bookmark.aspx");
