@@ -28,11 +28,11 @@
         <br />
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row ">
             <div style="width: 100%; border-bottom: 2px solid lightgray;" class="row mx-0 pb-2">
-                <div style="font-size: 20px;" class="col-md-2 col-sm-2">
+                <div style="font-size: 20px;" class="fdback-head col-12 col-md-2 col-sm-2">
                     Feedback
                 </div>
 
-                <div class="text-right col-md-10 col-sm-10">
+                <div class="fdback-head col-12 col-md-10 col-sm-10">
                         <label for="ddlEvents" class="col-form-label">Event:</label>
                         <asp:DropDownList AutoPostBack="True" ID="ddlEvents" OnSelectedIndexChanged="ddlEvents_OnSelectedIndexChanged" runat="server"></asp:DropDownList>
                 </div>
@@ -48,14 +48,14 @@
                     {
             %>
             <div style="width: 100%; border-bottom: 1px solid lightgray;" class="pb-2 row mt-2 mx-0 mb-2">
-                <div class="col-sm-6 col-md-4">
+                <div class="col-6 col-sm-6 col-md-4">
                     <div style="position: absolute; top: 50%; -ms-transform: translateY(-50%); transform: translateY(-50%);"
                         class="">
                         <img style="border-radius: 100%; width: 60px; height: 60px;" src="<%=user.GetUserById(feedbackList[i].UserId).DPimage%>" class="img img-thumbnail" />
                         <a href="/PPGallery.aspx?userId=<%=feedbackList[i].UserId%>" class="fdback-link text-dark ml-2"><b><%=user.GetUserById(feedbackList[i].UserId).name%></b></a>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-8">
+                <div class="col-6 col-sm-6 col-md-8">
                     <div class="row">
                         <div class="fdback-rating">
                             <% for (int j = 0; j < feedbackList[i].AvgRating; j++)
@@ -76,14 +76,14 @@
                 else // The last row.
                 { %>
             <div style="width: 100%;" class="row mt-2 mx-0 mb-2">
-                <div class="col-sm-6 col-md-4">
+                <div class="col-6 col-sm-6 col-md-4">
                     <div style="position: absolute; top: 50%; -ms-transform: translateY(-50%); transform: translateY(-50%);"
                         class="">
                         <img style="border-radius: 100%; width: 60px; height: 60px;" src="<%=user.GetUserById(feedbackList[i].UserId).DPimage%>" class="img img-thumbnail" />
                         <a href="/PPGallery.aspx?userId=<%=feedbackList[i].UserId%>" class="fdback-link text-dark ml-2"><b><%=user.GetUserById(feedbackList[i].UserId).name%></b></a>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-8">
+                <div class="col-6 col-sm-6 col-md-8">
                     <div class="row">
                         <div class="fdback-rating">
                             <% for (int j = 0; j < feedbackList[i].AvgRating; j++)

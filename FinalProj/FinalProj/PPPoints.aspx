@@ -29,18 +29,18 @@
                     <i id="chevronHow" style="font-size: 10px;" class="fas fa-chevron-down"></i>
                     </a>
                 </div>
-                <div style="font-size: 18px;" id="collapseOne" class="text-center collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                    Participating in events and giving feedback, organising an event with a rating exceeding 3 stars.
+                <div style="font-size: 16px;" id="collapseOne" class="text-center collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    Participating in events and giving feedback, organising an event with a rating exceeding 2 stars.
                 </div>
             </div>
         </div>
         <br>
         <div style="border: 1px solid lightgray; border-radius: 15px; padding: 10px;" class="row ">
             <div style="width: 100%; border-bottom: 1px solid lightgray;" class="row mx-0 pb-2">
-                <div style="font-size: 20px;" class="col-md-4 col-sm-7">
+                <div style="font-size: 20px;" class="col-7 col-md-4 col-sm-7">
                     Redeemed Vouchers 
                 </div>
-                <div class="text-right col-md-8 col-sm-5">
+                <div class="text-right col-5 col-md-8 col-sm-5">
                     <asp:LinkButton href="/VoucherRedemption.aspx" CssClass="btn btn-success" ID="lbRedeem" runat="server">Redeem <i class="fas fa-arrow-right"></i></asp:LinkButton>
                 </div>
             </div>

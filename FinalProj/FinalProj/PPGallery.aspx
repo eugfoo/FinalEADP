@@ -109,7 +109,7 @@
                 <a data-fancybox="gallery"
                     data-caption="&lt;b&gt;<%=gpCaption%>&lt;/b&gt;<br />&lt;a class=&quot;ev-link&quot; href=&quot;eventDetails.aspx?eventId=<%=gpList[i].gpevent%>&quot;&gt;@<%=evTitle%>&lt;/a&gt;"
                     href="<%Response.Write(gpList[i].filepath);%>">
-                    <img src="<%Response.Write(gpList[i].filepath);%>" style="width: 200px; height: 200px;" class="img text-left" />
+                    <img src="<%Response.Write(gpList[i].filepath);%>" style="" class="img text-left" />
                 </a>
             </div>
                  <% } else
@@ -118,7 +118,7 @@
                 <a data-fancybox="gallery"
                     data-caption="&lt;b&gt;<%=gpCaption%>&lt;/b&gt;<br />&lt;span&gt;@<%=evTitle%>&lt;/span&gt;"
                     href="<%Response.Write(gpList[i].filepath);%>">
-                    <img src="<%Response.Write(gpList[i].filepath);%>" style="width: 200px; height: 200px;" class="img text-left" />
+                    <img src="<%Response.Write(gpList[i].filepath);%>" style="" class="img text-left" />
                 </a>
             </div>
                    <%  }
@@ -127,6 +127,7 @@
             <%} %>
         </div>
     </div>
+    <br />
     <%  } %>
 
     <div class="modal fade" id="uploadPicture" tabindex="-1" role="dialog" aria-labelledby="uploadPictureLabel" aria-hidden="true">

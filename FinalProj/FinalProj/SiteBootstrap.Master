@@ -21,16 +21,11 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
-        .hexagon {
-            position: relative;
-            width: 30px;
-            height: 17.32px;
-            background-color: #ffffff;
-            margin: 8.66px 0;
-            box-shadow: 0 0 20px rgba(0,0,0,0.35);
+        .navbar-nav {
+            padding-right: 15px;
         }
 
-            .hexagon:before, .hexagon:after {
+        .hexagon:before, .hexagon:after {
                 content: "";
                 position: absolute;
                 z-index: 1;
@@ -42,27 +37,35 @@
                 background-color: inherit;
                 left: 4.3934px;
                 box-shadow: 0 0 20px rgba(0,0,0,0.35);
-            }
+        }
 
-            .hexagon:before {
-                top: -10.6066px;
-            }
+        .hexagon:before {
+            top: -10.6066px;
+        }
 
-            .hexagon:after {
-                bottom: -10.6066px;
-            }
+        .hexagon:after {
+            bottom: -10.6066px;
+        }
 
+        .hexagon span {
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0;
+            width: 30px;
+            height: 17.3205px;
+            z-index: 2;
+            background: inherit;
+        }
 
-            .hexagon span {
-                display: block;
-                position: absolute;
-                top: 0px;
-                left: 0;
-                width: 30px;
-                height: 17.3205px;
-                z-index: 2;
-                background: inherit;
-            }
+        .hexagon {
+            position: relative;
+            width: 30px;
+            height: 17.32px;
+            background-color: #ffffff;
+            margin: 8.66px 0;
+            box-shadow: 0 0 20px rgba(0,0,0,0.35);
+        }
 
         .flex-wrapper {
             display: flex;
@@ -71,6 +74,13 @@
             justify-content: space-between;
         }
 
+        @media screen and (max-width: 975px) {
+            #ddCaret {
+            margin-left: 5px;
+            }
+
+        }
+        
         #ddCaret i:hover {
             color: white;
             cursor: pointer;
@@ -86,9 +96,9 @@
                 var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
             }
-		}
+        }
 
-		
+
     </script>
 </head>
 <body>

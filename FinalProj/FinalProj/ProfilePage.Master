@@ -66,13 +66,86 @@
             display: block;
         }
 
-            .pphyperlinks:hover {
-                text-decoration: none;
-            }
+        .pphyperlinks:hover {
+            text-decoration: none;
+        }
 
         .ppSMlinks {
             border: none !important;
             background-color: rgba(0,0,0,0) !important;
+        }
+
+        @media screen and (min-width: 985px) {
+            #ddCaret {
+            margin-left: 5px;
+            }
+
+            #imgCon  {
+                margin-left: 6px;
+            }
+
+             .gpic a img {
+                width: 200px;
+                height: 200px;
+            }
+
+             .fdback-head:nth-of-type(2n) {
+                text-align:right;
+            }
+
+        }
+
+        @media screen and (max-width: 985px) {
+            #ddCaret {
+            margin-left: 5px;
+            }
+
+            #imgCon  {
+                margin-right: 6px;
+            }
+
+            .gpic a img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .fdback-head:nth-of-type(2n) {
+                text-align:right;
+            }
+
+        }
+
+        @media screen and (max-width: 575px) {
+            #ppContainer {
+            padding-left: 0;
+            padding-right: 0;
+
+            }
+
+            .gpic a img{
+                width: 50px;
+                height: 50px;
+            }
+
+            #imgCon  {
+                margin-right: 15px;
+            }
+
+            .gpic a img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .gpic:nth-of-type(2n+1) {
+                /* Hi */
+            }
+
+            .fdback-head:nth-of-type(2n) {
+                text-align:left;
+            }
+
+
+
         }
 
         #ddCaret i:hover {
@@ -136,7 +209,7 @@
                 </ul>
             </div>
         </nav>
-        <div class="container">
+        <div id="ppContainer" class="container">
             <div class="row">
 
                 <div class="col-md-12">
@@ -144,7 +217,7 @@
                         <div style="top: 0;">
                             <asp:Image CssClass="card-img-top" Style="max-width: 1100px; min-height: 200px; max-height: 200px; min-width: 300px;" ID="imgBP" runat="server" />
                         </div>
-                        <div style="position: absolute; top: 125px; left: 45%; margin-left: 6px;" class="text-center">
+                        <div id="imgCon" style="position: absolute; top: 125px; left: 45%;" class="text-center">
                             <asp:Image CssClass="img img-thumbnail text-center" Style="max-width: 100px; max-height: 100px; min-height: 100px; min-width: 100px;" ID="imgDP" runat="server" />
                         </div>
                         <br />
