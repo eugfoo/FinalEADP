@@ -32,13 +32,22 @@ namespace FinalProj
 				Response.Redirect("/bookmark.aspx");
 			else
 			{
+
 				Events ev = new Events();
-				int result = ev.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]), userName);
-				if (result == 1)
-					Session["SessionSSM"] = "Successfully Joined the event!";
+				var organiserId = ev.getEventDetails(int.Parse(Request.QueryString["eventId"])).User_id;
+				if (organiserId != userId)
+				{
+					int result = ev.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]), userName);
+					if (result == 1)
+						Session["SessionSSM"] = "Successfully Joined the event!";
+					else
+						Session["SessionERM"] = "Oops! Something Went Wrong!";
+					Response.Redirect("/bookmark.aspx");
+				}
 				else
-					Session["SessionERM"] = "Oops! Something Went Wrong!";
-				Response.Redirect("/bookmark.aspx");
+				{
+					Response.Redirect("/eventDetails?=eventId" + Request.QueryString["eventId"]);
+				}
 			}
 		}
 	}
