@@ -17,6 +17,7 @@ namespace FinalProj
         protected Dictionary<int, int> userIdList = new Dictionary<int, int>();
         protected Dictionary<int, int> attendingUsers = new Dictionary<int, int>();
 		protected List<Users> participantList = new List<Users>();
+		protected string setCalendarDate = "";
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -60,13 +61,19 @@ namespace FinalProj
 		
 		protected void DateClicked(object sender, EventArgs e)
 		{
-			
-				Events ev = new Events();
-				DateTime currentDate;
-				currentDate = Convert.ToDateTime(hidingDate.Text);
-				evList = ev.GetAllEventsByEDate(currentDate);
 
-				userList.Clear();
+			
+			Events ev = new Events();
+			DateTime currentDate;
+			currentDate = Convert.ToDateTime(hidingDate.Text);
+			evList = ev.GetAllEventsByEDate(currentDate);
+
+			string dateOnly = hidingDate.Text;
+			String[] dateList = dateOnly.Split('/');
+			string dateFinal = dateList[2] + "-" + dateList[1] + "-" + dateList[0];
+			setCalendarDate = dateFinal;
+
+			userList.Clear();
 				userIdList.Clear();
 				if (attending != null)
 				{

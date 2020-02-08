@@ -282,15 +282,16 @@
 		}
 	</style>
 	<script>
-		
+
 		document.addEventListener('DOMContentLoaded', function () {      //script happens whenever document is load
 			var today = new Date(),
-				year = today.getFullYear(),
-				month = today.getMonth(),
+				selectedDay = document.getElementById("previousDate").value,
+				selectedDayDate = new Date(document.getElementById("previousDate").value),
+				year = selectedDay == "" ? today.getFullYear() : selectedDayDate.getFullYear(),
+				month = selectedDay == "" ? today.getMonth() : selectedDayDate.getMonth(),
 				monthTag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 				day = today.getDate(),
 				days = document.getElementsByTagName('td'),
-				selectedDay,
 				setDate,
 				daysLen = days.length;
 			// options should like '2014-01-01'
@@ -302,17 +303,14 @@
 
 			Calendar.prototype.draw = function () {
 
-				this.getCookie('selected_day');
 				this.getOptions();
 				this.drawDays();
 				var that = this,
-					//reset = document.getElementById('reset'),
 					pre = document.getElementsByClassName('pre-button'),
 					next = document.getElementsByClassName('next-button');
 
 				pre[0].addEventListener('click', function () { that.preMonth(); });
 				next[0].addEventListener('click', function () { that.nextMonth(); });
-				//reset.addEventListener('click', function () { that.reset(); });
 				while (daysLen--) {
 					days[daysLen].addEventListener('click', function () { that.clickDay(this); });
 				}
@@ -337,7 +335,7 @@
 
 					tempMonth = today.getMonth(),
 					invalidSelection = false;
-
+				console.log(this.options);
 				if (today.getFullYear() > year) {   // if current year more than selected year(eg. 2019)
 					tempMonth += 12;				// adds 12 to tempmonth (eg. jan = 0), therefore 12 (Good Analogy is 12Hr & 24Hr Clock)
 				}
@@ -380,10 +378,10 @@
 
 						}
 					}
-					if (selectedDay) {
-						if ((j === selectedDay.getDate() + startDay - 1) && (month === selectedDay.getMonth()) && (year === selectedDay.getFullYear())) {
+					if (selectedDay != "") {
+						if ((j === selectedDayDate.getDate() + startDay - 1) && (month === selectedDayDate.getMonth()) && (year === selectedDayDate.getFullYear())) {
 							days[j].className = "selected";
-							this.drawHeader(selectedDay.getDate());
+							this.drawHeader(selectedDayDate.getDate());
 						}
 					}
 				}
@@ -402,7 +400,6 @@
 					}
 					o.className = "selected";
 					this.drawHeader(o.innerHTML);
-					this.setCookie('selected_day', 1);
 					let stringday = document.querySelector(".selected").innerText.length > 1 ? document.querySelector(".selected").innerText : "0" + document.querySelector(".selected").innerText;
 					let stringmonth = month >= 9 ? month + 1 : "0" + (month + 1);
 					document.getElementById("ContentPlaceHolder1_hidingDate").value = stringday + "/" + stringmonth + "/" + year;
@@ -436,6 +433,7 @@
 
 			Calendar.prototype.getOptions = function () {
 				if (this.options) {
+					console.log(this.options);
 					var sets = this.options.split('-');
 					setDate = new Date(sets[0], sets[1] - 1, sets[2]);
 					day = setDate.getDate();
@@ -443,53 +441,12 @@
 					month = setDate.getMonth();
 				}
 			};
-
-			//Calendar.prototype.reset = function () {		//reset
-			//	month = today.getMonth();
-			//	year = today.getFullYear();
-			//	day = today.getDate();
-			//	this.options = undefined;
-			//	this.drawDays();
-			//};
-
-			
-			
-			Calendar.prototype.setCookie = function (name, expiredays) {
-				if (expiredays) {
-					var date = new Date();
-					date.setTime(date.getTime() + (expiredays * 24 * 60 * 60 * 1000));
-					var expires = "; expires=" + date.toGMTString();
-				} else {
-					var expires = "";
-				}
-				document.cookie = name + "=" + selectedDay + expires + "; path=/";
-			};
-			
-			
-
-			Calendar.prototype.getCookie = function (name) {
-				if (document.cookie.length) {
-					var arrCookie = document.cookie.split(';'),
-						nameEQ = name + "=";
-					for (var i = 0, cLen = arrCookie.length; i < cLen; i++) {
-						var c = arrCookie[i];
-						while (c.charAt(0) == ' ') {
-							c = c.substring(1, c.length);
-
-						}
-						if (c.indexOf(nameEQ) === 0) {
-							selectedDay = new Date(c.substring(nameEQ.length, c.length));
-						}
-					}
-				}
-			};
-			
 			
 			var calendar = new Calendar();
 
 
 		}, false);
-		
+
 
 
 
@@ -550,18 +507,25 @@
 									{
 										if (element.EventId == attendance.Key)
 										{%><%= attendance.Value %><%}
-									}%> 
+																	  }%> 
 								Participants Attending 
-								<% if (attending.Count == element.MaxAttendees){ %> 
-									<b style="color: darkred;">(FULL)</b>
-								<%} else if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.StartTime.ToString())){
-									if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.EndTime.ToString()))
-									{%>
-										<b style="color: darkred;">(EVENT ENDED)</b>
-									<%}else{ %>
-										<b style="color: darkred;">(Event Ongoing)</b><%}
-								}else{ %>
-									<b style="color: forestgreen;">(EVENT AVAILABLE TO JOIN)</b>
+								<% if (attending.Count == element.MaxAttendees)
+									{ %>
+								<b style="color: darkred;">(FULL)</b>
+								<%}
+									else if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.StartTime.ToString()))
+									{
+										if (DateTime.Now >= DateTime.Parse(element.Date.ToString() + " " + element.EndTime.ToString()))
+										{%>
+								<b style="color: darkred;">(EVENT ENDED)</b>
+								<%}
+								else
+								{ %>
+								<b style="color: darkred;">(Event Ongoing)</b><%}
+			}
+			else
+			{ %>
+								<b style="color: forestgreen;">(EVENT AVAILABLE TO JOIN)</b>
 								<%} %>
 							</p>
 							<a href="/eventDetails.aspx?eventId=<%=element.EventId %>" class="btn btn-primary">View More &rarr;</a>
@@ -577,7 +541,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-4 order-first order-lg-12" style="margin-bottom: 10%;">
 				<asp:Button ID="createEvent" CssClass="btn btn-primary createEvent" runat="server" OnClick="createEvent_Click" Text="Create Event" />
 				<div class="elegant-calencar" style="font-size: 10px;">
-								<%--<p id="reset">reset</p>--%>
+					<%--<p id="reset">reset</p>--%>
 					<div id="header" class="clearfix">
 						<div class="pre-button"><</div>
 						<div class="head-info">
@@ -658,6 +622,7 @@
 					</table>
 				</div>
 				<asp:TextBox ID="hidingDate" CssClass="forHide" runat="server"></asp:TextBox>
+				<input type="hidden" id="previousDate" value="<%=setCalendarDate %>" />
 				<asp:Button ID="testbtn" CssClass="forHide" runat="server" OnClick="DateClicked" CausesValidation="False" />
 			</div>
 		</div>

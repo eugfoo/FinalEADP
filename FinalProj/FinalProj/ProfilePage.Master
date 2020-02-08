@@ -216,18 +216,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-	<script> function deleteAllCookies() {
-            var cookies = document.cookie.split(";");
-
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i];
-                var eqPos = cookie.indexOf("=");
-                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-            }
-		}
-
-	</script>
+	
 
     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
     </asp:ContentPlaceHolder>
@@ -265,7 +254,7 @@
                     </div>
                 </div>
                   <%}%>
-                <a id="hmpage-link" style="" class="ml-2 navbar-brand text-center" href="/homepage.aspx" onclick="deleteAllCookies()">Clear View</a>
+                <a id="hmpage-link" style="" class="ml-2 navbar-brand text-center" href="/homepage.aspx">Clear View</a>
                 <button style="padding:0;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarnav"
                     aria-controls="navbarnav" aria-expanded="false" aria-label="toggle navigation">
                     <span class="navbar-toggler-icon"></span>
