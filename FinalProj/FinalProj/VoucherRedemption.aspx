@@ -46,7 +46,10 @@
         </table>
         <% } %>
 
-        <a href="AddVoucher.aspx" id="AddVouchers">Add Vouchers</a>
+        <% if (Session["admin"] != null)
+            { %>
+            <a href="AddVoucher.aspx" id="AddVouchers">Add Vouchers</a>
+        <% } %>
 
     </div>
 </asp:Content>

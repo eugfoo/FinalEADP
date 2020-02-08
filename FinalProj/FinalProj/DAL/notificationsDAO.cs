@@ -7,12 +7,15 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web;
 using System.Diagnostics;
+using System.Text;
 
 namespace FinalProj.DAL
 {
     public class notificationsDAO
     {
         protected List<EventsStatus> evStList;
+        protected List<int> eventIds = new List<int>();
+        protected List<string> eventTitleList = new List<string>();
 
         public List<Notifications> SelectAllEventsEnd()
         {
@@ -60,43 +63,71 @@ namespace FinalProj.DAL
 
                 int result = DateTime.Compare(dt1, dt2);
 
-                if (result < 0 || result == 0)
+                if (result <= 0)
                 {
-
-                    //Step 1 -  Define a connection to the database by getting
-                    //          the connection string from web.config
-                    string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-                    SqlConnection myConn = new SqlConnection(DBConnect);
-
-                    //Step 2 -  Create a DataAdapter to retrieve data from the database table
-                    string sqlStmt = "Select * from Attendance Where Event_Id = @eventId and Attend = 1";
-                    SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
-
-                    da.SelectCommand.Parameters.AddWithValue("@eventId", element.Id);
-
-                    //Step 3 -  Create a DataSet to store the data to be retrieved
-                    DataSet ds = new DataSet();
-
-                    //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
-                    da.Fill(ds);
-
-                    //Step 5 -  Read data from DataSet to List
-                    int rec_cnt = ds.Tables[0].Rows.Count;
-                    for (int i = 0; i < rec_cnt; i++)
-                    {
-                        DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
-                        int eventId = int.Parse(row["Event_Id"].ToString());
-                        int userId = int.Parse(row["Users_Id"].ToString());
-                        int attend = int.Parse(row["Attend"].ToString());
-                        int feedback = int.Parse(row["Feedback"].ToString());
-                        string eventName = element.Title;
-
-                        Notifications obj = new Notifications(eventId, eventName, userId, attend, feedback);
-                        notiList.Add(obj);
-                    }
+                    eventIds.Add(int.Parse(element.Id));
                 }
-
             }
+            string combinedInt = "";
+            for (int i = 0; i < eventIds.Count; i++)
+            {
+                combinedInt = string.Join(",", eventIds);
+            }
+
+            System.Diagnostics.Debug.WriteLine("This is eventid: " + combinedInt);
+            
+
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from web.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter to retrieve data from the database table
+            string sqlStmt = "Select * from Attendance Where ','+@eventId+',' like '%,'+cast(Event_Id as varchar(50))+',%' and Attend = 1";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+
+            da.SelectCommand.Parameters.AddWithValue("@eventId", combinedInt);
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            
+
+
+            //Step 5 -  Read data from DataSet to List
+            int rec_cnt = ds.Tables[0].Rows.Count;
+
+            List<Events> evList = new List<Events>();
+            Events ev = new Events();
+
+
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                int eventId = int.Parse(row["Event_Id"].ToString());
+                int userId = int.Parse(row["Users_Id"].ToString());
+                int attend = int.Parse(row["Attend"].ToString());
+                int feedback = int.Parse(row["Feedback"].ToString());
+
+                evList.Add(ev.getEventDetails(eventId));
+
+                string eventName = evList[i].Title;
+
+                Notifications obj = new Notifications(eventId, eventName, userId, attend, feedback);
+                notiList.Add(obj);
+            }
+            
+
+            for (int i = 0; i < notiList.Count; i++)
+            {
+                System.Diagnostics.Debug.WriteLine("This is user_id: " + notiList[i].User_id);
+                System.Diagnostics.Debug.WriteLine("This is event Name: " + notiList[i].EventName);
+                System.Diagnostics.Debug.WriteLine("This is event id: " + notiList[i].EventId);
+            }
+
             return notiList;
         }
     }

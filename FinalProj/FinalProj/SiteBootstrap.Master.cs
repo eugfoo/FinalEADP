@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,9 +11,8 @@ namespace FinalProj
 {
     public partial class SiteBootstrap : System.Web.UI.MasterPage
     {
-        protected List<Notifications> notiList;
-        public List<string> eventName = new List<string>();
-
+        protected List<Notifications> notiListTemp;
+        protected List<Notifications> notiList = new List<Notifications>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,18 +35,18 @@ namespace FinalProj
                     liLogOut.Visible = true;
                     lblBookmark.Visible = true;
 
-                    notiList = noti.GetEventsEnded();
+                    notiListTemp = noti.GetEventsEnded();
+                    System.Diagnostics.Debug.WriteLine("This is notiListTemp: " + notiListTemp);
 
-                    if (notiList.Count != 0)
+                    for (int i = 0; i < notiListTemp.Count; i++)
                     {
-                        foreach (var element in notiList)
+                        if (notiListTemp[i].User_id == user.id)
                         {
-                            if (element.User_id == user.id)
-                            {
-                                eventName.Add(element.EventName);
-                            }
+                            notiList.Add(notiListTemp[i]);
+                            //System.Diagnostics.Debug.WriteLine("This is notiList" + notiList[i]);
                         }
                     }
+                    
                 }
                 else
                 {
@@ -58,9 +58,6 @@ namespace FinalProj
                     lblBookmark.Visible = false;
                 }
             }
-
-            
-            
         }
 
         protected void lblLogOut_Click(object sender, EventArgs e)
