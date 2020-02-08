@@ -37,6 +37,7 @@ namespace FinalProj.DAL
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                 string eventTitle = row["eventTitle"].ToString();
+                string eventId = row["eventId"].ToString();
                 string eventVenue = row["eventVenue"].ToString();
                 string eventDate = row["eventDate"].ToString();
                 string eventStartTime = row["eventStartTime"].ToString();
@@ -48,7 +49,7 @@ namespace FinalProj.DAL
                 string eventOrganiserPic = "";
                 int eventNum = 0;
             
-                EventsStatus obj = new EventsStatus(eventTitle, eventVenue, eventDate ,eventStartTime, eventEndTime, eventDesc, eventPic, eventOrganiser, eventCompletion, eventOrganiserPic, eventNum);
+                EventsStatus obj = new EventsStatus(eventTitle, eventId, eventVenue, eventDate ,eventStartTime, eventEndTime, eventDesc, eventPic, eventOrganiser, eventCompletion, eventOrganiserPic, eventNum);
                 evStList.Add(obj);
             };
 

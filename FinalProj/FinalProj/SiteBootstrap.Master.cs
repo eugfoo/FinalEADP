@@ -12,6 +12,8 @@ namespace FinalProj
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Notifications noti = new Notifications();
+
             if (Convert.ToBoolean(Session["admin"])) // An admin has signed in
             {
                 liAdmin.Visible = true;
@@ -39,6 +41,11 @@ namespace FinalProj
                     lblBookmark.Visible = false;
                 }
             }
+
+            
+            noti.GetEventsEnded();
+
+            
         }
 
         protected void lblLogOut_Click(object sender, EventArgs e)
