@@ -66,41 +66,55 @@
             display: block;
         }
 
-        .pphyperlinks:hover {
-            text-decoration: none;
-        }
+            .pphyperlinks:hover {
+                text-decoration: none;
+            }
 
         .ppSMlinks {
             border: none !important;
-            background-color: rgba(0,0,0,0) !important;
         }
+
+            .ppSMlinks a img {
+                border-radius: 100%;
+                box-shadow: 0px 5px 5px #626b80;
+                height: 30px;
+                width: 30px;
+                transition: box-shadow 0.2s;
+            }
+
+                .ppSMlinks a img:hover {
+                    box-shadow: 0px 2px 2px #454b59;
+                }
+
+            .ppSMlinks div {
+                height: 30px;
+            }
 
         @media screen and (min-width: 985px) {
             #ddCaret {
-            margin-left: 5px;
+                margin-left: 5px;
             }
 
-            #imgCon  {
+            #imgCon {
                 margin-left: 6px;
             }
 
-             .gpic a img {
+            .gpic a img {
                 width: 200px;
                 height: 200px;
             }
 
-             .fdback-head:nth-of-type(2n) {
-                text-align:right;
+            .fdback-head:nth-of-type(2n) {
+                text-align: right;
             }
-
         }
 
         @media screen and (max-width: 985px) {
             #ddCaret {
-            margin-left: 5px;
+                margin-left: 5px;
             }
 
-            #imgCon  {
+            #imgCon {
                 margin-right: 6px;
             }
 
@@ -110,24 +124,22 @@
             }
 
             .fdback-head:nth-of-type(2n) {
-                text-align:right;
+                text-align: right;
             }
-
         }
 
         @media screen and (max-width: 575px) {
             #ppContainer {
-            padding-left: 0;
-            padding-right: 0;
-
+                padding-left: 0;
+                padding-right: 0;
             }
 
-            .gpic a img{
+            .gpic a img {
                 width: 50px;
                 height: 50px;
             }
 
-            #imgCon  {
+            #imgCon {
                 margin-right: 15px;
             }
 
@@ -141,11 +153,8 @@
             }
 
             .fdback-head:nth-of-type(2n) {
-                text-align:left;
+                text-align: left;
             }
-
-
-
         }
 
         #ddCaret i:hover {
@@ -224,19 +233,53 @@
                         <div style="min-height: 200px;" class="text-center card-body">
                             <ul style="float: left; position: absolute; background-color: none !important;" class="list-group">
                                 <li class="list-group-item ppSMlinks">
-                                    <asp:HyperLink ID="hlFacebook" Style="text-decoration: none;" class="text-dark" NavigateUrl="" runat="server">
-                                <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/124/124010.svg" alt="f icon" />
-                                    </asp:HyperLink>
+                                    <div>
+                                        <% if (hlFacebook.NavigateUrl != "")
+                                            { %>
+                                        <asp:HyperLink ID="hlFacebook" Style="text-decoration: none;" class="stretched-link text-dark" NavigateUrl="" runat="server">
+                                <img style="" class="img " src="https://image.flaticon.com/icons/svg/124/124010.svg" alt="f icon" />
+                                        </asp:HyperLink>
+                                        <% }
+                                            else
+                                            { %>
+                                        <asp:HyperLink ID="HyperLink1" Style="text-decoration: none;" class="stretched-link text-dark" NavigateUrl="" runat="server">
+                                <img style="box-shadow:none;" class="img " src="https://image.flaticon.com/icons/svg/124/124010.svg" alt="f icon" />
+                                        </asp:HyperLink>
+                                        <%}%>
+                                    </div>
                                 </li>
                                 <li class="list-group-item ppSMlinks">
-                                    <asp:HyperLink ID="hlInstagram" Style="text-decoration: none;" class="text-dark" NavigateUrl="" runat="server">
-                            <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/2111/2111463.svg" alt="i icon" />
-                                    </asp:HyperLink>
+                                    <div>
+                                        <% if (hlInstagram.NavigateUrl != "")
+                                            { %>
+                                        <asp:HyperLink ID="hlInstagram" Style="text-decoration: none;" class="stretched-link text-dark" NavigateUrl="" runat="server">
+                            <img style="" class="img " src="https://image.flaticon.com/icons/svg/2111/2111463.svg" alt="i icon" />
+                                        </asp:HyperLink>
+                                        <% }
+                                            else 
+                                            { %>
+                                        <asp:HyperLink ID="HyperLink2" Style="text-decoration: none;" class="stretched-link text-dark" NavigateUrl="" runat="server">
+                            <img style="box-shadow:none;" class="img " src="https://image.flaticon.com/icons/svg/2111/2111463.svg" alt="i icon" />
+                                        </asp:HyperLink>
+                                        <%}%>
+                                    </div>
                                 </li>
                                 <li class="list-group-item ppSMlinks">
-                                    <asp:HyperLink ID="hlTwitter" Style="text-decoration: none;" class="text-dark" NavigateUrl="" runat="server">
-                            <img style="max-height: 28px;" class="img " src="https://image.flaticon.com/icons/svg/124/124021.svg" alt="t icon" />
-                                    </asp:HyperLink>
+                                    <div>
+                                        <% if (hlTwitter.NavigateUrl != "")
+                                            { %>
+                                        <asp:HyperLink ID="hlTwitter" Style="text-decoration: none;" class="stretched-link text-dark" NavigateUrl="" runat="server">
+                            <img style="" class="img " src="https://image.flaticon.com/icons/svg/124/124021.svg" alt="t icon" />
+                                        </asp:HyperLink>
+                                        <% }
+                                            else 
+                                            { %>
+                                        <asp:HyperLink ID="HyperLink3" Style="text-decoration: none;" class="stretched-link text-dark" NavigateUrl="" runat="server">
+                            <img style="box-shadow:none;" class="img " src="https://image.flaticon.com/icons/svg/124/124021.svg" alt="t icon" />
+                                        </asp:HyperLink>
+                                        <%}%>
+
+                                    </div>
                                 </li>
                             </ul>
                             <div>

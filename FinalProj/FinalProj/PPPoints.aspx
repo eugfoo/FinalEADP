@@ -30,7 +30,7 @@
                     </a>
                 </div>
                 <div style="font-size: 16px;" id="collapseOne" class="text-center collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                    Participating in events and giving feedback, organising an event with a rating exceeding 2 stars.
+                    Participating in events and giving feedback or organising an event that reaches an average rating exceeding 2 stars.
                 </div>
             </div>
         </div>
