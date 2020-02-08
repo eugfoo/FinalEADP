@@ -60,40 +60,42 @@ namespace FinalProj
 		
 		protected void DateClicked(object sender, EventArgs e)
 		{
-			Events ev = new Events();
-			DateTime currentDate;
-			currentDate = Convert.ToDateTime(hidingDate.Text);
-			evList = ev.GetAllEventsByEDate(currentDate);
+			
+				Events ev = new Events();
+				DateTime currentDate;
+				currentDate = Convert.ToDateTime(hidingDate.Text);
+				evList = ev.GetAllEventsByEDate(currentDate);
 
-			userList.Clear();
-			userIdList.Clear();
-			if (attending != null)
-			{
-				attending.Clear();
-			}
-			attendingUsers.Clear();
-			foreach (Events element in evList)                  // loops through each event list and changes formatting of both time and date
-			{
-				int index = element.Date.IndexOf(" ");
-				element.Date = element.Date.Substring(0, index);
-				element.StartTime = element.StartTime.Substring(0, 5);
-
-				if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+				userList.Clear();
+				userIdList.Clear();
+				if (attending != null)
 				{
-					if (int.Parse(element.StartTime.Substring(0, 2)) == 12)
-						element.StartTime = (int.Parse(element.StartTime.Substring(0, 2))).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+					attending.Clear();
+				}
+				attendingUsers.Clear();
+				foreach (Events element in evList)                  // loops through each event list and changes formatting of both time and date
+				{
+					int index = element.Date.IndexOf(" ");
+					element.Date = element.Date.Substring(0, index);
+					element.StartTime = element.StartTime.Substring(0, 5);
+
+					if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+					{
+						if (int.Parse(element.StartTime.Substring(0, 2)) == 12)
+							element.StartTime = (int.Parse(element.StartTime.Substring(0, 2))).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+						else
+							element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+
+					}
 					else
-						element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+					{
+						element.StartTime = element.StartTime + " AM";
+					}
+					userList.Add(element.EventId, ev.GetAllUserNameByUserId(element.User_id));
+					userIdList.Add(element.EventId, element.User_id);
+					attending = element.getAllParticipants(element.EventId);
+					attendingUsers.Add(element.EventId, attending.Count);
 				
-				}
-				else
-				{
-					element.StartTime = element.StartTime + " AM";
-				}
-				userList.Add(element.EventId, ev.GetAllUserNameByUserId(element.User_id));
-				userIdList.Add(element.EventId, element.User_id);
-				attending = element.getAllParticipants(element.EventId);
-				attendingUsers.Add(element.EventId, attending.Count);
 			}
 		}
 

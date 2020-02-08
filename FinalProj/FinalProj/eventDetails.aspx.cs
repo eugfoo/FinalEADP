@@ -15,6 +15,7 @@ namespace FinalProj
 		protected string userName;
 		protected Users profilePic;
 		protected Events eventDetail;
+		protected List<int> listOfUserId;
 		protected List<Users> participantList = new List<Users>();
 		protected void Page_Load(object sender, EventArgs e)
         {
@@ -78,7 +79,7 @@ namespace FinalProj
 				eventDetail.EndTime = eventDetail.EndTime + " AM";
 			}
 
-			List<int> listOfUserId = ev.getAllParticipants(eventDetail.EventId);
+			listOfUserId = ev.getAllParticipants(eventDetail.EventId);
 			Users usr = new Users();
 
 			foreach (int usrId in listOfUserId)
@@ -209,6 +210,17 @@ namespace FinalProj
             Session["eventId"] = int.Parse(Request.QueryString["eventId"]);
             Response.Redirect("/AttendanceSubmitted.aspx");
         }
-		
+
+		protected void discussion2_Click(object sender, EventArgs e)
+		{
+			
+			Response.Redirect("/forumEventPost.aspx?threadId=" + Request.QueryString["eventId"]);
+		}
+
+		protected void discussion_Click(object sender, EventArgs e)
+		{
+			Response.Redirect("/forumEventPost.aspx?threadId=" + Request.QueryString["eventId"]);
+
+		}
 	}
 }

@@ -452,6 +452,8 @@
 			//	this.drawDays();
 			//};
 
+			
+			
 			Calendar.prototype.setCookie = function (name, expiredays) {
 				if (expiredays) {
 					var date = new Date();
@@ -462,6 +464,8 @@
 				}
 				document.cookie = name + "=" + selectedDay + expires + "; path=/";
 			};
+			
+			
 
 			Calendar.prototype.getCookie = function (name) {
 				if (document.cookie.length) {
@@ -479,8 +483,8 @@
 					}
 				}
 			};
-
-
+			
+			
 			var calendar = new Calendar();
 
 
@@ -573,7 +577,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-4 order-first order-lg-12" style="margin-bottom: 10%;">
 				<asp:Button ID="createEvent" CssClass="btn btn-primary createEvent" runat="server" OnClick="createEvent_Click" Text="Create Event" />
 				<div class="elegant-calencar" style="font-size: 10px;">
-					<%--			<p id="reset">reset</p>--%>
+								<%--<p id="reset">reset</p>--%>
 					<div id="header" class="clearfix">
 						<div class="pre-button"><</div>
 						<div class="head-info">
