@@ -10,6 +10,10 @@ namespace FinalProj
 {
     public partial class SiteBootstrap : System.Web.UI.MasterPage
     {
+        protected List<Notifications> notiList;
+        public List<string> eventName = new List<string>();
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Notifications noti = new Notifications();
@@ -30,6 +34,19 @@ namespace FinalProj
                     lblProfile.Text = user.name;
                     liLogOut.Visible = true;
                     lblBookmark.Visible = true;
+
+                    notiList = noti.GetEventsEnded();
+
+                    if (notiList.Count != 0)
+                    {
+                        foreach (var element in notiList)
+                        {
+                            if (element.User_id == user.id)
+                            {
+                                eventName.Add(element.EventName);
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -43,8 +60,6 @@ namespace FinalProj
             }
 
             
-            noti.GetEventsEnded();
-
             
         }
 
