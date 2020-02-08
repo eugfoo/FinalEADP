@@ -159,30 +159,39 @@
             
         }
 
+        /* Set CSS for drop down list */
+
         .dropdown {
             position: relative;
             display: inline-block;
         }
 
         .dropdown-content {
+            text-align: center;
             display: none;
             position: absolute;
             background-color: #f1f1f1;
-            min-width: 160px;
+            min-width: 300px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
         }
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
 
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+                .dropdown-content p {
+                    font-weight: bold;
+                    color: darkgreen;
+                    display: inline;
+                }
 
         .dropdown:hover .dropdown-content {
             display: block;
@@ -191,6 +200,8 @@
         .dropdown:hover .hexagon {
             background-color: lightblue;
         }
+
+        /* End Drop down list */
 
         #ddCaret i:hover {
             color: white;
@@ -227,16 +238,32 @@
             <% Users userG = (Users)Session["user"];
                     if (userG != null)
                     {%>
-                <div style="padding: .25rem .75rem;"class="dropdown"> <!-- Kovi Here is the hexagon i was gonna change it in the other master page but didnt want to disturb -->
-                    <div class="hexagon">
+                        <div class="dropdown">
+                        <div class="hexagon">
+                            <% if (Session["id"] != null)
+                                { %>
+                            <div class="dropdown-content">
+                                <br />
+                                <% if (notiList.Count == 0)
+                                    { %>
+                                    <p id="link">You have no notifications</p>
+                                   <% }
+                                    else
+                                    { %>
+                                    <% for (int i = 0; i < notiList.Count; i++)
+                                            {
+                                            if (notiList[i].User_id.ToString() == Session["id"].ToString())
+                                            { %>
+                                            <a href="#" id="link"><p id="eventName"><%= notiList[i].EventName %></p> has ended! <br /> Please click here to complete feedback to get points! </a>
+                                            <% }
+                                        } %>
+                                <% } %>
+                            </div>
+                            <% } %>
+
                         <span></span>
-                        <div class="dropdown-content">
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
-                        </div>
                     </div>
-                </div> 
+                </div>
                   <%}%>
                 <a id="hmpage-link" style="" class="ml-2 navbar-brand text-center" href="/homepage.aspx" onclick="deleteAllCookies()">Clear View</a>
                 <button style="padding:0;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarnav"

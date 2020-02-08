@@ -10,12 +10,15 @@ namespace FinalProj
 {
     public partial class ProfilePage : System.Web.UI.MasterPage
     {
+        protected List<Notifications> notiListTemp;
+        protected List<Notifications> notiList = new List<Notifications>();
         public int rating;
         public string viewingUserId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             viewingUserId = Request.QueryString["userId"];
+            Notifications noti = new Notifications();
 
             if (viewingUserId != null) // A user is viewing another's PP
             {
@@ -58,6 +61,19 @@ namespace FinalProj
                 lblProfile.Text = user.name;
                 liLogOut.Visible = true;
                 lblBookmark.Visible = true;
+
+                notiListTemp = noti.GetEventsEnded();
+                System.Diagnostics.Debug.WriteLine("This is notiListTemp: " + notiListTemp);
+
+                for (int i = 0; i < notiListTemp.Count; i++)
+                {
+                    if (notiListTemp[i].User_id == user.id)
+                    {
+                        notiList.Add(notiListTemp[i]);
+                        //System.Diagnostics.Debug.WriteLine("This is notiList" + notiList[i]);
+                    }
+                }
+
             }
             else
             {

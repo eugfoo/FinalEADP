@@ -171,19 +171,28 @@
 
                 <div class="dropdown">
                     <div class="hexagon">
+                        <% if (Session["id"] != null)
+                            { %>
                         <div class="dropdown-content">
                             <br />
-
-                            <% for (int i = 0; i < notiList.Count; i++)
-                                {
-                                    if (notiList[i].User_id.ToString() == Session["id"].ToString())
-                                    { %>
-                                    <a href="#" id="link"><p id="eventName"><%= notiList[i].EventName %></p> has ended! <br /> Please click here to complete feedback to get points! </a>
-                                <% }
-                                } %>
+                            <% if (notiList.Count == 0)
+                                { %>
+                                <p id="link">You have no notifications</p>
+                               <% }
+                                else
+                                { %>
+                                <% for (int i = 0; i < notiList.Count; i++)
+                                        {
+                                        if (notiList[i].User_id.ToString() == Session["id"].ToString())
+                                        { %>
+                                        <a href="#" id="link"><p id="eventName"><%= notiList[i].EventName %></p> has ended! <br /> Please click here to complete feedback to get points! </a>
+                                        <% }
+                                    } %>
+                            <% } %>
                         </div>
-                        <span></span>
+                        <% } %>
 
+                        <span></span>
                     </div>
                 </div>
 

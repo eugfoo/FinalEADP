@@ -49,7 +49,9 @@ namespace FinalProj.DAL
                 string eventOrganiserPic = "";
                 int eventNum = 0;
             
-                EventsStatus obj = new EventsStatus(eventTitle, eventId, eventVenue, eventDate ,eventStartTime, eventEndTime, eventDesc, eventPic, eventOrganiser, eventCompletion, eventOrganiserPic, eventNum);
+                EventsStatus obj = new EventsStatus(eventTitle, eventId, eventVenue, eventDate 
+                    ,eventStartTime, eventEndTime, eventDesc, eventPic, eventOrganiser
+                    , eventCompletion, eventOrganiserPic, eventNum);
                 evStList.Add(obj);
             };
 
