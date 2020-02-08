@@ -13,7 +13,6 @@ namespace FinalProj.DAL
     public class notificationsDAO
     {
         protected List<EventsStatus> evStList;
-        protected List<string> eventIdEnded;
 
         public List<Notifications> SelectAllEventsEnd()
         {
@@ -63,8 +62,6 @@ namespace FinalProj.DAL
 
                 if (result < 0 || result == 0)
                 {
-                    eventIdEnded.Add(element.Id);
-
 
                     //Step 1 -  Define a connection to the database by getting
                     //          the connection string from web.config
@@ -92,8 +89,9 @@ namespace FinalProj.DAL
                         int userId = int.Parse(row["Users_Id"].ToString());
                         int attend = int.Parse(row["Attend"].ToString());
                         int feedback = int.Parse(row["Feedback"].ToString());
+                        string eventName = element.Title;
 
-                        Notifications obj = new Notifications(eventId, userId, attend, feedback);
+                        Notifications obj = new Notifications(eventId, eventName, userId, attend, feedback);
                         notiList.Add(obj);
                     }
                 }

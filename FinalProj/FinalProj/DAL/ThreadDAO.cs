@@ -45,6 +45,38 @@ namespace FinalProj.DAL
             return result;
         }
 
+        public int InsertEvent(Thread thread)
+        {
+            int result = 0;
+             SqlCommand sqlCmd = new SqlCommand();
+
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "INSERT INTO Threads (threadPrefix, threadBadgeColor, threadTitle, threadDate, threadImage1, " +
+                "threadContent, user_id, user_name)" +
+                "VALUES (@paraThreadPrefix, @paraThreadBadgeColor, @paraThreadTitle, @paraThreadDate, @paraThreadImage1, " +
+                "@paraThreadContent, @paraUserId, @paraUserName)";
+            sqlCmd = new SqlCommand(sqlStmt, myConn);
+
+            sqlCmd.Parameters.AddWithValue("@paraThreadPrefix", thread.Prefix);
+            sqlCmd.Parameters.AddWithValue("@paraThreadBadgeColor", thread.BadgeColor);
+            sqlCmd.Parameters.AddWithValue("@paraThreadTitle", thread.Title);
+            sqlCmd.Parameters.AddWithValue("@paraThreadDate", thread.Date);
+            sqlCmd.Parameters.AddWithValue("@paraThreadImage1", thread.ThreadImage1);
+            sqlCmd.Parameters.AddWithValue("@paraThreadContent", thread.Content);
+            sqlCmd.Parameters.AddWithValue("@paraUserId", thread.UserId);
+            sqlCmd.Parameters.AddWithValue("@paraUserName", thread.UserName);
+
+            myConn.Open();
+            result = sqlCmd.ExecuteNonQuery();
+
+            myConn.Close();
+
+            return result;
+
+        }
+
         public int Update(int id, Thread thread)
         {
             int result = 0;
@@ -129,8 +161,49 @@ namespace FinalProj.DAL
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
 
-            string sqlStmt = "Select * from Threads ORDER BY Id DESC";
+            string sqlStmt = "Select * from Threads WHERE threadPrefix != @paraThreadPrefix ORDER BY Id DESC";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraThreadPrefix", "[EVENT]");
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+
+            List<Thread> threadsList = new List<Thread>();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                int tId = int.Parse(row["Id"].ToString());
+                string threadPrefix = row["threadPrefix"].ToString();
+                string threadBadgeColor = row["threadBadgeColor"].ToString();
+                string threadTitle = row["threadTitle"].ToString();
+                string threadDate = row["threadDate"].ToString();
+                string threadImage1 = row["threadImage1"].ToString();
+                string threadImage2 = row["threadImage2"].ToString();
+                string threadImage3 = row["threadImage3"].ToString();
+                string threadImage4 = row["threadImage4"].ToString();
+                string threadContent = row["threadContent"].ToString();
+                int threadUserId = Convert.ToInt32(row["user_id"]);
+                string threadUserName = row["user_name"].ToString();
+
+                Thread thread = new Thread(tId, threadPrefix, threadBadgeColor, threadTitle, threadDate,
+                    threadImage1, threadImage2, threadImage3, threadImage4, threadContent,
+                    threadUserId, threadUserName);
+                threadsList.Add(thread);
+            }
+
+            return threadsList;
+        }
+
+        public List<Thread> getAllEventThreads(string eventPrefix)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "Select * from Threads WHERE threadPrefix = @paraThreadPrefix ORDER BY Id DESC";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraThreadPrefix", eventPrefix);
 
             DataSet ds = new DataSet();
             da.Fill(ds);

@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalProj
-{
-
-
-    public partial class forumPage1
-    {
-
+namespace FinalProj {
+    
+    
+    public partial class forumPage1 {
+        
         /// <summary>
         /// rptrConfirmedThreads control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace FinalProj
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptrConfirmedThreads;
-
+        
         /// <summary>
         /// rptrThreads control.
         /// </summary>

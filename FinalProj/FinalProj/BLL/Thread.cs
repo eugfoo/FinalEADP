@@ -64,6 +64,25 @@ namespace FinalProj.BLL
             UserName = userName;
         }
 
+        public Thread(string eventPrefix, string eventBadgeColor, string eventTitle, string eventDate, string eventImg, string eventDesc, int userId, string userName)
+        {
+            Prefix = eventPrefix;
+            BadgeColor = eventBadgeColor;
+            Title = eventTitle;
+            Date = eventDate;
+            ThreadImage1 = eventImg;
+            Content = eventDesc;
+            UserId = userId;
+            UserName = userName;
+        }
+
+        public int createThreadForEvent()
+        {
+            ThreadDAO dao = new ThreadDAO();
+            int result = dao.InsertEvent(this);
+            return result;
+        }
+
         public int CreateThread()
         {
             ThreadDAO dao = new ThreadDAO();
@@ -113,6 +132,12 @@ namespace FinalProj.BLL
         {
             ThreadDAO dao = new ThreadDAO();
             return dao.getAllThreads();
+        }
+
+        public List<Thread> SelectAllEventThreads(string eventPrefix)
+        {
+            ThreadDAO dao = new ThreadDAO();
+            return dao.getAllEventThreads(eventPrefix);
         }
 
 

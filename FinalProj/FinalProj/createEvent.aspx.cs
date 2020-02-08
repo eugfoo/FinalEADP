@@ -15,16 +15,16 @@ namespace FinalProj
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-			if (Session["user"] == null) // A user has signed in
-			{
-				Response.Redirect("/homepage.aspx");
-			}
+            if (Session["user"] == null) // A user has signed in
+            {
+                Response.Redirect("/homepage.aspx");
+            }
 
-		}
+        }
 
 
 
-		protected void changetoDefaultBorder()
+        protected void changetoDefaultBorder()
         {
             eventTitle.BorderColor = System.Drawing.Color.LightGray;
             eventAddress.BorderColor = System.Drawing.Color.LightGray;
@@ -103,20 +103,20 @@ namespace FinalProj
                     endTime.BorderColor = System.Drawing.Color.Red;
                 }
 
-				if ((int.Parse(endTimeNumber) - int.Parse(startTimeNumber)) < 100)
-				{
-					errmsg += "Duration must be 1 hour bare minimum";
-					startTime.BorderColor = System.Drawing.Color.Red;
-					endTime.BorderColor = System.Drawing.Color.Red;
-				}
-			}
-			
-			if (DateTime.Parse(eventDate.Text.ToString() + " " + startTime.Text.ToString()) <= DateTime.Now)
-			{
-				errmsg += "Please ensure that you entered a valid Start Time";
-				startTime.BorderColor = System.Drawing.Color.Red;
-			}
-			if (maxAttend.Text.ToString() == "")
+                if ((int.Parse(endTimeNumber) - int.Parse(startTimeNumber)) < 100)
+                {
+                    errmsg += "Duration must be 1 hour bare minimum";
+                    startTime.BorderColor = System.Drawing.Color.Red;
+                    endTime.BorderColor = System.Drawing.Color.Red;
+                }
+            }
+
+            if (DateTime.Parse(eventDate.Text.ToString() + " " + startTime.Text.ToString()) <= DateTime.Now)
+            {
+                errmsg += "Please ensure that you entered a valid Start Time";
+                startTime.BorderColor = System.Drawing.Color.Red;
+            }
+            if (maxAttend.Text.ToString() == "")
             {
                 errmsg += "Maximum number of attendees cannot be empty! <br>";
                 maxAttend.BorderColor = System.Drawing.Color.Red;
@@ -144,7 +144,7 @@ namespace FinalProj
                     desc.BorderColor = System.Drawing.Color.Red;
                 }
             }
-  
+
             if (errmsg != "")
             {
                 errmsgTb.Text = errmsg;
@@ -153,8 +153,8 @@ namespace FinalProj
             }
             else
             {
-				Users user = (Users)Session["user"];
-				string eventStartTime = startTime.Text.ToString();
+                Users user = (Users)Session["user"];
+                string eventStartTime = startTime.Text.ToString();
                 string eventEndTime = endTime.Text.ToString();
                 string title = eventTitle.Text.ToString();
                 string venue = eventAddress.Text.ToString();
@@ -163,8 +163,11 @@ namespace FinalProj
                 string description = desc.Text.ToString();
                 string picture = "";
                 string note = noteText.Text.ToString();
-				int user_id = user.id;
+                int user_id = user.id;
 
+                Thread thread = new Thread();
+                DateTime now = DateTime.Now;
+                string andyDate = now.ToString("g");
 
         
 				
@@ -186,14 +189,19 @@ namespace FinalProj
 
                 }
 
-				int rating = 0;
+                int rating = 0;
 
-                ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, rating , user_id);
+                ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, rating, user_id);
+
+                thread = new Thread("[EVENT]", "success", title, andyDate, picture,
+                    description, user_id, user.name);
+
                 int result = ev.AddEvent();
+                int resultThread = thread.createThreadForEvent();
                 Response.Redirect("/eventDetails.aspx");
             }
         }
 
-		
-	}
+
+    }
 }
