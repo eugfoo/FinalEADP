@@ -71,8 +71,7 @@
 							<p class="card-text">Start Date and time: <%=bookmarkedEvent.Date %>, <%=bookmarkedEvent.StartTime %>-<%=bookmarkedEvent.EndTime %></p>
 							<p class="card-text">Venue: <%=bookmarkedEvent.Venue %></p>
 
-							<%--<asp:Button ID="removeBMBtn" CssClass="btn btn-danger removeBMBtn" runat="server" Text="REMOVE" OnClick="removeBMBtn_Click" />
-						 <asp:Button ID="joinBtn" CssClass="btn btn-warning join" runat="server" Text="JOIN" />--%>
+							
 							<a class="btn btn-danger removeBMBtn" href="/RemoveBookmark.aspx?eventId=<%=bookmarkedEvent.EventId %>">REMOVE</a>
 							<% if (DateTime.Now >= DateTime.Parse(bookmarkedEvent.Date.ToString() + " " + bookmarkedEvent.StartTime.ToString()))
 								{
