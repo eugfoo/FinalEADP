@@ -16,9 +16,12 @@ namespace FinalProj
         public int eventCount = 0;
         public List<string> complete = new List<string>();
         int forCount = 0;
+        public string viewingUserId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            viewingUserId = Request.QueryString["userId"];
+
             EventsStatus evSt = new EventsStatus();
             Users usr = new Users();
 
@@ -28,61 +31,133 @@ namespace FinalProj
             }
             else
             {
-                evStListTemp = evSt.GetAllEventsByName();
-
-                for (int i = 0; i < evStListTemp.Count; i++)
+                if (viewingUserId != null)
                 {
-                    if (evStListTemp[i].Organiser == Session["id"].ToString())
+                    evStListTemp = evSt.GetAllEventsByName();
+                    Users viewingUser = new Users();
+                    usr = viewingUser.GetUserById(int.Parse(viewingUserId));
+
+                    for (int i = 0; i < evStListTemp.Count; i++)
                     {
-                        evStListTemp[i].OrganiserPic = Session["Pic"].ToString();
-                        evStListTemp[i].Organiser = Session["Name"].ToString();
-                        evStList.Add(evStListTemp[i]);
-                        eventCount += 1;
+                        if (evStListTemp[i].Organiser == viewingUserId)
+                        {
+                            evStListTemp[i].OrganiserPic = usr.DPimage;
+                            evStListTemp[i].Organiser = usr.name;
+                            evStList.Add(evStListTemp[i]);
+                            eventCount += 1;
+                        }
+                    }
+
+                    foreach (EventsStatus element in evStList)
+                    {
+                        element.NumCompleted = eventCount;
+
+                        int index = element.Date.IndexOf(" ");
+                        element.Date = element.Date.Substring(0, index);
+                        element.StartTime = element.StartTime.Substring(0, 5);
+
+                        if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+                        {
+
+                            if (int.Parse(element.StartTime.Substring(0, 2)) == 12)
+                                element.StartTime = (int.Parse(element.StartTime.Substring(0, 2))).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+                            else
+                                element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+                        }
+                        else
+                        {
+                            element.StartTime = element.StartTime + " AM";
+                        }
+
+                        if (int.Parse(element.EndTime.Substring(0, 2)) >= 12)
+                        {
+
+                            if (int.Parse(element.EndTime.Substring(0, 2)) == 12)
+                                element.EndTime = (int.Parse(element.EndTime.Substring(0, 2))).ToString() + ":" + element.EndTime.Substring(3, 2) + " PM";
+                            else
+                                element.EndTime = (int.Parse(element.EndTime.Substring(0, 2)) - 12).ToString() + ":" + element.EndTime.Substring(3, 2) + " PM";
+                        }
+                        else
+                        {
+                            element.EndTime = element.EndTime + " AM";
+                        }
+
+
+                        string date = element.Date + " " + element.EndTime;
+                        DateTime dt1 = DateTime.Parse(date);
+                        DateTime dt2 = DateTime.Now;
+
+                        int result = DateTime.Compare(dt1, dt2);
+
+                        if (result < 0 || result == 0)
+                            element.Completed = "Complete";
+
+                        forCount += 1;
                     }
                 }
-
-
-                foreach (EventsStatus element in evStList)
+                else
                 {
-                    element.NumCompleted = eventCount;
+                    evStListTemp = evSt.GetAllEventsByName();
 
-                    int index = element.Date.IndexOf(" ");
-                    
-
-                    element.Date = element.Date.Substring(0, index);
-                    element.StartTime = element.StartTime.Substring(0, 5);
-                    element.EndTime = element.EndTime.Substring(0, 5);
-                    
-
-                    if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+                    for (int i = 0; i < evStListTemp.Count; i++)
                     {
-                        element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
-                    }
-                    else
-                    {
-                        element.StartTime = element.StartTime + " AM";
+                        if (evStListTemp[i].Organiser == Session["id"].ToString())
+                        {
+                            evStListTemp[i].OrganiserPic = Session["Pic"].ToString();
+                            evStListTemp[i].Organiser = Session["Name"].ToString();
+                            evStList.Add(evStListTemp[i]);
+                            eventCount += 1;
+                        }
                     }
 
-                    if (int.Parse(element.EndTime.Substring(0, 2)) >= 12)
+
+                    foreach (EventsStatus element in evStList)
                     {
-                        element.EndTime = (int.Parse(element.EndTime.Substring(0, 2)) - 12).ToString() + ":" + element.EndTime.Substring(3, 2) + " PM";
+                        element.NumCompleted = eventCount;
+
+                        int index = element.Date.IndexOf(" ");
+                        element.Date = element.Date.Substring(0, index);
+                        element.StartTime = element.StartTime.Substring(0, 5);
+
+                        if (int.Parse(element.StartTime.Substring(0, 2)) >= 12)
+                        {
+
+                            if (int.Parse(element.StartTime.Substring(0, 2)) == 12)
+                                element.StartTime = (int.Parse(element.StartTime.Substring(0, 2))).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+                            else
+                                element.StartTime = (int.Parse(element.StartTime.Substring(0, 2)) - 12).ToString() + ":" + element.StartTime.Substring(3, 2) + " PM";
+                        }
+                        else
+                        {
+                            element.StartTime = element.StartTime + " AM";
+                        }
+
+                        if (int.Parse(element.EndTime.Substring(0, 2)) >= 12)
+                        {
+
+                            if (int.Parse(element.EndTime.Substring(0, 2)) == 12)
+                                element.EndTime = (int.Parse(element.EndTime.Substring(0, 2))).ToString() + ":" + element.EndTime.Substring(3, 2) + " PM";
+                            else
+                                element.EndTime = (int.Parse(element.EndTime.Substring(0, 2)) - 12).ToString() + ":" + element.EndTime.Substring(3, 2) + " PM";
+                        }
+                        else
+                        {
+                            element.EndTime = element.EndTime + " AM";
+                        }
+
+                        string date = element.Date + " " + element.EndTime;
+                        DateTime dt1 = DateTime.Parse(date);
+                        DateTime dt2 = DateTime.Now;
+
+                        int result = DateTime.Compare(dt1, dt2);
+
+                        if (result < 0 || result == 0)
+                            element.Completed = "Complete";
+
+                        forCount += 1;
                     }
-                    else
-                    {
-                        element.EndTime = element.EndTime + " AM";
-                    }
-
-                    string date = element.Date + " " + element.EndTime;
-                    DateTime dt1 = DateTime.Parse(date);
-                    DateTime dt2 = DateTime.Now;
-
-                    int result = DateTime.Compare(dt1, dt2);
-
-                    if (result < 0 || result == 0)
-                        element.Completed = "Complete";
-
-                    forCount += 1;
                 }
+                
             }
         }
     }
