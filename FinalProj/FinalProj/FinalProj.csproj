@@ -93,6 +93,7 @@
     <Content Include="forumNewThread.aspx" />
     <Content Include="forumPage1.aspx" />
     <Content Include="forumPost.aspx" />
+    <Content Include="forumPostEvent.aspx" />
     <Content Include="forumProjectClean.aspx" />
     <Content Include="grabVoucher.JPG" />
     <Content Include="homepage.aspx" />
@@ -129,6 +130,7 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="AddVoucher.css" />
     <Content Include="StyleSheet\sweetalert.css" />
+    <Content Include="threadCreaterOverview.aspx" />
     <Content Include="Voucher.css" />
     <Content Include="AddVoucher.aspx" />
     <Content Include="VoucherRedemption.aspx" />
@@ -255,6 +257,13 @@
     <Compile Include="forumPost.aspx.designer.cs">
       <DependentUpon>forumPost.aspx</DependentUpon>
     </Compile>
+    <Compile Include="forumPostEvent.aspx.cs">
+      <DependentUpon>forumPostEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forumPostEvent.aspx.designer.cs">
+      <DependentUpon>forumPostEvent.aspx</DependentUpon>
+    </Compile>
     <Compile Include="forumProjectClean.aspx.cs">
       <DependentUpon>forumProjectClean.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -363,6 +372,13 @@
     </Compile>
     <Compile Include="AddVoucher.aspx.designer.cs">
       <DependentUpon>AddVoucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="threadCreaterOverview.aspx.cs">
+      <DependentUpon>threadCreaterOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="threadCreaterOverview.aspx.designer.cs">
+      <DependentUpon>threadCreaterOverview.aspx</DependentUpon>
     </Compile>
     <Compile Include="VoucherRedemption.aspx.cs">
       <DependentUpon>VoucherRedemption.aspx</DependentUpon>
