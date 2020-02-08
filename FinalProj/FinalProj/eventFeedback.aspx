@@ -128,7 +128,7 @@
         </table>
         <div class="form-group" style="background-color: #f2f2f2; padding: 20px;">
             <h5>Please write a review for the Event : 
-                <asp:Label ID="LblEventTitle" runat="server" style="font-size:20px; color:red;"></asp:Label>
+                <asp:Label ID="LblEventTitle" runat="server" style="font-size:35px; color:red;"></asp:Label>
             </h5>
             <small>What, if anything, did you dislike about this event? What elements of the event did you like the most?
 Are you satisfied with the event?</small>
@@ -139,7 +139,7 @@ Are you satisfied with the event?</small>
             <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" />
 
             <%-- <button type="submit" class="btn btn-primary">Submit</button>--%>
-            <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-danger" />
+            <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-danger" OnClick="btnClear_Click" />
         </div>
         </div>
     </div>

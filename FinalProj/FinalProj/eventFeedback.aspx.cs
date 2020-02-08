@@ -131,5 +131,14 @@ namespace FinalProj
             }
 
         }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            tbFeedbackContent.Text = String.Empty;
+            Q1Rating.CurrentRating = 0;
+            Q2Rating.CurrentRating = 0;
+            Q3Rating.CurrentRating = 0;
+            Q4Rating.CurrentRating = 0;
+        }
     }
 }

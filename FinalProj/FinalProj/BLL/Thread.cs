@@ -122,7 +122,7 @@ namespace FinalProj.BLL
         //    return dao.GetRepliesFromDB(threadId);
         //}
 
-        public DataTable getThreadByUserId(int userId)
+        public List<Thread> getThreadByUserId(int userId)
         {
             ThreadDAO dao = new ThreadDAO();
             return dao.getThreadsByUserId(userId);

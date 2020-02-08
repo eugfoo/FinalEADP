@@ -110,7 +110,7 @@ namespace FinalProj
                     }
                     else
                     {
-                        lastReplierName = "NO Replies";
+                        lastReplierName = "No Replies";
                         lastReplierDate = "-";
                     }
 
@@ -194,7 +194,7 @@ namespace FinalProj
                 }
                 else
                 {
-                    lastReplierName = "NO Replies";
+                    lastReplierName = "No Replies";
                     lastReplierDate = "-";
                 }
 

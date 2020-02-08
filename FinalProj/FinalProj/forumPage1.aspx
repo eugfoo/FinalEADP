@@ -45,8 +45,8 @@
                                 <tr>
                                     <th scope="col" class="topic-col">Topic</th>
                                     <th scope="col" class="created-col">Created</th>
-                                    <th scope="col" style="min-width: 6em;">Replies/Views</th>
-                                    <th scope="col" class="last-post-col">Last Post</th>
+                                    <th scope="col" style="min-width: 6em;">Total Replies</th>
+                                    <th scope="col" class="last-post-col">Last Reply</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,14 +61,14 @@
                             </td>
 
                             <td>
-                                <div>by <a href="#0"><%# Eval("user_name") %></a></div>
+                                <div>by <a href="PPGallery.aspx?userId=<%# Eval("user_id") %>"><%# Eval("user_name") %></a></div>
                                 <div><%# Eval("threadDate") %></div>
                             </td>
                             <td style="text-align: center;">
                                 <div style="margin-top: 10px;"><%# threadIdReplies[Convert.ToInt32(Eval("Id"))] %> replies</div>
                             </td>
                             <td>
-                                <div>by <a href="#0"><%# threadIdUserIdReplies[Convert.ToInt32(Eval("Id"))] %></a></div>
+                                <div><%# threadIdUserIdReplies[Convert.ToInt32(Eval("Id"))] %></div>
                                 <div><%# threadIdLastReplyDateT[Convert.ToInt32(Eval("Id"))] %></div>
                             </td>
                         </tr>
@@ -113,14 +113,14 @@
                             </td>
 
                             <td>
-                                <div>by <a href="#0"><%# Eval("user_name") %></a></div>
+                                <div>by <a href="PPGallery.aspx?userId=<%# Eval("user_id") %>"><%# Eval("user_name") %></a></div>
                                 <div><%# Eval("threadDate") %></div>
                             </td>
                             <td style="text-align: center;">
                                 <div style="margin-top: 10px;"><%# threadIdReplies[Convert.ToInt32(Eval("Id"))] %> replies</div>
                             </td>
                             <td>
-                                <div>by <a href="#0"><%# threadIdUserIdReplies[Convert.ToInt32(Eval("Id"))] %></a></div>
+                                <div><%# threadIdUserIdReplies[Convert.ToInt32(Eval("Id"))] %></div>
                                 <div><%# threadIdLastReplyDateT[Convert.ToInt32(Eval("Id"))] %></div>
                             </td>
                         </tr>

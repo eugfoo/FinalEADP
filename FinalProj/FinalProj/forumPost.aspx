@@ -86,7 +86,7 @@
                                 <img src="<%=currentThreadUser.DPimage%>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left:30px;">
 
                                 <div><span class="font-weight-bold">Joined: </span><%= currentThreadUser.regDate%></div>
-                                <div><a href="threadCreaterOverview.aspx?userId=<%= currentThreadUser.id%>"<strong>Posts </strong></a>: 123</div>
+                                <div><a href="threadCreaterOverview.aspx?userId=<%= currentThreadUser.id%>"<strong style="font-weight:700;">Posts </strong></a>: 123</div>
                             </td>
                             <td>
                                 <asp:ListView ID="LVImages" runat="server">

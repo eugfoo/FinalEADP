@@ -57,14 +57,14 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+         
             if (!IsPostBack)
             {
                 //ConfirmedThreadsRptr();
 
                 allthreadsList = thread.SelectAllThreads();
                 OnlyEventThreadsList = thread.SelectAllEventThreads("[EVENT]");
-
+            
 
                 List<Threads> threadsList = new List<Threads>();
                 List<ThreadsEvent> threadsEventList = new List<ThreadsEvent>();
@@ -94,10 +94,12 @@ namespace FinalProj
                     {
                         lastReplierName = threadReply.getLastPersonReplyByMaxId(threadReply.getMaxUserReplyIdByThreadId(threadEvent.Id).trId).UserName;
                         lastReplierDate = threadReply.getLastPersonReplyByMaxId(threadReply.getMaxUserReplyIdByThreadId(threadEvent.Id).trId).PostDate;
+  
+                      
                     }
                     else
                     {
-                        lastReplierName = "NO Replies";
+                        lastReplierName = "No Replies";
                         lastReplierDate = "-";
                     }
 
@@ -140,7 +142,7 @@ namespace FinalProj
                     }
                     else
                     {
-                        lastReplierName = "NO Replies";
+                        lastReplierName = "No Replies";
                         lastReplierDate = "-";
                     }
 

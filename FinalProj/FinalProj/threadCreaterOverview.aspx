@@ -47,45 +47,44 @@
 
 
         <asp:Repeater ID="rptrThreads" runat="server">
-            <HeaderTemplate>
-                <table class="table table-striped table-bordered table-responsive-lg">
-                    <thead class="thead-light">
+                    <HeaderTemplate>
+                        <table class="table table-striped table-bordered table-responsive-lg">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="topic-col">Topic</th>
+                                    <th scope="col" class="created-col">Created</th>
+                                    <th scope="col" style="min-width: 6em;">Total Replies</th>
+                                    <th scope="col" class="last-post-col">Last Reply</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    </HeaderTemplate>
+                    <ItemTemplate>
                         <tr>
-                            <th scope="col" class="topic-col">Topic</th>
-                            <th scope="col" class="created-col">Created</th>
-                            <th scope="col" style="min-width: 6em;">Replies/Views</th>
-                            <th scope="col" class="last-post-col">Last Post</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            </HeaderTemplate>
-            <ItemTemplate>
-                <tr>
-                    <td>
-                        <h3 class="h6"><span class="badge badge-<%# Eval("threadBadgeColor") %>"><%# Eval("threadPrefix") %></span> <a href="forumPost.aspx?threadid=<%# Eval("Id") %>"><%# Eval("threadTitle") %></a></h3>
-                        <div class="small">
-                            Started by: <%# Eval("user_name") %>
-                        </div>
-                    </td>
+                            <td style="width: 600px;">
+                                <h3 class="h6"><span class="badge badge-<%# Eval("threadBadgeColor") %>"><%# Eval("threadPrefix") %></span> <a href="forumPost.aspx?threadid=<%# Eval("Id") %>"><%# Eval("threadTitle") %></a></h3>
+                                <div class="small">
+                                    Started by: <%# Eval("user_name") %>
+                                </div>
+                            </td>
 
-                    <td>
-                        <div>by <a href="#0"><%# Eval("user_name") %></a></div>
-                        <div><%# Eval("threadDate") %></div>
-                    </td>
-                    <td>
-                        <div>5 replies</div>
-                        <div>169 Views</div>
-                    </td>
-                    <td>
-                        <div>by <a href="#0">KoviTan</a></div>
-                        <div>05 Apr 2017, 20:07</div>
-                    </td>
-                </tr>
-            </ItemTemplate>
-            <FooterTemplate>
-                </tbody>
+                            <td>
+                                <div>by <a href="PPGallery.aspx?userId=<%# Eval("user_id") %>"><%# Eval("user_name") %></a></div>
+                                <div><%# Eval("threadDate") %></div>
+                            </td>
+                            <td style="text-align: center;">
+                                <div style="margin-top: 10px;"><%# threadIdReplies[Convert.ToInt32(Eval("Id"))] %> replies</div>
+                            </td>
+                            <td>
+                                <div><%# threadIdUserIdReplies[Convert.ToInt32(Eval("Id"))] %></div>
+                                <div><%# threadIdLastReplyDateT[Convert.ToInt32(Eval("Id"))] %></div>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </tbody>
                 </table>
-            </FooterTemplate>
-        </asp:Repeater>
+                    </FooterTemplate>
+                </asp:Repeater>
     </div>
 </asp:Content>
