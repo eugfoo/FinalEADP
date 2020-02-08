@@ -219,7 +219,7 @@
                             <%--<asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>--%>
                         </li>
                         <li id="liLogOut" runat="server" class="nav-item mr-3">
-                            <asp:LinkButton ID="lbLogOut" CssClass="nav-link" OnClick="lblLogOut_Click" OnClientClick="deleteAllCookies()" runat="server" CausesValidation="False">Log Out</asp:LinkButton>
+                            <asp:LinkButton ID="lbLogOut" CssClass="nav-link" OnClick="lblLogOut_Click" runat="server" CausesValidation="False">Log Out</asp:LinkButton>
                         </li>
                     </ul>
                 </div>
