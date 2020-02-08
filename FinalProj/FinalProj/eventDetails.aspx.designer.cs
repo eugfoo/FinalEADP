@@ -148,15 +148,6 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.Button discussion;
         
         /// <summary>
-        /// deleteEvent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deleteEvent;
-        
-        /// <summary>
         /// attendance control.
         /// </summary>
         /// <remarks>

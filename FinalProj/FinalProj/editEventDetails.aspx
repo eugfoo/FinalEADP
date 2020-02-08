@@ -37,7 +37,7 @@
 			text-align: center;
 		}
 
-		#eventPic {
+		#ContentPlaceHolder1_eventPic {
 			width: 100%;
 			height: auto;
 			border-radius: 5%;
@@ -104,6 +104,13 @@
 				document.getElementById("charNum").innerHTML = charRemain + ' characters remaining';
 			}
 		}
+
+		var loadFile = function (event) {
+			var output = document.getElementById('ContentPlaceHolder1_eventPic');
+			output.src = URL.createObjectURL(event.target.files[0]);
+		};
+
+
 	</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -114,34 +121,36 @@
 			<asp:Panel ID="panelSuccess" Visible="false" runat="server" CssClass="alert alert-dismissable alert-success">
 				<asp:Label ID="lb_success" runat="server"></asp:Label>
 			</asp:Panel>
+
 			<asp:Panel ID="PanelError" runat="server" Visible="false" CssClass="stuff alert alert-danger ">
-		<asp:Label ID="errmsgTb" runat="server"></asp:Label>
-	</asp:Panel>
+				<asp:Label ID="errmsgTb" runat="server"></asp:Label>
+			</asp:Panel>
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-6" id="eventPhoto">
-					<img id="eventPic" src="Img/<% = eventDetail.Pic %>"/>
-					<asp:FileUpload ID="FileUploadControl" runat="server" />
+					<asp:Image ID="eventPic" runat="server" />
+					<div class="form-control">
+						<asp:FileUpload ID="FileUploadControl" CssClass="col-md-8" onchange="loadFile(event)" runat="server" />
+					</div>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6" id="eventDetails">
 					<b>Title:</b>
-					<asp:TextBox ID="eventTitle" CssClass="form-control" placeholder="Project Free Cycle" runat="server"></asp:TextBox>
+					<asp:TextBox ID="eventTitle" CssClass="form-control" runat="server"></asp:TextBox>
 					<div id="organiserDiv">
 						<asp:Image Style="border-radius: 100%; width: 60px; height: 60px;" ID="imgDP" runat="server" /><span style="padding-left: 10px">organised by <a href="/PPGallery.aspx?userId=<%=eventDetail.User_id%>" style="text-decoration: none;"><%=userName %></a></span>
-
 
 						<div style="padding-left: 70px;">
 							<i class="fa fa-clock"></i>&nbsp;<b>Date:</b><asp:TextBox ID="eventDate" CssClass="form-control" runat="server" type="date" format="DD-MM-YYYY" min="<%=DateTime.Now.Date %>" Font-Overline="False"></asp:TextBox>
 							<br />
-							
+
 							<div class="row">
 
 								<div class="col-sm-12 col-md-12 col-lg-5">
-								<b>Start Time:</b>
+									<b>Start Time:</b>
 
 									<asp:TextBox ID="startTimeEdit" CssClass="form-control" runat="server" min="07:00" max="22:00" format="hh:mm" type="time"></asp:TextBox>
 
 								</div>
-								<div class="col-sm-12 col-md-12 col-lg-2" style="text-align: center; margin-top:auto; margin-bottom:auto;">
+								<div class="col-sm-12 col-md-12 col-lg-2" style="text-align: center; margin-top: auto; margin-bottom: auto;">
 									to
 								</div>
 								<div class="col-sm-12 col-md-12 col-lg-5">
@@ -164,7 +173,7 @@
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-6">
 
-								<asp:Button ID="cancelEdit" CssClass="btn btn-danger" runat="server" Text="CANCEL" />
+								<asp:Button ID="cancelEdit" CssClass="btn btn-danger" runat="server" Text="CANCEL" OnClick="cancelEdit_Click" />
 							</div>
 
 						</div>
@@ -188,8 +197,25 @@
 			</div>
 			<div id="tab1" class="row">
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">
+					<b>Description:</b>
 					<asp:TextBox ID="desc" onkeyup="countChars(this);" CssClass="form-control" runat="server" Width="100%" Height="250" TextMode="MultiLine"></asp:TextBox>
-					<p id="charNum">3000 characters remaining</p>
+					<p id="charNum">
+						<% if (eventDetail.Desc == "")
+							{%> 3000 <%}
+										 else
+										 {
+											 int enterCount = 0, index = 0;
+
+											 while (index < desc.Text.Length)
+											 {
+												 // check if current char is part of a word
+												 if (desc.Text[index] == '\r' && desc.Text[index + 1] == '\n')
+													 enterCount++;
+												 index++;
+											 }
+
+							%> <%=((3000 + enterCount) - eventDetail.Desc.Length) %><%} %>characters remaining
+					</p>
 
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">
@@ -201,7 +227,7 @@
 					</div>
 
 					<p style="margin-top: 1em;" id="remainingSpots" class="h5">
-						Max Attendees:<asp:TextBox ID="maxAttend" CssClass="form-control" runat="server" Rows="5"  type="number"></asp:TextBox>
+						Max Attendees:<asp:TextBox ID="maxAttend" CssClass="form-control" runat="server" Rows="5" type="number"></asp:TextBox>
 					</p>
 					<div class="row attendeeGroup" style="margin-top: 3em;">
 						<div class="col-sm-12 col-md-12 col-lg-12">
@@ -288,7 +314,7 @@
 
 	</div>
 	<script> 
-		
+
 		window.addEventListener("load", function () {
 			let tdyDate = new Date();
 			let tdyMonth = (parseInt(tdyDate.getMonth()) + 1).toString().length == 1 ? "0" + (parseInt(tdyDate.getMonth()) + 1).toString() : (parseInt(tdyDate.getMonth()) + 1).toString();

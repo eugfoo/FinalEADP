@@ -61,10 +61,7 @@
 			width: 30%;
 		}
 
-		#ContentPlaceHolder1_deleteEvent {
-			padding: 2%;
-			width: 20%;
-		}
+
 
 
 		#ContentPlaceHolder1_discussion {
@@ -144,11 +141,7 @@
 				height: auto
 			}
 
-			#ContentPlaceHolder1_deleteEvent {
-				margin-top: 1em;
-				width: 100%;
-				height: auto
-			}
+		
 
 			#ContentPlaceHolder1_attendance {
 				margin-top: 1em;
@@ -309,7 +302,6 @@
 								{%>
 
 							<a href="/editEventDetails.aspx?eventId=<%=eventDetail.EventId %>" id="editEvent" class="btn btn-warning">EDIT</a>
-							<asp:Button ID="deleteEvent" CssClass="btn btn-danger" runat="server" Text="DELETE" OnClick="deleteEvent_Click" />
 							<asp:Button ID="attendance" class="btn btn-primary" runat="server" Text="ATTENDANCE" OnClick="attendance_Click" />
 
 							<asp:Button ID="discussion2" class="btn btn-primary" runat="server" Text="DISCUSSION" />
@@ -336,10 +328,7 @@
 			<div id="tab1" class="row">
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">
 					<asp:TextBox ID="descriptionTB" CssClass="form-control" runat="server" Visible="False" Width="100%" Height="250" TextMode="MultiLine"></asp:TextBox>
-					<%if (descriptionTB.Visible == false)
-						{ %>
-					<%=eventDetail.Desc %>
-					<%} %>
+					<%=eventDetail.Desc.Replace("\r\n", "<br/>") %>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">
 					<div id="contactOrganiser">

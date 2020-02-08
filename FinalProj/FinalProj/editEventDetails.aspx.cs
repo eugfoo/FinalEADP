@@ -61,6 +61,7 @@ namespace FinalProj
 				eventTitle.Text = eventDetail.Title.ToString();
 				noteText.Text = eventDetail.Note.ToString();
 				maxAttend.Text = eventDetail.MaxAttendees.ToString();
+				eventPic.ImageUrl = "Img/" + eventDetail.Pic.ToString();
 
 				string dateOnly = eventDetail.Date.Substring(0, eventDetail.Date.IndexOf(" "));
 				String[] dateList = dateOnly.Split('/');
@@ -121,126 +122,7 @@ namespace FinalProj
 			}
 		}
 
-		protected void joinEvent_Click(object sender, EventArgs e)
-		{
-			if (Session["user"] != null)
-			{
-				Users user = (Users)Session["user"];
-				userId = user.id;
-                string userName = user.name;
-				Events parti = new Events();
-				var result = parti.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]), userName);
-				if (result == 1)
-				{
-					Session["SessionSSM"] = "You have successfully joined the event!";
-					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-					
-				}
-				else
-				{
-					Session["SessionERM"] = "Oops! Something Went Wrong";
-					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-				}
-
-
-			}
-			else
-			{
-				Session["SessionERM"] = "Please Log In!";
-				Response.Redirect("/eventDetails.aspx?eventId="+ Request.QueryString["eventId"]);
-				
-			}
-		}
-
-		protected void leaveEvent_Click(object sender, EventArgs e)
-		{
-
-			Users user = (Users)Session["user"];
-			userId = user.id;
-			Events parti = new Events();
-			int result = parti.RemoveParticipant(userId, int.Parse(Request.QueryString["eventId"]));
-			if (result == 1)
-			{
-				Session["SessionSSM"] = "You have successfully left the event!";
-				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-			}
-			else
-			{
-				Session["SessionERM"] = "Oops! Something Went Wrong";
-				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-			}
-		}
-
-		protected void bookmarkEvent_Click(object sender, EventArgs e)
-		{
-			Users user = (Users)Session["user"];
-			if (user != null)
-			{
-				userId = user.id;
-				Events parti = new Events();
-				int result = parti.findBookmark(userId, int.Parse(Request.QueryString["eventId"]));
-				if (result == 1)
-				{
-					Session["SessionSSM"] = "You have successfully bookmarked this event!";
-					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-				}
-				else
-				{
-					Session["SessionERM"] = "Oops! Something Went Wrong";
-					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-				}
-			}
-			else
-			{
-				Session["SessionERM"] = "Please Log In!";
-				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-
-			}
-		}
-
-		protected void unbookmarkEvent_Click(object sender, EventArgs e)
-		{
-			Users user = (Users)Session["user"];
-			userId = user.id;
-			Events parti = new Events();
-			int result = parti.removeBookmark(userId, int.Parse(Request.QueryString["eventId"]));
-			if (result == 1)
-			{
-				Session["SessionSSM"] = "You have successfully removed this bookmark!";
-				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-			}
-			else
-			{
-				Session["SessionERM"] = "Oops! Something Went Wrong";
-				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-			}
-		}
-
-		protected void deleteEvent_Click(object sender, EventArgs e)
-		{
-			Events parti = new Events();
-			int result = parti.removeEvent(int.Parse(Request.QueryString["eventId"]));
-			if (result == 1)
-			{
-				Session["SessionSSM"] = "You have successfully deleted the event!";
-				Response.Redirect("/homepage.aspx");
-			}
-			else
-			{
-				Session["SessionERM"] = "Oops! Something Went Wrong";
-				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-			}
-		}
-
-        protected void attendance_Click(object sender, EventArgs e)
-        {
-            Events ev = new Events();
-            eventDetail = ev.getEventDetails(int.Parse(Request.QueryString["eventId"]));
-            string title = eventDetail.Title;
-            Session["eventTitle"] = title;
-            Session["eventId"] = int.Parse(Request.QueryString["eventId"]);
-            Response.Redirect("/AttendanceSubmitted.aspx");
-        }
+		
 		protected void changetoDefaultBorder()
 		{
 			eventTitle.BorderColor = System.Drawing.Color.LightGray;
@@ -259,7 +141,19 @@ namespace FinalProj
 			 changetoDefaultBorder();
 
             Events ev = new Events();
-            string errmsg = "";
+			eventDetail = ev.getEventDetails(int.Parse(Request.QueryString["eventId"]));
+			List<int> listOfUserId = ev.getAllParticipants(eventDetail.EventId);
+			Users usr = new Users();
+
+			foreach (int usrId in listOfUserId)
+			{
+				Users name = usr.GetUserById(usrId);
+
+				participantList.Add(name);
+			}
+			
+			profilePic = usr.GetUserById(eventDetail.User_id);
+			string errmsg = "";
             PanelError.Visible = false;
 
             if (eventTitle.Text.ToString() == "")
@@ -282,8 +176,7 @@ namespace FinalProj
             {
                 string date = eventDate.Text.ToString();
                 DateTime dt = Convert.ToDateTime(date);
-                System.Diagnostics.Debug.WriteLine(date);
-                System.Diagnostics.Debug.WriteLine(dt);
+               
                 if (dt < DateTime.Now.Date)
                 {
                     errmsg += "Please enter a valid date <br>";
@@ -339,7 +232,12 @@ namespace FinalProj
                 errmsg += "Maximum number of attendees cannot be empty! <br>";
                 maxAttend.BorderColor = System.Drawing.Color.Red;
             }
-            if (desc.Text.ToString() == "")
+			if (int.Parse(maxAttend.Text.ToString()) < participantList.Count)
+			{
+				errmsg += "You cannot have a maximum number attendees less than or eual to the current number of participants ! <br>";
+				maxAttend.BorderColor = System.Drawing.Color.Red;
+			}
+			if (desc.Text.ToString() == "")
             {
                 errmsg += "Description cannot be empty! <br>";
                 desc.BorderColor = System.Drawing.Color.Red;
@@ -354,7 +252,7 @@ namespace FinalProj
                     // check if current char is part of a word
                     if (desc.Text[index] == '\r' && desc.Text[index + 1] == '\n')
                         enterCount++;
-                    index++;
+						index++;
                 }
                 if (desc.Text.Length > 3000 + enterCount)
                 {
@@ -382,24 +280,21 @@ namespace FinalProj
                 string picture = "";
                 string note = noteText.Text.ToString();
 				int user_id = user.id;
+				
 
-
-        
-
-                if (FileUploadControl.HasFile)
+				if (FileUploadControl.HasFile)
                 {
 
 					string filename = Path.GetFileName(FileUploadControl.PostedFile.FileName);
 					FileUploadControl.SaveAs(Server.MapPath("~/Img/" + filename));
 					picture = filename;
+					
 
 				}
                 else if (FileUploadControl.HasFile == false)
                 {
-
-                    string filename = "defaultPic.jpg";
+                    string filename = eventDetail.Pic;
                     picture = filename;
-
                 }
 
 				int rating = 0;
@@ -410,6 +305,12 @@ namespace FinalProj
 				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
             }
         }
+
+		protected void cancelEdit_Click(object sender, EventArgs e)
+		{
+			Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
+		}
+
 		
 	}
 }

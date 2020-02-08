@@ -44,6 +44,9 @@ namespace FinalProj
             }
 			Events ev = new Events();
 			eventDetail = ev.getEventDetails(int.Parse(Request.QueryString["eventId"]));
+		
+
+			
 
 			int index = eventDetail.Date.IndexOf(" ");
 			eventDetail.Date = eventDetail.Date.Substring(0, index);
@@ -91,6 +94,7 @@ namespace FinalProj
 			profilePic = organiser.GetUserById(eventDetail.User_id);
 			imgDP.ImageUrl = profilePic.DPimage;
 			imgDPOrg.ImageUrl = profilePic.DPimage;
+
 
 		}
 
@@ -189,21 +193,6 @@ namespace FinalProj
 			}
 		}
 
-		protected void deleteEvent_Click(object sender, EventArgs e)
-		{
-			Events parti = new Events();
-			int result = parti.removeEvent(int.Parse(Request.QueryString["eventId"]));
-			if (result == 1)
-			{
-				Session["SessionSSM"] = "You have successfully deleted the event!";
-				Response.Redirect("/homepage.aspx");
-			}
-			else
-			{
-				Session["SessionERM"] = "Oops! Something Went Wrong";
-				Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
-			}
-		}
 
         protected void attendance_Click(object sender, EventArgs e)
         {
