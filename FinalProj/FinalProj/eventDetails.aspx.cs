@@ -106,12 +106,18 @@ namespace FinalProj
 				userId = user.id;
                 string userName = user.name;
 				Events parti = new Events();
+
 				var result = parti.AddParticipant(userId, int.Parse(Request.QueryString["eventId"]), userName);
 				if (result == 1)
 				{
 					Session["SessionSSM"] = "You have successfully joined the event!";
 					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
 					
+				}
+				else if(result == -1)
+				{
+					Session["SessionERM"] = "You already joined an event within this timeframe!";
+					Response.Redirect("/eventDetails.aspx?eventId=" + Request.QueryString["eventId"]);
 				}
 				else
 				{

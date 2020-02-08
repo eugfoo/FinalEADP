@@ -85,8 +85,50 @@ namespace FinalProj.BLL
 
 		public int AddParticipant(int userId, int eventId, string userName)
 		{
+			int result = -1;
 			eventDao dao = new eventDao();
-			int result = dao.InsertParticipant(userId, eventId, userName);
+			var currentEvent = getEventDetails(eventId);
+			var AttendingList = GetAllAttendingEventsByUserId(userId);
+			bool sameTime = false;
+			foreach(var evnt in AttendingList)
+			{
+				if(evnt.Date == currentEvent.Date)
+				{	
+					string startTimeNumber = "";
+					string eventStartTime =evnt.StartTime.ToString();
+					string startFrontdigits = eventStartTime.Substring(0, 2);
+					string startBackdigits = eventStartTime.Substring(3, 2);
+
+					string endTimeNumber = "";
+					string eventEndTime = evnt.EndTime.ToString();
+					string endFrontdigits = eventEndTime.Substring(0, 2);
+					string endBackdigits = eventEndTime.Substring(3, 2);
+
+					string startTimeOfCurrentE = "";
+					string startTimeCurrent = currentEvent.StartTime.ToString();
+					string startFrontdigitsCurrent = startTimeCurrent.Substring(0, 2);
+					string startEnddigitsCurrent = startTimeCurrent.Substring(3, 2);
+
+					string EndTimeOfCurrentE = "";
+					string EndTimeCurrent = currentEvent.EndTime.ToString();
+					string EndFrontdigitsCurrent = EndTimeCurrent.Substring(0, 2);
+					string EndBackdigitsCurrent = EndTimeCurrent.Substring(3, 2);
+
+					startTimeNumber = startFrontdigits + startBackdigits;
+					endTimeNumber = endFrontdigits + endBackdigits;
+					startTimeOfCurrentE = startFrontdigitsCurrent + startEnddigitsCurrent;
+					EndTimeOfCurrentE = EndFrontdigitsCurrent + EndBackdigitsCurrent;
+
+
+					if (!(int.Parse(EndTimeOfCurrentE) <= int.Parse(startTimeNumber) || int.Parse(startTimeOfCurrentE) >= int.Parse(endTimeNumber)))
+					{
+						sameTime = true;
+						break;
+					}
+				}
+			}
+			if(!sameTime)
+				result = dao.InsertParticipant(userId, eventId, userName);
 			return result;
 		}
 

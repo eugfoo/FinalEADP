@@ -64,8 +64,6 @@ namespace FinalProj
             {
                 string date = eventDate.Text.ToString();
                 DateTime dt = Convert.ToDateTime(date);
-                System.Diagnostics.Debug.WriteLine(date);
-                System.Diagnostics.Debug.WriteLine(dt);
                 if (dt < DateTime.Now.Date)
                 {
                     errmsg += "Please enter a valid date <br>";
