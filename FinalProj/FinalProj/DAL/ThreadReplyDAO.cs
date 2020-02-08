@@ -38,6 +38,37 @@ namespace FinalProj.DAL
 
         }
 
+        public List<ThreadReply> getAllThreadReplies()
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "Select * from ThreadReplies";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+
+            List<ThreadReply> threadReplies = new List<ThreadReply>();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                int Id = int.Parse(row["Id"].ToString());
+                int tId = int.Parse(row["threadId"].ToString());
+                string postDate = row["postDate"].ToString();
+                string postContent = row["postContent"].ToString();
+                int user_id = int.Parse(row["user_id"].ToString());
+                string user_name = row["user_name"].ToString();
+
+                ThreadReply reply = new ThreadReply(tId, postDate, postContent, user_id, user_name);
+                threadReplies.Add(reply);
+            }
+
+            return threadReplies;
+        }
+
         public List<ThreadReply> getAllThreadRepliesByThreadId(int threadId)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;

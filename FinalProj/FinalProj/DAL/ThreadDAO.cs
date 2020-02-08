@@ -111,7 +111,7 @@ namespace FinalProj.DAL
             return result;
         }
 
-        public Thread GetThreadByThreadId(string threadId)
+        public Thread GetThreadByThreadId(int threadId)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
             string myQuery = "Select * From Threads where Id=" + threadId;
@@ -236,6 +236,7 @@ namespace FinalProj.DAL
             return threadsList;
         }
 
+  
         public int queryCreatedThreadId()
         {
             int result = 0;

@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <script src="https://account.snatchbot.me/script.js"></script><script>window.sntchChat.Init(91154)</script> 
     <div class="container mt-4">
         <div class="card card-body bg-light">
             <center>

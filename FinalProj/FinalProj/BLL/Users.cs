@@ -20,7 +20,7 @@ namespace FinalProj.BLL
 		public string isOrg { get; set; }
 		public int points { get; set; }
 		public int verified { get; set; }
-		public DateTime regDate { get; set; }
+		public string regDate { get; set; }
 		public string facebook { get; set; }
 		public string instagram { get; set; }
 		public string twitter { get; set; }
@@ -29,7 +29,7 @@ namespace FinalProj.BLL
 
 		public Users() { }
 
-		public Users(string uEmail, string uName, string uIsOrg, string uPassHash, DateTime uRegDate)
+		public Users(string uEmail, string uName, string uIsOrg, string uPassHash, string uRegDate)
 		{
 			name = uName;
 			email = uEmail;
@@ -39,7 +39,7 @@ namespace FinalProj.BLL
 		}
 
 		public Users(int uId, string uEmail, string uPassHash, string uName, string uDPImage, string uBPImage,
-			string uDesc, int uRating, string uIsOrg, int uPoints, string uParticipate, int uVerified, DateTime uRegDate,
+			string uDesc, int uRating, string uIsOrg, int uPoints, string uParticipate, int uVerified, string uRegDate,
 			string uFacebook, string uInstagram, string uTwitter, string uDiet)
 		{
 			id = uId;
@@ -78,6 +78,12 @@ namespace FinalProj.BLL
         {
             userDAO user = new userDAO();
             return user.SelectById(id);
+        }
+
+        public List<Users> getAllUsers()
+        {
+            userDAO dao = new userDAO();
+            return dao.getAllUser();
         }
 
         public int VerifyOrgById(int id)

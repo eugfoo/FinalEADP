@@ -92,6 +92,7 @@ namespace FinalProj
                     feedback = new Feedback(eventId, userId, avgRating, FeedbackContent, 1);
                     Attendance attendance = new Attendance();
                     Users user = (Users)Session["user"];
+                    Users usr = new Users();
                     Events ev = new Events();
 
                     // I am using User session as the user id; diff from upstairs where i use from event detail;
@@ -101,8 +102,14 @@ namespace FinalProj
 
                     if (result == 1)
                     {
+                      
+                        // update user who gave feedback the points
+                        user.UpdatePointsByID(user.id, 50);
+
                         attendance.UpdateFeedbackById(user.id, 1);
 
+
+                        //calculate avg points for the event
                         allAvgRatingList = feedback.getAllFeedbacksByEventId(eventId);
 
                         int totalAvgRatings = 0;
@@ -117,7 +124,21 @@ namespace FinalProj
 
                         ev.updateAvgRatingByEventId(eventId, totalAvgRatingByEvent);
 
-                        string script = "setTimeout(function() { swal ({ title: 'Successful!', text: 'Thank you for doing this feedback!', type: 'success', confirmButtonText: 'OK'}, function(isConfirm) { if (isConfirm) { window.location.href = 'forumCatOverview.aspx'; } }); }, 1000);";
+
+                        // update organiser points
+                        int organiserUserId = ev.getEventDetails(eventId).User_id;
+
+                        if (ev.getEventDetails(eventId).AverageRating > 2)
+                        {
+                            usr.UpdatePointsByID(organiserUserId, 2);
+                        }
+                        else
+                        {
+                            usr.UpdatePointsByID(organiserUserId, 1);
+                        }
+
+
+                        string script = "setTimeout(function() { swal ({ title: 'Feedback Submitted!', text: 'Your Feedback Goes a Long Way in Organising Meaningful Events!', type: 'success', confirmButtonText: 'OK'}, function(isConfirm) { if (isConfirm) { window.location.href = 'forumCatOverview.aspx'; } }); }, 1000);";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", script, true);
                     }
 

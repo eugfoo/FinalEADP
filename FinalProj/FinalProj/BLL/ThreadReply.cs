@@ -46,6 +46,12 @@ namespace FinalProj.BLL
             return result;
         }
 
+        public List<ThreadReply> getAllThreadReplies()
+        {
+            ThreadReplyDAO dao = new ThreadReplyDAO();
+            return dao.getAllThreadReplies();
+        }
+
         public List<ThreadReply> getAllThreadRepliesByThreadId(int threadId)
         {
             ThreadReplyDAO dao = new ThreadReplyDAO();
@@ -63,6 +69,9 @@ namespace FinalProj.BLL
             ThreadReplyDAO dao = new ThreadReplyDAO();
             return dao.getMaxUserReplyIdByThreadId(threadId);
         }
+
+
+
 
     }
 }

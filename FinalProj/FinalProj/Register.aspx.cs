@@ -31,7 +31,9 @@ namespace FinalProj
                         {
                             string passHash = ComputeSha256Hash(tbPass.Text);
                             DateTime now = DateTime.Now;
-                            Users user = new Users(tbEmail.Text, tbName.Text, cbIsOrg.Checked.ToString(), passHash, now);
+                            string DTNow = now.ToString("g");
+
+                            Users user = new Users(tbEmail.Text, tbName.Text, cbIsOrg.Checked.ToString(), passHash, DTNow);
                             user.AddUser();
                             Response.Redirect("LogIn.aspx");
                         }

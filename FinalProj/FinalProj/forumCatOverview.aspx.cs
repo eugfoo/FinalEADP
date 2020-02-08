@@ -16,7 +16,6 @@ namespace FinalProj
     {
         //repeater control replacement
         protected List<Thread> allthreadsList;
-        protected List<ThreadReply> allthreadReplies;
         protected Dictionary<int, int> threadIdReplies = new Dictionary<int, int>();
         protected Dictionary<int, string> threadIdUserIdReplies = new Dictionary<int, string>();
         protected Dictionary<int, string> threadIdLastReplyDateT = new Dictionary<int, string>();

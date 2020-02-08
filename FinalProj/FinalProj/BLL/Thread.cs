@@ -97,7 +97,7 @@ namespace FinalProj.BLL
             return result;
         }
 
-        public Thread GetThreadByThreadId(string threadId)
+        public Thread GetThreadByThreadId(int threadId)
         {
             ThreadDAO thread = new ThreadDAO();
             return thread.GetThreadByThreadId(threadId);

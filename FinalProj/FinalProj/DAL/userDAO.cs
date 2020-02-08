@@ -71,7 +71,7 @@ namespace FinalProj.DAL
                 int Upoints = Convert.ToInt32(row["userPoints"]);
                 string Uparticipate = row["userParticipated"].ToString();
                 int Uverified = Convert.ToInt32(row["userIsVerified"]);
-                DateTime UregDate = Convert.ToDateTime(row["userRegDate"]);
+                string UregDate = row["userRegDate"].ToString();
                 string Ufacebook = row["userFacebook"].ToString();
                 string Uinstagram = row["userInstagram"].ToString();
                 string Utwitter = row["userTwitter"].ToString();
@@ -116,7 +116,7 @@ namespace FinalProj.DAL
                 int Upoints = Convert.ToInt32(row["userPoints"]);
                 string Uparticipate = row["userParticipated"].ToString();
                 int Uverified = Convert.ToInt32(row["userIsVerified"]);
-                DateTime UregDate = Convert.ToDateTime(row["userRegDate"]);
+                string UregDate = row["userRegDate"].ToString();
                 string Ufacebook = row["userFacebook"].ToString();
                 string Uinstagram = row["userInstagram"].ToString();
                 string Utwitter = row["userTwitter"].ToString();
@@ -131,6 +131,49 @@ namespace FinalProj.DAL
 
             return user;
         }
+
+        public List<Users> getAllUser()
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "Select * FROM Users";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+
+            List<Users> allUserList = new List<Users>();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];
+                int Uid = Convert.ToInt32(row["Id"]);
+                string Uemail = row["userEmail"].ToString();
+                string UpassHash = row["userPasswordHash"].ToString();
+                string Uname = row["userName"].ToString();
+                string UDPimage = row["userDPImage"].ToString();
+                string UBPimage = row["userBPImage"].ToString();
+                string Udesc = row["userDesc"].ToString();
+                int Urating = Convert.ToInt32(row["userRating"]);
+                string UisOrg = row["userIsOrg"].ToString();
+                int Upoints = Convert.ToInt32(row["userPoints"]);
+                string Uparticipate = row["userParticipated"].ToString();
+                int Uverified = Convert.ToInt32(row["userIsVerified"]);
+                string UregDate = row["userRegDate"].ToString();
+                string Ufacebook = row["userFacebook"].ToString();
+                string Uinstagram = row["userInstagram"].ToString();
+                string Utwitter = row["userTwitter"].ToString();
+                string Udiet = row["userDiet"].ToString();
+                Users user = new Users(Uid, Uemail, UpassHash, Uname, UDPimage, UBPimage, Udesc, Urating, UisOrg, Upoints,
+                    Uparticipate, Uverified, UregDate, Ufacebook, Uinstagram, Utwitter, Udiet);
+                allUserList.Add(user);
+            }
+
+            return allUserList;
+        }
+
 
         public int VerifyOrgById(int id)
         {

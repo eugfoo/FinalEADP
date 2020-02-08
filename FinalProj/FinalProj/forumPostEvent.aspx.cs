@@ -42,7 +42,7 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string threadId = Request.QueryString["threadid"];
+            string threadId = Request.QueryString["threadId"];
             Thread thread = new Thread();
             Users usr = new Users();
 
@@ -57,7 +57,7 @@ namespace FinalProj
             if (threadId != null)
             {
                 Users user = (Users)Session["user"];
-                Thread currentThread = thread.GetThreadByThreadId(threadId);
+                Thread currentThread = thread.GetThreadByThreadId(int.Parse(threadId));
 
                 LblTitle.Text = currentThread.Title;
                 LblTitleBig.Text = currentThread.Title;

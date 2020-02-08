@@ -200,7 +200,6 @@ namespace FinalProj
             {
                 DateTime now = DateTime.Now;
                 HFDate.Value = now.ToString("g");
-                DateTime mDate = Convert.ToDateTime(HFDate.Value);
 
                 if (uploadedImgNames.Count == 1)
                 {

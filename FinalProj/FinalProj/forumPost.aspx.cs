@@ -16,6 +16,31 @@ namespace FinalProj
     public partial class forumPost : System.Web.UI.Page
     {
         protected Users currentThreadUser;
+        protected List<Users> allUsersList;
+        protected List<ThreadReply> allThreadRepliesByThreadId;
+        protected Dictionary<int, int> threadIdReplies = new Dictionary<int, int>();
+        protected Dictionary<int, string> threadIdUserIdReplies = new Dictionary<int, string>();
+        protected Dictionary<int, string> threadIdLastReplyDateT = new Dictionary<int, string>();
+
+        Thread thread = new Thread();
+        Users user = new Users();
+        ThreadReply threadReply = new ThreadReply();
+
+        public class tReplies
+        {
+            public int trId { get; set; }
+            public int tId { get; set; }
+            public string postTitle { get; set; }
+            public string postDate { get; set; }
+            public string postContent { get; set; }
+            public int user_id { get; set; }
+            public string user_name { get; set; }
+            public string userDesc { get; set; }
+            public string userDP { get; set; }
+            public string userJoinedDate { get; set; }
+        }
+
+
 
         readonly PagedDataSource _pgsource = new PagedDataSource();
         int _firstIndex, _lastIndex;
@@ -37,27 +62,66 @@ namespace FinalProj
             }
         }
 
-        Thread thread = new Thread();
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string threadId = Request.QueryString["threadid"];
-            Thread thread = new Thread();
-            Users usr = new Users();
-            
-
-
 
             if (Session["user"] == null) // A user has signed in
             {
                 Response.Redirect("/homepage.aspx");
             }
 
+            string threadId = Request.QueryString["threadid"];
+            int threadiiD;
+            int.TryParse(threadId, out threadiiD);
+            Users usr = new Users();
+            Thread currentThread = thread.GetThreadByThreadId(threadiiD);
+            List<tReplies> threadReplyListForThisThread = new List<tReplies>();
+
+            if (!IsPostBack)
+            {
+                allUsersList = user.getAllUsers();
+                allThreadRepliesByThreadId = threadReply.getAllThreadRepliesByThreadId(threadiiD);
+
+                
+
+                foreach (Users user in allUsersList)
+                {
+                    foreach (ThreadReply TReply in allThreadRepliesByThreadId)
+                    {
+                        if (user.id == TReply.UserId)
+                        {
+                            threadReplyListForThisThread.Add(
+                                new tReplies
+                                {
+                                    trId = TReply.trId,
+                                    tId = TReply.ThreadId,
+                                    postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                                    postDate = TReply.PostDate,
+                                    postContent = TReply.PostContent,
+                                    user_id = TReply.UserId,
+                                    user_name = TReply.UserName,
+                                    userDesc = user.desc,
+                                    userDP = user.DPimage,
+                                    userJoinedDate = user.regDate
+                                }
+
+                            );
+                        }
+                    }
+                }
+
+                this.rptrComments.DataSource = threadReplyListForThisThread;
+                this.rptrComments.DataBind();
+
+                LVImages.DataSource = thread.GetImagesToLV(threadId);
+                LVImages.DataBind();
+                //getImages(HFthreadId.Value);
+            }
+
             if (threadId != null)
             {
                 Users user = (Users)Session["user"];
-                Thread currentThread = thread.GetThreadByThreadId(threadId);
 
                 LblTitle.Text = currentThread.Title;
                 LblTitleBig.Text = currentThread.Title;
@@ -79,24 +143,14 @@ namespace FinalProj
                 {
                     panelEdit.Visible = true;
                 }
-
-                
             }
 
             if (Page.IsPostBack) return;
-            BindDataIntoRepeater();
-
-            if (!IsPostBack)
-            {
-                LVImages.DataSource = thread.GetImagesToLV(threadId);
-                LVImages.DataBind();
-                //getImages(HFthreadId.Value);
-
-            }
+            //BindDataIntoRepeater();
 
         }
 
-        static DataTable GetDataFromDb(string threadId)
+        static DataTable GetDataFromDb(int threadId)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
@@ -113,7 +167,43 @@ namespace FinalProj
 
         private void BindDataIntoRepeater()
         {
-            var dt = GetDataFromDb(HFthreadId.Value);
+            int threadiiD;
+            int.TryParse(HFthreadId.Value, out threadiiD);
+            allUsersList = user.getAllUsers();
+
+
+
+            allThreadRepliesByThreadId = threadReply.getAllThreadRepliesByThreadId(threadiiD);
+
+            List<tReplies> threadReplyListForThisThread = new List<tReplies>();
+
+            foreach (Users user in allUsersList)
+            {
+                foreach (ThreadReply TReply in allThreadRepliesByThreadId)
+                {
+                    if (user.id == TReply.UserId)
+                    {
+                        threadReplyListForThisThread.Add(
+                            new tReplies
+                            {
+                                trId = TReply.trId,
+                                tId = TReply.ThreadId,
+                                postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                                postDate = TReply.PostDate,
+                                postContent = TReply.PostContent,
+                                user_id = TReply.UserId,
+                                user_name = TReply.UserName,
+                                userDesc = user.desc,
+                                userDP = user.DPimage,
+                                userJoinedDate = user.regDate
+                            }
+                        );
+                    }
+                }
+            }
+
+
+            var dt = GetDataFromDb(threadiiD);
             _pgsource.DataSource = dt.DefaultView;
             _pgsource.AllowPaging = true;
 
@@ -128,8 +218,8 @@ namespace FinalProj
             lbNext.Enabled = !_pgsource.IsLastPage;
             lbFirst.Enabled = !_pgsource.IsFirstPage;
             lbLast.Enabled = !_pgsource.IsLastPage;
-            rptrComments.DataSource = _pgsource;
-            rptrComments.DataBind();
+            this.rptrComments.DataSource = _pgsource;
+            this.rptrComments.DataBind();
 
 
             HandlePaging();
