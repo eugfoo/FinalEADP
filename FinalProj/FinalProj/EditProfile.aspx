@@ -30,7 +30,7 @@
         <div class="ml-5 mt-3 mr-5">
             <p class="" style="border-bottom: 1px solid rgba(0,0,0,.250); font-size: 30px;">Edit Profile</p>
             <div class="row">
-                <div class="col-5">
+                <div class="col-12 col-sm-5 col-md-5">
                     <div class="form-group">
                         <label for="formGroupExampleInput">Background Picture</label>
                         <br />
@@ -59,8 +59,8 @@
                             CssClass="form-control" ID="tbDesc" runat="server" CausesValidation="True"></asp:TextBox>
                     </div>
                 </div>
-                <div class="col-1"></div>
-                <div class="col-5">
+                <div class="col-0 col-sm-1 col-md-1"></div>
+                <div class="col-12 col-sm-5 col-md-5">
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Connect your Social Media</label>
                         <div class="input-group mb-2">
@@ -102,11 +102,13 @@
             </div>
             <div style="border-bottom: 1px solid rgba(0,0,0,.250);"></div>
             <div class="mt-2 align-bottom" style="text-align: right;">
+                <span class="text-muted font-italic mr-3">Fields left empty will <b>not</b> be updated</span>
                 <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-danger mr-3" Text="Cancel" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnCancel_Click" />
                 <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnUpdate_Click" />
             </div>
         </div>
     </div>
+    <br />
 </asp:Content>
 
 <%--<div style=" margin: auto; margin-top: 3rem;" class="p-0 card col-10 row">

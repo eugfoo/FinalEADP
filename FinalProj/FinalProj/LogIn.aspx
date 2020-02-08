@@ -19,9 +19,6 @@
         <div>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="ml-2 navbar-brand text-center" href="/homepage.aspx" onclick="deleteAllCookies()">Clear View</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarnav" aria-controls="navbarnav" aria-expanded="false" aria-label="toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
             </nav>
             <div style="width:500px; margin:auto; margin-top: 5rem;" class="card">
                 <div class="card-header text-center">
