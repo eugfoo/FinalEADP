@@ -97,6 +97,7 @@ namespace FinalProj
                         }
                     );
 
+
                     threadIdReplies.Add(thread.Id, threadReply.getAllThreadRepliesByThreadId(thread.Id).Count());
 
 
@@ -132,19 +133,20 @@ namespace FinalProj
 
         static DataTable GetDataFromDb()
         {
+            DataTable allThreads = new DataTable();
+
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            using (SqlConnection myConn = new SqlConnection(DBConnect))
-            {
-                using (SqlCommand cmd = new SqlCommand("Select * From Threads ORDER BY Id DESC", myConn))
-                {
-                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                    {
-                        DataTable allThreads = new DataTable();
-                        sda.Fill(allThreads);
-                        return allThreads;
-                    }
-                }
-            }
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            myConn.Open();
+            string sqlStmt = "Select * from Threads WHERE threadPrefix != @paraThreadPrefix ORDER BY Id DESC";
+            SqlDataAdapter sqlDa = new SqlDataAdapter(sqlStmt, myConn);
+            sqlDa.SelectCommand.Parameters.AddWithValue("@paraThreadPrefix", "[EVENT]");
+            sqlDa.Fill(allThreads);
+            myConn.Close();
+
+            return allThreads;
+
         }
 
 
@@ -179,16 +181,16 @@ namespace FinalProj
                     }
                 );
 
-                string lastReplierName = "";
-                string lastReplierDate = "";
 
                 threadIdReplies.Add(thread.Id, threadReply.getAllThreadRepliesByThreadId(thread.Id).Count());
 
+
+                string lastReplierName = "";
+                string lastReplierDate = "";
                 if (threadReply.getMaxUserReplyIdByThreadId(thread.Id) != null)
                 {
                     lastReplierName = threadReply.getLastPersonReplyByMaxId(threadReply.getMaxUserReplyIdByThreadId(thread.Id).trId).UserName;
                     lastReplierDate = threadReply.getLastPersonReplyByMaxId(threadReply.getMaxUserReplyIdByThreadId(thread.Id).trId).PostDate;
-
                 }
                 else
                 {
@@ -217,8 +219,9 @@ namespace FinalProj
             lbNext.Enabled = !_pgsource.IsLastPage;
             lbFirst.Enabled = !_pgsource.IsFirstPage;
             lbLast.Enabled = !_pgsource.IsLastPage;
-            rptrThreads.DataSource = _pgsource;
-            rptrThreads.DataBind();
+            this.rptrThreads.DataSource = _pgsource;
+            this.rptrThreads.DataBind();
+
 
 
             HandlePaging();

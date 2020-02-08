@@ -48,7 +48,7 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
-                    <td>
+                    <td style="width:600px;">
                         <h3 class="h6"><span class="badge badge-<%# Eval("threadBadgeColor") %>"><%# Eval("threadPrefix") %></span> <a href="forumPost.aspx?threadid=<%# Eval("Id") %>"><%# Eval("threadTitle") %></a></h3>
                         <div class="small">
                             Started by: <%# Eval("user_name") %>

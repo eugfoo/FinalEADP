@@ -16,6 +16,7 @@
         .event-topic-col {
             min-width: 23em;
         }
+
         .auto-style1 {
             height: 62px;
         }
@@ -52,24 +53,23 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <tr>
-                            <td>
-                                <h3 class="h6"><span class="badge badge-success">EVENT</span> <a href="forumPost.aspx?threadid=<%# Eval("eventId") %>"><%# Eval("eventTitle") %></a></h3>
+                            <td style="width:320px;">
+                                <h3 class="h6"><span class="badge badge-<%# Eval("threadBadgeColor") %>"><%# Eval("threadPrefix") %></span> <a href="forumPost.aspx?threadid=<%# Eval("Id") %>"><%# Eval("threadTitle") %></a></h3>
                                 <div class="small">
-                                    Started by: <%--<%# Eval("user_name") %>--%>
+                                    Started by: <%# Eval("user_name") %>
                                 </div>
                             </td>
 
                             <td>
-                                <div>by <a href="#0"><%--<%# Eval("user_name") %></a>--%></div>
-                                <div>02 Apr 2019, 13:33</div>
+                                <div>by <a href="#0"><%# Eval("user_name") %></a></div>
+                                <div><%# Eval("threadDate") %></div>
+                            </td>
+                            <td style="text-align: center;">
+                                <div style="margin-top: 10px;"><%# threadIdReplies[Convert.ToInt32(Eval("Id"))] %> replies</div>
                             </td>
                             <td>
-                                <div>5 replies</div>
-                                <div>169 Views</div>
-                            </td>
-                            <td>
-                                <div>by <a href="#0">KoviTan</a></div>
-                                <div>05 Apr 2017, 20:07</div>
+                                <div>by <a href="#0"><%# threadIdUserIdReplies[Convert.ToInt32(Eval("Id"))] %></a></div>
+                                <div><%# threadIdLastReplyDateT[Convert.ToInt32(Eval("Id"))] %></div>
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -105,7 +105,7 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <tr>
-                            <td>
+                            <td style="width:320px;">
                                 <h3 class="h6"><span class="badge badge-<%# Eval("threadBadgeColor") %>"><%# Eval("threadPrefix") %></span> <a href="forumPost.aspx?threadid=<%# Eval("Id") %>"><%# Eval("threadTitle") %></a></h3>
                                 <div class="small">
                                     Started by: <%# Eval("user_name") %>
@@ -116,13 +116,12 @@
                                 <div>by <a href="#0"><%# Eval("user_name") %></a></div>
                                 <div><%# Eval("threadDate") %></div>
                             </td>
-                            <td>
-                                <div>5 replies</div>
-                                <div>169 Views</div>
+                            <td style="text-align: center;">
+                                <div style="margin-top: 10px;"><%# threadIdReplies[Convert.ToInt32(Eval("Id"))] %> replies</div>
                             </td>
                             <td>
-                                <div>by <a href="#0">KoviTan</a></div>
-                                <div>05 Apr 2017, 20:07</div>
+                                <div>by <a href="#0"><%# threadIdUserIdReplies[Convert.ToInt32(Eval("Id"))] %></a></div>
+                                <div><%# threadIdLastReplyDateT[Convert.ToInt32(Eval("Id"))] %></div>
                             </td>
                         </tr>
                     </ItemTemplate>
