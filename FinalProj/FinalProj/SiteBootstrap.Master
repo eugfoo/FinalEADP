@@ -141,9 +141,9 @@
     <div class="flex-wrapper">
         <form runat="server">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div style="padding: .25rem .75rem;" class="hexagon"><span></span></div>
+                <%--<div style="padding: .25rem .75rem;" class="hexagon"><span></span></div>
                 
-                <a style="left:50%;" class="mx-5 navbar-brand text-center" href="/homepage.aspx" onclick="deleteAllCookies()">Clear View</a>
+                <a style="left:50%;" class="mx-5 navbar-brand text-center" href="/homepage.aspx" onclick="deleteAllCookies()">Clear View</a>--%>
                 <button style="padding:0;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarnav"
                     aria-controls="navbarnav" aria-expanded="false" aria-label="toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -174,19 +174,19 @@
                             <div class="btn-group">
 
                                 <asp:HyperLink ID="lblProfile" CssClass="nav-link" runat="server" NavigateUrl="/EventStatus.aspx"></asp:HyperLink>
-                                <span id="ddCaret" runat="server" class="text-secondary pt-2" data-toggle="hexagon" aria-haspopup="true" aria-expanded="false"><i class="fas fa-caret-down"></i></span>
+                                <span id="ddCaret" runat="server" class="text-secondary pt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-caret-down"></i></span>
 
-                                <div id="ddMenu" runat="server" class="hexagon-menu hexagon-menu-right">
-                                    <a class="hexagon-item" href="/EditProfile.aspx">Edit Profile</a>
+                                <div id="ddMenu" runat="server" class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="/EditProfile.aspx">Edit Profile</a>
                                     <% Users user = (Users)Session["user"];
                                         if (user != null && user.isOrg.Trim() == "True" && Convert.ToInt32(user.verified) == 0)
                                         { %>
-                                    <div class="hexagon-divider"></div>
-                                    <button id="openModal" runat="server" type="button" class="btn hexagon-item" data-toggle="modal" data-target="#reqVer">Request Verification</button>
+                                    <div class="dropdown-divider"></div>
+                                    <button id="openModal" runat="server" type="button" class="btn dropdown-item" data-toggle="modal" data-target="#reqVer">Request Verification</button>
                                     <%  }%>
                                     <div id="norgItems" runat="server">
-                                        <div class="hexagon-divider"></div>
-                                        <a class="hexagon-item" href="/VoucherRedemption.aspx">Redeem Vouchers</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/VoucherRedemption.aspx">Redeem Vouchers</a>
                                         <%--<a class="hexagon-item" href="#">Request Recommendation</a>--%>
                                     </div>
                                 </div>
