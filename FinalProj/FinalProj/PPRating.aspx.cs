@@ -39,6 +39,7 @@ namespace FinalProj
             try
             {
                 loadFeedback(Convert.ToInt32(ddlEvents.SelectedItem.Value));
+                
             }
             catch { }
 
@@ -66,6 +67,7 @@ namespace FinalProj
         {
             Feedback fdback = new Feedback();
             feedbackList = fdback.getAllFeedbacksByEventId(eventId);
+            lbEvent.HRef = "/eventDetails.aspx?eventId=" + eventId;
         }
 
         ICollection CreateDataSource(int userId)

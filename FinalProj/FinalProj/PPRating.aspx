@@ -33,8 +33,11 @@
                 </div>
 
                 <div class="fdback-head col-12 col-md-10 col-sm-10">
-                        <label for="ddlEvents" class="col-form-label">Event:</label>
-                        <asp:DropDownList AutoPostBack="True" ID="ddlEvents" OnSelectedIndexChanged="ddlEvents_OnSelectedIndexChanged" runat="server"></asp:DropDownList>
+                    <label for="ddlEvents" class="col-form-label">Event:</label>
+                    <asp:DropDownList AutoPostBack="True" ID="ddlEvents" OnSelectedIndexChanged="ddlEvents_OnSelectedIndexChanged" runat="server"></asp:DropDownList>
+                    <a style="" id="lbEvent" runat="server" class="text-success">
+                        <i class="fas fa-arrow-alt-circle-right"></i>
+                    </a>
                 </div>
             </div>
 
