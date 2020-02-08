@@ -54,7 +54,6 @@ namespace FinalProj
                     norgItems.Visible = false;
                 }
                 initializePPFields(user);
-                user.UpdateRatingByID(user.id);
                 linkPPPoints.Visible = true;
                 lblProfile.Text = user.name;
                 liLogOut.Visible = true;
@@ -84,14 +83,18 @@ namespace FinalProj
             user.VerifyOrgById(user.id);
         }
 
-        public void initializePPFields(Users user)
+        public void initializePPFields(Users userI)
         {
-            if (user == null)
+            if (userI == null)
             {
                 Response.Redirect("homepage.aspx");
             }
             else
             {
+                userI.UpdateRatingByID(userI.id);
+                Users user = userI.GetUserById(userI.id);
+                Session["user"] = user;
+
                 EventsStatus events = new EventsStatus();
                 var eventList = events.GetAllEventsByName();
                 int eventCount = 0;
@@ -127,7 +130,6 @@ namespace FinalProj
                 imgDP.ImageUrl = user.DPimage;
                 imgBP.ImageUrl = user.BPimage;
                 if (user.desc != "") { lblDesc.Text = user.desc; } else { lblDesc.Text = "This user has not added any description."; lblDesc.CssClass += "text-muted font-italic"; }
-                user.UpdateRatingByID(user.id);
                 rating = user.rating;
             }
         }
