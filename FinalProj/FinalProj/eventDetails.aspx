@@ -141,7 +141,7 @@
 				height: auto
 			}
 
-		
+
 
 			#ContentPlaceHolder1_attendance {
 				margin-top: 1em;
@@ -293,15 +293,20 @@
 							<asp:Button ID="bookmarkEvent" CssClass="btn btn-primary" runat="server" Text="BOOKMARK+" OnClick="bookmarkEvent_Click" />
 							<%}
 								else
-								{%>
+								{ %>
 							<asp:Button ID="bookmarked" CssClass="btn btn-success" runat="server" Text="BOOKMARKED" OnClick="unbookmarkEvent_Click" />
 							<%} %>
 							<asp:Button ID="discussion" CssClass="btn btn-primary" runat="server" Text="DISCUSSION" OnClick="discussion_Click" />
 							<%}
 								else
 								{%>
-
+							<%if (DateTime.Now >= DateTime.Parse(eventDetail.Date.ToString() + " " + eventDetail.EndTime.ToString()) || DateTime.Now >= DateTime.Parse(eventDetail.Date.ToString() + " " + eventDetail.EndTime.ToString()))
+								{ %>
+							<%}
+								else
+								{ %>
 							<a href="/editEventDetails.aspx?eventId=<%=eventDetail.EventId %>" id="editEvent" class="btn btn-warning">EDIT</a>
+							<%} %>
 							<asp:Button ID="attendance" class="btn btn-primary" runat="server" Text="ATTENDANCE" OnClick="attendance_Click" />
 
 							<asp:Button ID="discussion2" class="btn btn-primary" runat="server" Text="DISCUSSION" OnClick="discussion2_Click" />
@@ -352,9 +357,11 @@
 								{ %>
 
 						<div class="col-3" style="text-align: center;">
-							<a href="/PPGallery.aspx?userId=<%=listOfUserId[i]%>"><img style="border-radius: 100%; width: 60px; height: 60px;" src="<%=participantList[i].DPimage %>">
+							<a href="/PPGallery.aspx?userId=<%=listOfUserId[i]%>">
+								<img style="border-radius: 100%; width: 60px; height: 60px;" src="<%=participantList[i].DPimage %>">
 
-							<p><%= participantList[i].name %></p></a>
+								<p><%= participantList[i].name %></p>
+							</a>
 						</div>
 
 						<%}
@@ -370,8 +377,10 @@
 								{ %>
 
 						<div class="col-3" style="text-align: center;">
-							<a href="/PPGallery.aspx?userId=<%=listOfUserId[i]%>"><img style="border-radius: 100%; width: 60px; height: 60px;" src="<%=participantList[i].DPimage %>">
-							<p><%= participantList[i].name %></p></a>
+							<a href="/PPGallery.aspx?userId=<%=listOfUserId[i]%>">
+								<img style="border-radius: 100%; width: 60px; height: 60px;" src="<%=participantList[i].DPimage %>">
+								<p><%= participantList[i].name %></p>
+							</a>
 						</div>
 
 						<%}
@@ -405,7 +414,7 @@
 						</div>
 						<%} %>
 
-						<ul class="participants" style="text-align:center;" id="myUL">
+						<ul class="participants" style="text-align: center;" id="myUL">
 
 							<%foreach (var participant in participantList)
 								{
@@ -413,7 +422,7 @@
 							%>
 
 
-							<li class="participantsListed" style="margin-bottom: 5%; margin-right:10%;">
+							<li class="participantsListed" style="margin-bottom: 5%; margin-right: 10%;">
 								<img src="<%=participant.DPimage %>" style="border-radius: 100%; width: 60px; height: 60px;" /><span><a href="/PPGallery.aspx?userId=<%=listOfUserId[i] %>" style="text-decoration: none;"><%=participant.name %></a></span></li>
 
 							<% i++;

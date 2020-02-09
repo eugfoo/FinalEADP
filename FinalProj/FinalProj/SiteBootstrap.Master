@@ -293,7 +293,7 @@
     </div>
 </body>
     <script type="text/javascript">
-        var count = <%= count %>;
+        var count = <%=count %>;
         var color = ['red', 'white'];
         var index = 0;
 

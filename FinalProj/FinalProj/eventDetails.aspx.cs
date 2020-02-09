@@ -213,13 +213,18 @@ namespace FinalProj
 
 		protected void discussion2_Click(object sender, EventArgs e)
 		{
-			
-			Response.Redirect("/forumEventPost.aspx?threadId=" + Request.QueryString["eventId"]);
+			Thread thdId = new Thread();
+			Thread newthId = thdId.getThreadIdByEventId(int.Parse(Request.QueryString["eventId"]));
+
+
+			Response.Redirect("/forumPostEvent.aspx?threadId=" + newthId.Id.ToString());
 		}
 
 		protected void discussion_Click(object sender, EventArgs e)
 		{
-			Response.Redirect("/forumEventPost.aspx?threadId=" + Request.QueryString["eventId"]);
+			Thread thdId = new Thread();
+			Thread newthId = thdId.getThreadIdByEventId(int.Parse(Request.QueryString["eventId"]));
+			Response.Redirect("/forumPostEvent.aspx?threadId=" + newthId.Id.ToString());
 
 		}
 	}

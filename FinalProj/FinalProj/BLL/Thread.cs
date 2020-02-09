@@ -144,7 +144,11 @@ namespace FinalProj.BLL
             return dao.getAllEventThreads(eventPrefix);
         }
 
-
+		public Thread getThreadIdByEventId(int eventId)
+		{
+			ThreadDAO dao = new ThreadDAO();
+			return dao.GetThreadByeventId(eventId);
+		}
 
 
     }
