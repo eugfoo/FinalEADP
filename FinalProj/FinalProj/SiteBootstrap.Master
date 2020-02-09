@@ -174,7 +174,7 @@
                                         {
                                         if (notiList[i].User_id.ToString() == Session["id"].ToString())
                                         { %>
-                                        <a href="#" id="link"><p id="eventName"><%= notiList[i].EventName %></p> has ended! <br /> Please click here to complete feedback to get points! </a>
+                                        <a href="/eventFeedback.aspx?eventId=<%= notiList[i].EventId %>" id="link"><p id="eventName"><%= notiList[i].EventName %></p> has ended! <br /> Please click here to complete feedback to get points! </a>
                                         <% }
                                     } %>
                             <% } %>

@@ -70,7 +70,7 @@ namespace FinalProj
                     if (notiListTemp[i].User_id == user.id)
                     {
                         notiList.Add(notiListTemp[i]);
-                        //System.Diagnostics.Debug.WriteLine("This is notiList" + notiList[i]);
+                        System.Diagnostics.Debug.WriteLine("This is notiList" + notiList[i]);
                     }
                 }
 
