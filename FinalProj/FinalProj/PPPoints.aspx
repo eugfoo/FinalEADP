@@ -31,6 +31,7 @@
                 </div>
                 <div style="font-size: 16px;" id="collapseOne" class="text-center collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     Participating in events and giving feedback = <b>1 Point</b><br />
+                    Organising an event that reaches an average rating under 2 stars = <b>1 Point</b><br />
                     Organising an event that reaches an average rating exceeding 2 stars = <b>2 Points</b>
                 </div>
             </div>
