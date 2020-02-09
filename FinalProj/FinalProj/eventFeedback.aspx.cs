@@ -38,10 +38,12 @@ namespace FinalProj
             {
                 Feedback feedback = new Feedback();
                 Events events = new Events();
+                Users userS = (Users)Session["user"];
 
                 string errorMsg = string.Empty;
                 int eventId = Convert.ToInt32(Request.QueryString["eventId"]);
-                int userId = events.getEventDetails(eventId).User_id;
+                //int userId = events.getEventDetails(eventId).User_id;          //  andy why u store the user id of the event organiser instead of the
+                int userId = userS.id;                                           //  user id of the user who completed the feedback into the feedback
                 string Q1Ratings = Q1Rating.CurrentRating.ToString();
                 string Q2Ratings = Q2Rating.CurrentRating.ToString();
                 string Q3Ratings = Q3Rating.CurrentRating.ToString();
@@ -102,7 +104,7 @@ namespace FinalProj
 
                     if (result == 1)
                     {
-                      
+
                         // update user who gave feedback the points
                         user.UpdatePointsByID(user.id, 50);
 

@@ -27,7 +27,7 @@ namespace FinalProj
                 { 
                     if (tbPass.Text == tbCfmPass.Text)               // If the passwords match...
                     {
-                        if (tbPass.Text.Length > 8)                 // If the password is longer than the amount of seconds I wish to live...
+                        if (tbPass.Text.Length > 8)                  // If the password is longer than the amount of seconds I wish to live...
                         {
                             string passHash = ComputeSha256Hash(tbPass.Text);
                             DateTime now = DateTime.Now;
@@ -39,7 +39,7 @@ namespace FinalProj
                         }
                         else
                         {
-                            lblError.Text = "Password should be longer than 12 characters.";
+                            lblError.Text = "Password should be longer than 8 characters.";
                             lblError.Visible = true;
                         }
                     }
