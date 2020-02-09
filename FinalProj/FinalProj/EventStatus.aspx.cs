@@ -78,7 +78,7 @@ namespace FinalProj
                             if (evStListTemp[i].Organiser == viewingUserId)
                             {
                                 evStListTemp[i].OrganiserPic = usr.DPimage;
-                                evStListTemp[i].Organiser = usr.name;
+                                evStListTemp[i].OrganiserName = usr.name;
                                 evStListTemp[i].Attendee = 0;
                                 evStList.Add(evStListTemp[i]);
                             }
@@ -162,7 +162,7 @@ namespace FinalProj
                             if (evStListTemp[i].Organiser == usr.id.ToString())
                             {
                                 evStListTemp[i].OrganiserPic = usr.DPimage;
-                                evStListTemp[i].Organiser = usr.name;
+                                evStListTemp[i].OrganiserName = usr.name;
                                 evStList.Add(evStListTemp[i]);
                             }
                         }
@@ -254,7 +254,7 @@ namespace FinalProj
 
                             evStListTemp[i].Organiser = usr.id.ToString();
                             evStListTemp[i].OrganiserPic = usr.DPimage;
-                            evStListTemp[i].Organiser = usr.name;
+                            evStListTemp[i].OrganiserName = usr.name;
                             evStList.Add(evStListTemp[i]);
                         }
 
@@ -337,7 +337,7 @@ namespace FinalProj
 
                             evStListTemp[i].Organiser = usr.id.ToString();
                             evStListTemp[i].OrganiserPic = usr.DPimage;
-                            evStListTemp[i].Organiser = usr.name;
+                            evStListTemp[i].OrganiserName = usr.name;
                             evStList.Add(evStListTemp[i]);
                         }
 

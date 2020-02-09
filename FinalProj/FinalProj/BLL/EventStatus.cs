@@ -19,6 +19,7 @@ namespace FinalProj.BLL
         public string Pic { get; set; }
         public string Organiser { get; set; }
         public string OrganiserPic { get; set; }
+        public string OrganiserName { get; set; }
         public string Completed { get; set; }
         public int NumCompleted { get; set; }
         public int Attendee { get; set; }
@@ -28,8 +29,8 @@ namespace FinalProj.BLL
 
         }
         // Define a constructor to initialize all the properties
-        public EventsStatus(string eventTitle, string eventId, string eventVenue, string eventDate, string eventStartTime, 
-            string eventEndTime, string eventDesc, string eventPic, string eventOrganiser, string eventCompletion, 
+        public EventsStatus(string eventTitle, string eventId, string eventVenue, string eventDate, string eventStartTime,
+            string eventEndTime, string eventDesc, string eventPic, string eventOrganiser, string eventCompletion,
             string eventOrganiserPic, int eventNum)
         {
             Title = eventTitle;
@@ -42,6 +43,7 @@ namespace FinalProj.BLL
             Pic = eventPic;
             Organiser = eventOrganiser;
             OrganiserPic = eventOrganiserPic;
+            OrganiserName = "";
             Completed = eventCompletion;
             NumCompleted = eventNum;
             Attendee = 1;

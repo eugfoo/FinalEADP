@@ -88,9 +88,6 @@
                         <asp:ListItem Value="participate">Show Participated</asp:ListItem>
                     </asp:RadioButtonList>
                 </div>
-                <div class="col-sm-12 col-md-4 col-lg-4">
-                    <br />
-                </div>
             </div>
         </div>
 
@@ -116,7 +113,9 @@
                                     </td>
                                     <td>
                                         <img id="dp" src="<%= element.OrganiserPic %>" />
-                                        <p id="organiser"><%= element.Organiser %></p>
+                                        <a id="organiserName" href="/PPGallery.aspx?userId=<%= element.Organiser %>">
+                                            <p id="organiser"><%= element.OrganiserName %></p>
+                                        </a>
                                     </td>
                                 </tr>
                                 <tr>
