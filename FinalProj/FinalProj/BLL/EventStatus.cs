@@ -53,5 +53,17 @@ namespace FinalProj.BLL
             return evst.SelectAllByName();
         }
 
+        public List<int> GetAllEventsParticipate(int id)
+        {
+
+        AttendanceDAO attend = new AttendanceDAO();
+            return attend.GetEventIdByParticipate(id);
+        }
+
+        public List<EventsStatus> GetAllEventsEventId(List<int> ids)
+        {
+            eventStatusDAO evst = new eventStatusDAO();
+            return evst.SelectAllByEventId(ids);
+        }
     }
 }

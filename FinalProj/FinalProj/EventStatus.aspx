@@ -67,13 +67,13 @@
         <table id="totalStats">
             <tr>
                 <td>Total Events:</td>
-                <td id="totalComplete"><%= eventCount %></td>
+                <td id="totalComplete"><%= total %></td>
                 <td></td>
                 <td>Events Create:</td>
                 <td id="totalCreate"><%= eventCount %></td>
                 <td></td>
                 <td>Events Participate:</td>
-                <td id="totalParticipate">0</td>
+                <td id="totalParticipate"><%= participated %></td>
         </table>
 
         <div class="container">
@@ -83,7 +83,7 @@
                 </div>
 
                 <div id="divRadioList" class="col-sm-12 col-md-4 col-lg-4">
-                    <asp:RadioButtonList ID="radioButtonList" runat="server" CssClass="text" RepeatColumns="4" RepeatDirection="Vertical">
+                    <asp:RadioButtonList ID="radioButtonList" runat="server" CssClass="text" RepeatColumns="4" RepeatDirection="Vertical" AutoPostBack="True" OnSelectedIndexChanged="radioButtonList_SelectedIndexChanged">
                         <asp:ListItem Selected="True" Value="create">Show Created</asp:ListItem>
                         <asp:ListItem Value="participate">Show Participated</asp:ListItem>
                     </asp:RadioButtonList>
