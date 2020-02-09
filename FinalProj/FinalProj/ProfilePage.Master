@@ -107,6 +107,10 @@
             .fdback-head:nth-of-type(2n) {
                 text-align: right;
             }
+
+            #hmpage-link {
+                margin-left: 0.5rem !important;
+            }
         }
 
         @media screen and (max-width: 985px) {
@@ -130,6 +134,11 @@
             #navbarnav ul li {
                 text-align:right;
             }
+
+            #hmpage-link {
+                margin-left: 1rem !important;
+            }
+            
         }
 
         @media screen and (max-width: 575px) {
@@ -254,7 +263,7 @@
                     </div>
                 </div>
                   <%}%>
-                <a id="hmpage-link" style="" class="ml-2 navbar-brand text-center" href="/homepage.aspx">Clear View</a>
+                <a id="hmpage-link" style="" class="navbar-brand text-center" href="/homepage.aspx">Clear View</a>
                 <button style="padding:0;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarnav"
                     aria-controls="navbarnav" aria-expanded="false" aria-label="toggle navigation">
                     <span class="navbar-toggler-icon"></span>
