@@ -21,6 +21,7 @@ namespace FinalProj.BLL
         public string Content { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public int EventId { get; set; }
 
         public Thread()
         {
@@ -64,8 +65,9 @@ namespace FinalProj.BLL
             UserName = userName;
         }
 
-        public Thread(string eventPrefix, string eventBadgeColor, string eventTitle, string eventDate, string eventImg, string eventDesc, int userId, string userName)
+        public Thread(int eventId, string eventPrefix, string eventBadgeColor, string eventTitle, string eventDate, string eventImg, string eventDesc, int userId, string userName)
         {
+            EventId = eventId;
             Prefix = eventPrefix;
             BadgeColor = eventBadgeColor;
             Title = eventTitle;

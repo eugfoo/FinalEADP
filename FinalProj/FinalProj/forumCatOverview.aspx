@@ -29,7 +29,10 @@
                             <h2 class="h4">ClearView Forum</h2>
                         </div>
                         <div class="col-md-3">
-                            <a class="btn btn-dark" href="forumNewThread.aspx" role="button">Create New Thread</a>
+                            <asp:Panel ID="createEventPanel" runat="server">
+                                <a class="btn btn-dark" href="forumNewThread.aspx" role="button">Create New Thread</a>
+                            </asp:Panel>
+
                         </div>
                     </div>
                 </div>

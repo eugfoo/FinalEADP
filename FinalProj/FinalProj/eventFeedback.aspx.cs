@@ -10,7 +10,7 @@ namespace FinalProj
 {
     public partial class eventFeedback : System.Web.UI.Page
     {
-        protected List<Feedback> allAvgRatingList;
+        protected List<Feedback> allFeedbackListByEventId;
         Feedback feedback = new Feedback();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -106,23 +106,24 @@ namespace FinalProj
                     {
 
                         // update user who gave feedback the points
-                        user.UpdatePointsByID(user.id, 50);
-
-                        attendance.UpdateFeedbackById(user.id, 1);
+                        usr.UpdatePointsByID(user.id, 1);
+                        
+                        //update 1 to Feedback in Attendance table by Event Id
+                        attendance.UpdateFeedbackByUserIdEventId(user.id, eventId, 1);
 
 
                         //calculate avg points for the event
-                        allAvgRatingList = feedback.getAllFeedbacksByEventId(eventId);
+                        allFeedbackListByEventId = feedback.getAllFeedbacksByEventId(eventId);
 
                         int totalAvgRatings = 0;
                         int totalAvgRatingByEvent = 0;
 
-                        for (int i = 0; i < allAvgRatingList.Count; i++)
+                        for (int i = 0; i < allFeedbackListByEventId.Count; i++)
                         {
-                            totalAvgRatings += allAvgRatingList[i].AvgRating;
+                            totalAvgRatings += allFeedbackListByEventId[i].AvgRating;
                         }
 
-                        totalAvgRatingByEvent = totalAvgRatings / allAvgRatingList.Count();
+                        totalAvgRatingByEvent = totalAvgRatings / allFeedbackListByEventId.Count();
 
                         ev.updateAvgRatingByEventId(eventId, totalAvgRatingByEvent);
 
