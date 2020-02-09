@@ -49,6 +49,15 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.Label lb_error;
         
         /// <summary>
+        /// showAvailableEvnts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox showAvailableEvnts;
+        
+        /// <summary>
         /// createEvent control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button createEvent;
+        
+        /// <summary>
+        /// calPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel calPanel;
         
         /// <summary>
         /// hidingDate control.

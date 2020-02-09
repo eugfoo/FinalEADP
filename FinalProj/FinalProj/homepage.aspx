@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteBootstrap.Master" AutoEventWireup="true" CodeFile="homepage.aspx.cs" Inherits="FinalProj.Corporate" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteBootstrap.Master" AutoEventWireup="true" CodeBehind="homepage.aspx.cs" Inherits="FinalProj.Corporate" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 	<style>
@@ -441,7 +441,7 @@
 					month = setDate.getMonth();
 				}
 			};
-			
+
 			var calendar = new Calendar();
 
 
@@ -489,6 +489,12 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+
+
+					<span style="margin-left: 20px;"><b>Show only Available Events: </b>
+						<asp:CheckBox ID="showAvailableEvnts" runat="server" AutoPostBack="True" OnCheckedChanged="showAvailableEvnts_CheckedChanged" /></span>
+				</div>
 
 				<div id="myEvents" style="margin-bottom: 10%;">
 					<% foreach (var element in evList)
@@ -509,7 +515,7 @@
 										{%><%= attendance.Value %><%}
 																	  }%> 
 								Participants Attending 
-								<% if (attending.Count == element.MaxAttendees)
+								<% if (attendingUsers[element.EventId] == element.MaxAttendees)
 									{ %>
 								<b style="color: darkred;">(FULL)</b>
 								<%}
@@ -519,12 +525,12 @@
 										{%>
 								<b style="color: darkred;">(EVENT ENDED)</b>
 								<%}
+									else
+									{ %>
+								<b style="color: darkred;">(Event Ongoing)</b><%}
+								}
 								else
 								{ %>
-								<b style="color: darkred;">(Event Ongoing)</b><%}
-			}
-			else
-			{ %>
 								<b style="color: forestgreen;">(EVENT AVAILABLE TO JOIN)</b>
 								<%} %>
 							</p>
@@ -540,6 +546,7 @@
 			</div>
 			<div class="col-sm-12 col-md-12 col-lg-4 order-first order-lg-12" style="margin-bottom: 10%;">
 				<asp:Button ID="createEvent" CssClass="btn btn-primary createEvent" runat="server" OnClick="createEvent_Click" Text="Create Event" />
+				<asp:Panel ID="calPanel" runat="server">
 				<div class="elegant-calencar" style="font-size: 10px;">
 					<%--<p id="reset">reset</p>--%>
 					<div id="header" class="clearfix">
@@ -621,6 +628,7 @@
 						</tbody>
 					</table>
 				</div>
+					</asp:Panel>
 				<asp:TextBox ID="hidingDate" CssClass="forHide" runat="server"></asp:TextBox>
 				<input type="hidden" id="previousDate" value="<%=setCalendarDate %>" />
 				<asp:Button ID="testbtn" CssClass="forHide" runat="server" OnClick="DateClicked" CausesValidation="False" />

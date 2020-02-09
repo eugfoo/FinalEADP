@@ -208,5 +208,11 @@ namespace FinalProj.BLL
             int result = dao.queryCreatedEventId();
             return result;
         }
-    }
+
+		public List<Events> GetAllEvents()
+		{
+			eventDao ev = new eventDao();
+			return ev.SelectAllEvents();
+		}
+	}
 }
