@@ -10,13 +10,13 @@
     padding: 5px 0px 5px 0px;
     background-color: darkred;
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     border-radius: 3px;
     width: 320px;
 }
 
 #myTable {
-    width: 90%;
+    width: 80%;
     border-collapse: collapse;
     border-spacing: 0;
     border: 1px solid #ddd;
@@ -33,7 +33,7 @@ tr {
 
 #rowRepeat {
     box-shadow: 0px 1px 5px grey;
-    height: 500px;
+    height: 250px;
 }
 
 #tableTD {
@@ -41,11 +41,10 @@ tr {
 }
 
 #totalStats {
-    font-weight: bold;
     margin: 0 auto;
-    text-align: right;
     font-size: 25px;
     margin-bottom: 40px;
+    font-weight: 500;
 }
 
 #totalStats td {
@@ -54,23 +53,25 @@ tr {
 
 #totalParticipate {
     color: green;
+    font-weight: 600;
 }
 
 #totalComplete {
     color: green;
+    font-weight: 600;
 }
 
 #totalCreate {
     color: saddlebrown;
+    font-weight: 600;
 }
 
-#tbName, #radioButtonList, #dropdlAlphabet {
+#tbName, #radioButtonList {
     padding: 0px 15px 0px 15px;
 }
 
 #searchEventName {
     font-size: 20px;
-    font-weight: bold;
 }
 
 #divRadioList {
@@ -92,22 +93,19 @@ label {
     margin-right: auto;
     background-color: wheat;
     width: 70%;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 25px;
     border-radius: 4px;
     margin-top: 20px;
 }
 
-#row1, #row2 {
-    margin: 20px 0 40px 0;
+#row2 {
     padding: 10px 0 0 0;
     border-radius: 4px;
     box-shadow: 0px 1px 5px grey;
-}
-
-#row2 {
     font-size: 20px;
-    font-weight: bold;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #eventdp {
@@ -118,15 +116,15 @@ label {
 }
 
 #containerItems {
-    font-size: 25px;
-    
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .alignRight {
     float:right;
 }
 
-#organiserName {
+.organiserName {
     text-decoration: none;
     color: black;
 }
@@ -136,6 +134,7 @@ label {
     width: 50px;
     border-radius: 50%;
     float: left;
+    margin-right: 10px;
 }
 
 #innerTable {
@@ -150,19 +149,19 @@ label {
 
 #dateTime {
     color: dodgerblue;
-    font-weight: bold;
     text-align: left;
 }
 
 #txtDate {
     float: left;
+    margin-right: 10px;
 }
 
 #status {
-    font-weight: bold;
     text-align: left;
 }
 
 #txtStatus {
     float: left;
+    margin-right: 10px;
 }

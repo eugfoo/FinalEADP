@@ -228,7 +228,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <p id="totalPart">Total Participants: </p>
                         <p id="totalPartNum"><%= participant %></p>
-                        <p id="currentPart">Current Participants: </p>
+                        <p id="currentPart">Currently Present: </p>
                         <p id="currentPartNum"><%= participantHere %></p>
                     </div>
                 </div>

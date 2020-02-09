@@ -16,19 +16,18 @@
         <h2 id="title">Add Vouchers (Admin)</h2>
         <div class="container" id="formContainer">
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="col-sm-12 col-md-12 col-lg-6">
                     <label for="voucherName">Voucher Name: </label>
                     <asp:TextBox ID="voucherName" CssClass="form-control" placeholder="FoodPanda $15 off" runat="server"></asp:TextBox>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="col-sm-12 col-md-12 col-lg-6">
                     <label for="voucherAmt">Voucher Amount: </label>
                     <asp:TextBox ID="voucherAmt" CssClass="form-control" placeholder="15" runat="server"></asp:TextBox>
                 </div>
+                
             </div>
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12s">
+                <div class="col-sm-12 col-md-12 col-lg-12">
                     <label for="voucherName">Voucher Picture: </label>
                     <asp:FileUpload ID="FileUpload1" runat="server" />
                 </div>

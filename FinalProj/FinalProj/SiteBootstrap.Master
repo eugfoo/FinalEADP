@@ -105,15 +105,17 @@
             position: absolute;
             background-color: #f1f1f1;
             min-width: 300px;
+            min-height:70px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
+            border-radius: 3px;
         }
 
             .dropdown-content a {
-                color: black;
-                padding: 12px 16px;
                 text-decoration: none;
+                color: black;
                 display: block;
+                padding: 14px 12px;
             }
 
                 .dropdown-content a:hover {
@@ -122,7 +124,7 @@
 
                 .dropdown-content p {
                     font-weight: bold;
-                    color: darkgreen;
+                    color: dodgerblue;
                     display: inline;
                 }
 
@@ -293,15 +295,15 @@
     </div>
 </body>
     <script type="text/javascript">
-        var count = <%=count %>;
-        var color = ['red', 'white'];
+        var count = <%= count %>;
+        var color = ['#DC143C', 'white'];
         var index = 0;
 
         if (count > 0) {
             setInterval(function () {
                 document.getElementById("hexagon").style.backgroundColor = color[index];
                 index = (index + 1) % 2;
-            }, 2000);
+            }, 1000);
         }
 
     </script>

@@ -181,6 +181,7 @@
             position: absolute;
             background-color: #f1f1f1;
             min-width: 300px;
+            min-height: 70px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
             min-height: 30px;
@@ -188,7 +189,7 @@
 
             .dropdown-content a {
                 color: black;
-                padding: 12px 16px;
+                padding: 14px 12px;
                 text-decoration: none;
                 display: block;
             }
@@ -199,7 +200,7 @@
 
                 .dropdown-content p {
                     font-weight: bold;
-                    color: darkgreen;
+                    color: dodgerblue;
                     display: inline;
                 }
 
@@ -242,7 +243,7 @@
                     if (userG != null)
                     {%>
                         <div class="dropdown">
-                        <div class="hexagon">
+                        <div id="hexagon" class="hexagon">
                             <% if (Session["id"] != null)
                                 { %>
                             <div class="dropdown-content">
@@ -492,14 +493,14 @@
 </body>
     <script>
         var count = <%= count %>;
-        var color = ['red', 'white'];
+        var color = ['#DC143C', 'white'];
         var index = 0;
 
         if (count > 0) {
             setInterval(function () {
                 document.getElementById("hexagon").style.backgroundColor = color[index];
                 index = (index + 1) % 2;
-            }, 2000);
+            }, 1000);
         }
     </script>
 </html>

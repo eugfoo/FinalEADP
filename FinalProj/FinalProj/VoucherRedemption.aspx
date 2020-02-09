@@ -43,6 +43,7 @@
                 </td>
                 <td id="tdRepeat">
                     <p id="voucherName"><%=element.VoucherName %></p>
+                    <p id="amountP">Amount: </p>
                     <p id="voucherAmount">$<%=element.VoucherAmount %></p>
                     <a id="btnRedeem" href="/VoucherRedemption.aspx?voucherId=<%=element.VoucherId %>" class="btn btn-primary"><%= element.VoucherPoints %> Points&rarr;</a>
                 </td>

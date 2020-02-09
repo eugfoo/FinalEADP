@@ -62,24 +62,30 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <div style="height: 100%">
         <div>
-            <h1 id="title">Event Overview</h1>
+            <h2 id="title">Event Overview</h2>
         </div>
-        <table id="totalStats">
-            <tr>
-                <td>Total Events:</td>
-                <td id="totalComplete"><%= total %></td>
-                <td></td>
-                <td>Events Create:</td>
-                <td id="totalCreate"><%= eventCount %></td>
-                <td></td>
-                <td>Events Participate:</td>
-                <td id="totalParticipate"><%= participated %></td>
-        </table>
+
+        <div class="container">
+            <div id="totalStats" class="row">
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    Total Events:
+                <p id="totalComplete"><%= total %></p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    Events Create:
+                <p id="totalCreate"><%= eventCount %></p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    Events Participate:
+                <p id="totalParticipate"><%= participated %></p>
+                </div>
+            </div>
+        </div>
 
         <div class="container">
             <div class="row" id="row2">
                 <div class="col-sm-12 col-md-6 col-lg-6">
-                    <input type="search" onkeyup="searchFunction()" id="searchEventName" placeholder="Search for events" aria-describedby="button-addon1" class="form-control border-1 bg-light" />
+                    <input type="search" onkeyup="searchFunction()" id="searchEventName" placeholder="Search for event titles.." aria-describedby="button-addon1" class="form-control border-1 bg-light" />
                 </div>
 
                 <div id="divRadioList" class="col-sm-12 col-md-6 col-lg-6">
@@ -109,18 +115,18 @@
                             <table id="innerTable">
                                 <tr>
                                     <td class="alignRight">
-                                        <p>Organised by: </p>
+                                        <p style="margin-right: 10px">Organised by: </p>
                                     </td>
                                     <td>
-                                        <img id="dp" src="<%= element.OrganiserPic %>" />
-                                        <a id="organiserName" href="/PPGallery.aspx?userId=<%= element.Organiser %>">
+                                        <a class="organiserName" href="/PPGallery.aspx?userId=<%= element.Organiser %>"><img id="dp" src="<%= element.OrganiserPic %>" /></a>
+                                        <a class="organiserName" href="/PPGallery.aspx?userId=<%= element.Organiser %>">
                                             <p id="organiser"><%= element.OrganiserName %></p>
                                         </a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="alignRight">
-                                        <p id="txtDate">Start date and time: </p>
+                                        <p id="txtDate">Date and time: </p>
                                         <br />
                                     </td>
                                     <td>
@@ -132,17 +138,18 @@
                                         <p id="txtStatus">Status: </p>
                                         <br />
                                     </td>
-                                    <script>
-                                        if (document.getElementById("status").innerText == "Incomplete") {
-                                            document.getElementById("status").style.color = "red";
-                                        }
-                                        else if (document.getElementById("status").innerText == "Complete"){
-                                            document.getElementById("status").style.color = "green";
-                                        }
-                                    </script>
+                                    
                                     <td>
                                         <p id="status"><%= element.Completed %></p>
                                     </td>
+                                    <script type="text/javascript">
+                                        if (document.getElementById("status").innerHTML == "Incomplete") {
+                                                document.getElementById("status").style.color = "Red";
+                                        }
+                                        if (document.getElementById("status").innerHTML == "Complete") {
+                                                document.getElementById("status").style.color = "Green";
+                                            }
+                                    </script>
                                 </tr>
                             </table>
                         </div>
@@ -154,8 +161,7 @@
         </div>
     </div>
     
-        <script>
-
+    <script>
         if (<%= eventCount%> > 0) {
             document.getElementById("msg").style.visibility = "hidden";
         }
