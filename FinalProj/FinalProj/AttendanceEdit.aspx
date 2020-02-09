@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="AttendanceEdit.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="height: 86vh">
@@ -190,9 +191,9 @@
             </table>
 
 
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for participant" />
+            <input type="text" id="myInput" class="w3-input" onkeyup="myFunction()" placeholder="Search for participant" />
 
-            <table id="attendance">
+            <table id="attendance" class="pure-table pure-table-bordered">
                 <tr>
                     <th style="visibility: hidden">ID</th>
                     <th>Names</th>
@@ -213,9 +214,9 @@
                     </td>
                     <td>
                         <script type="text/javascript">
-                            checkChkBox(<%= check[i].ToString().ToLower() %>);
+                            document.getElementById("ContentProvider");
                         </script>
-                        <asp:CheckBox ID="CheckBox1" runat="server" />
+                        <input type="checkbox" />
                         <%= attending[i] %>
                     </td>
                 </tr>
@@ -223,15 +224,11 @@
                 <% } %>
             </table>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <p id="totalPart">Total Participants: </p>
-                        <p id="totalPartNum"><%= participant %></p>
-                        <p id="currentPart">Currently Present: </p>
-                        <p id="currentPartNum"><%= participantHere %></p>
-                    </div>
-                </div>
+            <div id="container">
+                <p id="totalPart">Total Participants: </p>
+                <p id="totalPartNum"><%= participant %></p>
+                <p id="currentPart">Currently Present: </p>
+                <p id="currentPartNum"><%= participantHere %></p>
             </div>
 
             <asp:Button ID="Button1" UseSubmitBehavior="true" OnClientClick="onClick();onClick1();" runat="server" OnClick="Button1_Click" Text="Submit" CssClass="btn btn-primary"/>

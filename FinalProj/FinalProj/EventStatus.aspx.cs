@@ -47,7 +47,8 @@ namespace FinalProj
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
-                    System.Diagnostics.Debug.WriteLine("This is selected index 0 ");
+                    msg.Visible = false;
+
                     if (viewingUserId != null)
                     {
 
@@ -67,6 +68,11 @@ namespace FinalProj
                             {
                                 eventCount += 1;
                             }
+                        }
+
+                        if (eventCount == 0)
+                        {
+                            msg.Visible = true;
                         }
 
                         evStListTemp = evSt.GetAllEventsByName();
@@ -152,6 +158,11 @@ namespace FinalProj
                             }
                         }
 
+                        if (eventCount == 0)
+                        {
+                            msg.Visible = true;
+                        }
+
                         Users viewingUser = new Users();
                         usr = viewingUser.GetUserById(int.Parse(Session["id"].ToString()));
 
@@ -217,8 +228,7 @@ namespace FinalProj
                 }
                 if (radioButtonList.SelectedIndex == 1)
                 {
-
-                    System.Diagnostics.Debug.WriteLine("This is selected index 1 ");
+                    msg.Visible = false;
 
                     if (viewingUserId != null)
                     {
@@ -239,6 +249,11 @@ namespace FinalProj
                             participated += 1;
                         }
 
+                        if (participated == 0)
+                        {
+                            msg.Visible = true;
+                        }
+
                         foreach (var element in evStListEventCounter)
                         {
                             if (element.Organiser == viewingUserId)
@@ -246,7 +261,6 @@ namespace FinalProj
                                 eventCount += 1;
                             }
                         }
-
 
                         for (int i = 0; i < evStListTemp.Count; i++)
                         {
@@ -320,6 +334,11 @@ namespace FinalProj
                         foreach (var element in evStListParticipateCounter)
                         {
                             participated += 1;
+                        }
+
+                        if (participated == 0)
+                        {
+                            msg.Visible = true;
                         }
 
                         foreach (var element in evStListEventCounter)

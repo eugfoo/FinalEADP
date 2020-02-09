@@ -98,8 +98,8 @@
         </div>
 
         <div style="overflow-x: auto;">
-            <h1 id="msg">No available events, join or create one!</h1>
-            
+            <h1 id="msg" visible="false" runat="server">No events to show :( <br />Join or create one!</h1>
+            <%--style="visibility:hidden"--%>
             <table class="center" id="myTable">
                 <% foreach (var element in evStList)
                     { %>
@@ -160,10 +160,4 @@
             
         </div>
     </div>
-    
-    <script>
-        if (<%= eventCount%> > 0) {
-            document.getElementById("msg").style.visibility = "hidden";
-        }
-    </script>
 </asp:Content>

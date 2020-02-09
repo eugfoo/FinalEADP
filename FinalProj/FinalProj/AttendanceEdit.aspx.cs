@@ -64,6 +64,7 @@ namespace FinalProj
                         diet.Add(user.GetUserById(userId).diet);
                     }
 
+
                     if (attendList[i].Attend == 1)
                     {
                         System.Diagnostics.Debug.WriteLine("This is check true");

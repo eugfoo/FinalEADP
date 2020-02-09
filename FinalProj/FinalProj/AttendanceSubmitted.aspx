@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="AttendanceSubmitted.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script type="text/javascript">
 
             var endTime = '<%= endTime %>';
@@ -119,11 +120,12 @@
                 </tr>
             </table>
 
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for participant" />
+            <input type="text" id="myInput" class="w3-input" onkeyup="myFunction()" placeholder="Search for participant" />
 
 
             <table id="attendance">
                 <tr>
+                    <th style="visibility: hidden">id</th>
                     <th>Names</th>
                     <th>Dietary Requirements (If any)</th>
                     <th>Are they at your event?</th>
@@ -131,6 +133,9 @@
                 <% for (int i = 0; i < attendList.Count; i++)
                     { %>
                 <tr>
+                    <td style="visibility: hidden">
+                        <%= attendUser[i].id %>
+                    </td>
                     <td>
                         <%= attendUser[i].name %>
                     </td>
@@ -145,15 +150,11 @@
                 <% } %>
             </table>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <p id="totalPart">Total Participants: </p>
-                        <p id="totalPartNum"><%= participant %></p>
-                        <p id="currentPart">Current Participants: </p>
-                        <p id="currentPartNum"><%= participantHere %></p>
-                    </div>
-                </div>
+            <div id="container">
+                <p id="totalPart">Total Participants: </p>
+                <p id="totalPartNum"><%= participant %></p>
+                <p id="currentPart">Currently Present: </p>
+                <p id="currentPartNum"><%= participantHere %></p>
             </div>
 
             <a href="/AttendanceEdit.aspx" id="btnEdit" class="btn btn-danger" runat="server">Edit</a>
