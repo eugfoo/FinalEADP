@@ -19,7 +19,7 @@
     <div class="container my-3">
         <nav class="breadcrumb">
             <a href="forumPage1.aspx" class="breadcrumb-item">Board index</a>
-            <span class="breadcrumb-item active">Forum Category</span>
+            <span class="breadcrumb-item active">Forum Threads</span>
         </nav>
         <div class="row">
             <div class="col-12">

@@ -35,7 +35,7 @@
                             <h2 class="h4">UP-COMING EVENTS</h2>
                         </div>
                         <div class="col-md-3">
-                            <a class="btn btn-dark" href="#0" role="button">View Category</a>
+                            <a class="btn btn-dark" href="forumCatEventOverview.aspx" role="button">View Threads</a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <ItemTemplate>
                         <tr>
                             <td style="width: 320px;">
-                                <h3 class="h6"><span class="badge badge-<%# Eval("threadBadgeColor") %>"><%# Eval("threadPrefix") %></span> <a href="forumPost.aspx?threadId=<%# Eval("Id") %>"><%# Eval("threadTitle") %></a></h3>
+                                <h3 class="h6"><span class="badge badge-<%# Eval("threadBadgeColor") %>"><%# Eval("threadPrefix") %></span> <a href="forumPostEvent.aspx?threadId=<%# Eval("Id") %>"><%# Eval("threadTitle") %></a></h3>
                                 <div class="small">
                                     Started by: <%# Eval("user_name") %>
                                 </div>
@@ -87,7 +87,7 @@
                             <h2 class="h4">ClearView Forum</h2>
                         </div>
                         <div class="col-md-3">
-                            <a class="btn btn-dark" href="forumCatOverview.aspx" role="button">View Category</a>
+                            <a class="btn btn-dark" href="forumCatOverview.aspx" role="button">View Threads</a>
                         </div>
                     </div>
                 </div>

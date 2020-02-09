@@ -1,7 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteBootstrap.Master" AutoEventWireup="true" CodeBehind="forumPostEvent.aspx.cs" Inherits="FinalProj.forumPostEvent" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://account.snatchbot.me/script.js"></script>
+    <script>window.sntchChat.Init(91154)</script>
+
     <style type="text/css">
         .author-col {
             min-width: 12em;
@@ -9,12 +13,6 @@
 
         .post-col {
             min-width: 20em;
-        }
-
-        .auto-style1 {
-            max-width: 100%;
-            height: 245px;
-            width: 213px;
         }
 
         .auto-style3 {
@@ -29,7 +27,7 @@
     <div class="container my-3">
         <nav class="breadcrumb">
             <a href="forumPage1.aspx" class="breadcrumb-item">Board index</a>
-            <a href="forumCatOverview.aspx" class="breadcrumb-item">Forum Category</a>
+            <a href="forumCatEventOverview.aspx" class="breadcrumb-item">Forum Event Threads</a>
             <span class="breadcrumb-item active">
                 <asp:Label ID="LblPrefix" runat="server"></asp:Label>
                 <asp:Label ID="LblTitleBreadcrumb" runat="server"></asp:Label></span>
@@ -56,8 +54,8 @@
 
                     <tbody>
                         <tr>
-                            <td class="auto-style4 table-secondary" style="text-align:center; font-size:20px;">
-                                <div><a href="PPGallery.aspx?userId=<%= currentThreadUser.id %>"><strong style="font-weight:700;"><%= currentThreadUser.name%></strong></a></div>
+                            <td class="auto-style4 table-secondary" style="text-align: center; font-size: 20px;">
+                                <div><a href="PPGallery.aspx?userId=<%= currentThreadUser.id%>"><strong><%= currentThreadUser.name%></strong></a></div>
                             </td>
                             <td class="post-col d-lg-flex justify-content-lg-between table-secondary" style="height: 60px;">
                                 <div class="container">
@@ -80,11 +78,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="max-width: 100px;" class="auto-style3">
-                                <img src="<%=currentThreadUser.DPimage%>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left:30px;">
-
-                                <div><span class="font-weight-bold">Joined: </span><%= currentThreadUser.regDate%></div>
-                                <div><a href="threadCreaterOverview.aspx?userId=<%= currentThreadUser.id%>"<strong>Posts </strong></a>: 123</div>
+                            <td style="width: 255px;">
+                                <img src="<%=currentThreadUser.DPimage %>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left: 30px;">
+                                <div><%= currentThreadUser.desc %></div>
+                                <div style="margin-top: 70px;"><span class="font-weight-bold">Joined: </span><%= currentThreadUser.regDate %></div>
+                                <div>
+                                    <a href="threadCreaterOverview.aspx?userId=<%= currentThreadUser.id %>"><strong style="font-weight: 700;">Posts </strong></a>:
+                                    <asp:Label ID="LblThreadsCount" runat="server"></asp:Label>
+                                </div>
                             </td>
                             <td>
                                 <asp:ListView ID="LVImages" runat="server">
@@ -169,31 +170,31 @@
 
                             <ItemTemplate>
                                 <tr>
-                                    <td class="auto-style4 table-active">
-                                        <div><a href="#0"><strong>GandyHaley</strong></a></div>
+                                    <td class="auto-style4 table-active" style="text-align: center; font-size: 15px;">
+                                        <div><a href="PPGallery.aspx?userId=<%# Eval("user_id") %>"><strong><%# Eval("user_name")%></strong></a></div>
                                     </td>
-                                    <td class="post-col d-lg-flex justify-content-lg-between table-active">
+                                    <td class="post-col d-lg-flex justify-content-lg-between table-active" style="font-size: 15px;">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <span class="font-weight-bold">Post subject:</span>
-                                                    <asp:Label ID="LblTitle" runat="server"></asp:Label>
+                                                    <span class="font-weight-bold">Replied To : <%# Eval("postTitle") %></span>
+                                                    <%--<asp:Label ID="LblTitle" runat="server"></asp:Label>--%>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <span class="font-weight-bold">Posted:</span>
-                                                    <asp:Label ID="LblPostDate" runat="server"><%# Eval("postDate") %></asp:Label>
-
+                                                    <span class="font-weight-bold">Posted: <%# Eval("postDate") %></span>
+                                                    <%--<asp:Label ID="LblPostDate" runat="server"><%# Eval("postDate") %></asp:Label>--%>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="max-width: 100px;" class="auto-style3">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/1200px-Donald_Trump_official_portrait.jpg" class="auto-style1" />
+                                <tr style="max-height: 456px; height: 350px;">
+                                    <td style="width: 255px;">
+                                        <img src="<%# Eval("userDP") %>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left: 30px;">
+                                        <div><%# Eval("userDesc") %></div>
+                                        <div style="margin-top: 70px;"><span class="font-weight-bold">Joined: </span><%# Eval("userJoinedDate") %></div>
+                                        <div><a href="threadCreaterOverview.aspx?userId=<%# Eval("user_id") %>"><strong style="font-weight: 700;">Posts </strong></a>: <%# Eval("userThreadCount") %></div>
 
-                                        <div><span class="font-weight-bold">Joined: </span>02 Apr 2019, 23:59</div>
-                                        <div><span class="font-weight-bold">Posts:</span>123</div>
                                     </td>
                                     <td>
                                         <asp:Label ID="LblContent" runat="server"><%# Eval("postContent") %></asp:Label>
@@ -267,25 +268,21 @@
                     .threadBox {
                         background-color: #A9A9A9;
                     }
-
-                    .auto-style5 {
-                        max-width: 100%;
-                        height: 131px;
-                        width: 107px;
-                    }
                 </style>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="comment">Reply to this post:</label>
-            <asp:TextBox ID="tbReplyContent" runat="server" CssClass="form-control" Height="250px" TextMode="MultiLine"></asp:TextBox>
-            <asp:Label ID="LblMsg" runat="server" ForeColor="Red"></asp:Label>
-        </div>
+        <asp:Panel ID="replyPanel" runat="server">
+            <div class="form-group">
+                <label for="comment">Reply to this post:</label>
+                <asp:TextBox ID="tbReplyContent" runat="server" CssClass="form-control" Height="250px" TextMode="MultiLine"></asp:TextBox>
+                <asp:Label ID="LblMsg" runat="server" ForeColor="Red"></asp:Label>
+            </div>
 
-        <asp:Button ID="btnReply" runat="server" Text="Reply" CssClass="btn btn-primary" OnClick="btnReply_Click" />
-        <button type="reset" class="btn btn-danger">Clear</button>
 
+            <asp:Button ID="btnReply" runat="server" Text="Reply" CssClass="btn btn-primary" OnClick="btnReply_Click" />
+            <button type="reset" class="btn btn-danger">Clear</button>
+        </asp:Panel>
 
         <asp:HiddenField ID="HFthreadId" runat="server" />
 
@@ -299,5 +296,8 @@
                                         </tr>
                                     </thead>--%>
     </div>
+
+
+
 
 </asp:Content>
