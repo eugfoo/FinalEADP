@@ -101,8 +101,8 @@ namespace FinalProj.DAL
             SqlConnection myConn = new SqlConnection(DBConnect);
             // Step 2 - Instantiate SqlCommand instance to add record 
             //          with INSERT statement
-            string sqlStmt = "IF EXISTS(SELECT * FROM VoucherRedeemed WHERE VoucherId = " + vcher.VoucherId + ") "+
-                                "UPDATE VoucherRedeemed SET Quantity = Quantity + 1 WHERE VoucherId = " + vcher.VoucherId + " " + 
+            string sqlStmt = "IF EXISTS(SELECT * FROM VoucherRedeemed WHERE VoucherId = " + vcher.VoucherId + " AND UserId = " + vcher.UserId + ") "+
+                                "UPDATE VoucherRedeemed SET Quantity = Quantity + 1 WHERE VoucherId = " + vcher.VoucherId + "AND UserId = " + vcher.UserId + " " + 
                             "ELSE"+ 
                                 " INSERT INTO VoucherRedeemed(VoucherId, VoucherName, VoucherAmount, VoucherPic, UserId, Quantity) " +
                                 "VALUES (@voucherId, @voucherName, @voucherAmt, @voucherPic, @userId, @quantity)";

@@ -83,7 +83,7 @@ namespace FinalProj.DAL
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter to retrieve data from the database table
-            string sqlStmt = "Select * from Attendance Where ','+@eventId+',' like '%,'+cast(Event_Id as varchar(50))+',%' and Attend = 1";
+            string sqlStmt = "Select * from Attendance Where ','+@eventId+',' like '%,'+cast(Event_Id as varchar(50))+',%' and Attend = 1 and Feedback = 0";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
 
             da.SelectCommand.Parameters.AddWithValue("@eventId", combinedInt);

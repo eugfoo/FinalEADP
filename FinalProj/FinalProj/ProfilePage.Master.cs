@@ -14,6 +14,7 @@ namespace FinalProj
         protected List<Notifications> notiList = new List<Notifications>();
         public int rating;
         public string viewingUserId;
+        public int notiCount = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -69,8 +70,9 @@ namespace FinalProj
                 {
                     if (notiListTemp[i].User_id == user.id)
                     {
+                        notiCount += 1;
                         notiList.Add(notiListTemp[i]);
-                        System.Diagnostics.Debug.WriteLine("This is notiList" + notiList[i]);
+                        // System.Diagnostics.Debug.WriteLine("This is notiList" + notiList[i]);
                     }
                 }
 
