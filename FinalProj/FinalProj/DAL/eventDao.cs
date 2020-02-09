@@ -570,7 +570,23 @@ namespace FinalProj.DAL
             myConn.Close();
             return result;
         }
-        
+
+        public int queryCreatedEventId()
+        {
+            int result = 0;
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            myConn.Open();
+            SqlCommand cmd = new SqlCommand("Select Max(eventId) From tdEvent", myConn);
+            int i = Convert.ToInt32(cmd.ExecuteScalar());
+            myConn.Close();
+
+            result = i;
+
+            return result;
+        }
+
 
 
     }

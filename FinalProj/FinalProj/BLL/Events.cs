@@ -202,7 +202,11 @@ namespace FinalProj.BLL
             return dao.updateAvgRatingByEventId(eventId, avgRating);
         }
 
-
-
+        public int getMaxEventId()
+        {
+            eventDao dao = new eventDao();
+            int result = dao.queryCreatedEventId();
+            return result;
+        }
     }
 }

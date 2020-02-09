@@ -190,11 +190,13 @@ namespace FinalProj
                 int rating = 0;
 
                 ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, rating, user_id);
+                int result = ev.AddEvent();
 
-                thread = new Thread(1, "[EVENT]", "success", title, andyDate, picture,
+                int createdEventId = ev.getMaxEventId();
+                thread = new Thread(createdEventId, "[EVENT]", "success", title, andyDate, picture,
                     description, user_id, user.name);
 
-                int result = ev.AddEvent();
+                
                 int resultThread = thread.createThreadForEvent();
                 Response.Redirect("/eventDetails.aspx");
             }
