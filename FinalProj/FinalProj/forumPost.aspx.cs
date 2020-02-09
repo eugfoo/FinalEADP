@@ -16,6 +16,7 @@ namespace FinalProj
     public partial class forumPost : System.Web.UI.Page
     {
         protected Users currentThreadUser;
+        protected Thread threadUser;
         protected List<Users> allUsersList;
         protected List<ThreadReply> allThreadRepliesByThreadId;
         protected Dictionary<int, int> threadIdReplies = new Dictionary<int, int>();
@@ -38,6 +39,7 @@ namespace FinalProj
             public string userDesc { get; set; }
             public string userDP { get; set; }
             public string userJoinedDate { get; set; }
+            public int userThreadCount { get; set; }
         }
 
 
@@ -65,18 +67,38 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["user"] == null) // A user has signed in
-            {
-                Response.Redirect("/homepage.aspx");
-            }
-
             string threadId = Request.QueryString["threadid"];
             int threadiiD;
             int.TryParse(threadId, out threadiiD);
             Users usr = new Users();
             Thread currentThread = thread.GetThreadByThreadId(threadiiD);
             List<tReplies> threadReplyListForThisThread = new List<tReplies>();
+
+            Users SessUser = (Users)Session["user"];
+
+            if (Session["user"] == null) // A user has signed in
+            {
+                //Response.Redirect("/homepage.aspx");
+                replyPanel.Visible = false;
+            }
+            else
+            {
+                if (SessUser.id != currentThread.UserId)
+                {
+                    panelEdit.Visible = false;
+                }
+                else
+                {
+                    panelEdit.Visible = true;
+                }
+                replyPanel.Visible = true;
+                
+            }
+
+            
+
+
+
 
             if (!IsPostBack)
             {
@@ -103,7 +125,8 @@ namespace FinalProj
                                     user_name = TReply.UserName,
                                     userDesc = user.desc,
                                     userDP = user.DPimage,
-                                    userJoinedDate = user.regDate
+                                    userJoinedDate = user.regDate,
+                                    userThreadCount = thread.getThreadsByUserId(user.id).Count()
                                 }
 
                             );
@@ -121,7 +144,7 @@ namespace FinalProj
 
             if (threadId != null)
             {
-                Users user = (Users)Session["user"];
+                
 
                 LblTitle.Text = currentThread.Title;
                 LblTitleBig.Text = currentThread.Title;
@@ -134,15 +157,9 @@ namespace FinalProj
 
                 currentThreadUser = usr.GetUserById(currentThread.UserId);
 
+                LblThreadsCount.Text = thread.getThreadsByUserId(currentThreadUser.id).Count().ToString();
 
-                if (user.id != currentThread.UserId)
-                {
-                    panelEdit.Visible = false;
-                }
-                else
-                {
-                    panelEdit.Visible = true;
-                }
+               
             }
 
             if (Page.IsPostBack) return;
@@ -196,6 +213,7 @@ namespace FinalProj
                                 userDesc = user.desc,
                                 userDP = user.DPimage,
                                 userJoinedDate = user.regDate
+      
                             }
                         );
                     }

@@ -114,16 +114,13 @@ namespace FinalProj.DAL
         public Thread GetThreadByThreadId(int threadId)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            string myQuery = "Select * From Threads where Id=" + threadId;
             SqlConnection myConn = new SqlConnection(DBConnect);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = myQuery;
-            cmd.Connection = myConn;
 
-            //cmd.Parameters.AddWithValue("@ThreadId", threadId);
+            string sqlStmt = "Select * from Threads WHERE Id = @paraThreadId";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
 
-            SqlDataAdapter da = new SqlDataAdapter();
-            da.SelectCommand = cmd;
+
             DataSet ds = new DataSet();
             da.Fill(ds);
 
@@ -155,6 +152,7 @@ namespace FinalProj.DAL
 
             return thread;
         }
+
 
         public List<Thread> getAllThreads()
         {

@@ -64,10 +64,10 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] == null) // A user has signed in
-            {
-                Response.Redirect("/homepage.aspx");
-            }
+            //if (Session["user"] == null) // A user has signed in
+            //{
+            //    Response.Redirect("/homepage.aspx");
+            //}
 
             if (!IsPostBack)
             {
@@ -300,22 +300,5 @@ namespace FinalProj
             lnkPage.BackColor = Color.FromName("#8db0c7");
         }
 
-
-
-        private DataSet GetData()
-        {
-            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            using (SqlConnection myConn = new SqlConnection(DBConnect))
-            {
-                SqlDataAdapter da = new SqlDataAdapter("Select * From Threads", myConn);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                return ds;
-            }
-
-
-
-
-        }
     }
 }

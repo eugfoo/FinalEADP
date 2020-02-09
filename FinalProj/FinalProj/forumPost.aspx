@@ -15,12 +15,6 @@
             min-width: 20em;
         }
 
-        .auto-style1 {
-            max-width: 100%;
-            height: 245px;
-            width: 213px;
-        }
-
         .auto-style3 {
             width: 233px;
         }
@@ -87,8 +81,11 @@
                             <td style="width: 255px;">
                                 <img src="<%=currentThreadUser.DPimage %>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left: 30px;">
                                 <div><%= currentThreadUser.desc %></div>
-                                <div style="margin-top:70px;"><span class="font-weight-bold">Joined: </span><%= currentThreadUser.regDate %></div>
-                                <div><a href="threadCreaterOverview.aspx?userId=<%= currentThreadUser.id %>"><strong style="font-weight: 700;">Posts </strong></a>: 123</div>
+                                <div style="margin-top: 70px;"><span class="font-weight-bold">Joined: </span><%= currentThreadUser.regDate %></div>
+                                <div>
+                                    <a href="threadCreaterOverview.aspx?userId=<%= currentThreadUser.id %>"><strong style="font-weight: 700;">Posts </strong></a>:
+                                    <asp:Label ID="LblThreadsCount" runat="server"></asp:Label>
+                                </div>
                             </td>
                             <td>
                                 <asp:ListView ID="LVImages" runat="server">
@@ -195,8 +192,8 @@
                                     <td style="width: 255px;">
                                         <img src="<%# Eval("userDP") %>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left: 30px;">
                                         <div><%# Eval("userDesc") %></div>
-                                        <div style="margin-top:70px;"><span class="font-weight-bold">Joined: </span><%# Eval("userJoinedDate") %></div>
-                                        <div><a href="threadCreaterOverview.aspx?userId=<%# Eval("user_id") %>"><strong style="font-weight: 700;">Posts </strong></a>: 123</div>
+                                        <div style="margin-top: 70px;"><span class="font-weight-bold">Joined: </span><%# Eval("userJoinedDate") %></div>
+                                        <div><a href="threadCreaterOverview.aspx?userId=<%# Eval("user_id") %>"><strong style="font-weight: 700;">Posts </strong></a>: <%# Eval("userThreadCount") %></div>
 
                                     </td>
                                     <td>
@@ -271,25 +268,21 @@
                     .threadBox {
                         background-color: #A9A9A9;
                     }
-
-                    .auto-style5 {
-                        max-width: 100%;
-                        height: 131px;
-                        width: 107px;
-                    }
                 </style>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="comment">Reply to this post:</label>
-            <asp:TextBox ID="tbReplyContent" runat="server" CssClass="form-control" Height="250px" TextMode="MultiLine"></asp:TextBox>
-            <asp:Label ID="LblMsg" runat="server" ForeColor="Red"></asp:Label>
-        </div>
+        <asp:Panel ID="replyPanel" runat="server">
+            <div class="form-group">
+                <label for="comment">Reply to this post:</label>
+                <asp:TextBox ID="tbReplyContent" runat="server" CssClass="form-control" Height="250px" TextMode="MultiLine"></asp:TextBox>
+                <asp:Label ID="LblMsg" runat="server" ForeColor="Red"></asp:Label>
+            </div>
 
-        <asp:Button ID="btnReply" runat="server" Text="Reply" CssClass="btn btn-primary" OnClick="btnReply_Click" />
-        <button type="reset" class="btn btn-danger">Clear</button>
 
+            <asp:Button ID="btnReply" runat="server" Text="Reply" CssClass="btn btn-primary" OnClick="btnReply_Click" />
+            <button type="reset" class="btn btn-danger">Clear</button>
+        </asp:Panel>
 
         <asp:HiddenField ID="HFthreadId" runat="server" />
 

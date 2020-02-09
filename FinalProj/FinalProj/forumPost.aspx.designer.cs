@@ -58,6 +58,15 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.Label LblPostDate;
         
         /// <summary>
+        /// LblThreadsCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblThreadsCount;
+        
+        /// <summary>
         /// LVImages control.
         /// </summary>
         /// <remarks>
@@ -200,6 +209,15 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblpage;
+        
+        /// <summary>
+        /// replyPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel replyPanel;
         
         /// <summary>
         /// tbReplyContent control.
