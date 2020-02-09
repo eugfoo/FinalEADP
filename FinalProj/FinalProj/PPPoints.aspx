@@ -60,7 +60,7 @@
                     %>
                     <tr>
                         <th scope="row"><%=vRedList[i].VoucherName%></th>
-                        <td><%=vRedList[i].VoucherAmount %></td>
+                        <td><%=vRedList[i].Quantity %></td>
                     </tr>
                     <%} %>
                 </tbody>
