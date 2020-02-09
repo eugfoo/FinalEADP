@@ -35,11 +35,13 @@ namespace FinalProj.DAL
             for (int i = 0; i < rec_cnt; i++)
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                int voucherId = int.Parse(row["VoucherId"].ToString());
                 string voucherName = row["VoucherName"].ToString();
                 string voucherAmt = row["VoucherAmount"].ToString();
                 string voucherPic = row["VoucherPic"].ToString();
                 string userId = row["UserId"].ToString();
-                VoucherRedeemed obj = new VoucherRedeemed(voucherName, voucherAmt, voucherPic, userId);
+                int quantity = int.Parse(row["Quantity"].ToString());
+                VoucherRedeemed obj = new VoucherRedeemed(voucherId, voucherName, voucherAmt, voucherPic, userId, quantity);
                 voucherList.Add(obj);
             };
 
@@ -72,11 +74,13 @@ namespace FinalProj.DAL
             for (int i = 0; i < rec_cnt; i++)
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                int voucherId = int.Parse(row["VoucherId"].ToString());
                 string voucherName = row["VoucherName"].ToString();
                 string voucherAmt = row["VoucherAmount"].ToString();
                 string voucherPic = row["VoucherPic"].ToString();
                 string userId = row["UserId"].ToString();
-                VoucherRedeemed obj = new VoucherRedeemed(voucherName, voucherAmt, voucherPic, userId);
+                int quantity = int.Parse(row["Quantity"].ToString());
+                VoucherRedeemed obj = new VoucherRedeemed(voucherId, voucherName, voucherAmt, voucherPic, userId, quantity);
                 voucherList.Add(obj);
             };
 
@@ -85,6 +89,9 @@ namespace FinalProj.DAL
 
         public int Insert(VoucherRedeemed vcher)
         {
+
+            System.Diagnostics.Debug.WriteLine("This is id: " + vcher.VoucherId);
+
             // Execute NonQuery return an integer value
             int result = 0;
             SqlCommand sqlCmd = new SqlCommand();
@@ -94,21 +101,26 @@ namespace FinalProj.DAL
             SqlConnection myConn = new SqlConnection(DBConnect);
             // Step 2 - Instantiate SqlCommand instance to add record 
             //          with INSERT statement
-            string sqlStmt = "INSERT INTO VoucherRedeemed(VoucherName, VoucherAmount, VoucherPic, UserId) " +
-                             "VALUES (@voucherName, @voucherAmt, @voucherPic, @userId)";
+            string sqlStmt = "IF EXISTS(SELECT * FROM VoucherRedeemed WHERE VoucherId = " + vcher.VoucherId + ") "+
+                                "UPDATE VoucherRedeemed SET Quantity = Quantity + 1 WHERE VoucherId = " + vcher.VoucherId + " " + 
+                            "ELSE"+ 
+                                " INSERT INTO VoucherRedeemed(VoucherId, VoucherName, VoucherAmount, VoucherPic, UserId, Quantity) " +
+                                "VALUES (@voucherId, @voucherName, @voucherAmt, @voucherPic, @userId, @quantity)";
             sqlCmd = new SqlCommand(sqlStmt, myConn);
             // Step 3 : Add each parameterised variable with value
+            sqlCmd.Parameters.AddWithValue("@voucherId", vcher.VoucherId);
             sqlCmd.Parameters.AddWithValue("@voucherName", vcher.VoucherName);
             sqlCmd.Parameters.AddWithValue("@voucherAmt", vcher.VoucherAmount);
             sqlCmd.Parameters.AddWithValue("@voucherPic", vcher.VoucherPic);
             sqlCmd.Parameters.AddWithValue("@userId", vcher.UserId);
+            sqlCmd.Parameters.AddWithValue("@quantity", vcher.Quantity);
+
             // Step 4 Open connection the execute NonQuery of sql command   
             myConn.Open();
             result = sqlCmd.ExecuteNonQuery();
             // Step 5 :Close connection
             myConn.Close();
             return result;
-
         }
 
     }

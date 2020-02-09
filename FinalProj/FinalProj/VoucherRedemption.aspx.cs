@@ -20,9 +20,13 @@ namespace FinalProj
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] == null)
+            if (Session["user"] == null && Session["admin"] == null)
             {
                 Response.Redirect("homepage.aspx");
+            }
+            else if (Session["admin"] != null)
+            {
+                Response.Redirect("AddVoucher.aspx");
             }
             else
             {
@@ -40,19 +44,23 @@ namespace FinalProj
                             if (points >= double.Parse(element.VoucherPoints))
                             {
                                 panelError.Visible = false;
+                                voucher.VoucherId = int.Parse(Request.QueryString["voucherId"]);
                                 voucher.VoucherAmount = element.VoucherAmount;
                                 voucher.VoucherName = element.VoucherName;
                                 voucher.VoucherPic = element.VoucherPic;
                                 voucher.UserId = user.id.ToString();
+                                voucher.Quantity = 1;
 
-                                voucher = new VoucherRedeemed(voucher.VoucherName, voucher.VoucherAmount, voucher.VoucherPic, voucher.UserId);
+                                System.Diagnostics.Debug.WriteLine("This is voucherId: " + voucher.VoucherId);
+                                voucher = new VoucherRedeemed(voucher.VoucherId, voucher.VoucherName, voucher.VoucherAmount, voucher.VoucherPic, voucher.UserId, voucher.Quantity);
                                 int result = voucher.AddVoucher();
 
-                                user.points = user.points - int.Parse(element.VoucherPoints);
+                                user.points = user.points - double.Parse(element.VoucherPoints);
                                 user.UpdatePointsByID(user.id, user.points);
 
                                 panelSuccess.Visible = true;
 
+                                points = user.points;
                             }
                             else
                             {

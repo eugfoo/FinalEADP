@@ -388,6 +388,7 @@ namespace FinalProj
                         }
                     }
                 }
+                total = eventCount + participated;
             }
         }
 

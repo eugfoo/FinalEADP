@@ -158,7 +158,7 @@ namespace FinalProj.DAL
                 string Udesc = row["userDesc"].ToString();
                 int Urating = Convert.ToInt32(row["userRating"]);
                 string UisOrg = row["userIsOrg"].ToString();
-                int Upoints = Convert.ToInt32(row["userPoints"]);
+                double Upoints = Convert.ToDouble(row["userPoints"]);
                 string Uparticipate = row["userParticipated"].ToString();
                 int Uverified = Convert.ToInt32(row["userIsVerified"]);
                 string UregDate = row["userRegDate"].ToString();
@@ -285,7 +285,7 @@ namespace FinalProj.DAL
             return result;
         }
 
-        public int UpdatePoints(int id, int points)
+        public int UpdatePoints(int id, double points)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);

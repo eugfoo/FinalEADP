@@ -18,7 +18,7 @@ namespace FinalProj.BLL
 		public string participate { get; set; }
 		public int rating { get; set; }
 		public string isOrg { get; set; }
-		public int points { get; set; }
+		public double points { get; set; }
 		public int verified { get; set; }
 		public string regDate { get; set; }
 		public string facebook { get; set; }
@@ -39,7 +39,7 @@ namespace FinalProj.BLL
 		}
 
 		public Users(int uId, string uEmail, string uPassHash, string uName, string uDPImage, string uBPImage,
-			string uDesc, int uRating, string uIsOrg, int uPoints, string uParticipate, int uVerified, string uRegDate,
+			string uDesc, int uRating, string uIsOrg, double uPoints, string uParticipate, int uVerified, string uRegDate,
 			string uFacebook, string uInstagram, string uTwitter, string uDiet)
 		{
 			id = uId;
@@ -116,7 +116,7 @@ namespace FinalProj.BLL
 			return user.UpdateDesc(id, desc);
 		}
 
-        public int UpdatePointsByID(int id, int points)
+        public int UpdatePointsByID(int id, double points)
         {
             userDAO user = new userDAO();
             return user.UpdatePoints(id, points);

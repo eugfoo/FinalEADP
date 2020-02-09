@@ -27,8 +27,13 @@
     margin-bottom: 10px;
 }
 
-#btnOk {
-
+#btnHref {
+    text-align: center;
+    display: block;
+    width: 130px;
+    margin-left: auto;
+    margin-right: 20%;
+    margin: 20px 20% 20px auto;
 }
 
 h3 {

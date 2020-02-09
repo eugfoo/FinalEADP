@@ -9,10 +9,12 @@ namespace FinalProj.BLL
     public class VoucherRedeemed
     {
         // Define class properties
+        public int VoucherId { get; set; }
         public string VoucherName { get; set; }
         public string VoucherPic { get; set; }
         public string VoucherAmount { get; set; }
         public string UserId { get; set; }
+        public int Quantity { get; set; }
 
         public VoucherRedeemed()
         {
@@ -20,12 +22,14 @@ namespace FinalProj.BLL
         }
 
         // Define a constructor to initialize all properties
-        public VoucherRedeemed(string voucherName, string voucherAmount, string voucherPic, string userId)
+        public VoucherRedeemed(int voucherId, string voucherName, string voucherAmount, string voucherPic, string userId, int quantity)
         {
+            VoucherId = voucherId;
             VoucherName = voucherName;
             VoucherPic = voucherPic;
             VoucherAmount = voucherAmount;
             UserId = userId;
+            Quantity = quantity;
         }
 
         public List<VoucherRedeemed> GetAllVouchersByName()

@@ -29,6 +29,8 @@
             <asp:Label ID="lb_error" runat="server">You have too little points..</asp:Label>
         </asp:Panel>
 
+        <a href="/PPPoints.aspx" id="btnHref" class="btn btn-primary">Back to profile</a>
+
         <%foreach (var element in vcherList)
             { %>
         <table id="voucherTable">
@@ -44,11 +46,6 @@
                 </td>
             </tr>
         </table>
-        <% } %>
-
-        <% if (Session["admin"] != null)
-            { %>
-            <a href="AddVoucher.aspx" id="AddVouchers">Add Vouchers</a>
         <% } %>
 
     </div>
