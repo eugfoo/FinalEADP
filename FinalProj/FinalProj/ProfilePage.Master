@@ -490,5 +490,17 @@
         </footer>
     </form>
 </body>
+    <script>
+        var count = <%= count %>;
+        var color = ['red', 'white'];
+        var index = 0;
+
+        if (count > 0) {
+            setInterval(function () {
+                document.getElementById("hexagon").style.backgroundColor = color[index];
+                index = (index + 1) % 2;
+            }, 2000);
+        }
+    </script>
 </html>
 
