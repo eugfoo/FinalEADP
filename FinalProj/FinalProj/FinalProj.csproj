@@ -89,6 +89,7 @@
     <Content Include="eventFeedback.aspx" />
     <Content Include="EventStatus.aspx" />
     <Content Include="EventStatus.css" />
+    <Content Include="forumCatEventOverview.aspx" />
     <Content Include="forumCatOverview.aspx" />
     <Content Include="forumNewThread.aspx" />
     <Content Include="forumPage1.aspx" />
@@ -228,6 +229,13 @@
     </Compile>
     <Compile Include="EventStatus.aspx.designer.cs">
       <DependentUpon>EventStatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forumCatEventOverview.aspx.cs">
+      <DependentUpon>forumCatEventOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forumCatEventOverview.aspx.designer.cs">
+      <DependentUpon>forumCatEventOverview.aspx</DependentUpon>
     </Compile>
     <Compile Include="forumCatOverview.aspx.cs">
       <DependentUpon>forumCatOverview.aspx</DependentUpon>
