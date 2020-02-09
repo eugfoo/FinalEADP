@@ -173,7 +173,8 @@ namespace FinalProj.DAL
 			if (rec_cnt == 1)
 			{
 				DataRow row = ds.Tables[0].Rows[0];
-				string threadPrefix = row["threadPrefix"].ToString();
+                int tId = int.Parse(row["Id"].ToString());
+                string threadPrefix = row["threadPrefix"].ToString();
 				string threadBadgeColor = row["threadBadgeColor"].ToString();
 				string threadTitle = row["threadTitle"].ToString();
 				string threadDate = row["threadDate"].ToString();
@@ -184,7 +185,7 @@ namespace FinalProj.DAL
 				string threadContent = row["threadContent"].ToString();
 				int threadUserId = Convert.ToInt32(row["user_id"]);
 				string threadUserName = row["user_name"].ToString();
-				thread = new Thread(threadPrefix, threadBadgeColor, threadTitle, threadDate,
+				thread = new Thread(tId, threadPrefix, threadBadgeColor, threadTitle, threadDate,
 					threadImage1, threadImage2, threadImage3, threadImage4, threadContent,
 					threadUserId, threadUserName);
 			}
