@@ -14,6 +14,7 @@ namespace FinalProj
 		protected bool attendingResult;
 		protected Dictionary<int,Users> organiserDict = new Dictionary<int, Users>();
 		protected Dictionary<int, bool> checkJoinStatus= new Dictionary<int, bool>();
+		protected Dictionary<int, int> participantList = new Dictionary<int, int>();
 		protected List<Events> eventsUserBookmarked;
 		protected string userName;
 
@@ -45,7 +46,7 @@ namespace FinalProj
 				Session["SessionERM"] = null;
 			}
 
-
+			List<int> attending;
 
 			foreach (Events element in eventsUserBookmarked)                  // loops through each event list and changes formatting of both time and date
 			{
@@ -88,6 +89,8 @@ namespace FinalProj
 				attendingResult = ev.VerifyIfUserIsAttendingEvent(userId, element.EventId);
 				userName = element.GetAllUserNameByUserId(element.User_id);
 				checkJoinStatus.Add(element.EventId, attendingResult);
+				attending = element.getAllParticipants(element.EventId);
+				participantList.Add(element.EventId, attending.Count);
 			}
 
 

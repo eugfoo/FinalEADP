@@ -110,7 +110,7 @@
 		<div class="card">
 			<div class="card-body">
 
-				<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Fill in the Details of the Event*<br> <b style="color: red;">Note: Event must be between 7:00AM - 10:00PM and of minimum 1 hour duration </b></div>
+				<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Fill in the Details of the Event*<br> <b style="color: red;">Note: Event must be between 7:00AM - 10:00PM and of minimum 1 hour duration </b><asp:Button ID="testBtn" runat="server" Text="Test" OnClick="testBtn_Click"  /></div>
 				<div class="form-row">
 					<div class="form-group col-md-12">
 						<label for="eventTitle">Title:</label>
@@ -180,6 +180,7 @@
 				<div class="card-title" style="background-color: #22537C; font-family: 'Franklin Gothic'; padding: 1%; color: white; font-size: 1em;">&nbsp;Include a Short Note</div>
 				<label for="noteText">Note:</label>
 				<asp:TextBox ID="noteText" CssClass="form-control" runat="server"></asp:TextBox>
+				
 				<asp:Button ID="createBtn" runat="server" CssClass="btn btn-primary" Text="Submit" CausesValidation="false" OnClick="createBtn_Click" />
 			</div>
 		</div>

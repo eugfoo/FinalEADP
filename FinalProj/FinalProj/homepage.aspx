@@ -492,7 +492,7 @@
 				<div class="row">
 
 
-					<span style="margin-left: 20px;"><b>Show only Available Events: </b>
+					<span style="margin-left: 20px;"><b>Show All Upcoming Events: </b>
 						<asp:CheckBox ID="showAvailableEvnts" runat="server" AutoPostBack="True" OnCheckedChanged="showAvailableEvnts_CheckedChanged" /></span>
 				</div>
 

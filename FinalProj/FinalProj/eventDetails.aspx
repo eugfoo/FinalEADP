@@ -8,6 +8,9 @@
 			width: 20%;
 		}
 
+		#ContentPlaceHolder1_descriptionTB {
+		margin-bottom:6%;
+		}
 		#ContentPlaceHolder1_ongoing {
 			padding: 2%;
 			width: 20%;
@@ -332,7 +335,7 @@
 			</div>
 			<div id="tab1" class="row">
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">
-					<asp:TextBox ID="descriptionTB" CssClass="form-control" runat="server" Visible="False" Width="100%" Height="250" TextMode="MultiLine"></asp:TextBox>
+					<asp:TextBox ID="descriptionTB" CssClass="form-control" runat="server" Visible="False" Width="100%" Height="250"  TextMode="MultiLine"></asp:TextBox>
 					<%=eventDetail.Desc.Replace("\r\n", "<br/>") %>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6" style="margin-top: 2em;">

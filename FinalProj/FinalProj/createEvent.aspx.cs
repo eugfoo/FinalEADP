@@ -202,6 +202,16 @@ namespace FinalProj
             }
         }
 
-
-    }
+		protected void testBtn_Click(object sender, EventArgs e)
+		{
+			eventTitle.Text = "Project Eco";
+			eventAddress.Text = "Tampines Mall";
+			eventDate.Text = "2020-02-10";
+			startTime.Text = "09:00";
+			endTime.Text = "10:00";
+			maxAttend.Text = "20";
+			desc.Text = "This is a short description";
+			noteText.Text = "Be ecofriendly";
+		}
+	}
 }
