@@ -13,7 +13,7 @@ namespace FinalProj
     {
         protected List<Notifications> notiListTemp;
         protected List<Notifications> notiList = new List<Notifications>();
-        public int count = 0;
+        protected int count = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
