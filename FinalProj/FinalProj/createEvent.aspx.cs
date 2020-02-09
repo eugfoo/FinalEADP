@@ -191,7 +191,7 @@ namespace FinalProj
 
                 ev = new Events(1, title, venue, date, eventStartTime, eventEndTime, maxAttendees, description, picture, note, rating, user_id);
 
-                thread = new Thread("[EVENT]", "success", title, andyDate, picture,
+                thread = new Thread(1, "[EVENT]", "success", title, andyDate, picture,
                     description, user_id, user.name);
 
                 int result = ev.AddEvent();

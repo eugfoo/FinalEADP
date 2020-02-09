@@ -55,10 +55,10 @@ namespace FinalProj.BLL
             return voucher.SelectAllByEventId(id);
         }
 
-        public int UpdateFeedbackById(int id, int feedback)
+        public int UpdateFeedbackByUserIdEventId(int UserId, int eventId, int feedback)
         {
             AttendanceDAO attendance = new AttendanceDAO();
-            return attendance.UpdateFeedback(id, feedback);
+            return attendance.UpdateFeedbackByUserIdEventId(UserId, eventId, feedback);
         }
     }
 }
