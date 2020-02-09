@@ -55,7 +55,12 @@
                     <tbody>
                         <tr>
                             <td class="auto-style4 table-secondary" style="text-align: center; font-size: 20px;">
-                                <div><a href="PPGallery.aspx?userId=<%= currentThreadUser.id%>"><strong><%= currentThreadUser.name%></strong></a></div>
+                                <div><a href="PPGallery.aspx?userId=<%= currentThreadUser.id%>"><strong><%= currentThreadUser.name%></strong></a>
+                                    <asp:Panel ID="organiserPanel" runat="server">
+                                    <asp:Label ID="orgLabel" runat="server" ForeColor="Green"></asp:Label>
+                                </asp:Panel>
+                                </div>
+                                
                             </td>
                             <td class="post-col d-lg-flex justify-content-lg-between table-secondary" style="height: 60px;">
                                 <div class="container">

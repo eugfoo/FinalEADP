@@ -159,6 +159,14 @@ namespace FinalProj
 
                 LblThreadsCount.Text = thread.getThreadsByUserId(currentThreadUser.id).Count().ToString();
 
+                if (LblPrefix.Text == "[EVENT]")
+                {
+                    organiserPanel.Visible = true;
+                }
+                else
+                {
+                    organiserPanel.Visible = false;
+                }
 
             }
 
