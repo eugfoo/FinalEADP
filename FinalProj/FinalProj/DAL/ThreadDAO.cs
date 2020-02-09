@@ -142,9 +142,10 @@ namespace FinalProj.DAL
                 string threadContent = row["threadContent"].ToString();
                 int threadUserId = Convert.ToInt32(row["user_id"]);
                 string threadUserName = row["user_name"].ToString();
+                int eventId = Convert.ToInt32(row["eventId"]);
                 thread = new Thread(threadPrefix, threadBadgeColor, threadTitle, threadDate,
                     threadImage1, threadImage2, threadImage3, threadImage4, threadContent,
-                    threadUserId, threadUserName);
+                    threadUserId, threadUserName, eventId);
             }
             else
             {

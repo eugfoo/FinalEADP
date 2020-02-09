@@ -46,6 +46,25 @@ namespace FinalProj.BLL
             UserName = userName;
         }
 
+        public Thread(string threadPrefix, string threadBadgeColor, string threadTitle, string threadDate
+            , string Image1, string Image2, string Image3, string Image4
+            , string threadContent
+            , int userId, string userName, int eventId)
+        {
+            Prefix = threadPrefix;
+            BadgeColor = threadBadgeColor;
+            Title = threadTitle;
+            Date = threadDate;
+            ThreadImage1 = Image1;
+            ThreadImage2 = Image2;
+            ThreadImage3 = Image3;
+            ThreadImage4 = Image4;
+            Content = threadContent;
+            UserId = userId;
+            UserName = userName;
+            EventId = eventId;
+        }
+
         public Thread(int threadId, string threadPrefix, string threadBadgeColor, string threadTitle, string threadDate
             , string Image1, string Image2, string Image3, string Image4
             , string threadContent

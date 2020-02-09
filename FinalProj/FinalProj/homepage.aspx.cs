@@ -113,21 +113,21 @@ namespace FinalProj
 			Response.Redirect("createEvent.aspx");
 		}
 
-		protected void showAvailableEvnts_CheckedChanged(object sender, EventArgs e)
-		{
-			userList.Clear();
-			userIdList.Clear();
-			attendingUsers.Clear();
-			if (showAvailableEvnts.Checked == true)
-			{
-				loadDates("yes");
-				calPanel.Visible = false;
-			}
-			else
-			{
-				loadDates("no");
-				calPanel.Visible = true;
-			}
-		}
-	}
+        protected void showAvailableEvnts_CheckedChanged(object sender, EventArgs e)
+        {
+            userList.Clear();
+            userIdList.Clear();
+            attendingUsers.Clear();
+            if (showAvailableEvnts.Checked == true)
+            {
+                loadDates("yes");
+                calPanel.Visible = false;
+            }
+            else
+            {
+                loadDates("no");
+                calPanel.Visible = true;
+            }
+        }
+    }
 }

@@ -10,7 +10,7 @@
             <center>
         <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="<%=currentThreadUser.DPimage%>" name="aboutme" width="140" height="140" class="img-circle"></a>
         <h3><%=currentThreadUser.name%></h3>
-        <em>click my face for more</em>
+        <em>click on my picture for more!</em>
 		</center>
         </div>
         <!-- Modal -->

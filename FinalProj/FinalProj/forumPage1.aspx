@@ -173,21 +173,21 @@
                                 <div class="card-body">
                                     <h2 class="h4 card-title">Forum statistics</h2>
                                     <dl class="row mb-0">
-                                        <dt class="col-8">Total forums:</dt>
-                                        <dd class="col-4 mb-0">15</dd>
+                                        <dt class="col-8">Total Threads:</dt>
+                                        <dd class="col-4 mb-0"><%= allthreadsList.Count() %></dd>
                                     </dl>
                                     <dl class="row mb-0">
-                                        <dt class="col-8">Total topics:</dt>
-                                        <dd class="col-4 mb-0">1927</dd>
+                                        <dt class="col-8">Total Replies:</dt>
+                                        <dd class="col-4 mb-0"><%= allthreadReplies.Count() %></dd>
                                     </dl>
                                     <dl class="row mb-0">
                                         <dt class="col-8">Total members:</dt>
-                                        <dd class="col-4 mb-0">581</dd>
+                                        <dd class="col-4 mb-0"><%= allUsersList.Count() %></dd>
                                     </dl>
                                 </div>
                                 <div class="card-footer">
                                     <div>Newest Member</div>
-                                    <div><a href="#0">Forum member name</a></div>
+                                    <div><a href="#0"><%= LastUser.name %></a></div>
                                 </div>
                             </div>
                         </div>

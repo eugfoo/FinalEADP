@@ -151,6 +151,13 @@ namespace FinalProj.BLL
 			userDAO user = new userDAO();
 			return user.UpdateTwitter(id, twit);
 		}
-		
-	}
+
+        public int getLastUserId()
+        {
+            userDAO dao = new userDAO();
+            int result = dao.getLastUserId();
+            return result;
+        }
+
+    }
 }

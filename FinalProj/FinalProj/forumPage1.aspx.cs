@@ -13,6 +13,8 @@ namespace FinalProj
 {
     public partial class forumPage1 : System.Web.UI.Page
     {
+        protected Users LastUser;
+        protected List<Users> allUsersList;
         protected List<Thread> allthreadsList;
         protected List<Thread> OnlyEventThreadsList;
         protected List<ThreadReply> allthreadReplies;
@@ -22,6 +24,7 @@ namespace FinalProj
 
         Thread thread = new Thread();
         ThreadReply threadReply = new ThreadReply();
+        Users user = new Users();
 
         public class Threads
         {
@@ -64,12 +67,20 @@ namespace FinalProj
 
                 allthreadsList = thread.SelectAllThreads();
                 OnlyEventThreadsList = thread.SelectAllEventThreads("[EVENT]");
-            
+
+                allthreadReplies = threadReply.getAllThreadReplies();
+
+                allUsersList = user.getAllUsers();
+
+                int newestUserId = user.getLastUserId();
+                LastUser = user.GetUserById(newestUserId);
+
+
 
                 List<Threads> threadsList = new List<Threads>();
                 List<ThreadsEvent> threadsEventList = new List<ThreadsEvent>();
 
-                foreach(Thread threadEvent in OnlyEventThreadsList)
+                foreach(Thread threadEvent in OnlyEventThreadsList.Take(5))
                 {
                     threadsEventList.Add(
                         new ThreadsEvent

@@ -27,7 +27,7 @@
     <div class="container my-3">
         <nav class="breadcrumb">
             <a href="forumPage1.aspx" class="breadcrumb-item">Board index</a>
-            <a href="forumCatOverview.aspx" class="breadcrumb-item">Forum Threads</a>
+            <a href="forumCatEventOverview.aspx" class="breadcrumb-item">Forum Event Threads</a>
             <span class="breadcrumb-item active">
                 <asp:Label ID="LblPrefix" runat="server"></asp:Label>
                 <asp:Label ID="LblTitleBreadcrumb" runat="server"></asp:Label></span>
@@ -55,7 +55,9 @@
                     <tbody>
                         <tr>
                             <td class="auto-style4 table-secondary" style="text-align: center; font-size: 20px;">
-                                <div><a href="PPGallery.aspx?userId=<%= currentThreadUser.id%>"><strong><%= currentThreadUser.name%></strong></a></div>
+                                <div>
+                                    <a href="PPGallery.aspx?userId=<%= currentThreadUser.id%>"><strong><%= currentThreadUser.name%></strong></a>
+                                </div>
                             </td>
                             <td class="post-col d-lg-flex justify-content-lg-between table-secondary" style="height: 60px;">
                                 <div class="container">
@@ -79,7 +81,15 @@
                         </tr>
                         <tr>
                             <td style="width: 255px;">
-                                <img src="<%=currentThreadUser.DPimage %>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left: 30px;">
+                                <img src="<%=currentThreadUser.DPimage %>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left: 50px;margin-top:15px;">
+                                <div>
+                                    <asp:Panel ID="organiserPanel" runat="server">
+                                        <div style="font-size:20px;font-weight:700;text-align:center;margin:15px;">
+                                            <asp:Label ID="orgLabel" runat="server" ForeColor="Red">[Thread Starter]</asp:Label>
+                                        </div>
+                                    </asp:Panel>
+                                </div>
+
                                 <div><%= currentThreadUser.desc %></div>
                                 <div style="margin-top: 70px;"><span class="font-weight-bold">Joined: </span><%= currentThreadUser.regDate %></div>
                                 <div>
@@ -145,10 +155,6 @@
 
 
 
-                <asp:Button ID="btnFeedback" runat="server" OnClick="btnFeedback_Click" Text="Bring me to feedback" />
-
-
-
                 <asp:UpdatePanel ID="pnlHelloWorld" runat="server">
                     <ContentTemplate>
 
@@ -190,7 +196,8 @@
                                 </tr>
                                 <tr style="max-height: 456px; height: 350px;">
                                     <td style="width: 255px;">
-                                        <img src="<%# Eval("userDP") %>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left: 30px;">
+                                        <img src="<%# Eval("userDP") %>" name="aboutme" width="140" height="140" class="rounded-circle mb-4" style="margin-left: 50px;margin-top:15px;">
+                                        <div style="font-weight:700;font-size:20px;margin:15px;color:red;text-align:center;"><%# Eval("orgTag") %></div>
                                         <div><%# Eval("userDesc") %></div>
                                         <div style="margin-top: 70px;"><span class="font-weight-bold">Joined: </span><%# Eval("userJoinedDate") %></div>
                                         <div><a href="threadCreaterOverview.aspx?userId=<%# Eval("user_id") %>"><strong style="font-weight: 700;">Posts </strong></a>: <%# Eval("userThreadCount") %></div>

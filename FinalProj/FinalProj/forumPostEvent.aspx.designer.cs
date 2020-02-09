@@ -40,24 +40,6 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.Label LblTitleBig;
         
         /// <summary>
-        /// organiserPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel organiserPanel;
-        
-        /// <summary>
-        /// orgLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label orgLabel;
-        
-        /// <summary>
         /// LblTitle control.
         /// </summary>
         /// <remarks>
@@ -74,6 +56,24 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblPostDate;
+        
+        /// <summary>
+        /// organiserPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel organiserPanel;
+        
+        /// <summary>
+        /// orgLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label orgLabel;
         
         /// <summary>
         /// LblThreadsCount control.
@@ -146,15 +146,6 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HFuser_id;
-        
-        /// <summary>
-        /// btnFeedback control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFeedback;
         
         /// <summary>
         /// pnlHelloWorld control.

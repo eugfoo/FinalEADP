@@ -40,6 +40,7 @@ namespace FinalProj
             public string userDP { get; set; }
             public string userJoinedDate { get; set; }
             public int userThreadCount { get; set; }
+            public string orgTag { get; set; }
         }
 
 
@@ -71,6 +72,7 @@ namespace FinalProj
             int threadiiD;
             int.TryParse(threadId, out threadiiD);
             Users usr = new Users();
+            Events ev = new Events();
             Thread currentThread = thread.GetThreadByThreadId(threadiiD);
             List<tReplies> threadReplyListForThisThread = new List<tReplies>();
 
@@ -92,47 +94,104 @@ namespace FinalProj
                     panelEdit.Visible = true;
                 }
                 replyPanel.Visible = true;
-                
+
             }
 
-            
+
 
 
 
 
             if (!IsPostBack)
             {
-                allUsersList = user.getAllUsers();
+
+
+
+                int threadEventId = thread.GetThreadByThreadId(threadiiD).EventId;
+
+                int threadOrgUserId = thread.GetThreadByThreadId(threadiiD).UserId;
+
+
                 allThreadRepliesByThreadId = threadReply.getAllThreadRepliesByThreadId(threadiiD);
 
-                
 
-                foreach (Users user in allUsersList)
+                foreach (ThreadReply TReply in allThreadRepliesByThreadId)
                 {
-                    foreach (ThreadReply TReply in allThreadRepliesByThreadId)
+                    if (threadOrgUserId == TReply.UserId)
                     {
-                        if (user.id == TReply.UserId)
-                        {
-                            threadReplyListForThisThread.Add(
-                                new tReplies
-                                {
-                                    trId = TReply.trId,
-                                    tId = TReply.ThreadId,
-                                    postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
-                                    postDate = TReply.PostDate,
-                                    postContent = TReply.PostContent,
-                                    user_id = TReply.UserId,
-                                    user_name = TReply.UserName,
-                                    userDesc = user.desc,
-                                    userDP = user.DPimage,
-                                    userJoinedDate = user.regDate,
-                                    userThreadCount = thread.getThreadsByUserId(user.id).Count()
-                                }
+                        threadReplyListForThisThread.Add(
+                           new tReplies
+                           {
+                               trId = TReply.trId,
+                               tId = TReply.ThreadId,
+                               postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                               postDate = TReply.PostDate,
+                               postContent = TReply.PostContent,
+                               user_id = TReply.UserId,
+                               user_name = TReply.UserName,
+                               userDesc = usr.GetUserById(TReply.UserId).desc,
+                               userDP = usr.GetUserById(TReply.UserId).DPimage,
+                               userJoinedDate = usr.GetUserById(TReply.UserId).regDate,
+                               userThreadCount = thread.getThreadsByUserId(TReply.UserId).Count(),
+                               orgTag = "[Thread Starter]"
+                           }
 
-                            );
-                        }
+                       );
                     }
+                    else
+                    {
+                        threadReplyListForThisThread.Add(
+                           new tReplies
+                           {
+                               trId = TReply.trId,
+                               tId = TReply.ThreadId,
+                               postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                               postDate = TReply.PostDate,
+                               postContent = TReply.PostContent,
+                               user_id = TReply.UserId,
+                               user_name = TReply.UserName,
+                               userDesc = usr.GetUserById(TReply.UserId).desc,
+                               userDP = usr.GetUserById(TReply.UserId).DPimage,
+                               userJoinedDate = usr.GetUserById(TReply.UserId).regDate,
+                               userThreadCount = thread.getThreadsByUserId(TReply.UserId).Count(),
+                               orgTag = ""
+                           }
+
+                       );
+                    }
+
+
+
+
                 }
+
+                //allUsersList = user.getAllUsers();
+                //foreach (Users user in allUsersList)
+                //{
+                //    foreach (ThreadReply TReply in allThreadRepliesByThreadId)
+                //    {
+                //        if (user.id == TReply.UserId)
+                //        {
+                //            threadReplyListForThisThread.Add(
+                //                new tReplies
+                //                {
+                //                    trId = TReply.trId,
+                //                    tId = TReply.ThreadId,
+                //                    postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                //                    postDate = TReply.PostDate,
+                //                    postContent = TReply.PostContent,
+                //                    user_id = TReply.UserId,
+                //                    user_name = TReply.UserName,
+                //                    userDesc = user.desc,
+                //                    userDP = user.DPimage,
+                //                    userJoinedDate = user.regDate,
+                //                    userThreadCount = thread.getThreadsByUserId(user.id).Count()
+                //                }
+
+                //            );
+                //        }
+                //    }
+                //}
 
                 this.rptrComments.DataSource = threadReplyListForThisThread;
                 this.rptrComments.DataBind();
@@ -144,7 +203,7 @@ namespace FinalProj
 
             if (threadId != null)
             {
-                
+
 
                 LblTitle.Text = currentThread.Title;
                 LblTitleBig.Text = currentThread.Title;
@@ -159,69 +218,123 @@ namespace FinalProj
 
                 LblThreadsCount.Text = thread.getThreadsByUserId(currentThreadUser.id).Count().ToString();
 
-               
+
             }
 
             if (Page.IsPostBack) return;
-            //BindDataIntoRepeater();
+            BindDataIntoRepeater();
 
         }
 
-        static DataTable GetDataFromDb(int threadId)
+        static DataTable GetDataFromDb(List<tReplies> list)
         {
-            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-            DataTable allComments = new DataTable();
+            ThreadReply threadReply = new ThreadReply();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("trId");
+            dt.Columns.Add("tId");
+            dt.Columns.Add("postTitle");
+            dt.Columns.Add("postDate");
+            dt.Columns.Add("postContent");
+            dt.Columns.Add("user_id");
+            dt.Columns.Add("user_name");
+            dt.Columns.Add("userDesc");
+            dt.Columns.Add("userDP");
+            dt.Columns.Add("userJoinedDate");
+            dt.Columns.Add("userThreadCount");
+            dt.Columns.Add("orgTag");
 
-            myConn.Open();
-            string sqlCmd = "Select * From ThreadReplies WHERE threadId = @paraThreadId";
-            SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCmd, myConn);
-            sqlDa.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
-            sqlDa.Fill(allComments);
-            myConn.Close();
-            return allComments;
+            foreach (var TReply in list)
+            {
+                var row = dt.NewRow();
+
+                row["trId"] = TReply.trId;
+                row["tId"] = TReply.tId;
+                row["postTitle"] = TReply.postTitle;
+                row["postDate"] = TReply.postDate;
+                row["postContent"] = TReply.postContent;
+                row["user_id"] = TReply.user_id;
+                row["user_name"] = TReply.user_name;
+                row["userDesc"] = TReply.userDesc;
+                row["userDP"] = TReply.userDP;
+                row["userJoinedDate"] = TReply.userJoinedDate;
+                row["userThreadCount"] = TReply.userThreadCount;
+                row["orgTag"] = TReply.orgTag;
+
+                dt.Rows.Add(row);
+            }
+
+            return dt;
         }
+
 
         private void BindDataIntoRepeater()
         {
             int threadiiD;
             int.TryParse(HFthreadId.Value, out threadiiD);
-            allUsersList = user.getAllUsers();
+            //allUsersList = user.getAllUsers();
+            Users usr = new Users();
+            Events ev = new Events();
 
+            int threadEventId = thread.GetThreadByThreadId(threadiiD).EventId;
 
+            int threadOrgUserId = ev.getEventDetails(threadEventId).User_id;
 
             allThreadRepliesByThreadId = threadReply.getAllThreadRepliesByThreadId(threadiiD);
 
             List<tReplies> threadReplyListForThisThread = new List<tReplies>();
 
-            foreach (Users user in allUsersList)
+            foreach (ThreadReply TReply in allThreadRepliesByThreadId)
             {
-                foreach (ThreadReply TReply in allThreadRepliesByThreadId)
+                if (threadOrgUserId == TReply.UserId)
                 {
-                    if (user.id == TReply.UserId)
-                    {
-                        threadReplyListForThisThread.Add(
-                            new tReplies
-                            {
-                                trId = TReply.trId,
-                                tId = TReply.ThreadId,
-                                postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
-                                postDate = TReply.PostDate,
-                                postContent = TReply.PostContent,
-                                user_id = TReply.UserId,
-                                user_name = TReply.UserName,
-                                userDesc = user.desc,
-                                userDP = user.DPimage,
-                                userJoinedDate = user.regDate
-      
-                            }
-                        );
-                    }
+                    threadReplyListForThisThread.Add(
+                       new tReplies
+                       {
+                           trId = TReply.trId,
+                           tId = TReply.ThreadId,
+                           postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                           postDate = TReply.PostDate,
+                           postContent = TReply.PostContent,
+                           user_id = TReply.UserId,
+                           user_name = TReply.UserName,
+                           userDesc = usr.GetUserById(TReply.UserId).desc,
+                           userDP = usr.GetUserById(TReply.UserId).DPimage,
+                           userJoinedDate = usr.GetUserById(TReply.UserId).regDate,
+                           userThreadCount = thread.getThreadsByUserId(TReply.UserId).Count(),
+                           orgTag = "[Organiser]"
+                       }
+
+                   );
                 }
+                else
+                {
+                    threadReplyListForThisThread.Add(
+                       new tReplies
+                       {
+                           trId = TReply.trId,
+                           tId = TReply.ThreadId,
+                           postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                           postDate = TReply.PostDate,
+                           postContent = TReply.PostContent,
+                           user_id = TReply.UserId,
+                           user_name = TReply.UserName,
+                           userDesc = usr.GetUserById(TReply.UserId).desc,
+                           userDP = usr.GetUserById(TReply.UserId).DPimage,
+                           userJoinedDate = usr.GetUserById(TReply.UserId).regDate,
+                           userThreadCount = thread.getThreadsByUserId(TReply.UserId).Count(),
+                           orgTag = ""
+                       }
+
+                   );
+                }
+
+
+
+
             }
 
 
-            var dt = GetDataFromDb(threadiiD);
+            var dt = GetDataFromDb(threadReplyListForThisThread);
             _pgsource.DataSource = dt.DefaultView;
             _pgsource.AllowPaging = true;
 
@@ -355,11 +468,6 @@ namespace FinalProj
             Session["LblContent"] = LblContent.Text;
             Session["threadId"] = HFthreadId.Value;
             Response.Redirect("editForumPost.aspx?threadid=" + HFthreadId.Value);
-        }
-
-        protected void btnFeedback_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("eventFeedback.aspx?eventId=" + 15);
         }
 
         protected void btnGoBack_Click(object sender, EventArgs e)
