@@ -12,11 +12,14 @@
             var userIdChecked = [];
             var userIdUncheck = [];
             var str;
+            var endTime = '<%= endTime %>';
+            var nowDate;
+            var difference;
 
             function getDateObject(datestr) {
-                console.log("This is first", datestr);
+                //console.log("This is first", datestr);
                 var parts = datestr.split(' ');
-                console.log("This is second", parts);
+                //console.log("This is second", parts);
                 var dateparts = parts[0].split('/');
                 var day = dateparts[0];
                 var month = parseInt(dateparts[1]) - 1;
@@ -25,9 +28,9 @@
                 var hh = timeparts[0];
                 var mm = timeparts[1];
                 var ss = timeparts[2];
-                console.log("This is first ymdhhmmss: ", year, month, day, hh, mm, ss);
+                //console.log("This is first ymdhhmmss: ", year, month, day, hh, mm, ss);
                 var date = new Date(year, month, day, hh, mm, ss);
-                console.log("This is date: ", date);
+                //console.log("This is date: ", date);
                 return date;
             }
 
@@ -35,14 +38,15 @@
                 var secs = (t2 - t1) / 1000;
 
                 function z(n) { return (n < 10 ? '0' : '') + n; }
+
+                // If difference is less than 0, put a negative infront, otherwise leave it empty 
+                // (Formatting of the time string displayed)
+        
                 var sign = secs < 0 ? '-' : '';
                 secs = Math.abs(secs);
                 return sign + z(secs / 3600 | 0) + ' Hours   ' + z((secs % 3600) / 60 | 0) + ' Minutes   ' + z(secs % 60) + ' Seconds   ';
             }
-
-
-            var endTime = '<%= endTime %>';
-            var nowDate;
+            
 
             Number.prototype.padLeft = function (base, chr) {
                 var len = (String(base || 10).length - String(this).length) + 1;
@@ -81,10 +85,20 @@
 
                 nowDate = getDateObject(nowDate);
 
-                $("#time").text(gettimediff(nowDate, endTime));
+                var difference = gettimediff(nowDate, endTime);
+                if (difference[0] == "-") {
+                    
+                    $("#time").text("00 Hours 00 Minutes 00 Seconds");
+                    clearInterval();
+                    alert("Event has ended! Attendance will be automatically submitted now");
+                    window.location.href = "/AttendanceSubmitted.aspx";
+                }
+                else {
+                    $("#time").text(gettimediff(nowDate, endTime));
+                }
 
             }, 1000);
-
+            
             function myFunction() {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
@@ -108,10 +122,21 @@
             }
 
             function checkChkBox(checkI) {
-                console.log("Checkbox is checked!");
-                document.getElementById("ContentPlaceHolder1_CheckBox1").checked = checkI;
+                //alert("Checked: " + checkI);
+                if (checkI == false) {
+                    //alert("true");
+                    console.log("Checkbox is checked!");
+                    $('input[type=checkbox]').attr('checked', false);
+                }
+                else if (checkI == true) {
+                    // alert("false");
+                    console.log("Checkbox not checked!");
+                    $('input[type=checkbox]').attr('checked', true);
+                }
+                
             };
 
+            // function to check which row is checked
             function onClick() {
                 userIdChecked = [];
 
@@ -131,6 +156,7 @@
                 return false;
             };
 
+            // function to check which row is unchecked
             function onClick1() {
                 userIdUncheck = [];
 
@@ -149,8 +175,6 @@
 
                 return false;
             };
-
-
 
         </script>
 
@@ -210,7 +234,7 @@
                 </div>
             </div>
 
-            <asp:Button ID="Button1" UseSubmitBehavior="true" OnClientClick="onClick();onClick1();" runat="server" OnClick="Button1_Click" Text="Submit" />
+            <asp:Button ID="Button1" UseSubmitBehavior="true" OnClientClick="onClick();onClick1();" runat="server" OnClick="Button1_Click" Text="Submit" CssClass="btn btn-primary"/>
 
             <asp:HiddenField ID="HiddenField" runat="server" Value="5" Visible="true" />
             <asp:HiddenField ID="HiddenField1" runat="server" Value="5" Visible="true" />

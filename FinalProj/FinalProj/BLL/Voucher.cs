@@ -48,5 +48,11 @@ namespace FinalProj.BLL
             voucherDAO voucher = new voucherDAO();
             return voucher.SelectById(queryId);
         }
+
+        public int DeleteVoucherById(int voucherId)
+        {
+            voucherDAO voucher = new voucherDAO();
+            return voucher.Delete(voucherId);
+        }
     }
 }

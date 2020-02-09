@@ -50,6 +50,23 @@ namespace FinalProj
 
                     endTime = eventDetail.Date + " " + eventDetail.EndTime;
 
+                    DateTime dt1 = DateTime.Parse(endTime);
+                    DateTime dt2 = DateTime.Now;
+
+                    int result = DateTime.Compare(dt1, dt2);
+
+                    if (result < 0 || result == 0)
+                    {
+                        btnEdit.Visible = false;
+                        btnEnd.Visible = true;
+                    }
+                    else
+                    {
+                        btnEdit.Visible = true;
+                        btnEnd.Visible = false;
+                    }
+
+
                     int id = int.Parse(Session["eventId"].ToString());
                     attendList = attend.GetAttendanceEvent(id);
                     for (int i = 0; i < attendList.Count; i++)

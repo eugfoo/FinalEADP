@@ -31,6 +31,8 @@
 
         <a href="/PPPoints.aspx" id="btnHref" class="btn btn-primary">Back to profile</a>
 
+        <h2 id="no" runat="server" visible="false">Currently there are no vouchers available :( <br /> Come back and check again soon!</h2>
+
         <%foreach (var element in vcherList)
             { %>
         <table id="voucherTable">
@@ -42,7 +44,7 @@
                 <td id="tdRepeat">
                     <p id="voucherName"><%=element.VoucherName %></p>
                     <p id="voucherAmount">$<%=element.VoucherAmount %></p>
-                    <a id="btnRedeem" href="/VoucherRedemption.aspx?voucherId=<%=element.VoucherId %>" class="btn btn-primary">Costs: <%= element.VoucherPoints %>&rarr;</a>
+                    <a id="btnRedeem" href="/VoucherRedemption.aspx?voucherId=<%=element.VoucherId %>" class="btn btn-primary"><%= element.VoucherPoints %> Points&rarr;</a>
                 </td>
             </tr>
         </table>

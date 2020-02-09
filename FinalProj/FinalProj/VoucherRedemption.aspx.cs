@@ -30,49 +30,55 @@ namespace FinalProj
             }
             else
             {
-                    Users user = (Users)Session["user"];
-                    points = user.points;
-                    Voucher vcher = new Voucher();
-                    vcherList = vcher.GetAllVouchersByName();
-                    VoucherRedeemed voucher = new VoucherRedeemed();
-                    vchers = vcher.GetVoucherById(Request.QueryString["voucherId"]);
+                Users user = (Users)Session["user"];
+                points = user.points;
+                Voucher vcher = new Voucher();
+                vcherList = vcher.GetAllVouchersByName();
 
-                    if (vchers != null)
+                if (vcherList.Count == 0)
+                {
+                    no.Visible = true;
+                }
+
+                VoucherRedeemed voucher = new VoucherRedeemed();
+                vchers = vcher.GetVoucherById(Request.QueryString["voucherId"]);
+
+                if (vchers != null)
+                {
+                    foreach (var element in vchers)
                     {
-                        foreach (var element in vchers)
+                        if (points >= double.Parse(element.VoucherPoints))
                         {
-                            if (points >= double.Parse(element.VoucherPoints))
-                            {
-                                panelError.Visible = false;
-                                voucher.VoucherId = int.Parse(Request.QueryString["voucherId"]);
-                                voucher.VoucherAmount = element.VoucherAmount;
-                                voucher.VoucherName = element.VoucherName;
-                                voucher.VoucherPic = element.VoucherPic;
-                                voucher.UserId = user.id.ToString();
-                                voucher.Quantity = 1;
+                            panelError.Visible = false;
+                            voucher.VoucherId = int.Parse(Request.QueryString["voucherId"]);
+                            voucher.VoucherAmount = element.VoucherAmount;
+                            voucher.VoucherName = element.VoucherName;
+                            voucher.VoucherPic = element.VoucherPic;
+                            voucher.UserId = user.id.ToString();
+                            voucher.Quantity = 1;
 
-                                System.Diagnostics.Debug.WriteLine("This is voucherId: " + voucher.VoucherId);
-                                voucher = new VoucherRedeemed(voucher.VoucherId, voucher.VoucherName, voucher.VoucherAmount, voucher.VoucherPic, voucher.UserId, voucher.Quantity);
-                                int result = voucher.AddVoucher();
+                            System.Diagnostics.Debug.WriteLine("This is voucherId: " + voucher.VoucherId);
+                            voucher = new VoucherRedeemed(voucher.VoucherId, voucher.VoucherName, voucher.VoucherAmount, voucher.VoucherPic, voucher.UserId, voucher.Quantity);
+                            int result = voucher.AddVoucher();
 
-                                user.points = user.points - double.Parse(element.VoucherPoints);
-                                user.UpdatePointsByID(user.id, user.points);
+                            user.points = user.points - double.Parse(element.VoucherPoints);
+                            user.UpdatePointsByID(user.id, user.points);
 
-                                panelSuccess.Visible = true;
+                            panelSuccess.Visible = true;
 
-                                points = user.points;
-                            }
-                            else
-                            {
-                                panelSuccess.Visible = false;
-                                panelError.Visible = true;
-                            }
-
+                            points = user.points;
                         }
+                        else
+                        {
+                            panelSuccess.Visible = false;
+                            panelError.Visible = true;
+                        }
+
                     }
+                }
 
 
-                
+
             }
         }
     }

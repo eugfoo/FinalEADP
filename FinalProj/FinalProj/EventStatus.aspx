@@ -78,22 +78,18 @@
 
         <div class="container">
             <div class="row" id="row2">
-                <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-6">
                     <input type="search" onkeyup="searchFunction()" id="searchEventName" placeholder="Search for events" aria-describedby="button-addon1" class="form-control border-1 bg-light" />
                 </div>
 
-                <div id="divRadioList" class="col-sm-12 col-md-4 col-lg-4">
+                <div id="divRadioList" class="col-sm-12 col-md-6 col-lg-6">
                     <asp:RadioButtonList ID="radioButtonList" runat="server" CssClass="text" RepeatColumns="4" RepeatDirection="Vertical" AutoPostBack="True" OnSelectedIndexChanged="radioButtonList_SelectedIndexChanged">
                         <asp:ListItem Selected="True" Value="create">Show Created</asp:ListItem>
                         <asp:ListItem Value="participate">Show Participated</asp:ListItem>
                     </asp:RadioButtonList>
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                    <asp:DropDownList ID="ddlAlphabet" runat="server" Width="150px" onchange="sortTable();">
-                        <asp:ListItem>Earliest-Latest</asp:ListItem>
-                        <asp:ListItem>A-Z</asp:ListItem>
-                    </asp:DropDownList><br />
-                    Sort Alphabetically or by Date
+                    <br />
                 </div>
             </div>
         </div>
@@ -137,6 +133,14 @@
                                         <p id="txtStatus">Status: </p>
                                         <br />
                                     </td>
+                                    <script>
+                                        if (document.getElementById("status").innerText == "Incomplete") {
+                                            document.getElementById("status").style.color = "red";
+                                        }
+                                        else if (document.getElementById("status").innerText == "Complete"){
+                                            document.getElementById("status").style.color = "green";
+                                        }
+                                    </script>
                                     <td>
                                         <p id="status"><%= element.Completed %></p>
                                     </td>
@@ -150,13 +154,8 @@
             
         </div>
     </div>
-    <script>
-        if (document.getElementById("status").innerText == "Incomplete") {
-            document.getElementById("status").style.color = "red";
-        }
-        else if (document.getElementById("status").innerText == "Complete"){
-            document.getElementById("status").style.color = "green";
-        }
+    
+        <script>
 
         if (<%= eventCount%> > 0) {
             document.getElementById("msg").style.visibility = "hidden";

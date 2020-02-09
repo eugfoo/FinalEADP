@@ -37,7 +37,7 @@ namespace FinalProj
                 eventDetail.Date = eventDetail.Date.Substring(0, index);
                 eventDetail.StartTime = eventDetail.StartTime.Substring(0, 5);
 
-                
+
                 endTime = eventDetail.Date + " " + eventDetail.EndTime;
 
 
@@ -66,7 +66,7 @@ namespace FinalProj
 
                     if (attendList[i].Attend == 1)
                     {
-                        //System.Diagnostics.Debug.WriteLine("This is check true");
+                        System.Diagnostics.Debug.WriteLine("This is check true");
                         check.Add("true");
                         attending.Add("Previous: Yes");
 
@@ -76,7 +76,7 @@ namespace FinalProj
 
                     if (attendList[i].Attend == 0)
                     {
-                        //System.Diagnostics.Debug.WriteLine("This is check false");
+                        System.Diagnostics.Debug.WriteLine("This is check false");
                         check.Add("false");
                         attending.Add("Previous: No");
                     }

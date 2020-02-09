@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalProj {
-    
-    
-    public partial class EventStatus {
-        
+namespace FinalProj
+{
+
+
+    public partial class EventStatus
+    {
+
         /// <summary>
         /// radioButtonList control.
         /// </summary>
@@ -20,14 +22,5 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList radioButtonList;
-        
-        /// <summary>
-        /// ddlAlphabet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAlphabet;
     }
 }

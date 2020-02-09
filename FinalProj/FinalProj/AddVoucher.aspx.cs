@@ -13,11 +13,37 @@ namespace FinalProj
 {
     public partial class AddVoucher : System.Web.UI.Page
     {
+        protected List<Voucher> vcherList;
+        protected int vchers;
+        protected VoucherRedeemed vouchers;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Session["admin"] == null)
             {
                 Response.Redirect("homepage.aspx");
+            }
+            else
+            {
+                Voucher vcher = new Voucher();
+                vcherList = vcher.GetAllVouchersByName();
+
+                if (vcherList.Count == 0)
+                {
+                    no.Visible = true;
+                }
+
+                if (Request.QueryString["voucherId"] != null)
+                {
+                    vchers = vcher.DeleteVoucherById(int.Parse(Request.QueryString["voucherId"]));
+                    panelSuccess.Visible = true;
+                    vcherList = vcher.GetAllVouchersByName();
+                    if (vcherList.Count == 0)
+                    {
+                        no.Visible = true;
+                    }
+                }
             }
         }
 
@@ -25,6 +51,7 @@ namespace FinalProj
         {
             Voucher vcher = new Voucher();
             string errmsg = "";
+            panelSuccess.Visible = false;
             PanelError.Visible = false;
             int num = -1;
 
@@ -77,7 +104,12 @@ namespace FinalProj
 
                 vcher = new Voucher(1, vcherName, vcherAmt, file, vcherPoint);
                 int result = vcher.AddVoucher();
-                Response.Redirect("VoucherRedemption.aspx");
+
+                no.Visible = false;
+
+                voucherName.Text = "";
+                voucherAmt.Text = "";
+                vcherList = vcher.GetAllVouchersByName();
             }
         }
     }

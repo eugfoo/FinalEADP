@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="AttendanceSubmitted.css" />
     <script type="text/javascript">
 
-                    var endTime = '<%= endTime %>';
+            var endTime = '<%= endTime %>';
             var nowDate;
 
             Number.prototype.padLeft = function (base, chr) {
@@ -70,7 +70,14 @@
 
                 nowDate = getDateObject(nowDate);
 
-                $("#time").text(gettimediff(nowDate, endTime));
+                var difference = gettimediff(nowDate, endTime);
+                if (difference[0] == "-") {
+                    $("#time").text("00 Hours 00 Minutes 00 Seconds");
+                    clearInterval();
+                }
+                else {
+                    $("#time").text(gettimediff(nowDate, endTime));
+                }
 
             }, 1000);
 
@@ -149,7 +156,8 @@
                 </div>
             </div>
 
-            <a href="/AttendanceEdit.aspx" id="btnEdit" class="btn btn-danger">Edit</a>
+            <a href="/AttendanceEdit.aspx" id="btnEdit" class="btn btn-danger" runat="server">Edit</a>
+            <a id="btnEnd" class="btn btn-danger" runat="server">Event has ended!</a>
         </div>
     </div>
 </asp:Content>
