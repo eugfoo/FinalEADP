@@ -109,7 +109,11 @@ namespace FinalProj
             {
                 userI.UpdateRatingByID(userI.id);
                 Users user = userI.GetUserById(userI.id);
-                Session["user"] = user;
+                Users sUser = (Users)Session["user"];
+                if (sUser != null && user.id == sUser.id ) // i wanted to comment an explanation but was too lazy halfway.
+                {
+                    Session["user"] = user;
+                }
 
                 EventsStatus events = new EventsStatus();
                 var eventList = events.GetAllEventsByName();
