@@ -73,7 +73,7 @@ namespace FinalProj
             //{
             //    //createEventPanel.Visible = true;
             //}
-
+            createEventPanel.Visible = false;
             if (!IsPostBack)
             {
                 allthreadsList = thread.SelectAllEventThreads("[EVENT]");
