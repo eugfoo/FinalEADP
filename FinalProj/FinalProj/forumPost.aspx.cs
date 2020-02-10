@@ -145,7 +145,7 @@ namespace FinalProj
                            {
                                trId = TReply.trId,
                                tId = TReply.ThreadId,
-                               postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                               postTitle = thread.GetThreadByThreadIdW(TReply.ThreadId).Title,
                                postDate = TReply.PostDate,
                                postContent = TReply.PostContent,
                                user_id = TReply.UserId,

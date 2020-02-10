@@ -146,7 +146,7 @@
             <%--SEPARATION--%>
 
 
-            <form class="form-inline float-lg-left d-block d-sm-flex">
+            <%--<form class="form-inline float-lg-left d-block d-sm-flex">
                 <div class="mb-2 mb-sm-0 mr-2">Display post from previous:</div>
                 <div class="form-group mr-2">
                     <label class="sr-only" for="select-time">Time period</label>
@@ -179,7 +179,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-sm btn-primary">Go</button>
-            </form>
+            </form>--%>
         </div>
     </div>
 

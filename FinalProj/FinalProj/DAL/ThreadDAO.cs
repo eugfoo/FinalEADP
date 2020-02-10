@@ -48,7 +48,7 @@ namespace FinalProj.DAL
         public int InsertEvent(Thread thread)
         {
             int result = 0;
-             SqlCommand sqlCmd = new SqlCommand();
+            SqlCommand sqlCmd = new SqlCommand();
 
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
@@ -155,51 +155,93 @@ namespace FinalProj.DAL
             return thread;
         }
 
-		public Thread GetThreadByeventId(int eventId)
-		{
-			string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-			SqlConnection myConn = new SqlConnection(DBConnect);
+        public Thread GetThreadByThreadIdW(int threadId)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
 
-			string sqlStmt = "Select * from Threads WHERE eventId = @paraEventId";
-			SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
-			da.SelectCommand.Parameters.AddWithValue("@paraEventId", eventId);
+            string sqlStmt = "Select * from Threads WHERE Id = @paraThreadId";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraThreadId", threadId);
 
 
-			DataSet ds = new DataSet();
-			da.Fill(ds);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
 
-			Thread thread = null;
+            Thread thread = null;
 
-			int rec_cnt = ds.Tables[0].Rows.Count;
-			if (rec_cnt == 1)
-			{
-				DataRow row = ds.Tables[0].Rows[0];
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            if (rec_cnt == 1)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+                string threadPrefix = row["threadPrefix"].ToString();
+                string threadBadgeColor = row["threadBadgeColor"].ToString();
+                string threadTitle = row["threadTitle"].ToString();
+                string threadDate = row["threadDate"].ToString();
+                string threadImage1 = row["threadImage1"].ToString();
+                string threadImage2 = row["threadImage2"].ToString();
+                string threadImage3 = row["threadImage3"].ToString();
+                string threadImage4 = row["threadImage4"].ToString();
+                string threadContent = row["threadContent"].ToString();
+                int threadUserId = Convert.ToInt32(row["user_id"]);
+                string threadUserName = row["user_name"].ToString();
+                thread = new Thread(threadPrefix, threadBadgeColor, threadTitle, threadDate,
+                    threadImage1, threadImage2, threadImage3, threadImage4, threadContent,
+                    threadUserId, threadUserName);
+            }
+            else
+            {
+                thread = null;
+            }
+
+            return thread;
+        }
+
+        public Thread GetThreadByeventId(int eventId)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "Select * from Threads WHERE eventId = @paraEventId";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraEventId", eventId);
+
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            Thread thread = null;
+
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            if (rec_cnt == 1)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
                 int tId = int.Parse(row["Id"].ToString());
                 string threadPrefix = row["threadPrefix"].ToString();
-				string threadBadgeColor = row["threadBadgeColor"].ToString();
-				string threadTitle = row["threadTitle"].ToString();
-				string threadDate = row["threadDate"].ToString();
-				string threadImage1 = row["threadImage1"].ToString();
-				string threadImage2 = row["threadImage2"].ToString();
-				string threadImage3 = row["threadImage3"].ToString();
-				string threadImage4 = row["threadImage4"].ToString();
-				string threadContent = row["threadContent"].ToString();
-				int threadUserId = Convert.ToInt32(row["user_id"]);
-				string threadUserName = row["user_name"].ToString();
-				thread = new Thread(tId, threadPrefix, threadBadgeColor, threadTitle, threadDate,
-					threadImage1, threadImage2, threadImage3, threadImage4, threadContent,
-					threadUserId, threadUserName);
-			}
-			else
-			{
-				thread = null;
-			}
+                string threadBadgeColor = row["threadBadgeColor"].ToString();
+                string threadTitle = row["threadTitle"].ToString();
+                string threadDate = row["threadDate"].ToString();
+                string threadImage1 = row["threadImage1"].ToString();
+                string threadImage2 = row["threadImage2"].ToString();
+                string threadImage3 = row["threadImage3"].ToString();
+                string threadImage4 = row["threadImage4"].ToString();
+                string threadContent = row["threadContent"].ToString();
+                int threadUserId = Convert.ToInt32(row["user_id"]);
+                string threadUserName = row["user_name"].ToString();
+                thread = new Thread(tId, threadPrefix, threadBadgeColor, threadTitle, threadDate,
+                    threadImage1, threadImage2, threadImage3, threadImage4, threadContent,
+                    threadUserId, threadUserName);
+            }
+            else
+            {
+                thread = null;
+            }
 
-			return thread;
-		}
+            return thread;
+        }
 
 
-		public List<Thread> getAllThreads()
+        public List<Thread> getAllThreads()
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
@@ -279,7 +321,7 @@ namespace FinalProj.DAL
             return threadsList;
         }
 
-  
+
         public int queryCreatedThreadId()
         {
             int result = 0;

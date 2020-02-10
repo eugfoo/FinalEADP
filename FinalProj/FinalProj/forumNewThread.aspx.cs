@@ -109,8 +109,8 @@ namespace FinalProj
                 }
                 else
                 {
-                    LblMsg.Text = "Sorry you can only upload a maximum of 4 pictures!";
-                    LblMsg.ForeColor = Color.Red;
+                    LblMsgImg.Text = "Sorry you can only upload a maximum of 4 pictures!";
+                    LblMsgImg.ForeColor = Color.Red;
                 }
                 //}
             }
@@ -119,27 +119,29 @@ namespace FinalProj
 
         private bool ValidateInput()
         {
-            LblMsg.Text = String.Empty;
+            LblMsgPrefix.Text = String.Empty;
+            LblMsgTitle.Text = String.Empty;
+            LblMsgContent.Text = String.Empty;
 
             if (DdlPrefix.SelectedIndex == 0)
             {
-                LblMsg.Text += "Please Select a Prefix! <br/>";
-                LblMsg.ForeColor = Color.Red;
+                LblMsgPrefix.Text = "Please Select a Prefix! <br/>";
+                LblMsgPrefix.ForeColor = Color.Red;
             }
 
             if (tbTitle.Text == "")
             {
-                LblMsg.Text += "Title is required! <br/>";
-                LblMsg.ForeColor = Color.Red;
+                LblMsgTitle.Text = "Title is required! <br/>";
+                LblMsgTitle.ForeColor = Color.Red;
             }
 
             if (String.IsNullOrEmpty(tbContent.Text))
             {
-                LblMsg.Text += "Please fill in the content! <br/>";
-                LblMsg.ForeColor = Color.Red;
+                LblMsgContent.Text = "Please fill in the content! <br/>";
+                LblMsgContent.ForeColor = Color.Red;
             }
 
-            if (String.IsNullOrEmpty(LblMsg.Text))
+            if (String.IsNullOrEmpty(LblMsgPrefix.Text) && String.IsNullOrEmpty(LblMsgTitle.Text) && String.IsNullOrEmpty(LblMsgContent.Text))
             {
                 return true;
             }
@@ -227,7 +229,7 @@ namespace FinalProj
 
                 thread = new Thread(DdlPrefix.Text, BadgeColorIdentifier(), tbTitle.Text, HFDate.Value,
                     firstImage, secondImage, thirdImage, fourthImage,
-                    tbContent.Text, user_id, user_name);
+                    tbContent.Text, user_id, user_name, 0);
 
                 int result = thread.CreateThread();
                 int threadId = thread.getMaxThreadId();
@@ -254,6 +256,13 @@ namespace FinalProj
             tbTitle.Text = String.Empty;
             tbContent.Text = String.Empty;
             DdlPrefix.SelectedIndex = 0;
+        }
+
+        protected void btnHelp_Click(object sender, EventArgs e)
+        {
+            DdlPrefix.SelectedIndex = 1;
+            tbTitle.Text = "Purple Parade 2020?";
+            tbContent.Text = "Who is going Purple Parde this year? All my friends went last year and I felt left out! Who want to go with me this year?";
         }
     }
 }

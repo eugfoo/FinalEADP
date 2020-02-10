@@ -45,7 +45,7 @@
                         <table class="table table-striped table-bordered table-responsive-lg">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="topic-col">Topic</th>
+                                    <th scope="col" class="topic-col">Threads</th>
                                     <th scope="col" class="created-col">Created</th>
                                     <th scope="col" style="min-width: 6em;">Total Replies</th>
                                     <th scope="col" class="last-post-col">Last Reply</th>
@@ -97,10 +97,10 @@
                         <table class="table table-striped table-bordered table-responsive-lg">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="topic-col">Topic</th>
+                                    <th scope="col" class="topic-col">Threads</th>
                                     <th scope="col" class="created-col">Created</th>
-                                    <th scope="col" style="min-width: 6em;">Replies/Views</th>
-                                    <th scope="col" class="last-post-col">Last Post</th>
+                                    <th scope="col" style="min-width: 6em;">Total Replies</th>
+                                    <th scope="col" class="last-post-col">Last Reply</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -139,7 +139,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-xl-12">
                             <div class="card mb-3 mb-sm-0 mb-xl-3">
-                                <div class="card-body">
+                                <%--<div class="card-body">
                                     <h2 class="h4 card-title">Members online</h2>
                                     <ul class="list-unstyled mb-0">
                                         <li><a href="#0">Forum member name</a></li>
@@ -150,8 +150,8 @@
                                         <li><a href="#0">Forum member name</a></li>
                                         <li><a href="#0">Forum member name</a></li>
                                     </ul>
-                                </div>
-                                <div class="card-footer">
+                                </div>--%>
+                               <%-- <div class="card-footer">
                                     <dl class="row mb-0">
                                         <dt class="col-8">Total:</dt>
                                         <dd class="col-4 mb-0">10</dd>
@@ -164,7 +164,7 @@
                                         <dt class="col-8">Guests:</dt>
                                         <dd class="col-4 mb-0">3</dd>
                                     </dl>
-                                </div>
+                                </div>--%>
                             </div>
                         </div>
 
@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div>Newest Member</div>
-                                    <div><a href="#0"><%= LastUser.name %></a></div>
+                                    <div><a href="PPGallery.aspx?userId=<%= LastUser.id %>"><%= LastUser.name %></a></div>
                                 </div>
                             </div>
                         </div>

@@ -24,7 +24,7 @@
             </div>
 
             <div class="form-group">
-                <label for="prefix">Prefix:</label>
+                <label for="prefix">Category :</label>
                 <asp:DropDownList ID="DdlPrefix" runat="server" CssClass="form-control">
                     <asp:ListItem>-- Select --</asp:ListItem>
                     <asp:ListItem>[Discussion]</asp:ListItem>
@@ -34,29 +34,37 @@
                     <asp:ListItem>[Request]</asp:ListItem>
                 </asp:DropDownList>
             </div>
+            <asp:Label ID="LblMsgPrefix" runat="server"></asp:Label>
+
             <div class="form-group">
                 <label for="thread">Title</label>
                 <asp:TextBox ID="tbTitle" runat="server" CssClass="form-control"></asp:TextBox>
-
             </div>
-
+            <asp:Label ID="LblMsgTitle" runat="server"></asp:Label>
+            <p >You can upload up to 4 images!</p>
             <div class="form-group">
-                    <label>Upload Image :</label>
+                <label>Upload Image :</label>
 
-                    <asp:FileUpload ID="FileImgSave" runat="server" />
-                    <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+                <asp:FileUpload ID="FileImgSave" runat="server" />
+                <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
 
                 <br />
-                <asp:DataList ID="DataList1" runat="server" RepeatColumns="4">
-                    <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" Height="250px" ImageUrl='<%# Eval("path") %>' Width="283px" BorderWidth="2px" />
-                        <br />
-                        <asp:LinkButton ID="LKDelete" runat="server" Style="padding: 8px; margin: 110px; background: red; border: solid 1px #d5e3ed; color: white; font-weight: bold;"
-                            CommandArgument='<%# Eval("path") %>' OnCommand="LKDelete_Command">Delete</asp:LinkButton>
-                    </ItemTemplate>
-                </asp:DataList>
+                <div style="margin-top:20px;">
+                    <asp:DataList ID="DataList1" runat="server" RepeatColumns="4">
+                        <ItemTemplate>
+                            <asp:Image ID="Image1" runat="server" Height="250px" ImageUrl='<%# Eval("path") %>' Width="283px" BorderWidth="2px" />
+                            <br />
+                            <asp:LinkButton ID="LKDelete" runat="server" Style="padding: 8px; margin: 110px; background: red; border: solid 1px #d5e3ed; color: white; font-weight: bold;"
+                                CommandArgument='<%# Eval("path") %>' OnCommand="LKDelete_Command">Delete</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:DataList>
+                </div>
+                <br />
+                <asp:Label ID="LblMsgImg" runat="server"></asp:Label>
+
                 <br />
             </div>
+            
 
             <div class="form-group">
                 <label for="comment">Content:</label>
@@ -66,13 +74,14 @@
 
                 <br />
                 <%--<textarea class="form-control" id="comment" rows="10" placeholder="Write more about the event..." required></textarea>--%>
-                <asp:Label ID="LblMsg" runat="server"></asp:Label>
+                
             </div>
-
+            <asp:Label ID="LblMsgContent" runat="server"></asp:Label>
             <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" />
 
             <%-- <button type="submit" class="btn btn-primary">Submit</button>--%>
             <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-danger" OnClick="btnClear_Click" />
+            <asp:Button ID="btnHelp" runat="server" CssClass="btn btn-secondary" Text="Click Me!" OnClick="btnHelp_Click" />
         </div>
     </div>
 

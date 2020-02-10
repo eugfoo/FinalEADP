@@ -22,6 +22,15 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.DropDownList DdlPrefix;
         
         /// <summary>
+        /// LblMsgPrefix control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblMsgPrefix;
+        
+        /// <summary>
         /// tbTitle control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbTitle;
+        
+        /// <summary>
+        /// LblMsgTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblMsgTitle;
         
         /// <summary>
         /// FileImgSave control.
@@ -58,6 +76,15 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.DataList DataList1;
         
         /// <summary>
+        /// LblMsgImg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblMsgImg;
+        
+        /// <summary>
         /// tbContent control.
         /// </summary>
         /// <remarks>
@@ -85,13 +112,13 @@ namespace FinalProj {
         protected global::System.Web.UI.WebControls.HiddenField HFthreadId;
         
         /// <summary>
-        /// LblMsg control.
+        /// LblMsgContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblMsg;
+        protected global::System.Web.UI.WebControls.Label LblMsgContent;
         
         /// <summary>
         /// btnSubmit control.
@@ -110,5 +137,14 @@ namespace FinalProj {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClear;
+        
+        /// <summary>
+        /// btnHelp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHelp;
     }
 }
