@@ -73,7 +73,7 @@ namespace FinalProj
             int.TryParse(threadId, out threadiiD);
             Users usr = new Users();
             Events ev = new Events();
-            Thread currentThread = thread.GetThreadByThreadId(threadiiD);
+            Thread currentThread = thread.GetThreadByThreadIdWOEventId(threadiiD);
             List<tReplies> threadReplyListForThisThread = new List<tReplies>();
 
             Users SessUser = (Users)Session["user"];
@@ -107,9 +107,9 @@ namespace FinalProj
 
 
 
-                int threadEventId = thread.GetThreadByThreadId(threadiiD).EventId;
+                //int threadEventId = thread.GetThreadByThreadIdWOEventId(threadiiD).EventId;
 
-                int threadOrgUserId = thread.GetThreadByThreadId(threadiiD).UserId;
+                int threadOrgUserId = thread.GetThreadByThreadIdWOEventId(threadiiD).UserId;
 
 
                 allThreadRepliesByThreadId = threadReply.getAllThreadRepliesByThreadId(threadiiD);
@@ -124,7 +124,7 @@ namespace FinalProj
                            {
                                trId = TReply.trId,
                                tId = TReply.ThreadId,
-                               postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                               postTitle = thread.GetThreadByThreadIdWOEventId(TReply.ThreadId).Title,
                                postDate = TReply.PostDate,
                                postContent = TReply.PostContent,
                                user_id = TReply.UserId,
@@ -145,7 +145,7 @@ namespace FinalProj
                            {
                                trId = TReply.trId,
                                tId = TReply.ThreadId,
-                               postTitle = thread.GetThreadByThreadIdW(TReply.ThreadId).Title,
+                               postTitle = thread.GetThreadByThreadIdWOEventId(TReply.ThreadId).Title,
                                postDate = TReply.PostDate,
                                postContent = TReply.PostContent,
                                user_id = TReply.UserId,
@@ -275,13 +275,11 @@ namespace FinalProj
             Users usr = new Users();
             Events ev = new Events();
 
-            int threadEventId = thread.GetThreadByThreadId(threadiiD).EventId;
-
-            int threadOrgUserId = ev.getEventDetails(threadEventId).User_id;
+            int threadOrgUserId = thread.GetThreadByThreadIdWOEventId(threadiiD).UserId;
+            List<tReplies> threadReplyListForThisThread = new List<tReplies>();
 
             allThreadRepliesByThreadId = threadReply.getAllThreadRepliesByThreadId(threadiiD);
 
-            List<tReplies> threadReplyListForThisThread = new List<tReplies>();
 
             foreach (ThreadReply TReply in allThreadRepliesByThreadId)
             {
@@ -292,7 +290,7 @@ namespace FinalProj
                        {
                            trId = TReply.trId,
                            tId = TReply.ThreadId,
-                           postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                           postTitle = thread.GetThreadByThreadIdWOEventId(TReply.ThreadId).Title,
                            postDate = TReply.PostDate,
                            postContent = TReply.PostContent,
                            user_id = TReply.UserId,
@@ -301,7 +299,7 @@ namespace FinalProj
                            userDP = usr.GetUserById(TReply.UserId).DPimage,
                            userJoinedDate = usr.GetUserById(TReply.UserId).regDate,
                            userThreadCount = thread.getThreadsByUserId(TReply.UserId).Count(),
-                           orgTag = "[Organiser]"
+                           orgTag = "[Thread Starter]"
                        }
 
                    );
@@ -313,7 +311,7 @@ namespace FinalProj
                        {
                            trId = TReply.trId,
                            tId = TReply.ThreadId,
-                           postTitle = thread.GetThreadByThreadId(TReply.ThreadId).Title,
+                           postTitle = thread.GetThreadByThreadIdWOEventId(TReply.ThreadId).Title,
                            postDate = TReply.PostDate,
                            postContent = TReply.PostContent,
                            user_id = TReply.UserId,

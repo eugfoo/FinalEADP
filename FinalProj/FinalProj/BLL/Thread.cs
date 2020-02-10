@@ -124,10 +124,10 @@ namespace FinalProj.BLL
             return thread.GetThreadByThreadId(threadId);
         }
 
-        public Thread GetThreadByThreadIdW(int threadId)
+        public Thread GetThreadByThreadIdWOEventId(int threadId)
         {
             ThreadDAO thread = new ThreadDAO();
-            return thread.GetThreadByThreadIdW(threadId);
+            return thread.GetThreadByThreadIdWOEventId(threadId);
         }
 
         public int getMaxThreadId()
