@@ -102,7 +102,6 @@
         .dropdown-content {
             text-align: center;
             display: none;
-            position: absolute;
             background-color: #f1f1f1;
             min-width: 300px;
             min-height:70px;
@@ -163,25 +162,24 @@
                     <div class="hexagon" id="hexagon">
                         <% if (Session["id"] != null)
                             { %>
-                        <div class="dropdown-content">
-                            <br />
-                            <% if (notiList.Count == 0)
-                                { %>
-                                <p id="link">You have no notifications</p>
-                               <% }
-                                else
-                                { %>
-                                <% for (int i = 0; i < notiList.Count; i++)
-                                        {
-                                        if (notiList[i].User_id.ToString() == Session["id"].ToString())
-                                        { %>
-                                        <a href="/eventFeedback.aspx?eventId=<%= notiList[i].EventId %>" id="link"><p id="eventName"><%= notiList[i].EventName %></p> has ended! <br /> Please click here to complete feedback to get points! </a>
-                                        <% }
-                                    } %>
-                            <% } %>
-                        </div>
+                            <div class="dropdown-content">
+                                <br />
+                                <% if (notiList.Count == 0)
+                                    { %>
+                                    <p id="link">You have no notifications</p>
+                                   <% }
+                                    else
+                                    { %>
+                                    <% for (int i = 0; i < notiList.Count; i++)
+                                            {
+                                            if (notiList[i].User_id.ToString() == Session["id"].ToString())
+                                            { %>
+                                            <a href="/eventFeedback.aspx?eventId=<%= notiList[i].EventId %>" id="link"><p id="eventName"><%= notiList[i].EventName %></p> has ended! <br /> Please click here to complete feedback to get points! </a>
+                                            <% }
+                                        } %>
+                                <% } %>
+                            </div>
                         <% } %>
-
                         <span></span>
                     </div>
                 </div>  

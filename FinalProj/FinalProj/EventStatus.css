@@ -169,4 +169,6 @@ label {
 
 #ContentPlaceHolder3_msg {
     margin-top: 20px;
+    font-style: italic;
+    font-weight: 300;
 }
