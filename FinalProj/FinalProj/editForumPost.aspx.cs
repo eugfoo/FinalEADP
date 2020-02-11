@@ -43,7 +43,7 @@ namespace FinalProj
                     Session["fourthImage"] = "";
 
                     Thread thread = new Thread();
-                    Thread currentThread = thread.GetThreadByThreadId(int.Parse(threadId));
+                    Thread currentThread = thread.GetThreadByThreadIdWOEventId(int.Parse(threadId));
 
                     tbTitle.Text = currentThread.Title;
                     HFDate.Value = currentThread.Date;

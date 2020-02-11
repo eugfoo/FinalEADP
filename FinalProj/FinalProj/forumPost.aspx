@@ -27,7 +27,7 @@
     <div class="container my-3">
         <nav class="breadcrumb">
             <a href="forumPage1.aspx" class="breadcrumb-item">Board index</a>
-            <a href="forumCatEventOverview.aspx" class="breadcrumb-item">Forum Event Threads</a>
+            <a href="forumCatOverview.aspx" class="breadcrumb-item">Forum Threads</a>
             <span class="breadcrumb-item active">
                 <asp:Label ID="LblPrefix" runat="server"></asp:Label>
                 <asp:Label ID="LblTitleBreadcrumb" runat="server"></asp:Label></span>
