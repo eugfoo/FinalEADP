@@ -72,11 +72,11 @@
                 <p id="totalComplete"><%= total %></p>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    Events Create:
+                    Events Created:
                 <p id="totalCreate"><%= eventCount %></p>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    Events Participate:
+                    Events Joined:
                 <p id="totalParticipate"><%= participated %></p>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 <div id="divRadioList" class="col-sm-12 col-md-6 col-lg-6">
                     <asp:RadioButtonList ID="radioButtonList" runat="server" CssClass="text" RepeatColumns="4" RepeatDirection="Vertical" AutoPostBack="True" OnSelectedIndexChanged="radioButtonList_SelectedIndexChanged">
                         <asp:ListItem Selected="True" Value="create">Show Created</asp:ListItem>
-                        <asp:ListItem Value="participate">Show Participated</asp:ListItem>
+                        <asp:ListItem Value="participate">Show Joined</asp:ListItem>
                     </asp:RadioButtonList>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                         <img id="eventdp" src="/Img/<%= element.Pic %>" />
                     </td>
                     <td id="tableTD">
-                        <h3 class="title"><%= element.Title %></h3>
+                        <a id="eventTitle" href="/eventDetails.aspx?eventId=<%= element.Id %>"><h3 class="title"><%= element.Title %></h3></a>
                         <br />
                         <div id="containerItems">
 

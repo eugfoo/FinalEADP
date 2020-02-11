@@ -69,7 +69,7 @@ namespace FinalProj
                     {
                         System.Diagnostics.Debug.WriteLine("This is check true");
                         check.Add("true");
-                        attending.Add("Previous: Yes");
+                        attending.Add("Present: Yes");
 
                         // Count number of participants here already
                         participantHere += 1;
@@ -79,7 +79,7 @@ namespace FinalProj
                     {
                         System.Diagnostics.Debug.WriteLine("This is check false");
                         check.Add("false");
-                        attending.Add("Previous: No");
+                        attending.Add("Present: No");
                     }
 
                     foreach (var element1 in check)
