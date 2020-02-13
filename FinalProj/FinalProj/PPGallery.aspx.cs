@@ -61,14 +61,23 @@ namespace FinalProj
                 Users user = (Users)Session["user"];
                 var filepath = Session["tempPic"].ToString();
                 var caption = tbCaption.Text;
-                int gpevent = Convert.ToInt32(ddlEvents.SelectedItem.Value);
+                int gpevent = -1;
+                try
+                {
+                    gpevent = Convert.ToInt32(ddlEvents.SelectedItem.Value);
+                }
+                catch { }
                 DateTime now = DateTime.Now;
                 GPictures gpic = new GPictures(filepath, user.id, caption, gpevent, now);
                 gpic.addGP();
 
                 tbCaption.Text = "";
                 imgPic.ImageUrl = "";
-                ddlEvents.SelectedIndex = 0;
+                try
+                {
+                    ddlEvents.SelectedIndex = 0;
+                }
+                catch { }
                 Session["tempPic"] = null;
 
                 loadGP(user.id);
